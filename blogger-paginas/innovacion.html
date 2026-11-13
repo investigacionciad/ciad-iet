@@ -1,0 +1,855 @@
+<!--
+  Página de Blogger: Innovación
+  URL: https://ciad-innovaedutec.blogspot.com/p/innovacion.html
+  ID de la página: 3858324240136165732
+  Copia del contenido publicado (11/11/2026). Se edita en Blogger › Páginas o, Inicio y Sobre el blog, desde el Panel CIAD.
+-->
+<div class="seccion-innovacion">
+
+<style>
+
+.layout-grid:has(.seccion-innovacion) {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.main-content:has(.seccion-innovacion) {
+  width: 100%;
+  max-width: none;
+}
+
+.post-outer-container:has(.seccion-innovacion) {
+  margin: 0;
+}
+
+.post-outer:has(.seccion-innovacion) {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  overflow: visible;
+  box-shadow: none;
+}
+
+.post:has(.seccion-innovacion) {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.post-body:has(.seccion-innovacion) {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+}
+
+.app-container:has(.seccion-innovacion) {
+  width: 100%;
+  max-width: none;
+  background: #ffffff;
+  overflow: visible;
+}
+
+.blog-posts:has(.seccion-innovacion),
+.main-section:has(.seccion-innovacion) {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.post-outer:has(.seccion-innovacion) > .post .post-title,
+.post-outer:has(.seccion-innovacion) .entry-title {
+  display: none !important;
+}
+
+.seccion-innovacion {
+  --verde-uabc:#00723f;
+  --amarillo-uabc:#f2a900;
+  --azul-oscuro:#14243a;
+  --texto-gris:#5d6b7c;
+  --blanco:#ffffff;
+  --borde:#e5eaf0;
+  --radio:18px;
+  --sombra:0 10px 30px rgba(20,36,58,.08);
+
+  --solape-panel:clamp(18px,4vw,70px);
+  --ancho-panel:1220px;
+  --radio-panel:24px;
+
+  font-family:inherit;
+  color:var(--texto-gris);
+  background:#ffffff;
+  line-height:1.65;
+  margin:0;
+  padding:0 0 4rem;
+  position:relative;
+}
+
+.seccion-innovacion * {
+  box-sizing:border-box;
+}
+
+.seccion-innovacion .hero-innovacion {
+  position:relative;
+
+  width:100vw;
+  left:50%;
+  margin-left:-50vw;
+
+  height:auto;
+  aspect-ratio:4 / 1;
+  margin-top:0;
+  overflow:hidden;
+  background:#ffffff;
+
+  border:0 !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+}
+
+.seccion-innovacion .banner-innovacion {
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+
+  border:0 !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+  background:transparent !important;
+}
+
+.seccion-innovacion .banner-innovacion img {
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:contain;
+  object-position:center center;
+  max-width:none;
+
+  border:0 !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+  background:transparent !important;
+  padding:0 !important;
+  margin:0 !important;
+}
+
+.seccion-innovacion .hero-innovacion::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.00) 0%,
+    rgba(255,255,255,0.00) 62%,
+    rgba(255,255,255,0.12) 100%
+  );
+}
+
+.seccion-innovacion .panel-principal {
+  position:relative;
+  z-index:4;
+  width:min(calc(100% - 3rem),var(--ancho-panel));
+  margin:calc(-1 * var(--solape-panel)) auto 0;
+  background:var(--blanco);
+  border:1px solid rgba(20,36,58,.08);
+  border-radius:var(--radio-panel);
+  box-shadow:0 18px 50px rgba(20,36,58,.13);
+  padding:2.4rem 2.4rem 3.5rem;
+}
+
+.seccion-innovacion .descripcion-innovacion {
+  max-width:850px;
+  margin:0 auto 1rem;
+  text-align:center;
+  font-size:1.08rem;
+  color:#737b8a;
+}
+
+.seccion-innovacion .bloque-tema {
+  padding:3.6rem 0 2rem;
+  scroll-margin-top:110px;
+}
+
+.seccion-innovacion .bloque-tema h2 {
+  font-size:clamp(2rem,5vw,3.2rem);
+  color:var(--azul-oscuro);
+  font-weight:800;
+  line-height:1.1;
+  margin:0 0 1.5rem;
+}
+
+.seccion-innovacion .bloque-tema p {
+  max-width:720px;
+  font-size:1.02rem;
+  margin:0;
+}
+
+.seccion-innovacion .alinear-derecha {
+  text-align:right;
+}
+
+.seccion-innovacion .alinear-derecha p {
+  margin-left:auto;
+}
+.seccion-innovacion .bloque-tema h2::after {
+  content:"";
+  display:block;
+  width:64px;
+  height:4px;
+  background:var(--amarillo-uabc);
+  border-radius:4px;
+  margin-top:.9rem;
+}
+
+.seccion-innovacion .alinear-derecha h2::after {
+  margin-left:auto;
+}
+.seccion-innovacion .lista-articulos {
+  display:flex;
+  flex-direction:column;
+  gap:1.75rem;
+  width:100%;
+  margin-top:2.5rem;
+  text-align:left;
+}
+
+.seccion-innovacion .tarjeta-articulo {
+  width:min(82%,760px);
+  background:var(--blanco);
+  border:1px solid var(--borde);
+  border-radius:var(--radio);
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  text-align:left;
+  transition:transform .2s,box-shadow .2s;
+}
+
+.seccion-innovacion .alinear-derecha .lista-articulos .tarjeta-articulo:nth-child(odd) {
+  align-self:flex-end;
+}
+
+.seccion-innovacion .alinear-derecha .lista-articulos .tarjeta-articulo:nth-child(even) {
+  align-self:flex-start;
+}
+
+.seccion-innovacion .bloque-tema:not(.alinear-derecha) .lista-articulos .tarjeta-articulo:nth-child(odd) {
+  align-self:flex-start;
+}
+
+.seccion-innovacion .bloque-tema:not(.alinear-derecha) .lista-articulos .tarjeta-articulo:nth-child(even) {
+  align-self:flex-end;
+}
+
+.seccion-innovacion .tarjeta-articulo:hover {
+  transform:translateY(-4px);
+  box-shadow:var(--sombra);
+}
+
+.seccion-innovacion .imagen-articulo {
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  display:block;
+}
+
+.seccion-innovacion .contenido-articulo {
+  padding:1.25rem;
+  display:flex;
+  flex-direction:column;
+  flex:1;
+}
+
+.seccion-innovacion .fecha-articulo {
+  font-size:.78rem;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+  color:var(--verde-uabc);
+  font-weight:700;
+  margin:0 0 .5rem;
+}
+
+.seccion-innovacion .titulo-articulo {
+  font-size:1.05rem;
+  font-weight:700;
+  color:var(--azul-oscuro);
+  line-height:1.3;
+  margin:0 0 .6rem;
+}
+
+.seccion-innovacion .resumen-articulo {
+  font-size:.93rem;
+  margin:0 0 1rem;
+  flex:1;
+}
+
+.seccion-innovacion .boton-leer {
+  align-self:flex-start;
+  font-size:.88rem;
+  font-weight:700;
+  color:var(--verde-uabc);
+  text-decoration:none;
+}
+
+.seccion-innovacion .boton-leer:hover {
+  text-decoration:underline;
+}
+
+.seccion-innovacion .mensaje-estado {
+  text-align:inherit;
+  font-size:.95rem;
+  padding:2rem 0;
+  margin-top:0;
+  margin-bottom:0;
+}
+
+.seccion-innovacion .carrusel-casos {
+  margin-top:2.5rem;
+}
+
+.seccion-innovacion .pista-casos {
+  display:flex;
+  gap:1.5rem;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  scroll-behavior:smooth;
+  padding-bottom:.5rem;
+  -ms-overflow-style:none;
+  scrollbar-width:none;
+}
+
+.seccion-innovacion .pista-casos::-webkit-scrollbar {
+  display:none;
+}
+
+.seccion-innovacion .caso-exito {
+  flex:0 0 100%;
+  scroll-snap-align:center;
+}
+
+.seccion-innovacion .imagen-caso {
+  width:100%;
+  height:clamp(200px,34vw,380px);
+  object-fit:cover;
+  border-radius:var(--radio);
+  display:block;
+}
+
+.seccion-innovacion .tarjeta-persona {
+  background:var(--blanco);
+  border-radius:var(--radio);
+  box-shadow:var(--sombra);
+  margin:1.25rem 1.5rem 0;
+  padding:2rem 1.5rem;
+  text-align:center;
+}
+
+.seccion-innovacion .foto-persona {
+  width:110px;
+  height:110px;
+  border-radius:50%;
+  object-fit:cover;
+  display:block;
+  margin:0 auto 1rem;
+  border:4px solid var(--blanco);
+  box-shadow:var(--sombra);
+}
+
+.seccion-innovacion .nombre-persona {
+  font-weight:700;
+  color:var(--azul-oscuro);
+  font-size:1.05rem;
+  margin:0 0 .2rem;
+}
+
+.seccion-innovacion .rol-persona {
+  font-size:.9rem;
+  margin:0 0 .9rem;
+}
+
+.seccion-innovacion .texto-caso {
+  max-width:560px;
+  margin:0 auto 1.2rem;
+  font-size:.97rem;
+}
+
+.seccion-innovacion .enlaces-persona {
+  display:flex;
+  justify-content:center;
+  gap:.5rem;
+}
+
+.seccion-innovacion .enlaces-persona a {
+  padding:0 1.1rem;
+  height:38px;
+  border-radius:999px;
+  background:#eef2f7;
+  color:var(--azul-oscuro);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size:.8rem;
+  font-weight:700;
+  text-decoration:none;
+  transition:background .2s,color .2s;
+}
+
+.seccion-innovacion .enlaces-persona a:hover {
+  background:var(--verde-uabc);
+  color:var(--blanco);
+}
+
+.seccion-innovacion .controles-carrusel {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:1rem;
+  margin-top:1.5rem;
+}
+
+.seccion-innovacion .boton-carrusel {
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  border:1px solid var(--borde);
+  background:var(--blanco);
+  color:var(--azul-oscuro);
+  font-size:1.1rem;
+  line-height:1;
+  cursor:pointer;
+  transition:background .2s,color .2s;
+}
+
+.seccion-innovacion .boton-carrusel:hover {
+  background:var(--verde-uabc);
+  border-color:var(--verde-uabc);
+  color:var(--blanco);
+}
+
+.seccion-innovacion .puntos-carrusel {
+  display:flex;
+  gap:.5rem;
+}
+
+.seccion-innovacion .puntos-carrusel button {
+  width:10px;
+  height:10px;
+  padding:0;
+  border:0;
+  border-radius:50%;
+  background:#c9d3de;
+  cursor:pointer;
+  transition:background .2s,width .2s;
+}
+
+.seccion-innovacion .puntos-carrusel button.activo {
+  background:var(--verde-uabc);
+  width:26px;
+  border-radius:999px;
+}
+
+.seccion-innovacion .enlace-etiqueta {
+  display:inline-block;
+  margin-top:1.5rem;
+  padding:.7rem 1.4rem;
+  border-radius:999px;
+  background:var(--verde-uabc);
+  color:var(--blanco);
+  text-decoration:none;
+  font-size:.9rem;
+  font-weight:700;
+}
+
+.seccion-innovacion .enlace-etiqueta:hover {
+  background:var(--azul-oscuro);
+}
+
+@media (max-width:900px) {
+  .seccion-innovacion {
+    --solape-panel:36px;
+  }
+
+  .seccion-innovacion .panel-principal {
+    width:calc(100% - 2rem);
+    padding:2rem 1.5rem 3rem;
+  }
+}
+
+@media (max-width:768px) {
+  .seccion-innovacion {
+    --solape-panel:28px;
+  }
+
+  .seccion-innovacion .bloque-tema,
+  .seccion-innovacion .alinear-derecha {
+    text-align:left;
+  }
+
+  .seccion-innovacion .alinear-derecha p {
+    margin-left:0;
+  }
+
+  .seccion-innovacion .alinear-derecha h2::after {
+    margin-left:0;
+  }
+
+  .seccion-innovacion .panel-principal {
+    border-radius:18px;
+  }
+
+  .seccion-innovacion .descripcion-innovacion {
+    font-size:1rem;
+  }
+
+  .seccion-innovacion .tarjeta-articulo,
+  .seccion-innovacion .alinear-derecha .lista-articulos .tarjeta-articulo:nth-child(odd),
+  .seccion-innovacion .alinear-derecha .lista-articulos .tarjeta-articulo:nth-child(even),
+  .seccion-innovacion .bloque-tema:not(.alinear-derecha) .lista-articulos .tarjeta-articulo:nth-child(odd),
+  .seccion-innovacion .bloque-tema:not(.alinear-derecha) .lista-articulos .tarjeta-articulo:nth-child(even) {
+    width:100%;
+    align-self:stretch;
+  }
+}
+
+@media (max-width:640px) {
+  .seccion-innovacion .tarjeta-persona {
+    margin:1rem .5rem 0;
+    padding:1.5rem 1rem;
+  }
+}
+
+@media (max-width:480px) {
+  .seccion-innovacion {
+    --solape-panel:18px;
+  }
+
+  .seccion-innovacion .panel-principal {
+    width:calc(100% - 1rem);
+    border-radius:14px;
+    padding:1.5rem 1rem 2.5rem;
+  }
+
+  .seccion-innovacion .lista-articulos {
+    grid-template-columns:1fr;
+  }
+
+  .seccion-innovacion .bloque-tema {
+    padding:2.7rem 0 1.5rem;
+  }
+}
+
+.seccion-innovacion [data-editable]:empty {
+  display:none;
+}
+
+.post-title,
+.entry-title {
+  display:none;
+}
+
+/* Panel CIAD: sin textos de introducción */
+.seccion-innovacion .panel-principal > .bloque-tema:first-of-type { padding-top: .6rem; }
+/* Panel CIAD: el banner mide 100vw (con la barra de desplazamiento) y empujaba la página de lado */
+html { overflow-x: clip; }
+</style>
+
+<section class="hero-innovacion">
+  <div class="banner-innovacion">
+    <img
+      alt="Innovación"
+      loading="eager"
+      src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhj0usRzxuWdx7sEZwxEXsMmew0sWfBe8Q4Oo1uNkRG_S8bUXAGIoiAuA9nGgp3xXFU0LeNAo9xFZycFVQRI1TSc7AB-K-MTW7NCdJ1rEGPQss58BeVkbK4FxQgr8VTocSLHhEnfaEoLn4Mf6mdWCwS3_BVJlvGpmKrka2gKMexXUbMwvLKbeczbqXsJA4/s1600/banner_innovacion_nuevo.png"
+    />
+  </div>
+</section>
+
+<main class="panel-principal">
+
+<section class="bloque-tema alinear-derecha" id="investigacion">
+    <h2>Investigación y proyectos institucionales</h2>
+    <div class="lista-articulos" id="lista-investigacion"></div>
+    <p class="mensaje-estado" id="estado-investigacion">Cargando entradas…</p>
+    <a class="enlace-etiqueta" href="#" id="enlace-investigacion">Ver todas las entradas</a>
+  </section>
+
+  
+  <section class="bloque-tema" id="casos-exito">
+    <h2>Casos de éxito</h2>
+
+    <div class="carrusel-casos">
+      <div class="pista-casos" id="pista-casos"></div>
+
+      <div class="controles-carrusel" id="controles-casos" style="display:none;">
+        <button aria-label="Caso anterior" class="boton-carrusel" id="caso-anterior" type="button">←</button>
+        <div class="puntos-carrusel" id="puntos-casos"></div>
+        <button aria-label="Caso siguiente" class="boton-carrusel" id="caso-siguiente" type="button">→</button>
+      </div>
+    </div>
+
+    <p class="mensaje-estado" id="estado-casos">Cargando casos de éxito…</p>
+    <a class="enlace-etiqueta" href="#" id="enlace-casos">Ver todos los casos</a>
+  </section>
+
+  
+  <section class="bloque-tema alinear-derecha" id="startups">
+    <h2>Startups y emprendimiento tecnológico</h2>
+    <div class="lista-articulos" id="lista-startups"></div>
+    <p class="mensaje-estado" id="estado-startups">Cargando entradas…</p>
+    <a class="enlace-etiqueta" href="#" id="enlace-startups">Ver todas las entradas</a>
+  </section>
+
+  
+  <section class="bloque-tema" id="transformacion">
+    <h2>Transformación digital administrativa</h2>
+    <div class="lista-articulos" id="lista-transformacion"></div>
+    <p class="mensaje-estado" id="estado-transformacion">Cargando entradas…</p>
+    <a class="enlace-etiqueta" href="#" id="enlace-transformacion">Ver todas las entradas</a>
+  </section>
+
+</main>
+
+<script>
+(function(){
+
+  var IMAGEN_GENERICA = "data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 800 500%27%3E%3Crect width=%27800%27 height=%27500%27 fill=%27%23e6f2ec%27/%3E%3Cpath d=%27M0 500L800 290V500z%27 fill=%27%2300723f%27 opacity=%27.14%27/%3E%3C/svg%3E";
+
+  var etiquetas = {
+    investigacion: 'Investigación y proyectos',
+    casos: 'Casos de éxito',
+    startups: 'Startups y emprendimiento',
+    transformacion: 'Transformación digital'
+  };
+
+  var rolesValidos = ['Docente', 'Estudiante', 'Egresado'];
+  // Ver todas las entradas: ?tema=<etiqueta> muestra solo ese tema con todas sus notas
+  var temaActual = new URLSearchParams(location.search).get('tema');
+  if(!Object.keys(etiquetas).some(function(k){return etiquetas[k] === temaActual;})){temaActual = null;}
+  // Notas por tema: se eligen en el Panel CIAD (data-notas en el contenedor de la página)
+  var maximoEntradas = temaActual ? 150 : (Number((document.querySelector('.post-body [data-notas]') || document.body).getAttribute('data-notas')) || 6);
+
+  function rutaFeed(etiqueta){
+    return '/feeds/posts/default/-/' + encodeURIComponent(etiqueta) +
+           '?alt=json&orderby=published&max-results=' + maximoEntradas;
+  }
+
+  function rutaEtiqueta(etiqueta){
+    return location.pathname + '?tema=' + encodeURIComponent(etiqueta);
+  }
+
+  function quitarEtiquetasHtml(texto){
+    var caja = document.createElement('div');
+    caja.innerHTML = texto || '';
+    return (caja.textContent || '').replace(/\s+/g, ' ').trim();
+  }
+
+  function recortar(texto, limite){
+    if(texto.length <= limite){return texto;}
+    return texto.substring(0, limite).replace(/\s+\S*$/, '') + '…';
+  }
+
+  function obtenerEnlace(entrada){
+    var enlaces = entrada.link || [];
+    for(var i = 0; i < enlaces.length; i++){
+      if(enlaces[i].rel === 'alternate'){return enlaces[i].href;}
+    }
+    return '#';
+  }
+
+  function obtenerImagen(entrada){
+    // Panel CIAD (imagenCiad): la imagen de las tarjetas de la nota (o la principal) va antes que la miniatura de Blogger
+    var contenidoCiad = entrada.content ? entrada.content.$t || '' : '';
+    var imagenCiad = contenidoCiad.match(/\x3cimg[^>]*class="articulo-tarjeta"[^>]*src="([^"]+)"/) || contenidoCiad.match(/\x3cfigure class="articulo-portada"[^>]*>\x3cimg[^>]*src="([^"]+)"/);
+    if (imagenCiad) { return imagenCiad[1].replace(/\x26amp;/g, '\x26'); }
+
+    if(entrada.media$thumbnail && entrada.media$thumbnail.url){
+      return entrada.media$thumbnail.url.replace(/\/s72-c\//, '/w800-h500-c/');
+    }
+    var cuerpo = (entrada.content && entrada.content.$t) || '';
+    var caja = document.createElement('div');
+    caja.innerHTML = cuerpo;
+    var imagen = caja.querySelector('img');
+    return imagen ? imagen.src : IMAGEN_GENERICA;
+  }
+
+  // Texto de la entrada sin la ficha del autor ni estilos, con espacios entre bloques (DEF-017)
+  function textoResumen(html){
+    var caja = document.createElement('div');
+    caja.innerHTML = html || '';
+    caja.querySelectorAll('style, script, .articulo-ficha').forEach(function(el){ el.remove(); });
+    caja.querySelectorAll('p, h1, h2, h3, h4, li, div, br').forEach(function(el){ el.insertAdjacentText('afterend', ' '); });
+    return (caja.textContent || '').replace(/\s+/g, ' ').trim();
+  }
+
+  function obtenerResumen(entrada, limite){
+    var cuerpo = (entrada.summary && entrada.summary.$t) ||
+                 (entrada.content && entrada.content.$t) || '';
+    return recortar(textoResumen(cuerpo), limite);
+  }
+
+  function obtenerRol(entrada){
+    var categorias = entrada.category || [];
+    for(var i = 0; i < categorias.length; i++){
+      for(var j = 0; j < rolesValidos.length; j++){
+        if(categorias[i].term === rolesValidos[j]){return rolesValidos[j];}
+      }
+    }
+    return 'Comunidad CIAD';
+  }
+
+  function formatearFecha(iso){
+    var fecha = new Date(iso);
+    if(isNaN(fecha)){return '';}
+    return fecha.toLocaleDateString('es-MX', {day:'numeric', month:'long', year:'numeric'});
+  }
+
+  function crearTarjetaArticulo(entrada){
+    var enlace = obtenerEnlace(entrada);
+    var articulo = document.createElement('article');
+    articulo.className = 'tarjeta-articulo';
+    articulo.innerHTML =
+      '<img class="imagen-articulo" src="' + obtenerImagen(entrada) + '" alt="" />' +
+      '<div class="contenido-articulo">' +
+        '<p class="fecha-articulo">' + formatearFecha(entrada.published.$t) + '</p>' +
+        '<h3 class="titulo-articulo">' + quitarEtiquetasHtml(entrada.title.$t) + '</h3>' +
+        '<p class="resumen-articulo">' + obtenerResumen(entrada, 130) + '</p>' +
+        '<a class="boton-leer" href="' + enlace + '">Leer más</a>' +
+      '</div>';
+    return articulo;
+  }
+
+  function crearCasoExito(entrada){
+    var enlace = obtenerEnlace(entrada);
+    var imagen = obtenerImagen(entrada);
+    var caso = document.createElement('article');
+    caso.className = 'caso-exito';
+    caso.innerHTML =
+      '<img class="imagen-caso" src="' + imagen + '" alt="" />' +
+      '<div class="tarjeta-persona">' +
+        '<img class="foto-persona" src="' + imagen + '" alt="" />' +
+        '<p class="nombre-persona">' + quitarEtiquetasHtml(entrada.title.$t) + '</p>' +
+        '<p class="rol-persona">' + obtenerRol(entrada) + ' · ' + formatearFecha(entrada.published.$t) + '</p>' +
+        '<p class="texto-caso">' + obtenerResumen(entrada, 130) + '</p>' +
+        '<div class="enlaces-persona"><a href="' + enlace + '">Leer el caso</a></div>' +
+      '</div>';
+    return caso;
+  }
+
+  function cargarEntradas(clave, idLista, idEstado, idEnlace, constructor, alTerminar){
+    var etiqueta = etiquetas[clave];
+    var lista = document.getElementById(idLista);
+    var estado = document.getElementById(idEstado);
+    var enlace = document.getElementById(idEnlace);
+
+    if(temaActual && etiqueta !== temaActual){
+      var bloque = lista && lista.closest('.bloque-tema');
+      if(bloque){bloque.style.display = 'none';}
+      return;
+    }
+
+    if(enlace){enlace.href = rutaEtiqueta(etiqueta);}
+    if(temaActual && enlace){enlace.href = location.pathname; enlace.textContent = 'Ver todos los temas';}
+
+    fetch(rutaFeed(etiqueta))
+      .then(function(respuesta){return respuesta.json();})
+      .then(function(datos){
+        var entradas = (datos.feed && datos.feed.entry) || [];
+        if(!entradas.length){
+          estado.textContent = 'Aún no hay entradas publicadas en este subapartado.';
+          if(enlace){enlace.style.display = 'none';}
+          return;
+        }
+        for(var i = 0; i < entradas.length; i++){
+          lista.appendChild(constructor(entradas[i]));
+        }
+        estado.style.display = 'none';
+        if(alTerminar){alTerminar(entradas.length);}
+      })
+      .catch(function(){
+        estado.textContent = 'No fue posible cargar las entradas en este momento.';
+        if(enlace){enlace.style.display = 'none';}
+      });
+  }
+
+  function iniciarCarrusel(){
+    var pista = document.getElementById('pista-casos');
+    var casos = pista.querySelectorAll('.caso-exito');
+    var controles = document.getElementById('controles-casos');
+    var puntos = document.getElementById('puntos-casos');
+    var anterior = document.getElementById('caso-anterior');
+    var siguiente = document.getElementById('caso-siguiente');
+    var actual = 0;
+
+    if(casos.length < 2){return;}
+    controles.style.display = 'flex';
+
+    function irA(indice){
+      if(indice < 0){indice = casos.length - 1;}
+      if(indice > casos.length - 1){indice = 0;}
+      actual = indice;
+      pista.scrollTo({left: casos[actual].offsetLeft - pista.offsetLeft, behavior:'smooth'});
+      marcarPunto();
+    }
+
+    function marcarPunto(){
+      var botones = puntos.children;
+      for(var i = 0; i < botones.length; i++){
+        botones[i].className = (i === actual) ? 'activo' : '';
+      }
+    }
+
+    for(var i = 0; i < casos.length; i++){
+      (function(indice){
+        var punto = document.createElement('button');
+        punto.type = 'button';
+        punto.setAttribute('aria-label', 'Ir al caso ' + (indice + 1));
+        punto.onclick = function(){irA(indice);};
+        puntos.appendChild(punto);
+      })(i);
+    }
+
+    anterior.onclick = function(){irA(actual - 1);};
+    siguiente.onclick = function(){irA(actual + 1);};
+
+    var temporizador;
+    pista.addEventListener('scroll', function(){
+      clearTimeout(temporizador);
+      temporizador = setTimeout(function(){
+        var centro = pista.scrollLeft + pista.clientWidth / 2;
+        for(var i = 0; i < casos.length; i++){
+          var inicio = casos[i].offsetLeft - pista.offsetLeft;
+          if(centro >= inicio && centro < inicio + casos[i].offsetWidth){
+            actual = i;
+            break;
+          }
+        }
+        marcarPunto();
+      }, 120);
+    });
+
+    marcarPunto();
+  }
+
+  cargarEntradas('investigacion', 'lista-investigacion', 'estado-investigacion', 'enlace-investigacion', crearTarjetaArticulo);
+  cargarEntradas('startups', 'lista-startups', 'estado-startups', 'enlace-startups', crearTarjetaArticulo);
+  cargarEntradas('transformacion', 'lista-transformacion', 'estado-transformacion', 'enlace-transformacion', crearTarjetaArticulo);
+  cargarEntradas('casos', 'pista-casos', 'estado-casos', 'enlace-casos', crearCasoExito, iniciarCarrusel);
+
+})();
+</script>
+
+</div>

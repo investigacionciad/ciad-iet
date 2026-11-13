@@ -1,0 +1,598 @@
+<!--
+  Página de Blogger: Tecnología Educativa
+  URL: https://ciad-innovaedutec.blogspot.com/p/tecnologia-educativa.html
+  ID de la página: 2188759747346334628
+  Copia del contenido publicado (11/11/2026). Se edita en Blogger › Páginas o, Inicio y Sobre el blog, desde el Panel CIAD.
+-->
+<div class="seccion-tecnologia" data-columnas="2" data-notas="6">
+
+<style>
+
+.layout-grid:has(.seccion-tecnologia) {
+  width:100%;
+  max-width:none;
+  margin:0;
+  padding:0;
+}
+
+.main-content:has(.seccion-tecnologia) {
+  width:100%;
+  max-width:none;
+}
+
+.post-outer-container:has(.seccion-tecnologia) {
+  margin:0;
+}
+
+.post-outer:has(.seccion-tecnologia) {
+  width:100%;
+  max-width:none;
+  margin:0;
+  padding:0;
+  background:transparent;
+  border:0;
+  border-radius:0;
+  overflow:visible;
+  box-shadow:none;
+}
+
+.post:has(.seccion-tecnologia) {
+  width:100%;
+  max-width:none;
+  margin:0;
+  padding:0;
+}
+
+.post-body:has(.seccion-tecnologia) {
+  width:100%;
+  max-width:none;
+  margin:0;
+  padding:0;
+  overflow:visible;
+}
+
+.app-container:has(.seccion-tecnologia) {
+  width:100%;
+  max-width:none;
+  background:#ffffff;
+  overflow:visible;
+}
+
+.blog-posts:has(.seccion-tecnologia),
+.main-section:has(.seccion-tecnologia) {
+  width:100%;
+  max-width:none;
+  margin:0;
+  padding:0;
+}
+
+.post-outer:has(.seccion-tecnologia) > .post .post-title,
+.post-outer:has(.seccion-tecnologia) .entry-title {
+  display:none !important;
+}
+
+.seccion-tecnologia {
+  --verde-uabc:#00723f;
+  --amarillo-uabc:#f2a900;
+  --azul-oscuro:#14243a;
+  --texto-gris:#5d6b7c;
+  --blanco:#ffffff;
+  --borde:#e5eaf0;
+  --radio:18px;
+  --sombra:0 10px 30px rgba(20,36,58,.08);
+  --solape-panel:clamp(18px,4vw,70px);
+  --ancho-panel:1220px;
+  --radio-panel:24px;
+  font-family:inherit;
+  color:var(--texto-gris);
+  background:#ffffff;
+  line-height:1.65;
+  margin:0;
+  padding:0 0 4rem;
+  position:relative;
+}
+
+.seccion-tecnologia * {
+  box-sizing:border-box;
+}
+
+.seccion-tecnologia .hero-tecnologia {
+  position:relative;
+  width:100vw;
+  left:50%;
+  margin-left:-50vw;
+  height:auto;
+  aspect-ratio:4 / 1;
+  margin-top:0;
+  overflow:hidden;
+  background:#ffffff;
+  border:0 !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+}
+
+.seccion-tecnologia .banner-tecnologia {
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  border:0 !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+  background:transparent !important;
+}
+
+.seccion-tecnologia .banner-tecnologia img {
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:contain;
+  object-position:center center;
+  max-width:none;
+  border:0 !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+  background:transparent !important;
+  padding:0 !important;
+  margin:0 !important;
+}
+
+.seccion-tecnologia .hero-tecnologia::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(
+    to bottom,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0) 62%,
+    rgba(255,255,255,.12) 100%
+  );
+}
+
+.seccion-tecnologia .panel-principal {
+  position:relative;
+  z-index:4;
+  width:min(calc(100% - 3rem),var(--ancho-panel));
+  margin:calc(-1 * var(--solape-panel)) auto 0;
+  background:var(--blanco);
+  border:1px solid rgba(20,36,58,.08);
+  border-radius:var(--radio-panel);
+  box-shadow:0 18px 50px rgba(20,36,58,.13);
+  padding:2.4rem 2.4rem 3.5rem;
+}
+
+.seccion-tecnologia .descripcion-tecnologia {
+  max-width:850px;
+  margin:0 auto 1rem;
+  text-align:center;
+  font-size:1.08rem;
+  color:#737b8a;
+}
+
+.seccion-tecnologia .bloque-tema {
+  padding:3.6rem 0 2rem;
+  scroll-margin-top:110px;
+}
+
+.seccion-tecnologia .bloque-tema h2 {
+  font-size:clamp(2rem,5vw,3.2rem);
+  color:var(--azul-oscuro);
+  font-weight:800;
+  line-height:1.1;
+  margin:0 0 1.5rem;
+}
+
+.seccion-tecnologia .bloque-tema h2::after {
+  content:"";
+  display:block;
+  width:64px;
+  height:4px;
+  background:var(--amarillo-uabc);
+  border-radius:4px;
+  margin-top:.9rem;
+}
+
+.seccion-tecnologia .bloque-tema > p {
+  max-width:720px;
+  font-size:1.02rem;
+  margin:0;
+}
+
+.seccion-tecnologia .alinear-derecha > p {
+  margin-left:auto;
+}
+
+.seccion-tecnologia .alinear-derecha {
+  text-align:right;
+}
+
+.seccion-tecnologia .alinear-derecha h2::after {
+  margin-left:auto;
+}
+
+.seccion-tecnologia .lista-articulos {
+  display:flex;
+  flex-direction:column;
+  gap:1.75rem;
+  width:100%;
+  margin-top:2.5rem;
+  text-align:left;
+}
+
+.seccion-tecnologia .tarjeta-articulo {
+  width:min(82%,760px);
+  background:var(--blanco);
+  border:1px solid var(--borde);
+  border-radius:var(--radio);
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  text-align:left;
+  transition:transform .2s,box-shadow .2s;
+}
+
+.seccion-tecnologia .alinear-derecha .lista-articulos .tarjeta-articulo:nth-child(odd) {
+  align-self:flex-end;
+}
+
+.seccion-tecnologia .alinear-derecha .lista-articulos .tarjeta-articulo:nth-child(even) {
+  align-self:flex-start;
+}
+
+.seccion-tecnologia .bloque-tema:not(.alinear-derecha) .lista-articulos .tarjeta-articulo:nth-child(odd) {
+  align-self:flex-start;
+}
+
+.seccion-tecnologia .bloque-tema:not(.alinear-derecha) .lista-articulos .tarjeta-articulo:nth-child(even) {
+  align-self:flex-end;
+}
+
+.seccion-tecnologia .tarjeta-articulo:hover {
+  transform:translateY(-4px);
+  box-shadow:var(--sombra);
+}
+
+.seccion-tecnologia .imagen-articulo {
+  width:100%;
+  height:180px;
+  object-fit:cover;
+  display:block;
+}
+
+.seccion-tecnologia .contenido-articulo {
+  padding:1.25rem;
+  display:flex;
+  flex-direction:column;
+  flex:1;
+}
+
+.seccion-tecnologia .fecha-articulo {
+  font-size:.78rem;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+  color:var(--verde-uabc);
+  font-weight:700;
+  margin:0 0 .5rem;
+}
+
+.seccion-tecnologia .titulo-articulo {
+  font-size:1.05rem;
+  font-weight:700;
+  color:var(--azul-oscuro);
+  line-height:1.3;
+  margin:0 0 .6rem;
+}
+
+.seccion-tecnologia .resumen-articulo {
+  font-size:.93rem;
+  margin:0 0 1rem;
+  flex:1;
+}
+
+.seccion-tecnologia .boton-leer {
+  align-self:flex-start;
+  font-size:.88rem;
+  font-weight:700;
+  color:var(--verde-uabc);
+  text-decoration:none;
+}
+
+.seccion-tecnologia .boton-leer:hover {
+  text-decoration:underline;
+}
+
+.seccion-tecnologia .mensaje-estado {
+  text-align:inherit;
+  font-size:.95rem;
+  padding:2rem 0;
+  margin:0;
+}
+
+.seccion-tecnologia .enlace-etiqueta {
+  display:inline-block;
+  margin-top:1.5rem;
+  padding:.7rem 1.4rem;
+  border-radius:999px;
+  background:var(--verde-uabc);
+  color:var(--blanco);
+  text-decoration:none;
+  font-size:.9rem;
+  font-weight:700;
+}
+
+.seccion-tecnologia .enlace-etiqueta:hover {
+  background:var(--azul-oscuro);
+}
+
+@media (max-width:900px) {
+  .seccion-tecnologia {
+    --solape-panel:36px;
+  }
+
+  .seccion-tecnologia .panel-principal {
+    width:calc(100% - 2rem);
+    padding:2rem 1.5rem 3rem;
+  }
+}
+
+@media (max-width:768px) {
+  .seccion-tecnologia {
+    --solape-panel:28px;
+  }
+
+  .seccion-tecnologia .bloque-tema,
+  .seccion-tecnologia .alinear-derecha {
+    text-align:left;
+  }
+
+  .seccion-tecnologia .alinear-derecha h2::after {
+    margin-left:0;
+  }
+
+  .seccion-tecnologia .panel-principal {
+    border-radius:18px;
+  }
+
+  .seccion-tecnologia .descripcion-tecnologia {
+    font-size:1rem;
+  }
+
+  .seccion-tecnologia .tarjeta-articulo,
+  .seccion-tecnologia .alinear-derecha .lista-articulos .tarjeta-articulo:nth-child(odd),
+  .seccion-tecnologia .alinear-derecha .lista-articulos .tarjeta-articulo:nth-child(even),
+  .seccion-tecnologia .bloque-tema:not(.alinear-derecha) .lista-articulos .tarjeta-articulo:nth-child(odd),
+  .seccion-tecnologia .bloque-tema:not(.alinear-derecha) .lista-articulos .tarjeta-articulo:nth-child(even) {
+    width:100%;
+    align-self:stretch;
+  }
+}
+
+@media (max-width:480px) {
+  .seccion-tecnologia {
+    --solape-panel:18px;
+  }
+
+  .seccion-tecnologia .panel-principal {
+    width:calc(100% - 1rem);
+    border-radius:14px;
+    padding:1.5rem 1rem 2.5rem;
+  }
+
+  .seccion-tecnologia .bloque-tema {
+    padding:2.7rem 0 1.5rem;
+  }
+}
+
+.seccion-tecnologia [data-editable]:empty {
+  display:none;
+}
+
+.post-title,
+.entry-title {
+  display:none;
+}
+
+/* Panel CIAD: sin textos de introducción */
+.seccion-tecnologia .panel-principal > .bloque-tema:first-of-type { padding-top: .6rem; }
+/* Panel CIAD: el banner mide 100vw (con la barra de desplazamiento) y empujaba la página de lado */
+html { overflow-x: clip; }
+</style>
+
+<section class="hero-tecnologia">
+  <div class="banner-tecnologia">
+    <img
+      alt="Tecnología Educativa"
+      loading="eager"
+      src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiaDb7qrBrJuyzny7YsXHBgetz5gtTkXfcccPBZ9FAi034nNwa3NGRcwobBi6kb3Lkt7wJ4aZ6Aw9GbOthdTiALolDL9m_DI0zq7vdVoU9YM9irig1dnonAyLeLuU5pQG7fMEaPLJeVYWU0hO5zXTrHbL0U_EX0a4jWcKgj8E6WEDgK3fo1C-XKVaglRe0/s1600/banner_tecnologia_nuevo.png"
+    />
+  </div>
+</section>
+
+<main class="panel-principal">
+
+  <section class="bloque-tema alinear-derecha" id="sec-herramientas">
+    <h2>Herramientas y plataformas</h2>
+    <div class="lista-articulos" id="lista-herramientas"></div>
+    <p class="mensaje-estado" id="estado-herramientas">Cargando entradas…</p>
+    <a class="enlace-etiqueta" href="#" id="enlace-herramientas">Ver todas las entradas</a>
+  </section>
+
+  <section class="bloque-tema" id="sec-metodologias">
+    <h2>Metodologías de enseñanza</h2>
+    <div class="lista-articulos" id="lista-metodologias"></div>
+    <p class="mensaje-estado" id="estado-metodologias">Cargando entradas…</p>
+    <a class="enlace-etiqueta" href="#" id="enlace-metodologias">Ver todas las entradas</a>
+  </section>
+
+  <section class="bloque-tema alinear-derecha" id="sec-accesibilidad">
+    <h2>Accesibilidad e inclusión digital</h2>
+    <div class="lista-articulos" id="lista-accesibilidad"></div>
+    <p class="mensaje-estado" id="estado-accesibilidad">Cargando entradas…</p>
+    <a class="enlace-etiqueta" href="#" id="enlace-accesibilidad">Ver todas las entradas</a>
+  </section>
+
+  <section class="bloque-tema" id="sec-analitica">
+    <h2>Analítica y evaluación del aprendizaje</h2>
+    <div class="lista-articulos" id="lista-analitica"></div>
+    <p class="mensaje-estado" id="estado-analitica">Cargando entradas…</p>
+    <a class="enlace-etiqueta" href="#" id="enlace-analitica">Ver todas las entradas</a>
+  </section>
+
+</main>
+
+<script>
+(function(){
+
+  var IMAGEN_GENERICA = "data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 800 500%27%3E%3Crect width=%27800%27 height=%27500%27 fill=%27%23e6f2ec%27/%3E%3Cpath d=%27M0 500L800 290V500z%27 fill=%27%2300723f%27 opacity=%27.14%27/%3E%3C/svg%3E";
+
+  var etiquetas = {
+    herramientas:'Herramientas y plataformas',
+    metodologias:'Metodologías de enseñanza',
+    accesibilidad:'Accesibilidad e inclusión digital',
+    analitica:'Analítica y evaluación del aprendizaje'
+  };
+
+  // Ver todas las entradas: ?tema=<etiqueta> muestra solo ese tema con todas sus notas
+  var temaActual = new URLSearchParams(location.search).get('tema');
+  if(!Object.keys(etiquetas).some(function(k){return etiquetas[k] === temaActual;})){temaActual = null;}
+  // Notas por tema: se eligen en el Panel CIAD (data-notas en el contenedor de la página)
+  var maximoEntradas = temaActual ? 150 : (Number((document.querySelector('.post-body [data-notas]') || document.body).getAttribute('data-notas')) || 6);
+
+  function rutaFeed(etiqueta){
+    return '/feeds/posts/default/-/' + encodeURIComponent(etiqueta) +
+           '?alt=json&orderby=published&max-results=' + maximoEntradas;
+  }
+
+  function rutaEtiqueta(etiqueta){
+    return location.pathname + '?tema=' + encodeURIComponent(etiqueta);
+  }
+
+  function quitarEtiquetasHtml(texto){
+    var caja = document.createElement('div');
+    caja.innerHTML = texto || '';
+    return (caja.textContent || '').replace(/\s+/g,' ').trim();
+  }
+
+  function recortar(texto,limite){
+    if(texto.length <= limite){return texto;}
+    return texto.substring(0,limite).replace(/\s+\S*$/,'') + '…';
+  }
+
+  function obtenerEnlace(entrada){
+    var enlaces = entrada.link || [];
+    for(var i=0;i<enlaces.length;i++){
+      if(enlaces[i].rel === 'alternate'){return enlaces[i].href;}
+    }
+    return '#';
+  }
+
+  function obtenerImagen(entrada){
+    // Panel CIAD (imagenCiad): la imagen de las tarjetas de la nota (o la principal) va antes que la miniatura de Blogger
+    var contenidoCiad = entrada.content ? entrada.content.$t || '' : '';
+    var imagenCiad = contenidoCiad.match(/\x3cimg[^>]*class="articulo-tarjeta"[^>]*src="([^"]+)"/) || contenidoCiad.match(/\x3cfigure class="articulo-portada"[^>]*>\x3cimg[^>]*src="([^"]+)"/);
+    if (imagenCiad) { return imagenCiad[1].replace(/\x26amp;/g, '\x26'); }
+
+    if(entrada.media$thumbnail && entrada.media$thumbnail.url){
+      return entrada.media$thumbnail.url.replace(/\/s72-c\//,'/w800-h500-c/');
+    }
+
+    var cuerpo = (entrada.content && entrada.content.$t) || '';
+    var caja = document.createElement('div');
+    caja.innerHTML = cuerpo;
+    var imagen = caja.querySelector('img');
+
+    return imagen ? imagen.src : IMAGEN_GENERICA;
+  }
+
+  // Texto de la entrada sin la ficha del autor ni estilos, con espacios entre bloques (DEF-017)
+  function textoResumen(html){
+    var caja = document.createElement('div');
+    caja.innerHTML = html || '';
+    caja.querySelectorAll('style, script, .articulo-ficha').forEach(function(el){ el.remove(); });
+    caja.querySelectorAll('p, h1, h2, h3, h4, li, div, br').forEach(function(el){ el.insertAdjacentText('afterend', ' '); });
+    return (caja.textContent || '').replace(/\s+/g, ' ').trim();
+  }
+
+  function obtenerResumen(entrada,limite){
+    var cuerpo = (entrada.summary && entrada.summary.$t) ||
+                 (entrada.content && entrada.content.$t) || '';
+    return recortar(textoResumen(cuerpo), limite);
+  }
+
+  function formatearFecha(iso){
+    var fecha = new Date(iso);
+    if(isNaN(fecha)){return '';}
+    return fecha.toLocaleDateString('es-MX',{day:'numeric',month:'long',year:'numeric'});
+  }
+
+  function crearTarjetaArticulo(entrada){
+    var enlace = obtenerEnlace(entrada);
+    var articulo = document.createElement('article');
+    articulo.className = 'tarjeta-articulo';
+
+    articulo.innerHTML =
+      '<img class="imagen-articulo" src="' + obtenerImagen(entrada) + '" alt="" loading="lazy" />' +
+      '<div class="contenido-articulo">' +
+        '<p class="fecha-articulo">' + formatearFecha(entrada.published.$t) + '</p>' +
+        '<h3 class="titulo-articulo">' + quitarEtiquetasHtml(entrada.title.$t) + '</h3>' +
+        '<p class="resumen-articulo">' + obtenerResumen(entrada,130) + '</p>' +
+        '<a class="boton-leer" href="' + enlace + '">Leer más</a>' +
+      '</div>';
+
+    return articulo;
+  }
+
+  function cargarEntradas(clave,idLista,idEstado,idEnlace){
+    var etiqueta = etiquetas[clave];
+    var lista = document.getElementById(idLista);
+    var estado = document.getElementById(idEstado);
+    var enlace = document.getElementById(idEnlace);
+
+    if(!lista || !estado){return;}
+    if(temaActual && etiqueta !== temaActual){
+      var bloque = lista.closest('.bloque-tema');
+      if(bloque){bloque.style.display = 'none';}
+      return;
+    }
+    if(enlace){enlace.href = rutaEtiqueta(etiqueta);}
+    if(temaActual && enlace){enlace.href = location.pathname; enlace.textContent = 'Ver todos los temas';}
+
+    fetch(rutaFeed(etiqueta))
+      .then(function(respuesta){
+        if(!respuesta.ok){throw new Error('Error al cargar el feed');}
+        return respuesta.json();
+      })
+      .then(function(datos){
+        var entradas = (datos.feed && datos.feed.entry) || [];
+
+        if(!entradas.length){
+          estado.textContent = 'Aún no hay entradas publicadas en este subapartado.';
+          if(enlace){enlace.style.display = 'none';}
+          return;
+        }
+
+        for(var i=0;i<entradas.length;i++){
+          lista.appendChild(crearTarjetaArticulo(entradas[i]));
+        }
+
+        estado.style.display = 'none';
+      })
+      .catch(function(){
+        estado.textContent = 'No fue posible cargar las entradas en este momento.';
+        if(enlace){enlace.style.display = 'none';}
+      });
+  }
+
+  cargarEntradas('herramientas','lista-herramientas','estado-herramientas','enlace-herramientas');
+  cargarEntradas('metodologias','lista-metodologias','estado-metodologias','enlace-metodologias');
+  cargarEntradas('accesibilidad','lista-accesibilidad','estado-accesibilidad','enlace-accesibilidad');
+  cargarEntradas('analitica','lista-analitica','estado-analitica','enlace-analitica');
+
+})();
+</script>
+
+</div>

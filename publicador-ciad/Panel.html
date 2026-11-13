@@ -1,0 +1,3053 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<base target="_top">
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --verde: #00723f;
+  --verde-oscuro: #005a31;
+  --verde-claro: #e6f2ec;
+  --amarillo: #f2a900;
+  --amarillo-claro: #fdf4dc;
+  --rojo: #b3261e;
+  --rojo-claro: #fbe9e7;
+  --azul-oscuro: #14243a;
+  --texto: #1d2a3a;
+  --texto-suave: #5d6b7c;
+  --borde: #e2e7ed;
+  --fondo: #f4f6f8;
+  --blanco: #ffffff;
+  --radio: 14px;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; font-family: 'Inter', system-ui, sans-serif;
+  background: var(--fondo); color: var(--texto); line-height: 1.5; font-size: 14px;
+}
+button { font: inherit; cursor: pointer; }
+a { color: var(--verde); }
+[hidden] { display: none !important; }
+
+/* --- Barra superior --- */
+.barra-superior {
+  background: var(--verde); color: #fff;
+  border-bottom: 4px solid var(--amarillo);
+}
+.barra-contenido {
+  max-width: 1100px; margin: 0 auto; padding: 16px 24px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+}
+.marca { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 22px; margin: 0; }
+.marca span { font-weight: 600; opacity: .8; font-size: 15px; margin-left: 8px; }
+.sesion { display: flex; align-items: center; gap: 12px; font-size: 13px; }
+
+
+/* --- Pestañas --- */
+.contenedor { max-width: 1100px; margin: 0 auto; padding: 24px; }
+.pestanas { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+.pestana {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--blanco); border: 1px solid var(--borde); color: var(--texto-suave);
+  border-radius: 12px; padding: 12px 14px; font-weight: 600; font-size: 15px;
+}
+.pestana.activa { border-color: var(--verde); color: var(--verde); box-shadow: 0 0 0 1px var(--verde) inset; }
+.contador {
+  min-width: 24px; height: 24px; padding: 0 7px; border-radius: 999px;
+  background: var(--fondo); color: var(--texto-suave); font-size: 12px; font-weight: 700;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.contador.con-pendientes { background: var(--amarillo); color: var(--azul-oscuro); }
+
+/* --- Filtros --- */
+.filtros { display: flex; gap: 6px; margin-bottom: 16px; flex-wrap: wrap; align-items: flex-end; }
+.filtro {
+  background: transparent; border: 1px solid var(--borde); color: var(--texto-suave);
+  border-radius: 999px; padding: 6px 14px; font-size: 13px; font-weight: 500;
+}
+.filtro.activo { background: var(--azul-oscuro); border-color: var(--azul-oscuro); color: #fff; }
+/* Color según la acción: pendiente = amarillo, aprobado/publicado = verde, rechazado/no publicado = rojo */
+.filtro.tono-amarillo { border-color: var(--amarillo); color: #8a5d00; background: var(--amarillo-claro); }
+.filtro.tono-verde { border-color: var(--verde); color: var(--verde); background: var(--verde-claro); }
+.filtro.tono-rojo { border-color: var(--rojo); color: var(--rojo); background: var(--rojo-claro); }
+.filtro.tono-amarillo.activo { background: var(--amarillo); border-color: var(--amarillo); color: var(--azul-oscuro); }
+.filtro.tono-verde.activo { background: var(--verde); border-color: var(--verde); color: #fff; }
+.filtro.tono-rojo.activo { background: var(--rojo); border-color: var(--rojo); color: #fff; }
+.filtro.tono-amarillo, .filtro.tono-verde, .filtro.tono-rojo { border-color: transparent; } /* Sin contorno; el borde queda transparente para no cambiar el tamaño */
+.orden-periodo { display: flex; gap: 10px; align-items: flex-end; flex-wrap: wrap; margin-left: 4px; }
+.orden-periodo label { display: flex; flex-direction: column; gap: 3px; font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: var(--texto-suave); font-weight: 600; }
+.orden-periodo select, .orden-periodo input[type="date"] {
+  border: 1px solid var(--borde); border-radius: 8px; padding: 6px 8px; font: inherit; font-size: 13px;
+  background: var(--blanco); color: inherit; text-transform: none; letter-spacing: normal;
+}
+.orden-periodo select:focus, .orden-periodo input[type="date"]:focus { outline: none; border-color: var(--verde); box-shadow: 0 0 0 3px rgba(0,114,63,.15); }
+
+/* --- Tarjetas --- */
+.lista { display: grid; gap: 14px; }
+.tarjeta {
+  background: var(--blanco); border: 1px solid var(--borde); border-radius: var(--radio);
+  padding: 20px 22px;
+}
+.tarjeta.spam { border-color: var(--amarillo); box-shadow: 0 0 0 1px var(--amarillo) inset; }
+.tarjeta-cabecera { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+.folio { font-family: 'Outfit', sans-serif; font-weight: 700; color: var(--azul-oscuro); }
+.fecha { color: var(--texto-suave); font-size: 12px; margin-left: auto; }
+.pastilla {
+  display: inline-block; border-radius: 999px; padding: 2px 10px; font-size: 12px; font-weight: 600;
+  background: var(--fondo); color: var(--texto-suave);
+}
+.pastilla.pendiente { background: var(--amarillo-claro); color: #8a5d00; }
+.pastilla.aprobado { background: var(--verde-claro); color: var(--verde); }
+.pastilla.rechazado { background: var(--rojo-claro); color: var(--rojo); }
+.pastilla.seccion { background: #eef1f5; color: var(--azul-oscuro); }
+.pastilla.aviso { background: var(--amarillo); color: var(--azul-oscuro); }
+
+.tarjeta h3 { font-family: 'Outfit', sans-serif; font-size: 19px; font-weight: 700; color: var(--azul-oscuro); margin: 0 0 8px; line-height: 1.3; }
+.datos { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 6px 20px; margin: 10px 0 12px; }
+.dato { font-size: 13px; min-width: 0; overflow-wrap: anywhere; }
+.dato b { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: var(--texto-suave); font-weight: 600; }
+.texto-largo { white-space: pre-wrap; color: var(--texto); margin: 8px 0; }
+.texto-largo.recortado { display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+.ver-mas { background: none; border: 0; color: var(--verde); font-weight: 600; padding: 0; font-size: 13px; }
+.nota {
+  border-left: 3px solid var(--amarillo); background: var(--amarillo-claro);
+  padding: 8px 12px; border-radius: 0 8px 8px 0; font-size: 13px; margin: 10px 0;
+}
+.detalle-estado { font-size: 12px; color: var(--texto-suave); margin-top: 6px; }
+.subtitulo-articulo { color: var(--texto-suave); font-size: 15px; margin: -4px 0 8px; }
+/* Imagen principal: los marcos tienen la misma forma que en el blog */
+.portada { margin: 16px 0 12px; padding: 16px 18px; border: 1px solid var(--borde); border-radius: 12px; background: #fafbfc; }
+.portada.falta { border-color: #e0a100; background: #fff8e6; }
+.portada-titulo { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: var(--texto-suave); font-weight: 600; margin-bottom: 12px; }
+.portada .ayuda { font-size: 13px; color: var(--texto-suave); margin: 0 0 12px; }
+.portada-vistas { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start; }
+.portada-vista { flex: 1 1 320px; min-width: 0; }
+/* Sin editar: las tres vistas en una fila (la de computadora, más ancha) */
+.portada:not(.editando) .portada-vistas { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr); gap: 14px; align-items: start; }
+.portada:not(.editando) .pn, .portada:not(.editando) .portada-marco[data-vista="cel"], .portada:not(.editando) .portada-marco[data-vista="tar"] { max-width: none; }
+@media (max-width: 760px) { .portada:not(.editando) .portada-vistas { grid-template-columns: minmax(0, 1fr); } }
+.portada-vista h4 { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 0 0 8px; font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 700; color: var(--azul-oscuro); }
+.portada.editando .portada-vista { padding: 10px 12px; border: 1px solid var(--borde); border-radius: 10px; background: var(--blanco); }
+/* Editando: computadora arriba (vista previa y barras lado a lado); banner y tarjeta abajo, en dos columnas */
+.portada.editando .portada-vistas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.portada.editando .portada-vista[data-vista-clave="pc"] { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 560px) minmax(220px, 1fr); column-gap: 14px; align-items: start; }
+.portada.editando .portada-vista[data-vista-clave="pc"] > h4, .portada.editando .portada-vista[data-vista-clave="pc"] > .ayuda { grid-column: 1 / -1; }
+.portada.editando .portada-vista[data-vista-clave="pc"] .portada-controles { margin-top: 0; }
+@media (max-width: 760px) {
+  .portada.editando .portada-vistas, .portada.editando .portada-vista[data-vista-clave="pc"] { grid-template-columns: minmax(0, 1fr); }
+}
+.boton-mini { border: 1px solid var(--borde); background: var(--blanco); border-radius: 6px; padding: 2px 8px; font-size: 12px; font-weight: 600; color: var(--texto-suave); }
+.boton-mini:hover { color: var(--verde); border-color: var(--verde); }
+.portada .fila-botones { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--borde); }
+/* Marco = la imagen principal de la nota */
+.portada-marco { margin: 0; position: relative; width: 100%; overflow: hidden; border-radius: 8px; }
+.en-pruebas { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; padding: 1px 6px; margin-left: 4px; border-radius: 999px; background: #fff4d6; color: #7a5a00; vertical-align: middle; }
+.portada-marco img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; user-select: none; }
+.portada-marco[data-vista="pc"] img { object-fit: contain; }
+.portada-marco[data-vista="cel"], .portada-marco[data-vista="tar"] { max-width: 420px; }
+.portada.editando .portada-marco[data-vista="cel"], .portada.editando .portada-marco[data-vista="tar"] { max-width: none; }
+.portada.editando .portada-marco { touch-action: none; outline: 2px solid var(--verde); outline-offset: 2px; cursor: grab; }
+.portada.editando .portada-vista .ayuda { font-size: 12px; margin: 0 0 8px; } /* Y que el contorno del marco no toque el texto */
+.portada.editando .portada-marco:active { cursor: grabbing; }
+/* Vista previa de la cabecera de la nota en computadora; tamaños en cqw = una nota de ~1000 px de ancho */
+.pn { container-type: inline-size; max-width: 420px; padding: 12px; border: 1px solid var(--borde); border-radius: 8px; background: #fff; }
+.portada.editando .pn { max-width: 560px; }
+.pn-rejilla { display: grid; grid-template-columns: minmax(0, 1fr) 40%; column-gap: 2.8cqw; align-items: start; }
+.pn-rejilla .portada-marco { align-self: stretch; min-height: 22cqw; border-radius: 1.2cqw; }
+.pn-titulo { margin: 0 0 1cqw; font: 700 2.15cqw/1.3 Bitter, Georgia, serif; color: #00723F; }
+.pn-sub { margin: 0 0 1.6cqw; font: italic 400 1.6cqw/1.35 Bitter, Georgia, serif; color: #20419A; }
+.pn-ficha { margin: 0 0 2.8cqw; padding: 1.6cqw 2cqw; border-left: .4cqw solid #00723F; border-radius: 0 1.2cqw 1.2cqw 0; background: #f6f8fa; font-size: 1.6cqw; line-height: 1.5; }
+.pn-ficha p { margin: 0; }
+.pn-ficha p:first-child { font-weight: 700; }
+.pn-lectura { margin: 0 0 2.4cqw; font-size: 1.4cqw; color: #5d6b7c; }
+.portada-controles { display: grid; grid-template-columns: auto minmax(0, 1fr) 3em; gap: 2px 10px; align-items: center; margin-top: 8px; padding: 6px 10px; border-radius: 8px; background: var(--fondo); }
+.portada-controles label { font-size: 10.5px; text-transform: uppercase; letter-spacing: .04em; color: var(--texto-suave); font-weight: 600; }
+.portada-controles input[type="range"] { width: 100%; margin: 0; accent-color: var(--verde); }
+.portada-controles input:disabled { opacity: .4; }
+.portada-controles output { font-size: 13px; color: var(--texto-suave); text-align: right; font-variant-numeric: tabular-nums; }
+.campo-seccion { margin: 12px 0 4px; max-width: 520px; }
+.campo-seccion label { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: var(--texto-suave); font-weight: 600; margin-bottom: 4px; }
+.campo-seccion input[type="text"] {
+  width: 100%; font: inherit; font-size: 13px; color: var(--texto);
+  border: 1px solid var(--borde); border-radius: 8px; padding: 8px 10px; background: #fff;
+}
+.campo-seccion input[type="text"]:focus { outline: none; border-color: var(--verde); box-shadow: 0 0 0 3px rgba(0,114,63,.15); }
+/* Editar nota publicada: compacto; la barra va junto al texto y el texto se desplaza dentro de su caja */
+.edicion { margin: 16px 0 4px; padding: 14px 16px; border: 1px solid var(--borde); border-radius: 12px; background: #fafbfc; }
+.edicion-cabeza { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 2px; }
+.edicion-cabeza .portada-titulo { margin: 0; }
+.edicion .campo-seccion { max-width: none; margin: 8px 0 0; }
+.edicion-rejilla { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 0 12px; }
+.edicion-rejilla.dos { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); align-items: start; }
+.edicion textarea { width: 100%; font: inherit; font-size: 13px; color: var(--texto); border: 1px solid var(--borde); border-radius: 8px; padding: 8px 10px; background: #fff; resize: vertical; }
+.edicion textarea:focus { outline: none; border-color: var(--verde); box-shadow: 0 0 0 3px rgba(0,114,63,.15); }
+.edicion .ayuda { font-size: 12px; color: var(--texto-suave); margin: 4px 0 0; }
+.edicion .portada { margin: 12px 0 0; background: var(--blanco); }
+.editor { border: 1px solid var(--borde); border-radius: 8px; background: #fff; overflow: hidden; }
+.editor:focus-within { border-color: var(--verde); box-shadow: 0 0 0 3px rgba(0,114,63,.15); }
+.editor-barra { display: flex; flex-wrap: wrap; gap: 2px 10px; padding: 4px 6px; border-bottom: 1px solid var(--borde); background: var(--fondo); }
+.editor-grupo { display: inline-flex; gap: 1px; }
+.editor-barra button { border: 1px solid transparent; background: transparent; border-radius: 6px; padding: 3px 7px; font-size: 12.5px; color: var(--texto); line-height: 1.3; }
+.editor-barra button:hover, .editor-barra button:focus-visible { background: #fff; border-color: var(--borde); outline: none; }
+.editor-pedir { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 6px 8px; border-bottom: 1px solid var(--borde); background: var(--amarillo-claro); font-size: 13px; }
+.editor-pedir input[type="text"] { flex: 1 1 220px; font: inherit; font-size: 13px; border: 1px solid var(--borde); border-radius: 8px; padding: 5px 9px; background: #fff; }
+.editor-pedir .boton { padding: 5px 12px; }
+.editor-cuerpo { min-height: 220px; max-height: 60vh; overflow: auto; padding: 12px 16px; font-size: 14px; line-height: 1.6; outline: none; }
+.editor-cuerpo img, .editor-cuerpo iframe, .editor-cuerpo figure { max-width: 100%; height: auto; }
+.editor-cuerpo .articulo-referencia { font-size: inherit !important; } /* Como en el blog: mismo tamaño que el texto */
+.editor-cuerpo .cita-burbuja { display: none; }
+.editor-cuerpo h2 { font-family: 'Outfit', sans-serif; font-size: 19px; color: var(--verde); margin: 1.1em 0 .4em; }
+.editor-cuerpo h3 { font-family: 'Outfit', sans-serif; font-size: 16px; color: var(--verde); margin: 1em 0 .3em; }
+/* Pantalla completa: el editor ocupa toda la ventana, con Guardar y Cancelar a la mano */
+.edicion-marco.pantalla-completa { position: fixed; inset: 0; z-index: 1000; overflow: auto; padding: 20px max(20px, calc(50vw - 560px)); background: var(--fondo); }
+.edicion-marco.pantalla-completa .edicion { margin-top: 0; background: var(--blanco); }
+.edicion-marco.pantalla-completa .editor-cuerpo { max-height: 70vh; min-height: 50vh; }
+.edicion-marco.pantalla-completa .acciones { position: sticky; bottom: 0; background: var(--fondo); padding-bottom: 14px; }
+.chips { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding: 6px 8px; border: 1px solid var(--borde); border-radius: 8px; background: var(--blanco); cursor: text; }
+.chips:focus-within { border-color: var(--verde); box-shadow: 0 0 0 3px rgba(0,114,63,.15); }
+.chip { display: inline-flex; align-items: center; gap: 4px; padding: 3px 4px 3px 10px; border-radius: 999px; background: var(--verde-claro, #e8f3ed); color: var(--verde); font-size: 12px; font-weight: 600; }
+.chip button { border: 0; background: transparent; color: inherit; cursor: pointer; font-size: 14px; line-height: 1; padding: 0 4px; border-radius: 50%; }
+.chip button:hover { background: rgba(0,114,63,.15); }
+.campo-seccion .chips input[type="text"] { flex: 1 0 140px; border: 0; padding: 4px 2px; box-shadow: none; min-width: 120px; }
+.campo-seccion .chips input[type="text"]:focus { box-shadow: none; }
+.campo-seccion select {
+  width: 100%; font: inherit; font-size: 13px; color: var(--texto);
+  border: 1px solid var(--borde); border-radius: 8px; padding: 8px 10px; background: #fff;
+}
+.campo-seccion select:focus { outline: none; border-color: var(--verde); box-shadow: 0 0 0 3px rgba(0,114,63,.15); }
+.campo-seccion.con-error select { border-color: var(--rojo); }
+.campo-seccion .ayuda { font-size: 12px; color: var(--texto-suave); margin-top: 4px; }
+.enlaces { display: flex; gap: 14px; flex-wrap: wrap; font-size: 13px; font-weight: 600; margin: 8px 0; }
+
+/* --- Acciones --- */
+.acciones { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--borde); }
+.boton {
+  border-radius: 8px; padding: 8px 16px; font-weight: 600; font-size: 13px;
+  border: 1px solid transparent; transition: background .15s;
+}
+.boton:disabled { opacity: .55; cursor: wait; }
+/* --- Mantenimiento --- */
+.mt-cabecera { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-start; justify-content: space-between; }
+.mt-cabecera h2 { margin: 0; font-size: 18px; }
+.mt-cabecera p { margin: 4px 0 0; color: #5d6b7c; font-size: 13px; }
+.mt-botones { display: flex; gap: 8px; flex-wrap: wrap; }
+.mt-cifras { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-top: 16px; }
+.mt-cifra { border: 1px solid var(--borde); border-radius: 10px; padding: 10px 12px; }
+.mt-cifra b { display: block; font-size: 20px; line-height: 1.2; }
+.mt-cifra span { font-size: 12px; color: #5d6b7c; }
+.mt-cifra.liberar b { color: var(--verde); }
+.mt-barra-uso { height: 8px; border-radius: 999px; background: #eef1f4; overflow: hidden; margin-top: 12px; }
+.mt-barra-uso i { display: block; height: 100%; background: var(--verde); }
+.mt-reglas { margin-top: 12px; font-size: 13px; }
+.mt-reglas summary { cursor: pointer; font-weight: 600; }
+.mt-reglas ul { margin: 8px 0 0; padding-left: 18px; color: #3d4a5a; }
+/* Métricas: una barra por valor; el número y el % van en texto (no dependen del color) */
+.met-rejilla { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 14px; }
+.met-rejilla .tarjeta { margin: 0; }
+
+.met-grafica h3 { margin: 0 0 2px; font-size: 15px; }
+.met-grafica > p { margin: 0 0 12px; font-size: 12px; color: var(--texto-suave); }
+.met-lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.met-lista li { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(50px, 1fr) auto; gap: 10px; align-items: center; font-size: 13px; padding: 2px 0; }
+.met-lista li:hover { background: var(--fondo); }
+.met-etiqueta { overflow-wrap: anywhere; line-height: 1.3; }
+.met-barra { height: 10px; }
+.met-barra i { display: block; height: 100%; min-width: 2px; background: var(--azul-oscuro); border-radius: 0 4px 4px 0; }
+.met-lista b { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.met-lista b small { font-weight: 400; color: var(--texto-suave); }
+.met-grafica details { margin-top: 8px; font-size: 13px; }
+.met-grafica summary { cursor: pointer; font-weight: 600; color: var(--verde); margin-bottom: 6px; }
+.met-meses { display: flex; align-items: flex-end; gap: 2px; height: 160px; overflow-x: auto; padding-top: 18px; }
+.met-mes { flex: 1 0 28px; max-width: 72px; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; font-size: 11px; color: var(--texto-suave); }
+.met-mes b { color: var(--texto); font-size: 12px; font-variant-numeric: tabular-nums; }
+.met-pila { width: 70%; min-height: 2px; display: flex; flex-direction: column-reverse; gap: 2px; border-radius: 4px 4px 0 0; overflow: hidden; }
+.met-pila i { display: block; min-height: 2px; }
+.met-mes:hover .met-pila { opacity: .85; }
+.met-leyenda { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 12px; margin: 0 0 8px; color: var(--texto); }
+.met-leyenda span { display: inline-flex; align-items: center; gap: 6px; }
+.met-leyenda i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+.met-heroe-cifra { display: flex; align-items: center; gap: 16px; margin-bottom: 14px; }
+.met-heroe-cifra b { font-family: 'Outfit', sans-serif; font-size: 56px; line-height: 1; color: var(--verde); }
+.met-heroe-cifra span { font-size: 17px; font-weight: 600; color: var(--azul-oscuro); line-height: 1.3; }
+.met-heroe-cifra small { font-size: 12px; font-weight: 400; color: var(--texto-suave); }
+.met-partida { display: flex; gap: 2px; height: 16px; border-radius: 4px; overflow: hidden; margin-bottom: 10px; }
+.met-partida i { display: block; min-width: 4px; }
+.solo-impresion { display: none; }
+/* --- Usuarios --- */
+.us-tabla-caja { overflow-x: auto; margin-top: 14px; }
+.us-tabla { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 640px; }
+.us-tabla th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: var(--texto-suave); padding: 8px 6px; border-bottom: 1px solid var(--borde); }
+.us-tabla th.centro, .us-tabla td.centro { text-align: center; }
+.us-tabla td { padding: 8px 6px; border-bottom: 1px solid var(--borde); vertical-align: middle; }
+.us-tabla input[type="text"] { width: 100%; border: 1px solid var(--borde); border-radius: 6px; padding: 5px 8px; font: inherit; }
+.us-tabla input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--verde); cursor: pointer; }
+.us-correo { font-weight: 600; overflow-wrap: anywhere; }
+.us-nota { font-size: 11px; color: var(--texto-suave); }
+.us-agregar { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+.us-agregar input { flex: 1 1 260px; border: 1px solid var(--borde); border-radius: 8px; padding: 8px 10px; font: inherit; }
+.us-pie { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; justify-content: space-between; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--borde); }
+.us-resumen { font-size: 12px; color: var(--texto-suave); }
+@media print {
+  body { background: #fff; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .barra-superior, .pestanas, #filtros, .aviso-flotante, .mt-botones { display: none !important; }
+  .solo-impresion { display: block; margin-bottom: 12px; font-size: 12px; line-height: 1.5; }
+  .contenedor { max-width: none; padding: 0; }
+  .tarjeta { break-inside: avoid; box-shadow: none; }
+  .met-rejilla { grid-template-columns: 1fr 1fr; }
+  .met-grafica summary { display: none; }
+}
+.met-mes span { margin-top: 4px; white-space: nowrap; }
+.mt-grupo-cab { display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; justify-content: space-between; }
+.mt-grupo-cab h3 { margin: 0; font-size: 15px; }
+.mt-grupo-cab .mt-sub { font-size: 13px; color: #5d6b7c; }
+.mt-grupo-desc { margin: 4px 0 8px; font-size: 13px; color: #5d6b7c; }
+.mt-enlace { background: none; border: 0; padding: 0; color: var(--verde); font-weight: 600; font-size: 13px; cursor: pointer; }
+.mt-fila { display: grid; grid-template-columns: 22px 1fr auto; gap: 10px; align-items: start; padding: 9px 0; border-top: 1px solid var(--borde); font-size: 13.5px; }
+.mt-fila small { display: block; color: #5d6b7c; overflow-wrap: anywhere; }
+.mt-fila .mt-lado { text-align: right; display: grid; gap: 4px; justify-items: end; }
+.mt-tam { font-weight: 600; font-variant-numeric: tabular-nums; }
+.mt-etiqueta { font-size: 12px; white-space: nowrap; padding: 2px 8px; border-radius: 999px; background: #eef1f4; }
+.mt-etiqueta.sin-deshacer { background: #fdecea; color: #a12a1f; }
+.mt-etiqueta.hecho { background: #e7f4ec; color: #00723f; }
+.mt-plegable summary { cursor: pointer; font-weight: 600; font-size: 15px; }
+.mt-resumen { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 8px; }
+.mt-resumen td { padding: 6px 4px; border-top: 1px solid var(--borde); vertical-align: top; }
+.mt-acciones { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; position: sticky; bottom: 0; z-index: 1; background: var(--blanco); }
+.mt-acciones .mt-total { margin-right: auto; font-size: 13px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.mt-revision { flex: 1 1 100%; max-height: 45vh; overflow-y: auto; font-size: 13px; border-bottom: 1px solid var(--borde); padding-bottom: 8px; }
+.mt-revision p { margin: 0 0 6px; }
+.mt-revision h4 { margin: 10px 0 4px; font-size: 13.5px; }
+.mt-revision h4.sin-deshacer { color: #a12a1f; }
+.mt-revision h4 small, .mt-revision li small { font-weight: 400; color: #5d6b7c; }
+.mt-revision ul { list-style: none; margin: 0; padding: 0; }
+.mt-revision li { display: flex; justify-content: space-between; gap: 10px; padding: 4px 0; border-top: 1px solid var(--borde); overflow-wrap: anywhere; }
+.mt-revision li b { white-space: nowrap; font-variant-numeric: tabular-nums; }
+@media (max-width: 560px) { .mt-fila { grid-template-columns: 22px 1fr; } .mt-fila .mt-lado { grid-column: 2; justify-items: start; text-align: left; } }
+.boton.principal { background: var(--verde); color: #fff; }
+.boton.principal:hover { background: var(--verde-oscuro); }
+.boton.secundario { background: var(--blanco); border-color: var(--borde); color: var(--texto); }
+.boton.secundario:hover { background: var(--fondo); }
+.boton.peligro { background: var(--blanco); border-color: #efc4bf; color: var(--rojo); }
+.boton.peligro:hover { background: var(--rojo-claro); }
+.boton.peligro-lleno { background: var(--rojo); color: #fff; }
+
+.confirmacion { width: 100%; display: grid; gap: 8px; }
+.confirmacion p { margin: 0; font-weight: 600; }
+.confirmacion textarea {
+  width: 100%; min-height: 70px; font: inherit; font-size: 13px;
+  border: 1px solid var(--borde); border-radius: 8px; padding: 8px 10px; resize: vertical;
+}
+.confirmacion .fila-botones { display: flex; gap: 8px; flex-wrap: wrap; }
+
+/* --- Bloqueados --- */
+.bloque-bloqueados { margin-top: 28px; }
+.bloque-bloqueados summary { cursor: pointer; font-weight: 600; color: var(--azul-oscuro); padding: 8px 0; }
+.fila-bloqueado {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  background: var(--blanco); border: 1px solid var(--borde); border-radius: 10px; padding: 10px 14px; margin-top: 8px;
+}
+
+/* --- Guía de uso --- */
+.guia-barra { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+.guia-barra p { margin: 0; color: var(--texto-suave); font-size: 13px; }
+
+/* --- Estados --- */
+.mensaje-lista { text-align: center; color: var(--texto-suave); padding: 48px 16px; background: var(--blanco); border: 1px dashed var(--borde); border-radius: var(--radio); }
+.mensaje-lista.error { color: var(--rojo); border-color: #efc4bf; background: var(--rojo-claro); }
+.mensaje-lista.error { overflow-wrap: anywhere; max-height: 320px; overflow: auto; }
+
+.aviso-flotante {
+  position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%) translateY(20px);
+  background: var(--azul-oscuro); color: #fff; padding: 12px 20px; border-radius: 10px;
+  font-weight: 500; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s;
+  max-width: calc(100% - 32px); z-index: 10;
+}
+.aviso-flotante.visible { opacity: 1; transform: translateX(-50%) translateY(0); }
+.aviso-flotante.error { background: var(--rojo); }
+
+
+/* --- Editor de páginas --- */
+.pg-barra { position: sticky; top: 0; z-index: 5; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;
+  background: var(--blanco); border: 1px solid var(--borde); border-radius: var(--radio); padding: 12px 18px; margin-bottom: 14px; box-shadow: 0 4px 14px rgba(20,36,58,.06); }
+.pg-barra a { font-weight: 600; }
+.pg-barra-botones { display: flex; gap: 8px; }
+.pg-estado { margin-left: 12px; font-size: 12px; color: var(--texto-suave); }
+.pg-estado.sucio { color: #8a5d00; font-weight: 700; }
+.pg-bloque h3, .pg-subtitulo { font-family: 'Outfit', sans-serif; font-size: 17px; color: var(--azul-oscuro); margin: 0 0 10px; }
+.pg-subtitulo { margin: 18px 0 10px; }
+.pg-fila-titulo { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 8px; }
+.pg-campo { display: block; margin-bottom: 10px; }
+.pg-campo span, .pg-etiqueta { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: var(--texto-suave); font-weight: 600; margin-bottom: 4px; }
+.pg-campo input, .pg-campo textarea, .pg-agregar input, .pg-enlace input {
+  width: 100%; font: inherit; font-size: 13px; color: var(--texto); border: 1px solid var(--borde); border-radius: 8px; padding: 8px 10px; background: #fff; }
+.pg-campo textarea { resize: vertical; }
+.pg-campo input:focus, .pg-campo textarea:focus, .pg-agregar input:focus, .pg-enlace input:focus { outline: none; border-color: var(--verde); box-shadow: 0 0 0 3px rgba(0,114,63,.15); }
+.pg-campo.corto { max-width: 220px; }
+.pg-agregar { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 10px; }
+.pg-agregar input { flex: 1; min-width: 220px; }
+.pg-ayuda { font-size: 12px; color: var(--texto-suave); margin: 0; }
+.pg-check { font-size: 12px; display: inline-flex; gap: 6px; align-items: center; }
+.pg-video { display: grid; grid-template-columns: 200px 1fr auto; gap: 16px; align-items: start; margin-bottom: 12px; }
+.pg-miniatura { position: relative; display: block; border-radius: 10px; overflow: hidden; background: #e9edf1; aspect-ratio: 16 / 9; }
+.pg-miniatura img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pg-miniatura span { position: absolute; inset: 0; margin: auto; width: 38px; height: 38px; border-radius: 50%; background: rgba(0,114,63,.9); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+.pg-miniatura.chica { width: 180px; flex-shrink: 0; }
+.pg-acciones { display: flex; gap: 6px; flex-wrap: wrap; align-items: flex-start; }
+.pg-acciones.arriba { justify-content: flex-end; margin: 10px 0; }
+.pg-video > .pg-acciones { flex-direction: column; }
+.pg-mini { background: var(--blanco); border: 1px solid var(--borde); color: var(--texto); border-radius: 8px; padding: 5px 10px; font-size: 12px; font-weight: 600; }
+.pg-mini:hover { background: var(--fondo); }
+.pg-mini:disabled { opacity: .35; cursor: default; }
+.pg-mini.peligro { color: var(--rojo); border-color: #efc4bf; }
+.pg-mini.confirmando { background: var(--rojo); color: #fff; border-color: var(--rojo); }
+.pg-guia { margin-bottom: 12px; }
+.pg-guia > summary { cursor: pointer; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; font-size: 15px; color: var(--azul-oscuro); }
+.pg-rejilla { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0 14px; }
+.pg-video-guia { display: flex; gap: 14px; align-items: flex-start; margin: 6px 0 14px; }
+.pg-video-guia-campos { flex: 1; }
+.pg-grupo { border: 1px solid var(--borde); border-radius: 12px; padding: 12px 14px; margin: 10px 0; background: #fbfcfd; }
+.pg-grupo-cabecera { display: flex; gap: 12px; align-items: flex-end; }
+.pg-grupo-cabecera .pg-campo { flex: 1; }
+.pg-grupo-cabecera .pg-acciones { margin-bottom: 10px; }
+.pg-enlaces { display: grid; gap: 6px; margin-bottom: 8px; }
+/* Páginas: menú lateral + editor */
+.pg-layout { display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 20px; align-items: start; }
+.pg-menu { position: sticky; top: 12px; display: grid; gap: 2px; background: var(--blanco); border: 1px solid var(--borde); border-radius: var(--radio); padding: 8px; }
+.pg-item { display: flex; gap: 10px; align-items: flex-start; text-align: left; background: none; border: 0; border-radius: 10px; padding: 9px 10px; font-size: 14px; color: var(--texto); }
+.pg-item:hover { background: var(--fondo); }
+.pg-item.activo { background: var(--verde-claro); color: var(--verde); font-weight: 600; }
+.pg-item small { display: block; font-size: 11px; color: var(--texto-suave); font-weight: 500; }
+.pg-punto { width: 8px; height: 8px; border-radius: 50%; background: var(--borde); margin-top: 7px; flex-shrink: 0; }
+.pg-punto.ok { background: var(--verde); }
+.pg-punto.sucio { background: var(--amarillo); }
+.pg-punto.error { background: var(--rojo); }
+.pg-editor { display: grid; gap: 14px; min-width: 0; }
+.pg-equipo { display: grid; gap: 10px; margin: 6px 0 10px; }
+.pg-integrante { display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; gap: 14px; align-items: start; border: 1px solid var(--borde); border-radius: 12px; padding: 12px 14px; background: #fbfcfd; }
+.pg-foto { width: 56px; height: 56px; border-radius: 50%; overflow: hidden; background: var(--verde-claro); color: var(--verde); display: flex; align-items: center; justify-content: center; font-weight: 700; }
+.pg-foto img { width: 100%; height: 100%; object-fit: cover; }
+.pg-integrante > .pg-acciones { flex-direction: column; align-items: stretch; }
+.pg-enlace { display: grid; grid-template-columns: 1fr 1.4fr auto; gap: 6px; align-items: center; }
+.pg-enlace.sin-url input:nth-child(2) { border-color: var(--amarillo); background: var(--amarillo-claro); }
+@media (max-width: 760px) {
+  .pg-layout { grid-template-columns: 1fr; }
+  .pg-menu { position: static; grid-auto-flow: column; overflow-x: auto; }
+  .pg-integrante { grid-template-columns: 48px minmax(0, 1fr); }
+  .pg-integrante > .pg-acciones { grid-column: 1 / -1; flex-direction: row; }
+  .pg-video { grid-template-columns: 1fr; }
+  .pg-video > .pg-acciones { flex-direction: row; }
+  .pg-enlace { grid-template-columns: 1fr; }
+  .pg-video-guia { flex-direction: column; }
+}
+
+@media (max-width: 600px) {
+  .contenedor { padding: 16px; }
+  .pestana { flex: 1; justify-content: center; padding: 10px; font-size: 14px; }
+  .fecha { margin-left: 0; width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<header class="barra-superior">
+  <div class="barra-contenido">
+    <h1 class="marca">Panel CIAD <span>Moderación del blog</span></h1>
+    <div class="sesion">
+      <span id="correo-sesion"></span>
+    </div>
+  </div>
+</header>
+
+<main class="contenedor">
+  <nav class="pestanas" role="tablist">
+    <button class="pestana activa" data-pestana="solicitudes" role="tab">Solicitudes <span class="contador" id="contador-solicitudes">…</span></button>
+    <button class="pestana" data-pestana="articulos" role="tab">Artículos <span class="contador" id="contador-articulos">…</span></button>
+    <button class="pestana" data-pestana="comentarios" role="tab">Comentarios <span class="contador" id="contador-comentarios">…</span></button>
+    <button class="pestana" data-pestana="metricas" role="tab">Métricas</button>
+    <button class="pestana" data-pestana="paginas" role="tab">Páginas</button>
+    <button class="pestana" data-pestana="mantenimiento" role="tab">Mantenimiento</button>
+    <button class="pestana" data-pestana="guia" role="tab">Guía de uso</button>
+    <button class="pestana" data-pestana="usuarios" role="tab" hidden>Usuarios</button>
+  </nav>
+
+  <div class="filtros" id="filtros"></div>
+  <section class="lista" id="lista"></section>
+  <section id="extra"></section>
+</main>
+
+<div class="aviso-flotante" id="aviso" role="status"></div>
+
+<script>
+/**
+ * @fileoverview Panel CIAD: interfaz que se ejecuta en el navegador.
+ * @author APONTE
+ * Capa: Vista. Pide y envía datos al Controlador (PanelServidor.gs) con google.script.run.
+ * Los estilos están en el <style> de arriba y el código en varios bloques <script>, uno por área.
+ *
+ * ===== Estado (datos globales del panel) =====
+ */
+var FILTROS = {
+  solicitudes: [
+    { clave: 'pendientes', texto: 'Pendientes', tono: 'amarillo' },
+    { clave: 'Aprobada', texto: 'Aprobadas', tono: 'verde' },
+    { clave: 'Rechazada', texto: 'Rechazadas', tono: 'rojo' },
+    { clave: 'todas', texto: 'Todas' }
+  ],
+  articulos: [
+    { clave: 'revision', texto: 'Por revisar', tono: 'amarillo' },
+    { clave: 'publicado', texto: 'Publicados', tono: 'verde' },
+    { clave: 'problemas', texto: 'No publicados', tono: 'rojo' },
+    { clave: 'todos', texto: 'Todos' }
+  ],
+  comentarios: [
+    { clave: 'pendiente', texto: 'Pendientes', tono: 'amarillo' },
+    { clave: 'publicado', texto: 'Publicados', tono: 'verde' },
+    { clave: 'rechazado', texto: 'Rechazados', tono: 'rojo' }
+  ],
+  paginas: [
+    // Desactivadas (sin borrar): para reactivarlas, quitar las barras
+    // { clave: 'multimedia', texto: 'Multimedia' },
+    // { clave: 'guias', texto: 'Guías y tutoriales' },
+    { clave: 'inicio', texto: 'Inicio' },
+    { clave: 'sobre', texto: 'Sobre el blog' }
+  ],
+  metricas: [
+    { clave: 'publicado', texto: 'Publicados', tono: 'verde' },
+    { clave: 'todos', texto: 'Todos los artículos recibidos' }
+  ],
+  mantenimiento: [],
+  guia: [],
+  usuarios: []
+};
+
+var estado = {
+  pestana: 'solicitudes',
+  filtro: { solicitudes: 'pendientes', articulos: 'revision', comentarios: 'pendiente', paginas: 'inicio', metricas: 'publicado' },
+  // Orden y periodo por pestaña; los valores iniciales respetan el orden que ya tenía cada lista
+  orden: { solicitudes: 'recientes', articulos: 'recientes', comentarios: 'antiguos' },
+  periodo: { solicitudes: { desde: '', hasta: '' }, articulos: { desde: '', hasta: '' }, comentarios: { desde: '', hasta: '' }, metricas: { desde: '', hasta: '' } },
+  datos: { solicitudes: null, articulos: null, comentarios: null },
+  secciones: [],
+  elecciones: {},   // Secciones o solicitudes elegidas y aún sin enviar (se conservan al recargar)
+  portadas: {},     // fila → { src, datos, nw, nh, pc, cel }: imagen principal en ajuste, aún sin guardar
+  ediciones: {},    // fila → { titulo, subtitulo, ficha, cuerpo, cuerpoNuevo }: nota publicada en edición, aún sin guardar
+  cabeceras: {},    // postId → { titulo, subtitulo, ficha, lectura } de la nota real (vista previa de la imagen principal)
+  errores: {}
+};
+
+// ===== Utilidades =====
+function llamar(funcion) {
+  var args = Array.prototype.slice.call(arguments, 1);
+  return new Promise(function (resolver, rechazar) {
+    var r = google.script.run.withSuccessHandler(resolver).withFailureHandler(rechazar);
+    r[funcion].apply(r, args);
+  });
+}
+
+function esc(t) {
+  return String(t == null ? '' : t)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+function dosDigitos(n) { return (n < 10 ? '0' : '') + n; }
+
+/** 23/09/2026 14:05 */
+function fechaLegible(iso) {
+  if (!iso) return '';
+  var d = new Date(iso);
+  if (isNaN(d)) return iso;
+  return dosDigitos(d.getDate()) + '/' + dosDigitos(d.getMonth() + 1) + '/' + d.getFullYear() +
+    ' ' + dosDigitos(d.getHours()) + ':' + dosDigitos(d.getMinutes());
+}
+
+/** Milisegundos de "dd/MM/yyyy HH:mm" (hojas) o ISO (comentarios); NaN si no se entiende. */
+function fechaEnMs(texto) {
+  var m = /^(\d{1,2})\/(\d{1,2})\/(\d{4})(?:\s+(\d{1,2}):(\d{2}))?/.exec(String(texto || '').trim());
+  if (m) return new Date(+m[3], m[2] - 1, +m[1], +(m[4] || 0), +(m[5] || 0)).getTime();
+  return texto ? new Date(texto).getTime() : NaN;
+}
+
+/** Aplica el periodo (Desde/Hasta, días completos) y el orden elegidos en la pestaña. */
+function ordenarYFiltrarPorFecha(lista, pestana, campo) {
+  var per = estado.periodo[pestana];
+  var desde = per.desde ? new Date(per.desde + 'T00:00:00').getTime() : -Infinity;
+  var hasta = per.hasta ? new Date(per.hasta + 'T23:59:59.999').getTime() : Infinity;
+  var signo = estado.orden[pestana] === 'antiguos' ? 1 : -1;
+  return lista.filter(function (x) {
+    if (!per.desde && !per.hasta) return true;
+    var t = fechaEnMs(x[campo]);
+    return !isNaN(t) && t >= desde && t <= hasta;
+  }).sort(function (a, b) {
+    var ta = fechaEnMs(a[campo]), tb = fechaEnMs(b[campo]);
+    if (isNaN(ta)) return 1;   // Sin fecha: siempre al final
+    if (isNaN(tb)) return -1;
+    return (ta - tb) * signo;
+  });
+}
+
+function controlesOrdenPeriodo(p) {
+  var per = estado.periodo[p];
+  return '<div class="orden-periodo">' +
+    (!estado.orden[p] ? (p === 'metricas' ? metSelectorSemestre() : '') : '<label>Orden<select data-orden>' + // Métricas: semestre en lugar de orden
+      '<option value="recientes"' + (estado.orden[p] === 'recientes' ? ' selected' : '') + '>Más recientes primero</option>' +
+      '<option value="antiguos"' + (estado.orden[p] === 'antiguos' ? ' selected' : '') + '>Más antiguos primero</option>' +
+    '</select></label>') +
+    '<label>Desde<input type="date" data-periodo="desde" value="' + esc(per.desde) + '"' + (per.hasta ? ' max="' + esc(per.hasta) + '"' : '') + '></label>' +
+    '<label>Hasta<input type="date" data-periodo="hasta" value="' + esc(per.hasta) + '"' + (per.desde ? ' min="' + esc(per.desde) + '"' : '') + '></label>' +
+    (per.desde || per.hasta ? '<button class="filtro" data-quitar-periodo type="button">Quitar periodo</button>' : '') +
+  '</div>';
+}
+
+var temporizadorAviso;
+function avisar(texto, esError) {
+  var aviso = document.getElementById('aviso');
+  aviso.textContent = texto;
+  aviso.className = 'aviso-flotante visible' + (esError ? ' error' : '');
+  clearTimeout(temporizadorAviso);
+  temporizadorAviso = setTimeout(function () { aviso.className = 'aviso-flotante'; }, esError ? 7000 : 4000);
+}
+
+function mensajeError(err) {
+  var texto = (err && err.message ? err.message : String(err)).replace(/^(Exception|Error|ScriptError):\s*/, '');
+  // Sesión de Google vencida o conexión perdida: google.script.run no llega al servidor
+  if (/Authorization is required|Se necesita autorización|NetworkError|HTTP 0|Failed to fetch|PERMISSION_DENIED|la sesión ha caducado/i.test(texto)) {
+    return 'Se perdió la conexión o tu sesión de Google expiró. Recarga el panel (F5); si sigue, cierra sesión y vuelve a entrar. No se guardó ningún cambio.';
+  }
+  if (/We're sorry, a server error occurred|Lo sentimos, se ha producido un error del servidor/i.test(texto)) {
+    return 'Google Apps Script tuvo una falla temporal. Espera un momento e inténtalo de nuevo.';
+  }
+  return texto;
+}
+
+function dato(etiqueta, valor) {
+  return valor ? '<div class="dato"><b>' + esc(etiqueta) + '</b>' + esc(valor) + '</div>' : '';
+}
+
+function textoLargo(texto) {
+  if (!texto) return '';
+  var largo = texto.length > 320;
+  return '<p class="texto-largo' + (largo ? ' recortado' : '') + '">' + esc(texto) + '</p>' +
+    (largo ? '<button class="ver-mas" type="button" data-accion="ver-mas">Ver completo</button>' : '');
+}
+
+// ===== Carga de datos =====
+function pedirDatos(pestana) {
+  if (pestana === 'solicitudes') return llamar('obtenerSolicitudes');
+  if (pestana === 'articulos') return llamar('obtenerArticulos');
+  return llamar('obtenerComentarios', estado.filtro.comentarios);
+}
+
+function cargar(pestana) {
+  estado.errores[pestana] = null;
+  return pedirDatos(pestana)
+    .then(function (datos) { estado.datos[pestana] = datos; })
+    .catch(function (err) { estado.errores[pestana] = mensajeError(err); })
+    .then(function () { actualizarContadores(); if (estado.pestana === pestana) pintar(); });
+}
+
+// --- Recarga automática ---
+var RECARGA_CADA_MS = 30000;
+var recargando = false;
+
+/** true si el usuario está a mitad de algo que una recarga borraría. */
+function hayInteraccion() {
+  if (document.querySelector('.confirmacion') || Object.keys(estado.portadas).length || Object.keys(estado.ediciones).length) return true;
+  var activo = document.activeElement;
+  return !!(activo && /^(TEXTAREA|INPUT)$/.test(activo.tagName));
+}
+
+/** Recarga sin "Cargando…": solo vuelve a pintar si algo cambió y el usuario no está ocupado. */
+function cargarEnSilencio(pestana) {
+  var comentariosFiltro = estado.filtro.comentarios;
+  return pedirDatos(pestana).then(function (datos) {
+    if (pestana === 'comentarios' && comentariosFiltro !== estado.filtro.comentarios) return; // Cambió de filtro mientras tanto
+    var cambio = JSON.stringify(datos) !== JSON.stringify(estado.datos[pestana]);
+    estado.errores[pestana] = null;
+    estado.datos[pestana] = datos;
+    actualizarContadores();
+    if (cambio && estado.pestana === pestana && !hayInteraccion()) {
+      var scroll = window.scrollY;
+      pintar();
+      window.scrollTo(0, scroll);
+    }
+  });
+}
+
+/* OPT: en cada vuelta se recarga solo la pestaña abierta; las demás (para los contadores), cada 3 vueltas.
+   Tampoco se recarga mientras hay una acción en curso (publicar, rechazar…), para no competir con ella
+   en el servidor. */
+var vueltaRecarga = 0;
+var accionesEnCurso = 0;
+
+function recargarAutomatico() {
+  if (recargando || accionesEnCurso || document.hidden || hayInteraccion()) return;
+  recargando = true;
+  vueltaRecarga++;
+  var todas = ['solicitudes', 'articulos', 'comentarios'];
+  var pestanas = vueltaRecarga % 3 === 0 ? todas : todas.filter(function (p) { return p === estado.pestana; });
+  Promise.all(pestanas.map(cargarEnSilencio))
+    .catch(function () { /* Sin aviso: se reintenta en la siguiente vuelta */ })
+    .then(function () { recargando = false; });
+}
+
+setInterval(recargarAutomatico, RECARGA_CADA_MS);
+
+// Al volver a la pestaña del navegador, se actualiza de inmediato
+document.addEventListener('visibilitychange', function () {
+  if (!document.hidden) recargarAutomatico();
+});
+
+function cargarTodo() {
+  ['solicitudes', 'articulos', 'comentarios'].forEach(function (p) { estado.datos[p] = null; });
+  pintar();
+  return Promise.all([cargar('solicitudes'), cargar('articulos'), cargar('comentarios')]);
+}
+
+function actualizarContadores() {
+  var s = estado.datos.solicitudes, a = estado.datos.articulos, c = estado.datos.comentarios;
+  poner('contador-solicitudes', s ? s.filter(function (x) { return !x.respondida; }).length : (estado.errores.solicitudes ? '!' : '…'));
+  poner('contador-articulos', a ? a.filter(function (x) { return x.tipo === 'revision' || x.tipo === 'vincular'; }).length : (estado.errores.articulos ? '!' : '…'));
+  if (estado.filtro.comentarios === 'pendiente') {
+    poner('contador-comentarios', c ? c.comentarios.length : (estado.errores.comentarios ? '!' : '…'));
+  }
+  function poner(id, n) {
+    var el = document.getElementById(id);
+    el.textContent = n;
+    el.className = 'contador' + (typeof n === 'number' && n > 0 ? ' con-pendientes' : '');
+  }
+}
+
+// ===== Pintar (generar el HTML de cada pestaña) =====
+function pintar() {
+  var p = estado.pestana;
+
+  document.querySelectorAll('.pestana').forEach(function (b) {
+    b.classList.toggle('activa', b.getAttribute('data-pestana') === p);
+  });
+
+  // En Páginas no hay filtros: la lista de páginas va en el menú lateral del editor
+  document.getElementById('filtros').innerHTML = p === 'paginas' ? '' : FILTROS[p].map(function (f) {
+    return '<button class="filtro' + (f.tono ? ' tono-' + f.tono : '') + (estado.filtro[p] === f.clave ? ' activo' : '') + '" data-filtro="' + f.clave + '" type="button">' + f.texto + '</button>';
+  }).join('') + (estado.periodo[p] ? controlesOrdenPeriodo(p) : '');
+
+  var lista = document.getElementById('lista');
+  var extra = document.getElementById('extra');
+  extra.innerHTML = '';
+
+  if (p === 'paginas') { pintarPaginas(); return; }
+  if (p === 'guia') { pintarGuia(); return; }
+  if (p === 'mantenimiento') { pintarMantenimiento(); return; }
+  if (p === 'metricas') { pintarMetricas(); return; }
+  if (p === 'usuarios') { pintarUsuarios(); return; }
+
+  if (estado.errores[p]) {
+    lista.innerHTML = '<div class="mensaje-lista error">No se pudo cargar: ' + esc(estado.errores[p]) + '</div>';
+    return;
+  }
+  if (!estado.datos[p]) {
+    lista.innerHTML = '<div class="mensaje-lista">Cargando…</div>';
+    return;
+  }
+
+  var html = '';
+  if (p === 'solicitudes') html = pintarSolicitudes();
+  if (p === 'articulos') html = pintarArticulos();
+  if (p === 'comentarios') { html = pintarComentarios(); extra.innerHTML = pintarBloqueados(); }
+
+  lista.innerHTML = html || '<div class="mensaje-lista">No hay nada aquí por ahora.</div>';
+}
+
+// --- Solicitudes ---
+function pintarSolicitudes() {
+  var f = estado.filtro.solicitudes;
+  return ordenarYFiltrarPorFecha(estado.datos.solicitudes, 'solicitudes', 'fecha').filter(function (s) {
+    if (f === 'pendientes') return !s.respondida;
+    if (f === 'todas') return true;
+    return s.respondida && s.estado === f;
+  }).map(function (s, i) {
+    var clase = s.respondida ? (s.estado === 'Aprobada' ? 'aprobado' : 'rechazado') : 'pendiente';
+    var detalleVinculo = s.vinculo === 'UABC'
+      ? [s.unidad, s.programa].filter(Boolean).join(' · ')
+      : s.organizacion;
+
+    return '<article class="tarjeta" data-tipo="solicitud" data-fila="' + s.fila + '" data-firma="' + esc(s.firma) + '">' +
+      '<div class="tarjeta-cabecera">' +
+        '<span class="folio">' + esc(s.folio || 'Sin folio') + '</span>' +
+        '<span class="pastilla ' + clase + '">' + esc(s.respondida ? s.estado : 'Pendiente') + '</span>' +
+        (s.seccion ? '<span class="pastilla seccion">Sugerida: ' + esc(s.seccion) + '</span>' : '') +
+        '<span class="fecha">' + esc(s.fecha) + '</span>' +
+      '</div>' +
+      '<h3>' + esc(s.titulo || '(sin título)') + '</h3>' +
+      '<div class="datos">' +
+        dato('Autor', s.nombre) + dato('Correo', s.correo) +
+        dato('Vínculo', s.vinculo) + dato(s.vinculo === 'UABC' ? 'Unidad y programa' : 'Organización', detalleVinculo) +
+      '</div>' +
+      textoLargo(s.resumen) +
+      (s.nota ? '<div class="nota"><b>Nota del moderador:</b> ' + esc(s.nota) + '</div>' : '') +
+      (s.respondida
+        ? '<p class="detalle-estado">Respuesta enviada: ' + esc(s.respuesta) + (s.moderador ? ' · por ' + esc(s.moderador) : '') + '</p>'
+        : '<div class="acciones">' +
+            '<button class="boton principal" data-accion="aprobar-solicitud" type="button">Aprobar</button>' +
+            '<button class="boton peligro" data-accion="rechazar-solicitud" type="button">Rechazar</button>' +
+            (s.respuesta ? '<span class="detalle-estado">' + esc(s.respuesta) + '</span>' : '') +
+          '</div>') +
+    '</article>';
+  }).join('');
+}
+
+// --- Artículos ---
+function pintarArticulos() {
+  var f = estado.filtro.articulos;
+  var nombres = { revision: 'Por revisar', vincular: 'Por vincular', publicado: 'Publicado', eliminado: 'Eliminado', rechazado: 'Rechazado', error: 'Error', procesando: 'Procesando' };
+  var clases = { revision: 'pendiente', vincular: 'aviso', publicado: 'aprobado', eliminado: 'rechazado', rechazado: 'rechazado', error: 'rechazado', procesando: '' };
+
+  return ordenarYFiltrarPorFecha(estado.datos.articulos, 'articulos', 'fecha').filter(function (a) {
+    if (f === 'todos') return true;
+    if (f === 'problemas') return a.tipo === 'rechazado' || a.tipo === 'error' || a.tipo === 'eliminado';
+    if (f === 'revision') return a.tipo === 'revision' || a.tipo === 'vincular';
+    return a.tipo === f;
+  }).map(function (a) {
+    var acciones = '';
+    var botonReconvertir = '<button class="boton secundario" data-accion="reconvertir-articulo" type="button" title="En pruebas: borra el contenido actual de la entrada y lo vuelve a crear a partir del Word original">Rehacer <span class="en-pruebas">en pruebas</span></button>';
+    var botonCopia = '<button class="boton peligro" data-accion="eliminar-copia" type="button" title="Es una copia: no se avisa a nadie y la original no cambia">Eliminar copia</button>';
+    var editable = (a.tipo === 'revision' || a.tipo === 'publicado') && a.postId;
+    var botonesNota = '<button class="boton secundario" data-accion="editar-nota" type="button">Editar nota</button>' +
+      '<button class="boton secundario" data-accion="clonar-nota" type="button" title="Copia como borrador para cambiarle algo y publicarla aparte">Clonar</button>';
+    if (editable && estado.ediciones[a.fila]) {
+      acciones = '<div class="edicion-marco' + (estado.ediciones[a.fila].completa ? ' pantalla-completa' : '') + '">' + bloqueEdicion(a) + '<div class="acciones">' +
+        '<button class="boton principal" data-accion="guardar-nota" type="button">Guardar cambios</button>' +
+        '<button class="boton secundario" data-accion="cancelar-edicion" type="button">Cancelar</button></div></div>';
+    } else if (a.tipo === 'revision') {
+      acciones = '<div class="acciones">' +
+        '<button class="boton principal" data-accion="publicar-articulo" type="button"' + (a.portada ? '' : ' disabled title="Falta la imagen principal"') + '>Publicar</button>' +
+        (a.clonDe ? botonCopia : '<button class="boton peligro" data-accion="rechazar-articulo" type="button">Rechazar</button>') +
+        (a.postId ? botonesNota : '') + (a.documento ? botonReconvertir : '') +
+      '</div>';
+    } else if (a.tipo === 'vincular') {
+      acciones = '<div class="acciones">' +
+        '<button class="boton principal" data-accion="vincular-articulo" type="button">Vincular y crear borrador</button>' +
+        '<button class="boton peligro" data-accion="descartar-articulo" type="button">Descartar</button>' +
+      '</div>';
+    } else if (a.tipo === 'publicado' && a.postId) {
+      acciones = '<div class="acciones">' + botonesNota +
+        (a.clonDe ? botonCopia : '<button class="boton peligro" data-accion="eliminar-articulo" type="button">Eliminar del blog</button>') +
+        (a.documento ? botonReconvertir : '') + '</div>';
+    } else if (a.tipo === 'error' || (a.tipo === 'procesando' && Date.now() - fechaEnMs(a.fecha) > 10 * 60 * 1000)) {
+      // "Procesando" por más de 10 min = el disparador no corrió o se cortó; Reintentar procesa solo esta fila
+      acciones = '<div class="acciones"><button class="boton secundario" data-accion="reintentar-articulo" type="button">Reintentar</button></div>';
+    }
+
+    return '<article class="tarjeta" data-tipo="articulo" data-fila="' + a.fila + '" data-post="' + esc(a.postId) + '">' +
+      '<div class="tarjeta-cabecera">' +
+        '<span class="folio">' + esc(a.folio || (a.esNotaCiad ? 'Nota del CIAD' : 'Sin vincular')) + '</span>' +
+        '<span class="pastilla ' + clases[a.tipo] + '">' + nombres[a.tipo] + '</span>' +
+        (a.seccionAsignada ? '<span class="pastilla seccion">' + esc(a.seccionAsignada) + '</span>' : '') +
+        '<span class="fecha">' + esc(a.fecha) + '</span>' +
+      '</div>' +
+      '<h3>' + esc(a.titulo || '(sin título)') + '</h3>' +
+      (a.subtitulo ? '<p class="subtitulo-articulo">' + esc(a.subtitulo) + '</p>' : '') +
+      '<div class="datos">' + dato('Autor(es)', a.autor) + dato('Correo', a.correo) +
+        (a.palabras ? dato('Extensión (recomendada: 1,000 a 2,500)', a.palabras.toLocaleString('es-MX') + ' palabras' +
+          (a.palabras < 1000 ? ' ⚠ menos de lo recomendado' : a.palabras > 2500 ? ' ⚠ más de lo recomendado' : ' ✓')) : '') +
+      '</div>' +
+      (a.tipo === 'revision' && !estado.ediciones[a.fila] ? selectorSeccion(a.seccionAsignada || a.seccionSugerida, a.fila) + campoEtiquetas(a.etiquetasAsignadas || a.etiquetasSugeridas, a.fila) : '') +
+      (a.tipo === 'publicado' && a.etiquetasAsignadas ? '<p class="detalle-estado">Etiquetas: ' + esc(a.etiquetasAsignadas) + '</p>' : '') +
+      (a.tipo === 'vincular' ? selectorSolicitud(a.opcionesVincular, a.fila) : '') +
+      (estado.ediciones[a.fila] ? '' : bloquePortada(a)) +
+      '<div class="enlaces">' +
+        (a.documento && a.tipo !== 'publicado' ? '<a href="' + esc(a.documento) + '" target="_blank" rel="noopener">Ver Word ↗</a>' : '') +
+        (a.pdf && (a.tipo !== 'publicado' || !a.documento) ? '<a href="' + esc(a.pdf) + '" target="_blank" rel="noopener">Ver PDF ↗</a>' : '') +
+        (a.carpeta ? '<a href="' + esc(a.carpeta) + '" target="_blank" rel="noopener">Carpeta ↗</a>' : '') +
+        (a.imagenes || []).map(function (url, i) {
+          return '<a href="' + esc(url) + '" target="_blank" rel="noopener">Imagen ' + (i + 1) + ' ↗</a>';
+        }).join('') +
+        (a.tipo === 'revision' && a.enlaceBorrador ? '<a href="' + esc(a.enlaceBorrador) + '" target="_blank" rel="noopener">Editar en Blogger ↗</a>' : '') +
+        (a.enlacePublicado ? '<a href="' + esc(a.enlacePublicado) + '" target="_blank" rel="noopener">Ver en el blog ↗</a>' : '') +
+      '</div>' +
+      (a.nota ? '<div class="nota"><b>Nota del moderador:</b> ' + esc(a.nota) + '</div>' : '') +
+      (a.editada ? '<p class="detalle-estado">Editada en el panel: ' + esc(a.editada) + '</p>' : '') +
+      (a.clonDe ? '<p class="detalle-estado">Copia de ' + (/^https?:/.test(a.clonDe) ? '<a href="' + esc(a.clonDe) + '" target="_blank" rel="noopener">otra nota ↗</a>' : 'otra nota') + '</p>' : '') +
+      (a.tipo !== 'revision' && a.estado ? '<p class="detalle-estado">' + esc(a.estado) + '</p>' : '') +
+      acciones +
+    '</article>';
+  }).join('');
+}
+
+// --- Editar nota (publicada o en revisión) ---
+function abrirEdicion(filaE, postId) {
+  return llamar('notaParaEditar', Number(filaE), postId).then(function (d) {
+    d.cuerpo = d.cuerpo === null ? null : htmlLimpio(d.cuerpo);
+    d.cuerpoNuevo = null; // Solo se envía si se tocó: así el texto no cambia por guardar el título
+    d.historial = [{ html: d.cuerpo, cursor: null }]; d.paso = 0;
+    estado.ediciones[filaE] = d;
+    var artE = articuloDeFila(filaE);
+    if (artE && artE.portada && !estado.portadas[filaE]) { // La imagen principal también se ajusta aquí
+      abrirPortada(filaE, 'https://drive.google.com/thumbnail?id=' + artE.portada + '&sz=w1600', '', artE.encuadrePc, artE.encuadreCelular, artE.postId, artE.encuadreTarjeta);
+    }
+    delete estado.elecciones['seccion-' + filaE]; // Parten de lo que ya tiene la nota
+    delete estado.elecciones['etiquetas-' + filaE];
+    pintar();
+  });
+}
+
+function bloqueEdicion(a) {
+  var ed = estado.ediciones[a.fila];
+  var campo = function (clave, etiqueta, valor, largo) {
+    var id = 'ed-' + a.fila + '-' + clave.replace('.', '-');
+    return '<div class="campo-seccion"><label for="' + id + '">' + etiqueta + '</label>' + (largo
+      ? '<textarea id="' + id + '" data-editar="' + clave + '" rows="2">' + esc(valor) + '</textarea>'
+      : '<input type="text" id="' + id + '" data-editar="' + clave + '" value="' + esc(valor) + '">') + '</div>';
+  };
+  return '<div class="edicion">' +
+    '<div class="edicion-cabeza"><span class="portada-titulo">' + (a.tipo === 'revision' ? 'Editar borrador' : 'Editar nota publicada') + '</span>' +
+      '<button class="boton secundario" type="button" data-formato="completa" aria-pressed="' + !!ed.completa + '">' + (ed.completa ? 'Salir de pantalla completa' : '⛶ Pantalla completa') + '</button></div>' +
+    campo('titulo', 'Título', ed.titulo) +
+    campo('subtitulo', 'Subtítulo (va en azul bajo el título)', ed.subtitulo, true) +
+    '<div class="edicion-rejilla">' + [['nombre', 'Autor(es)'], ['fecha', 'Fecha'], ['correo', 'Correo de contacto'], ['cargo', 'Cargo'], ['vinculo', 'Vínculo']]
+      .map(function (q) { return campo('ficha.' + q[0], q[1], ed.ficha[q[0]]); }).join('') + '</div>' +
+    '<div class="edicion-rejilla dos">' +
+      selectorSeccion(a.seccionAsignada || a.seccionSugerida, a.fila, a.tipo === 'revision' ? 'La que tendrá al publicarla. Puedes cambiarla.' : 'Si la cambias, la nota se mueve al guardar.') +
+        campoEtiquetas(a.etiquetasAsignadas || a.etiquetasSugeridas, a.fila) +
+    '</div>' +
+    bloquePortada(a) +
+    (ed.cuerpo === null
+      ? '<p class="ayuda">No encontré el texto de esta nota; para cambiarlo usa «Rehacer».</p>'
+      : '<div class="campo-seccion"><label id="ed-' + a.fila + '-cuerpo">Texto de la nota</label>' +
+        '<div class="editor">' +
+          '<div class="editor-barra" role="toolbar" aria-label="Formato del texto">' + BARRA_EDITOR.map(function (grupo) {
+            return '<span class="editor-grupo">' + grupo.map(function (b) {
+              return '<button type="button" data-formato="' + b[0] + '" title="' + b[2] + '" aria-label="' + b[2] + '">' + b[1] + '</button>';
+            }).join('') + '</span>';
+          }).join('') + '<input type="file" accept="image/*" data-imagen-nota hidden></div>' +
+          '<div class="editor-pedir" data-pedir hidden><label></label><input type="text"><button class="boton principal" type="button" data-pedir-aceptar>Aplicar</button>' +
+            '<button class="boton secundario" type="button" data-pedir-cancelar>Cancelar</button></div>' +
+          '<div class="editor-cuerpo" contenteditable="true" role="textbox" aria-multiline="true" aria-labelledby="ed-' + a.fila + '-cuerpo" data-editar-cuerpo>' +
+            (ed.cuerpoNuevo !== null ? ed.cuerpoNuevo : ed.cuerpo) + '</div>' +
+        '</div>' +
+        '<p class="ayuda">Cita: escribe [[1]] (o «Cita»); la referencia es la línea que empieza con [[1]] («+ Referencia»). Lo pegado de Word o Docs se limpia solo. ' +
+          (a.tipo === 'revision' ? 'Al guardar sigue en borrador; se publica con «Publicar».' : 'Al guardar, el cambio se ve en el blog.') + ' «Rehacer desde el Word» reemplaza la ficha y el texto editados.</p></div>') +
+  '</div>';
+}
+
+// Grupos de [formato, texto del botón, descripción]
+var BARRA_EDITOR = [
+  [['bold', '<b>N</b>', 'Negrita (Ctrl+B)'], ['italic', '<i>C</i>', 'Cursiva (Ctrl+I)'], ['underline', '<u>S</u>', 'Subrayado (Ctrl+U)']],
+  [['h2', 'Título', 'Título de sección'], ['h3', 'Subtítulo', 'Subtítulo'], ['p', 'Normal', 'Texto normal']],
+  [['insertUnorderedList', '•&nbsp;Lista', 'Lista con viñetas'], ['insertOrderedList', '1.&nbsp;Lista', 'Lista numerada']],
+  [['enlace', 'Enlace', 'Enlace en el texto seleccionado'], ['unlink', 'Quitar&nbsp;enlace', 'Quitar enlace']],
+  [['cita', 'Cita&nbsp;[[n]]', 'Insertar cita a una referencia'], ['referencia', '+&nbsp;Referencia', 'Agregar una referencia al final'], ['imagen', 'Imagen', 'Insertar imagen donde está el cursor']],
+  [['removeFormat', 'Limpiar', 'Quitar formato del texto seleccionado'], ['deshacer', '↶', 'Deshacer (Ctrl+Z)'], ['rehacer', '↷', 'Rehacer (Ctrl+Y)']]
+];
+var REFERENCIA_ATRIBUTOS = ' class="articulo-referencia" style="padding-left:2em;text-indent:-2em;"'; // Igual que la conversión (Documento.gs)
+
+/** Lo pegado desde Word, Docs o la web → solo las etiquetas que usa la nota, sin estilos ni clases (Word agrega muchos). */
+function limpiarPegado(html) {
+  var doc = new DOMParser().parseFromString(html, 'text/html');
+  var cambia = { H1: 'h2', H4: 'h3', H5: 'h3', H6: 'h3', B: 'strong', I: 'em', DIV: 'p' };
+  var permitidas = /^(P|H2|H3|STRONG|EM|U|A|UL|OL|LI|BR|SUP|SUB)$/;
+  (function limpiar(nodo) {
+    [].slice.call(nodo.childNodes).forEach(function (n) {
+      if (n.nodeType === 8) { n.remove(); return; } // Comentarios de Word
+      if (n.nodeType !== 1) return;
+      if (/^(STYLE|SCRIPT|META|LINK|TITLE|XML|IMG|svg)$/i.test(n.tagName) || n.tagName.indexOf(':') !== -1) { n.remove(); return; }
+      var estilo = n.getAttribute('style') || '';
+      if (/mso-list:\s*ignore/i.test(estilo)) { n.remove(); return; } // Viñeta dibujada por Word: la lista ya tiene su texto
+      limpiar(n);
+      var nombre = cambia[n.tagName] || (permitidas.test(n.tagName) ? n.tagName.toLowerCase() : '');
+      // Google Docs: todo va en <b style="font-weight:normal"> y las negritas/cursivas son <span style="…">
+      if (n.tagName === 'B' && /font-weight:\s*(normal|400)/i.test(estilo)) nombre = '';
+      if (n.tagName === 'SPAN' && /font-weight:\s*(bold|[6-9]00)/i.test(estilo)) nombre = 'strong';
+      else if (n.tagName === 'SPAN' && /font-style:\s*italic/i.test(estilo)) nombre = 'em';
+      if (nombre === 'a' && !/^(https?:|mailto:)/i.test(n.getAttribute('href') || '')) nombre = ''; // Enlace inválido: solo se deja el texto
+      if (!nombre) { n.replaceWith.apply(n, [].slice.call(n.childNodes)); return; } // span, font…: solo se deja el texto
+      var nuevo = doc.createElement(nombre);
+      var href = n.getAttribute('href');
+      if (nombre === 'a') { nuevo.setAttribute('href', href); nuevo.setAttribute('target', '_blank'); nuevo.setAttribute('rel', 'noopener'); }
+      while (n.firstChild) nuevo.appendChild(n.firstChild);
+      n.replaceWith(nuevo);
+    });
+  })(doc.body);
+  return doc.body.innerHTML;
+}
+
+function textoAParrafos(t) {
+  return String(t).split(/\r?\n\s*\r?\n|\r?\n/).filter(function (x) { return x.trim(); })
+    .map(function (x) { return '<p>' + esc(x) + '</p>'; }).join('');
+}
+
+// Última posición del cursor dentro de un editor: los botones y el campo «Aplicar» la necesitan después de mover el foco
+var rangoEditor = null;
+document.addEventListener('selectionchange', function () {
+  var sel = document.getSelection();
+  if (sel.rangeCount && sel.anchorNode && sel.anchorNode.parentElement && sel.anchorNode.parentElement.closest('[data-editar-cuerpo]')) rangoEditor = sel.getRangeAt(0).cloneRange();
+});
+
+function volverAlEditor(editor) {
+  editor.focus();
+  if (rangoEditor && editor.contains(rangoEditor.startContainer)) {
+    var sel = document.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(rangoEditor);
+  }
+}
+
+function edicionDe(nodo) {
+  var tarjeta = nodo.closest('.tarjeta');
+  return tarjeta && estado.ediciones[tarjeta.getAttribute('data-fila')];
+}
+
+/* Historial propio: los botones cambian el texto por código y el deshacer del navegador no los detecta.
+   Cada paso guarda el HTML y la posición del cursor (en caracteres desde el inicio). */
+function cursorEn(editor) {
+  var sel = document.getSelection();
+  if (!sel.rangeCount || !editor.contains(sel.anchorNode)) return null;
+  var r = document.createRange();
+  r.selectNodeContents(editor);
+  r.setEnd(sel.getRangeAt(0).endContainer, sel.getRangeAt(0).endOffset);
+  return r.toString().length;
+}
+
+function ponerCursor(editor, n) {
+  if (n === null || n === undefined) return;
+  var caminante = document.createTreeWalker(editor, NodeFilter.SHOW_TEXT), t;
+  while ((t = caminante.nextNode())) {
+    if (n <= t.length) {
+      var r = document.createRange();
+      r.setStart(t, n); r.collapse(true);
+      document.getSelection().removeAllRanges(); document.getSelection().addRange(r);
+      return;
+    }
+    n -= t.length;
+  }
+}
+
+function instantanea(editor) {
+  var ed = edicionDe(editor);
+  if (!ed) return;
+  clearTimeout(ed.espera);
+  var html = editor.innerHTML;
+  ed.cuerpoNuevo = html;
+  if (ed.historial[ed.paso].html === html) return;
+  ed.historial = ed.historial.slice(0, ed.paso + 1).concat([{ html: html, cursor: cursorEn(editor) }]).slice(-100);
+  ed.paso = ed.historial.length - 1;
+}
+
+function irAlPaso(editor, delta) {
+  var ed = edicionDe(editor);
+  instantanea(editor); // Lo escrito hace un momento también se puede deshacer
+  var destino = ed.paso + delta;
+  if (destino < 0 || destino >= ed.historial.length) return;
+  ed.paso = destino;
+  editor.innerHTML = ed.historial[destino].html;
+  ed.cuerpoNuevo = editor.innerHTML;
+  editor.focus();
+  ponerCursor(editor, ed.historial[destino].cursor);
+}
+
+/** Fila «Aplicar» bajo la barra (en lugar de ventanas emergentes): pide un dato y regresa el cursor donde estaba. */
+function pedirEnEditor(tarjeta, etiqueta, valor, alAceptar) {
+  var caja = tarjeta.querySelector('[data-pedir]'), entrada = caja.querySelector('input');
+  caja.querySelector('label').textContent = etiqueta;
+  entrada.value = valor || '';
+  caja.hidden = false;
+  entrada.focus();
+  caja.alAceptar = function () {
+    var v = entrada.value.trim();
+    if (!v) { entrada.focus(); return; }
+    caja.hidden = true;
+    var editor = tarjeta.querySelector('[data-editar-cuerpo]');
+    volverAlEditor(editor);
+    alAceptar(v, editor);
+    instantanea(editor);
+  };
+}
+
+function numerosDeReferencia(editor) {
+  return (editor.textContent.match(/\[\[\s*\d{1,3}\s*\]\]/g) || []).map(function (m) { return Number(m.replace(/\D/g, '')); });
+}
+
+function accionDeFormato(boton) {
+  var tarjeta = boton.closest('.tarjeta'), editor = tarjeta.querySelector('[data-editar-cuerpo]'), f = boton.getAttribute('data-formato');
+  var ed = estado.ediciones[tarjeta.getAttribute('data-fila')];
+  if (f === 'completa') { ed.completa = !ed.completa; pintar(); return; } // El texto y su historial están en estado: no se pierden
+  if (!editor) return;
+  if (f === 'deshacer' || f === 'rehacer') { irAlPaso(editor, f === 'deshacer' ? -1 : 1); return; }
+  instantanea(editor); // Lo escrito antes del botón queda como un paso aparte
+  if (f === 'enlace') {
+    pedirEnEditor(tarjeta, 'Dirección del enlace (https://…):', 'https://', function (url) {
+      if (!/^(https?:\/\/|mailto:)/i.test(url)) { avisar('El enlace debe empezar con https:// o mailto:', true); return; }
+      document.execCommand('createLink', false, url);
+      editor.querySelectorAll('a[href="' + url.replace(/"/g, '') + '"]').forEach(function (a) { a.target = '_blank'; a.rel = 'noopener'; });
+    });
+    return;
+  }
+  if (f === 'cita') {
+    var hay = numerosDeReferencia(editor);
+    pedirEnEditor(tarjeta, 'Número de la referencia que citas:', hay.length ? String(Math.max.apply(null, hay)) : '1', function (n) {
+      if (!/^\d{1,3}$/.test(n)) { avisar('Escribe solo el número, por ejemplo 3.', true); return; }
+      document.execCommand('insertText', false, '[[' + n + ']]');
+    });
+    return;
+  }
+  if (f === 'imagen') {
+    pedirEnEditor(tarjeta, 'Describe la imagen (para quien no puede verla):', '', function (alt) {
+      var archivo = tarjeta.querySelector('[data-imagen-nota]');
+      archivo.alt = alt;
+      archivo.click();
+    });
+    return;
+  }
+  if (f === 'referencia') {
+    var nums = numerosDeReferencia(editor), n = nums.length ? Math.max.apply(null, nums) + 1 : 1;
+    var lineas = [].slice.call(editor.querySelectorAll('p, li')).filter(function (x) { return /^\s*\[\[\s*\d{1,3}\s*\]\]/.test(x.textContent); });
+    var ultima = lineas[lineas.length - 1], nueva;
+    if (ultima) {
+      nueva = ultima.cloneNode(false);
+      ultima.after(nueva);
+    } else {
+      // Sin líneas [[n]]: va al final; el título «Referencias» solo se agrega si la nota no tiene uno
+      var conTitulo = [].slice.call(editor.querySelectorAll('h2')).some(function (h) { return /referencias|bibliograf/i.test(h.textContent); });
+      editor.insertAdjacentHTML('beforeend', (conTitulo ? '' : '<h2>Referencias</h2>') + '<p' + REFERENCIA_ATRIBUTOS + '></p>');
+      nueva = editor.lastElementChild;
+    }
+    nueva.textContent = '[[' + n + ']] ';
+    var r = document.createRange();
+    r.selectNodeContents(nueva); r.collapse(false);
+    editor.focus();
+    document.getSelection().removeAllRanges(); document.getSelection().addRange(r);
+    nueva.scrollIntoView({ block: 'nearest' });
+    instantanea(editor);
+    return;
+  }
+  volverAlEditor(editor);
+  if (f === 'h2' || f === 'h3' || f === 'p') document.execCommand('formatBlock', false, '<' + f + '>');
+  else document.execCommand(f, false, null);
+  instantanea(editor);
+}
+
+document.addEventListener('mousedown', function (e) {
+  if (e.target.closest && e.target.closest('.editor-barra button')) e.preventDefault(); // El clic no le quita la selección al texto
+});
+
+document.addEventListener('click', function (e) {
+  if (!e.target.closest) return;
+  var b = e.target.closest('[data-formato]');
+  if (b && b.closest('.edicion')) { accionDeFormato(b); return; }
+  var caja = e.target.closest('[data-pedir]');
+  if (caja && e.target.closest('[data-pedir-aceptar]')) caja.alAceptar();
+  if (caja && e.target.closest('[data-pedir-cancelar]')) caja.hidden = true;
+});
+
+document.addEventListener('paste', function (e) {
+  var editor = e.target.closest && e.target.closest('[data-editar-cuerpo]');
+  if (!editor) return;
+  e.preventDefault();
+  instantanea(editor);
+  var html = e.clipboardData.getData('text/html');
+  document.execCommand('insertHTML', false, html ? limpiarPegado(html) : textoAParrafos(e.clipboardData.getData('text/plain')));
+  instantanea(editor);
+});
+
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') {
+    var marco = document.querySelector('.edicion-marco.pantalla-completa');
+    if (marco) { estado.ediciones[marco.closest('.tarjeta').getAttribute('data-fila')].completa = false; pintar(); }
+    return;
+  }
+  if (e.key === 'Enter' && e.target.closest && e.target.closest('[data-pedir]')) { e.preventDefault(); e.target.closest('[data-pedir]').alAceptar(); return; }
+  var editor = e.target.closest && e.target.closest('[data-editar-cuerpo]');
+  var tecla = (e.key || '').toLowerCase();
+  if (editor && (e.ctrlKey || e.metaKey) && (tecla === 'z' || tecla === 'y')) {
+    e.preventDefault(); // El historial propio también cubre lo que hacen los botones
+    irAlPaso(editor, tecla === 'y' || e.shiftKey ? 1 : -1);
+  }
+});
+
+document.addEventListener('change', function (e) {
+  var archivo = e.target.closest && e.target.closest('[data-imagen-nota]');
+  if (!archivo || !archivo.files[0]) return;
+  var tarjeta = archivo.closest('.tarjeta'), alt = archivo.alt;
+  var rango = rangoEditor;
+  avisar('Subiendo la imagen…');
+  reducirImagen(archivo.files[0])
+    .then(function (datos) { return llamar('subirImagenNota', Number(tarjeta.getAttribute('data-fila')), tarjeta.getAttribute('data-post'), datos); })
+    .then(function (id) {
+      var editor = tarjeta.querySelector('[data-editar-cuerpo]');
+      if (!editor) return;
+      rangoEditor = rango;
+      volverAlEditor(editor);
+      instantanea(editor);
+      document.execCommand('insertHTML', false, '<p><img src="https://drive.google.com/thumbnail?id=' + esc(id) + '&amp;sz=w1600" alt="' + esc(alt) + '" ' +
+        'style="display:block;max-width:100%;height:auto;max-height:560px;object-fit:contain;margin:0 auto;border-radius:10px;"></p>'); // Igual que imagenHtml_ (Documento.gs)
+      instantanea(editor);
+      avisar('Imagen agregada. Se publica al guardar los cambios.');
+    }, function (err) { avisar(mensajeError(err), true); });
+  archivo.value = '';
+});
+
+/** HTML de la nota → listo para editarse en el panel: se analiza sin ejecutarse y se le quitan scripts y on…= (el servidor vuelve a limpiarlo). */
+function htmlLimpio(html) {
+  var doc = new DOMParser().parseFromString('<div>' + html + '</div>', 'text/html');
+  doc.querySelectorAll('script,style,object,embed,form,base,meta,link').forEach(function (n) { n.remove(); });
+  doc.querySelectorAll('*').forEach(function (n) {
+    [].slice.call(n.attributes).forEach(function (at) {
+      if (/^on/i.test(at.name) || /^\s*javascript:/i.test(at.value)) n.removeAttribute(at.name);
+    });
+  });
+  return doc.body.firstChild.innerHTML;
+}
+
+document.addEventListener('input', function (e) {
+  var tarjeta = e.target.closest && e.target.closest('.tarjeta');
+  var ed = tarjeta && estado.ediciones[tarjeta.getAttribute('data-fila')];
+  if (!ed) return;
+  var clave = e.target.getAttribute('data-editar');
+  var editor = e.target.closest('[data-editar-cuerpo]');
+  if (clave && clave.indexOf('ficha.') === 0) ed.ficha[clave.slice(6)] = e.target.value;
+  else if (clave) ed[clave] = e.target.value;
+  if (clave) { // La vista previa de la imagen principal muestra el título y la ficha conforme se editan
+    var cab = tarjeta.querySelector('.pn-cabecera'), art = articuloDeFila(tarjeta.getAttribute('data-fila'));
+    if (cab && art) { cab.innerHTML = cabeceraHtml(cabeceraPortada(art)); ejesPortada(); }
+  }
+  if (editor) {
+    ed.cuerpoNuevo = editor.innerHTML;
+    clearTimeout(ed.espera);
+    ed.espera = setTimeout(function () { instantanea(editor); }, 700); // Una pausa al escribir = un paso de deshacer
+  }
+});
+
+function articuloDeFila(fila) {
+  return estado.datos.articulos.filter(function (x) { return String(x.fila) === String(fila); })[0];
+}
+
+// --- Imagen principal ---
+// pc: imagen completa (contain) junto al texto de la nota; cel: banner 4:1 recortado (cover). Igual que estiloArticulo_ en Código.gs
+var PORTADA_VISTAS = [
+  { clave: 'pc', titulo: '1. En computadora (así se ve en la nota)', ajuste: 'contain',
+    ayuda: 'La altura la pone el texto; la imagen se ve completa.' },
+  { clave: 'cel', titulo: '2. Banner en celular', ajuste: 'cover', css: '4/1',
+    ayuda: 'Arriba de la nota, a todo lo ancho.' },
+  { clave: 'tar', titulo: '3. Tarjetas (Inicio y listas)', ajuste: 'cover', css: '16/9',
+    ayuda: 'En las secciones se ve la franja central.' }
+];
+var ENCUADRE_DE_VISTA = { pc: 'encuadrePc', cel: 'encuadreCelular', tar: 'encuadreTarjeta' };
+
+/** Recorte 16:9 de las tarjetas, igual que la vista 3 (object-position + acercamiento). '' para GIF: las tarjetas usan la principal. */
+function recorteTarjeta(fila, postId) {
+  var ed = estado.portadas[fila];
+  var fuente = ed.datos ? Promise.resolve(ed.datos) : llamar('imagenDePortada', Number(fila), postId);
+  return fuente.then(function (datos) {
+    if (!datos || /^data:image\/gif/.test(datos)) return '';
+    return new Promise(function (ok, mal) {
+      var img = new Image();
+      img.onload = function () {
+        var W = 1280, H = 720, e = ed.tar;
+        var k = Math.max(W / img.naturalWidth, H / img.naturalHeight) * (e.z || 100) / 100;
+        var w = img.naturalWidth * k, h = img.naturalHeight * k;
+        var c = document.createElement('canvas');
+        c.width = W; c.height = H;
+        var g = c.getContext('2d');
+        g.fillStyle = '#fff'; g.fillRect(0, 0, W, H);
+        g.drawImage(img, e.x / 100 * (W - w), e.y / 100 * (H - h), w, h); // Empieza en p·(marco − imagen), como en la vista previa
+        ok(c.toDataURL('image/jpeg', 0.85));
+      };
+      img.onerror = function () { mal(new Error('No se pudo preparar la imagen de las tarjetas.')); };
+      img.src = datos;
+    });
+  });
+}
+
+function guardarPortada(fila, postId) {
+  var ed = estado.portadas[fila];
+  return recorteTarjeta(fila, postId).then(function (t) {
+    return llamar('guardarImagenPrincipal', Number(fila), postId, ed.datos, ed.pc, ed.cel, ed.tar, t);
+  });
+}
+var PORTADA_EJES = [['z', 'Tamaño'], ['x', 'Horizontal'], ['y', 'Vertical']];
+
+/** object-position + scale con origen en el mismo punto (igual que estiloArticulo_ en Código.gs). */
+function estiloImagenPortada(e) {
+  return 'object-position:' + e.x + '% ' + e.y + '%;transform-origin:' + e.x + '% ' + e.y + '%;transform:scale(' + (e.z || 100) / 100 + ')';
+}
+
+/** Título, subtítulo, ficha y lectura reales de la nota (cabeceraDeNota) o, mientras llegan, lo que ya tiene el panel. */
+function cabeceraPortada(a) {
+  var ed = estado.ediciones[a.fila], real = estado.cabeceras[a.postId];
+  if (ed) return { titulo: ed.titulo, subtitulo: ed.subtitulo, lectura: (real || {}).lectura || '',
+    ficha: ['nombre', 'fecha', 'correo', 'cargo', 'vinculo'].map(function (k) { return ed.ficha[k]; }).filter(Boolean) };
+  return real || {
+    titulo: a.titulo, subtitulo: a.subtitulo, ficha: [a.autor].filter(Boolean),
+    lectura: a.palabras ? '⏱ Lectura de ' + Math.max(1, Math.round(a.palabras / 200)) + ' min' : ''
+  };
+}
+
+function cabeceraHtml(c) {
+  return '<p class="pn-titulo">' + esc(c.titulo || '') + '</p>' +
+    (c.subtitulo ? '<p class="pn-sub">' + esc(c.subtitulo) + '</p>' : '') +
+    (c.ficha.length ? '<div class="pn-ficha">' + c.ficha.map(function (l) { return '<p>' + esc(l) + '</p>'; }).join('') + '</div>' : '') +
+    (c.lectura ? '<p class="pn-lectura">' + esc(c.lectura) + '</p>' : '');
+}
+
+function bloquePortada(a) {
+  if (!a.postId || (a.tipo !== 'revision' && a.tipo !== 'publicado')) return '';
+  var ed = estado.portadas[a.fila];
+  var src = ed ? ed.src : (a.portada ? 'https://drive.google.com/thumbnail?id=' + a.portada + '&sz=w1600' : '');
+  var elegir = '<button class="boton secundario" data-accion="portada-elegir" type="button">' + (src ? 'Cambiar imagen' : 'Agregar imagen principal') + '</button>' +
+    '<input type="file" accept="image/*" data-portada-archivo="' + a.fila + '" hidden>';
+  if (!src) {
+    return '<div class="portada falta"><span class="portada-titulo">Imagen principal (obligatoria)</span>' +
+      '<p class="ayuda">⚠ Este artículo no tiene imagen principal y no se puede publicar sin ella. Puede ser de cualquier tamaño (JPG, PNG, WebP o GIF).</p>' +
+      '<div class="fila-botones">' + elegir + '</div></div>';
+  }
+  var vistas = PORTADA_VISTAS.map(function (v) {
+    var e = ed ? ed[v.clave] : a[ENCUADRE_DE_VISTA[v.clave]];
+    var marco = '<figure class="portada-marco" data-vista="' + v.clave + '"' + (v.css ? ' style="aspect-ratio:' + v.css + '"' : '') + '>' +
+      '<img src="' + esc(src) + '" alt="" draggable="false" style="' + estiloImagenPortada(e) + '"></figure>';
+    if (v.clave === 'pc') {
+      marco = '<div class="pn"><div class="pn-rejilla"><div class="pn-cabecera">' + cabeceraHtml(cabeceraPortada(a)) + '</div>' + marco + '</div></div>';
+    }
+    var controles = !ed ? '' : '<div class="portada-controles">' + PORTADA_EJES.map(function (q) {
+      var z = q[0] === 'z';
+      return '<label for="pr-' + a.fila + v.clave + q[0] + '">' + q[1] + '</label>' +
+        '<input type="range" id="pr-' + a.fila + v.clave + q[0] + '" min="' + (z ? 100 : 0) + '" max="' + (z ? 300 : 100) + '" value="' + e[q[0]] + '"' +
+        ' data-portada-rango="' + v.clave + '" data-eje="' + q[0] + '">' +
+        '<output data-portada-valor="' + v.clave + q[0] + '">' + e[q[0]] + '%</output>';
+    }).join('') + '</div>';
+    return '<div class="portada-vista" data-vista-clave="' + v.clave + '"><h4>' + v.titulo +
+        (ed ? '<button class="boton-mini" data-accion="portada-centrar" data-vista="' + v.clave + '" type="button" title="Centrar y quitar acercamiento">Centrar</button>' : '') + '</h4>' +
+      (ed ? '<p class="ayuda">' + v.ayuda + '</p>' : '') + marco + controles + '</div>';
+  }).join('');
+  if (ed) setTimeout(ejesPortada, 0); // Con el marco ya dibujado se sabe qué ejes se pueden mover
+  return '<div class="portada' + (ed ? ' editando' : '') + '"><span class="portada-titulo">Imagen principal' + (ed ? ' · arrastra cada imagen o usa las barras' : '') + '</span>' +
+    '<div class="portada-vistas">' + vistas + '</div>' +
+    '<div class="fila-botones">' + (estado.ediciones[a.fila] ? elegir : ed
+      ? '<button class="boton principal" data-accion="portada-guardar" type="button">' + (a.tipo === 'publicado' ? 'Guardar y publicar' : 'Guardar en el borrador') + '</button>' +
+        '<button class="boton secundario" data-accion="portada-cancelar" type="button">Cancelar</button>'
+      : '<button class="boton secundario" data-accion="portada-ajustar" type="button">Ajustar imagen</button>' + elegir) +
+    '</div></div>';
+}
+
+/** Abre el ajuste cuando ya se conoce el tamaño real de la imagen; pide la cabecera real de la nota para la vista previa. */
+function abrirPortada(fila, src, datos, pc, cel, postId, tar) {
+  var copia = function (e) { return { x: e.x, y: e.y, z: e.z || 100 }; };
+  var img = new Image();
+  img.onload = function () {
+    estado.portadas[fila] = { src: src, datos: datos, nw: img.naturalWidth, nh: img.naturalHeight, pc: copia(pc), cel: copia(cel), tar: copia(tar || { x: 50, y: 50, z: 100 }) };
+    pintar();
+  };
+  img.onerror = function () { avisar('No se pudo cargar la imagen. Recarga el panel e inténtalo de nuevo.', true); };
+  img.src = src;
+  if (postId && !estado.cabeceras[postId]) {
+    llamar('cabeceraDeNota', postId).then(function (c) { estado.cabeceras[postId] = c; pintar(); }, function () { /* Se queda la aproximada */ });
+  }
+}
+
+/**
+ * Cuánto sobra (en px, puede ser negativo) entre el marco y la imagen ya escalada, en cada eje.
+ * Con object-position p y scale(z) con origen en p, la imagen empieza en p·(marco − imagen·z):
+ * arrastrar Δ px equivale a mover p en Δ / sobra.
+ */
+function sobraPortada(ed, vista, marco) {
+  var v = PORTADA_VISTAS.filter(function (q) { return q.clave === vista; })[0];
+  var bw = marco.clientWidth, bh = marco.clientHeight;
+  var k = (v.ajuste === 'contain' ? Math.min : Math.max)(bw / ed.nw, bh / ed.nh) * ed[vista].z / 100;
+  return { x: bw - ed.nw * k, y: bh - ed.nh * k };
+}
+
+/** Desactiva las barras Horizontal/Vertical cuando en ese eje la imagen llena justo el marco (no hay nada que mover). */
+function ejesPortada() {
+  document.querySelectorAll('.portada.editando .portada-marco').forEach(function (marco) {
+    var tarjeta = marco.closest('.tarjeta'), ed = tarjeta && estado.portadas[tarjeta.getAttribute('data-fila')];
+    if (!ed) return;
+    var vista = marco.getAttribute('data-vista'), sobra = sobraPortada(ed, vista, marco);
+    ['x', 'y'].forEach(function (eje) {
+      var r = tarjeta.querySelector('[data-portada-rango="' + vista + '"][data-eje="' + eje + '"]');
+      if (r) r.disabled = Math.abs(sobra[eje]) < 1;
+    });
+  });
+}
+
+function moverPortada(tarjeta, vista, cambios) {
+  var e = estado.portadas[tarjeta.getAttribute('data-fila')][vista];
+  Object.keys(cambios).forEach(function (eje) {
+    e[eje] = Math.round(Math.max(eje === 'z' ? 100 : 0, Math.min(eje === 'z' ? 300 : 100, cambios[eje])));
+    var r = tarjeta.querySelector('[data-portada-rango="' + vista + '"][data-eje="' + eje + '"]');
+    if (r) r.value = e[eje];
+    var o = tarjeta.querySelector('[data-portada-valor="' + vista + eje + '"]');
+    if (o) o.textContent = e[eje] + '%';
+  });
+  tarjeta.querySelector('.portada-marco[data-vista="' + vista + '"] img').setAttribute('style', estiloImagenPortada(e));
+  if ('z' in cambios) ejesPortada();
+}
+
+/** Cualquier tamaño → JPEG de máximo 2000 px por lado (lo que necesita el blog y cabe en google.script.run). */
+function reducirImagen(archivo) {
+  return new Promise(function (ok, mal) {
+    if (archivo.type === 'image/gif') { // Sin cambios: el canvas le quitaría la animación
+      if (archivo.size > 10 * 1024 * 1024) return mal(new Error('El GIF pesa más de 10 MB. Usa uno más ligero.'));
+      var lector = new FileReader();
+      lector.onload = function () { ok(lector.result); };
+      lector.onerror = function () { mal(new Error('No se pudo leer el GIF.')); };
+      return lector.readAsDataURL(archivo);
+    }
+    var url = URL.createObjectURL(archivo), img = new Image();
+    img.onload = function () {
+      var k = Math.min(1, 2000 / Math.max(img.naturalWidth, img.naturalHeight));
+      var c = document.createElement('canvas');
+      c.width = Math.round(img.naturalWidth * k); c.height = Math.round(img.naturalHeight * k);
+      var g = c.getContext('2d');
+      g.fillStyle = '#fff'; g.fillRect(0, 0, c.width, c.height); // PNG transparente → fondo blanco
+      g.drawImage(img, 0, 0, c.width, c.height);
+      URL.revokeObjectURL(url);
+      ok(c.toDataURL('image/jpeg', 0.85));
+    };
+    img.onerror = function () { URL.revokeObjectURL(url); mal(new Error('No se pudo leer la imagen. Usa JPG, PNG, WebP o GIF.')); };
+    img.src = url;
+  });
+}
+
+document.addEventListener('change', function (e) {
+  var input = e.target.closest('[data-portada-archivo]');
+  if (!input || !input.files[0]) return;
+  var fila = input.getAttribute('data-portada-archivo');
+  var postId = input.closest('.tarjeta').getAttribute('data-post');
+  reducirImagen(input.files[0]).then(function (datos) {
+    abrirPortada(fila, datos, datos, { x: 50, y: 50, z: 100 }, { x: 50, y: 50, z: 100 }, postId, { x: 50, y: 50, z: 100 });
+  }, function (err) { avisar(err.message, true); });
+});
+
+document.addEventListener('input', function (e) {
+  var r = e.target.closest('[data-portada-rango]');
+  if (r) { var c = {}; c[r.getAttribute('data-eje')] = Number(r.value); moverPortada(r.closest('.tarjeta'), r.getAttribute('data-portada-rango'), c); }
+});
+
+// Arrastrar: la imagen sigue al dedo o al mouse, en los dos ejes
+document.addEventListener('pointerdown', function (e) {
+  var marco = e.target.closest('.portada.editando .portada-marco');
+  if (!marco) return;
+  var tarjeta = marco.closest('.tarjeta'), vista = marco.getAttribute('data-vista');
+  var ed = estado.portadas[tarjeta.getAttribute('data-fila')];
+  var sobra = sobraPortada(ed, vista, marco);
+  var x0 = e.clientX, y0 = e.clientY, inicio = { x: ed[vista].x, y: ed[vista].y };
+  e.preventDefault();
+  marco.setPointerCapture(e.pointerId);
+  function mover(ev) {
+    var c = {};
+    if (Math.abs(sobra.x) >= 1) c.x = inicio.x + (ev.clientX - x0) / sobra.x * 100;
+    if (Math.abs(sobra.y) >= 1) c.y = inicio.y + (ev.clientY - y0) / sobra.y * 100;
+    moverPortada(tarjeta, vista, c);
+  }
+  function soltar() {
+    marco.removeEventListener('pointermove', mover);
+    marco.removeEventListener('pointerup', soltar);
+    marco.removeEventListener('pointercancel', soltar);
+  }
+  marco.addEventListener('pointermove', mover);
+  marco.addEventListener('pointerup', soltar);
+  marco.addEventListener('pointercancel', soltar);
+});
+
+function selectorSolicitud(opciones, fila) {
+  var elegida = estado.elecciones['folio-' + fila];
+  if (!opciones || !opciones.length) {
+    return '<div class="campo-seccion"><label>Solicitud</label>' +
+      '<div class="ayuda">No hay solicitudes aprobadas disponibles. Aprueba primero la solicitud del autor o descarta este envío.</div></div>';
+  }
+  var coinciden = opciones.filter(function (o) { return o.coincide; }).length;
+  var aviso = coinciden ? '' : '<div class="ayuda">Ninguna solicitud aprobada es de la cuenta que envió el artículo; se muestran todas. Revisa que sea el autor correcto.</div>';
+  return '<div class="campo-seccion">' + aviso +
+    '<label>Solicitud a la que pertenece *</label>' +
+    '<select data-folio data-fila="' + fila + '">' +
+      '<option value="">Elige la solicitud…</option>' +
+      opciones.map(function (o) {
+        var marcada = elegida !== undefined ? elegida === o.folio : (coinciden === 1 && o.coincide);
+        return '<option value="' + esc(o.folio) + '"' + (marcada ? ' selected' : '') + '>' +
+          esc(o.folio + ' · ' + o.titulo + ' · ' + o.nombre) + (o.coincide ? '  ✓ mismo correo' : '') + '</option>';
+      }).join('') +
+    '</select>' +
+    '<div class="ayuda">El folio se asigna aquí; el autor nunca lo ve.</div>' +
+  '</div>';
+}
+
+// Etiquetas adicionales como chips: el administrador las agrega una por una (Enter)
+var ETIQUETAS_MAXIMO = 5, ETIQUETA_LARGO = 30;
+
+function listaEtiquetas(texto) {
+  return String(texto || '').split(',').map(function (x) { return x.trim(); }).filter(Boolean);
+}
+
+function campoEtiquetas(sugeridas, fila) {
+  var guardadas = estado.elecciones['etiquetas-' + fila];
+  var lista = listaEtiquetas(guardadas !== undefined ? guardadas : (sugeridas || '')).slice(0, ETIQUETAS_MAXIMO);
+  var chips = lista.map(function (x, i) {
+    return '<span class="chip">' + esc(x) + '<button type="button" data-quitar-etiqueta="' + i + '" data-fila="' + fila + '" aria-label="Quitar ' + esc(x) + '">×</button></span>';
+  }).join('');
+  var lleno = lista.length >= ETIQUETAS_MAXIMO;
+  return '<div class="campo-seccion">' +
+    '<label>Etiquetas adicionales (opcional)</label>' +
+    '<div class="chips" data-chips="' + fila + '">' + chips +
+      '<input type="text" data-chip-input data-fila="' + fila + '" maxlength="' + ETIQUETA_LARGO + '"' + (lleno ? ' disabled placeholder="Máximo ' + ETIQUETAS_MAXIMO + '"' : ' placeholder="Escribe una etiqueta y presiona Enter"') + '>' +
+    '</div>' +
+    '<input type="hidden" data-etiquetas data-fila="' + fila + '" value="' + esc(lista.join(', ')) + '">' +
+    '<div class="ayuda">Una por una, máximo ' + ETIQUETAS_MAXIMO + '. Sirven para buscar y filtrar notas en el blog.</div>' +
+  '</div>';
+}
+
+function cambiarEtiquetas(fila, lista) {
+  estado.elecciones['etiquetas-' + fila] = lista.join(', ');
+  var contenedor = document.querySelector('[data-chips="' + fila + '"]');
+  if (!contenedor) return;
+  var campo = contenedor.closest('.campo-seccion');
+  var temp = document.createElement('div');
+  temp.innerHTML = campoEtiquetas('', fila);
+  campo.replaceWith(temp.firstChild);
+  var entrada = document.querySelector('[data-chip-input][data-fila="' + fila + '"]');
+  if (entrada && !entrada.disabled) entrada.focus();
+}
+
+function agregarEtiqueta(entrada) {
+  var fila = entrada.getAttribute('data-fila');
+  var texto = entrada.value.replace(/^\s*#+/, '').replace(/[<>",]/g, '').replace(/\s+/g, ' ').trim().slice(0, ETIQUETA_LARGO);
+  if (!texto) return;
+  var lista = listaEtiquetas(estado.elecciones['etiquetas-' + fila] || document.querySelector('[data-etiquetas][data-fila="' + fila + '"]').value);
+  var repetida = lista.some(function (x) { return x.toLowerCase() === texto.toLowerCase(); });
+  if (/^(categoria|formato|facultad)-/i.test(texto)) { avisar('Esa etiqueta es interna del blog; usa otra.', true); return; }
+  if (repetida) { entrada.value = ''; return; }
+  if (lista.length >= ETIQUETAS_MAXIMO) { avisar('Máximo ' + ETIQUETAS_MAXIMO + ' etiquetas.', true); return; }
+  lista.push(texto);
+  cambiarEtiquetas(fila, lista);
+}
+
+document.addEventListener('keydown', function (e) {
+  var entrada = e.target;
+  if (!entrada.hasAttribute || !entrada.hasAttribute('data-chip-input')) return;
+  if (e.key === 'Enter' || e.key === ',') {
+    e.preventDefault();
+    agregarEtiqueta(entrada);
+  } else if (e.key === 'Backspace' && !entrada.value) {
+    var fila = entrada.getAttribute('data-fila');
+    var lista = listaEtiquetas(document.querySelector('[data-etiquetas][data-fila="' + fila + '"]').value);
+    if (lista.length) { lista.pop(); cambiarEtiquetas(fila, lista); }
+  }
+});
+
+document.addEventListener('click', function (e) {
+  var boton = e.target.closest && e.target.closest('[data-quitar-etiqueta]');
+  if (boton) {
+    var fila = boton.getAttribute('data-fila');
+    var lista = listaEtiquetas(document.querySelector('[data-etiquetas][data-fila="' + fila + '"]').value);
+    lista.splice(Number(boton.getAttribute('data-quitar-etiqueta')), 1);
+    cambiarEtiquetas(fila, lista);
+    return;
+  }
+  var caja = e.target.closest && e.target.closest('.chips');
+  if (caja) { var entrada = caja.querySelector('[data-chip-input]'); if (entrada && !entrada.disabled) entrada.focus(); }
+});
+
+function selectorSeccion(sugerida, fila, ayuda) {
+  var elegida = estado.elecciones['seccion-' + fila];
+  var valor = elegida !== undefined ? elegida : sugerida;
+  var grupos = {};
+  estado.secciones.forEach(function (op) {
+    var seccion = op.split(':')[0];
+    (grupos[seccion] = grupos[seccion] || []).push(op);
+  });
+  var opciones = '<option value="">Elige la sección…</option>' +
+    Object.keys(grupos).map(function (g) {
+      return '<optgroup label="' + esc(g) + '">' + grupos[g].map(function (op) {
+        return '<option value="' + esc(op) + '"' + (op === valor ? ' selected' : '') + '>' +
+          esc(op.slice(g.length + 1).trim()) + '</option>';
+      }).join('') + '</optgroup>';
+    }).join('');
+
+  return '<div class="campo-seccion">' +
+    '<label>Sección del blog *</label>' +
+    '<select data-seccion data-fila="' + fila + '">' + opciones + '</select>' +
+    '<div class="ayuda">' + (ayuda || (sugerida ? 'Preseleccionada con la sugerencia del autor. Puedes cambiarla.' : 'Nota del CIAD: elige dónde se publicará.')) + '</div>' +
+  '</div>';
+}
+
+// --- Comentarios ---
+function pintarComentarios() {
+  var f = estado.filtro.comentarios;
+  return ordenarYFiltrarPorFecha(estado.datos.comentarios.comentarios, 'comentarios', 'creado').map(function (c) {
+    var esSpam = c.spam && c.spam.length;
+    var clase = f === 'pendiente' ? 'pendiente' : (f === 'publicado' ? 'aprobado' : 'rechazado');
+    var nombreEstado = { pendiente: 'Pendiente', publicado: 'Publicado', rechazado: 'Rechazado' }[f];
+
+    return '<article class="tarjeta' + (esSpam ? ' spam' : '') + '" data-tipo="comentario" data-id="' + esc(c.id) + '" data-uid="' + esc(c.uid) + '" data-nombre="' + esc(c.nombre) + '">' +
+      '<div class="tarjeta-cabecera">' +
+        '<span class="folio">' + esc(c.nombre || 'Sin nombre') + '</span>' +
+        '<span class="pastilla ' + clase + '">' + nombreEstado + '</span>' +
+        (esSpam ? '<span class="pastilla aviso">⚠ Spam probable: ' + esc(c.spam.join(', ')) + '</span>' : '') +
+        '<span class="fecha">' + esc(fechaLegible(c.creado)) + '</span>' +
+      '</div>' +
+      '<div class="enlaces">' +
+        (c.postUrl ? '<a href="' + esc(c.postUrl) + '" target="_blank" rel="noopener">En: ' + esc(c.postTitulo || 'ver entrada') + ' ↗</a>' : '<span>Entrada ' + esc(c.postId) + '</span>') +
+      '</div>' +
+      '<p class="texto-largo">' + esc(c.texto) + '</p>' +
+      (c.notaModerador ? '<div class="nota"><b>Nota del moderador:</b> ' + esc(c.notaModerador) + '</div>' : '') +
+      (f !== 'pendiente' && c.moderadoPor ? '<p class="detalle-estado">Moderado por ' + esc(c.moderadoPor) + ' · ' + esc(fechaLegible(c.moderadoEn)) + '</p>' : '') +
+      (f === 'pendiente'
+        ? '<div class="acciones">' +
+            '<button class="boton principal" data-accion="aprobar-comentario" type="button">Aprobar</button>' +
+            '<button class="boton peligro" data-accion="rechazar-comentario" type="button">Rechazar</button>' +
+            '<button class="boton secundario" data-accion="bloquear-usuario" type="button">Bloquear cuenta</button>' +
+          '</div>'
+        : '<div class="acciones"><button class="boton peligro" data-accion="eliminar-comentario" type="button">Eliminar comentario</button></div>') +
+    '</article>';
+  }).join('');
+}
+
+function pintarBloqueados() {
+  var bloqueados = estado.datos.comentarios.bloqueados || [];
+  return '<details class="bloque-bloqueados">' +
+    '<summary>Cuentas bloqueadas (' + bloqueados.length + ')</summary>' +
+    (bloqueados.length
+      ? bloqueados.map(function (b) {
+          return '<div class="fila-bloqueado" data-uid="' + esc(b.uid || b.id) + '">' +
+            '<div><b>' + esc(b.nombre || b.uid || b.id) + '</b>' + (b.correo ? ' · ' + esc(b.correo) : '') +
+            (b.motivo ? '<div class="detalle-estado">Motivo: ' + esc(b.motivo) + '</div>' : '') + '</div>' +
+            '<button class="boton secundario" data-accion="desbloquear" type="button">Desbloquear</button>' +
+          '</div>';
+        }).join('')
+      : '<p class="detalle-estado">Ninguna cuenta bloqueada.</p>') +
+  '</details>';
+}
+
+// ===== Confirmaciones en línea =====
+function pedirConfirmacion(tarjeta, opciones) {
+  var acciones = tarjeta.querySelector('.acciones');
+  var original = acciones.innerHTML;
+
+  acciones.innerHTML =
+    '<div class="confirmacion">' +
+      '<p>' + esc(opciones.pregunta) + '</p>' +
+      (opciones.conNota ? '<textarea placeholder="' + esc(opciones.placeholder || 'Nota para el autor (opcional). Se incluye en el correo.') + '"></textarea>' : '') +
+      '<div class="fila-botones">' +
+        '<button class="boton ' + (opciones.peligro ? 'peligro-lleno' : 'principal') + '" data-confirmar type="button">' + esc(opciones.boton) + '</button>' +
+        '<button class="boton secundario" data-cancelar type="button">Cancelar</button>' +
+      '</div>' +
+    '</div>';
+
+  var area = acciones.querySelector('textarea');
+  if (area) area.focus();
+
+  acciones.querySelector('[data-cancelar]').onclick = function () { acciones.innerHTML = original; };
+  acciones.querySelector('[data-confirmar]').onclick = function () {
+    var nota = area ? area.value.trim() : '';
+    if (opciones.notaObligatoria && !nota) { area.focus(); avisar('Escribe el motivo.', true); return; }
+    var hecho = ejecutar(acciones, opciones.accion(nota), opciones.recargar);
+    if (opciones.despues) hecho.then(opciones.despues);
+  };
+}
+
+function ejecutar(contenedor, promesa, pestanaARecargar) {
+  contenedor.querySelectorAll('button').forEach(function (b) { b.disabled = true; });
+  accionesEnCurso++;
+  return promesa
+    .then(function (r) {
+      accionesEnCurso--;
+      avisar(typeof r === 'string' ? r : (r && r.mensaje) || 'Listo.');
+      return cargar(pestanaARecargar);
+    }, function (err) {
+      accionesEnCurso--;
+      throw err;
+    })
+    .catch(function (err) {
+      avisar(mensajeError(err), true);
+      contenedor.querySelectorAll('button').forEach(function (b) { b.disabled = false; });
+    });
+}
+
+// ===== Eventos =====
+document.addEventListener('click', function (e) {
+  var pestana = e.target.closest('.pestana');
+  if (pestana) {
+    estado.pestana = pestana.getAttribute('data-pestana');
+    pintar();
+    return;
+  }
+
+  // IMPORTANTE: va antes que .filtro, porque el botón comparte esa clase y el filtro lo capturaba (dejaba el filtro vacío)
+  if (e.target.closest('[data-quitar-periodo]')) {
+    estado.periodo[estado.pestana] = { desde: '', hasta: '' };
+    pintar();
+    return;
+  }
+
+  var filtro = e.target.closest('.filtro');
+  if (filtro) {
+    var p = estado.pestana;
+    var anterior = estado.filtro[p];
+    estado.filtro[p] = filtro.getAttribute('data-filtro');
+    if (p === 'comentarios' && anterior !== estado.filtro[p]) {
+      estado.datos.comentarios = null;
+      pintar();
+      cargar('comentarios');
+    } else {
+      pintar();
+    }
+    return;
+  }
+
+  var boton = e.target.closest('[data-accion]');
+  if (!boton) return;
+  var accion = boton.getAttribute('data-accion');
+  var tarjeta = boton.closest('.tarjeta');
+
+  if (accion === 'ver-mas') {
+    var texto = boton.previousElementSibling;
+    texto.classList.toggle('recortado');
+    boton.textContent = texto.classList.contains('recortado') ? 'Ver completo' : 'Ver menos';
+    return;
+  }
+
+  // --- Solicitudes ---
+  if (accion === 'aprobar-solicitud' || accion === 'rechazar-solicitud') {
+    var fila = Number(tarjeta.getAttribute('data-fila'));
+    var firma = tarjeta.getAttribute('data-firma');
+    var aprobar = accion === 'aprobar-solicitud';
+    pedirConfirmacion(tarjeta, {
+      pregunta: aprobar ? '¿Aprobar? Se enviará al autor el formulario para entregar su artículo.' : '¿Rechazar esta solicitud? Se le avisará por correo.',
+      boton: aprobar ? 'Sí, aprobar' : 'Sí, rechazar',
+      peligro: !aprobar,
+      conNota: !aprobar,
+      notaObligatoria: !aprobar, // DEF-014
+      placeholder: 'Motivo del rechazo (obligatorio). Se incluye en el correo al autor.',
+      recargar: 'solicitudes',
+      accion: function (nota) {
+        return aprobar ? llamar('aprobarSolicitud', fila, firma) : llamar('rechazarSolicitud', fila, firma, nota);
+      }
+    });
+  }
+
+  // --- Artículos ---
+  if (accion === 'publicar-articulo' || accion === 'rechazar-articulo') {
+    var filaA = Number(tarjeta.getAttribute('data-fila'));
+    var post = tarjeta.getAttribute('data-post');
+    var publicar = accion === 'publicar-articulo';
+    var selector = tarjeta.querySelector('[data-seccion]');
+    var seccion = selector ? selector.value : '';
+    var pendiente = tarjeta.querySelector('[data-chip-input]');
+    if (pendiente && pendiente.value.trim()) agregarEtiqueta(pendiente);
+    var campoEtq = tarjeta.querySelector('[data-etiquetas]');
+    var etiquetasExtra = campoEtq ? campoEtq.value : '';
+
+    if (publicar && !seccion) {
+      selector.closest('.campo-seccion').classList.add('con-error');
+      selector.focus();
+      avisar('Elige la sección del blog antes de publicar.', true);
+      return;
+    }
+    if (selector) selector.closest('.campo-seccion').classList.remove('con-error');
+
+    pedirConfirmacion(tarjeta, {
+      pregunta: publicar ? '¿Publicar en «' + seccion + '»? Será visible para todos y se avisará al autor.' : '¿Rechazar? Se borrará el borrador de Blogger y se avisará al autor.',
+      boton: publicar ? 'Sí, publicar' : 'Sí, rechazar',
+      peligro: !publicar,
+      conNota: !publicar,
+      recargar: 'articulos',
+      accion: function (nota) {
+        return publicar ? llamar('publicarArticulo', filaA, post, seccion, etiquetasExtra) : llamar('rechazarArticulo', filaA, post, nota);
+      }
+    });
+  }
+
+  if (accion === 'vincular-articulo') {
+    var selFolio = tarjeta.querySelector('[data-folio]');
+    var folioElegido = selFolio ? selFolio.value : '';
+    if (!folioElegido) {
+      if (selFolio) { selFolio.closest('.campo-seccion').classList.add('con-error'); selFolio.focus(); }
+      avisar('Elige la solicitud a la que pertenece.', true);
+      return;
+    }
+    ejecutar(tarjeta.querySelector('.acciones'), llamar('vincularArticulo', Number(tarjeta.getAttribute('data-fila')), folioElegido), 'articulos');
+  }
+
+  if (accion === 'descartar-articulo') {
+    var filaD = Number(tarjeta.getAttribute('data-fila'));
+    pedirConfirmacion(tarjeta, {
+      pregunta: '¿Descartar este envío? Se le avisará al autor.',
+      boton: 'Sí, descartar',
+      peligro: true,
+      conNota: true,
+      recargar: 'articulos',
+      accion: function (nota) { return llamar('descartarArticulo', filaD, nota); }
+    });
+  }
+
+  if (accion === 'eliminar-articulo') {
+    var filaE = Number(tarjeta.getAttribute('data-fila'));
+    var postE = tarjeta.getAttribute('data-post');
+    var tituloE = (tarjeta.querySelector('h3') || {}).textContent || 'este artículo';
+    pedirConfirmacion(tarjeta, {
+      pregunta: '¿Eliminar «' + tituloE + '» del blog? Dejará de verse para todos y no se puede deshacer.',
+      boton: 'Sí, eliminar',
+      peligro: true,
+      conNota: true,
+      placeholder: 'Motivo (opcional, solo lo ve el CIAD).',
+      recargar: 'articulos',
+      accion: function (motivo) { return llamar('eliminarArticuloPublicado', filaE, postE, motivo); }
+    });
+  }
+
+  if (accion === 'eliminar-copia') {
+    var filaK = Number(tarjeta.getAttribute('data-fila'));
+    var postK = tarjeta.getAttribute('data-post');
+    pedirConfirmacion(tarjeta, {
+      pregunta: '¿Eliminar esta copia? Se borra de Blogger y del panel. No se avisa a nadie y la nota original no cambia.',
+      boton: 'Sí, eliminar copia',
+      peligro: true,
+      conNota: false,
+      recargar: 'articulos',
+      accion: function () { return llamar('eliminarCopia', filaK, postK); }
+    });
+  }
+
+  if (accion === 'eliminar-comentario') {
+    var idE = tarjeta.getAttribute('data-id');
+    pedirConfirmacion(tarjeta, {
+      pregunta: '¿Eliminar este comentario? Se borra definitivamente y no se puede deshacer.',
+      boton: 'Sí, eliminar',
+      peligro: true,
+      conNota: false,
+      recargar: 'comentarios',
+      accion: function () { return llamar('eliminarComentario', idE); }
+    });
+  }
+
+  if (accion === 'reconvertir-articulo') {
+    var filaR = Number(tarjeta.getAttribute('data-fila'));
+    var postR = tarjeta.getAttribute('data-post');
+    var tituloR = (tarjeta.querySelector('h3') || {}).textContent || 'este artículo';
+    var artR = estado.datos.articulos.filter(function (x) { return x.fila === filaR; })[0] || {};
+    pedirConfirmacion(tarjeta, {
+      pregunta: (artR.editada ? '⚠ Esta nota se editó en el panel (' + artR.editada + '): la ficha del autor y el texto que se corrigieron ahí se perderán; ' +
+        'el título y el subtítulo editados sí se conservan. ' : '') + '⚠ Opción en pruebas (todavía en desarrollo): revisa la nota después. ¿Rehacer la entrada «' + tituloR + '» desde el Word original? Se borra el texto, las imágenes y el formato que tiene ahora en Blogger ' +
+        'y se vuelven a crear leyendo el Word. Los cambios hechos a mano en Blogger se pierden. El título, la sección y las etiquetas no cambian. Tarda unos 30 segundos.',
+      boton: 'Sí, rehacer',
+      peligro: false,
+      conNota: false,
+      recargar: 'articulos',
+      accion: function () { return llamar('volverAConvertirArticulo', filaR, postR); }
+    });
+  }
+
+  // --- Imagen principal ---
+  if (accion === 'portada-elegir') {
+    boton.parentNode.querySelector('[data-portada-archivo]').click();
+    return;
+  }
+  if (accion === 'portada-ajustar') {
+    var filaP = tarjeta.getAttribute('data-fila');
+    var art = estado.datos.articulos.filter(function (x) { return String(x.fila) === filaP; })[0];
+    abrirPortada(filaP, 'https://drive.google.com/thumbnail?id=' + art.portada + '&sz=w1600', '', art.encuadrePc, art.encuadreCelular, art.postId, art.encuadreTarjeta);
+    return;
+  }
+  if (accion === 'editar-nota') {
+    boton.disabled = true;
+    abrirEdicion(tarjeta.getAttribute('data-fila'), tarjeta.getAttribute('data-post'))
+      .catch(function (err) { boton.disabled = false; avisar(mensajeError(err), true); });
+    return;
+  }
+  if (accion === 'clonar-nota') {
+    var filaC = Number(tarjeta.getAttribute('data-fila')), postC = tarjeta.getAttribute('data-post'), clon = null;
+    pedirConfirmacion(tarjeta, {
+      pregunta: '¿Clonar «' + ((tarjeta.querySelector('h3') || {}).textContent || 'esta nota') + '»? Se crea una copia como borrador (Por revisar) y se abre para editarla; la original no cambia. ' +
+        'La copia es nota del CIAD: al publicarla no se le escribe al autor.',
+      boton: 'Sí, clonar',
+      recargar: 'articulos',
+      accion: function () { return llamar('clonarNota', filaC, postC).then(function (r) { clon = r; return r; }); },
+      despues: function () {
+        if (!clon) return;
+        estado.filtro.articulos = 'revision';
+        pintar();
+        abrirEdicion(String(clon.fila), clon.postId).then(function () {
+          var t = document.querySelector('.tarjeta[data-fila="' + clon.fila + '"]');
+          if (t) t.scrollIntoView({ block: 'start', behavior: 'smooth' });
+        }, function (err) { avisar(mensajeError(err), true); });
+      }
+    });
+    return;
+  }
+  if (accion === 'cancelar-edicion') {
+    delete estado.ediciones[tarjeta.getAttribute('data-fila')];
+    delete estado.portadas[tarjeta.getAttribute('data-fila')];
+    pintar();
+    return;
+  }
+  if (accion === 'guardar-nota') {
+    var filaN = tarjeta.getAttribute('data-fila'), edN = estado.ediciones[filaN], postN = tarjeta.getAttribute('data-post');
+    var selN = tarjeta.querySelector('[data-seccion]');
+    var pendienteN = tarjeta.querySelector('[data-chip-input]');
+    if (pendienteN && pendienteN.value.trim()) agregarEtiqueta(pendienteN);
+    if (!edN.titulo.trim()) { tarjeta.querySelector('[data-editar="titulo"]').focus(); avisar('El título no puede quedar vacío.', true); return; }
+    if (!selN.value) { selN.closest('.campo-seccion').classList.add('con-error'); selN.focus(); avisar('Elige la sección del blog.', true); return; }
+    var editorN = tarjeta.querySelector('[data-editar-cuerpo]');
+    if (editorN) instantanea(editorN);
+    var envio = { titulo: edN.titulo, subtitulo: edN.subtitulo, ficha: edN.ficha, cuerpo: edN.cuerpoNuevo, seccion: selN.value,
+      etiquetas: tarjeta.querySelector('[data-etiquetas]').value };
+    var portadaN = estado.portadas[filaN];
+    pedirConfirmacion(tarjeta, {
+      pregunta: '¿Guardar los cambios? Se verán en el blog de inmediato.',
+      boton: 'Sí, guardar',
+      recargar: 'articulos',
+      accion: function () {
+        // Primero la imagen principal (si se abrió su ajuste) y después lo demás: cada paso lee la entrada ya actualizada
+        var paso = portadaN ? guardarPortada(filaN, postN) : Promise.resolve();
+        return paso.then(function () { return llamar('guardarNotaEditada', Number(filaN), postN, envio); })
+          .then(function (r) { delete estado.ediciones[filaN]; delete estado.portadas[filaN]; delete estado.cabeceras[postN]; return r; });
+      }
+    });
+    return;
+  }
+  if (accion === 'portada-centrar') {
+    moverPortada(tarjeta, boton.getAttribute('data-vista'), { x: 50, y: 50, z: 100 });
+    return;
+  }
+  if (accion === 'portada-cancelar') {
+    delete estado.portadas[tarjeta.getAttribute('data-fila')];
+    pintar();
+    return;
+  }
+  if (accion === 'portada-guardar') {
+    var filaG = tarjeta.getAttribute('data-fila');
+    ejecutar(boton.parentNode, guardarPortada(filaG, tarjeta.getAttribute('data-post'))
+      .then(function (r) { delete estado.portadas[filaG]; return r; }), 'articulos');
+    return;
+  }
+
+  if (accion === 'reintentar-articulo') {
+    ejecutar(tarjeta.querySelector('.acciones'), llamar('reintentarArticulo', Number(tarjeta.getAttribute('data-fila'))), 'articulos');
+  }
+
+  // --- Comentarios ---
+  if (accion === 'aprobar-comentario') {
+    ejecutar(tarjeta.querySelector('.acciones'), llamar('aprobarComentario', tarjeta.getAttribute('data-id')), 'comentarios');
+  }
+
+  if (accion === 'rechazar-comentario') {
+    var id = tarjeta.getAttribute('data-id');
+    pedirConfirmacion(tarjeta, {
+      pregunta: '¿Rechazar este comentario?',
+      boton: 'Sí, rechazar',
+      peligro: true,
+      conNota: true,
+      placeholder: 'Nota para el lector (opcional). Si la escribes, se le envía por correo.',
+      recargar: 'comentarios',
+      accion: function (nota) { return llamar('rechazarComentario', id, nota); }
+    });
+  }
+
+  if (accion === 'bloquear-usuario') {
+    var uid = tarjeta.getAttribute('data-uid');
+    var nombre = tarjeta.getAttribute('data-nombre');
+    pedirConfirmacion(tarjeta, {
+      pregunta: '¿Bloquear a ' + (nombre || 'esta cuenta') + '? Ya no podrá comentar y se rechazarán todos sus pendientes.',
+      boton: 'Sí, bloquear',
+      peligro: true,
+      conNota: true,
+      notaObligatoria: true,
+      placeholder: 'Motivo del bloqueo (solo lo ve el CIAD).',
+      recargar: 'comentarios',
+      accion: function (motivo) { return llamar('bloquearUsuario', uid, nombre, motivo); }
+    });
+  }
+
+  if (accion === 'desbloquear') {
+    var filaB = boton.closest('.fila-bloqueado');
+    ejecutar(filaB, llamar('desbloquearUsuario', filaB.getAttribute('data-uid')), 'comentarios');
+  }
+});
+
+
+// Recordar la sección o solicitud elegida aunque el panel se recargue
+document.addEventListener('change', function (e) {
+  var sel = e.target;
+  if (sel.hasAttribute('data-seccion')) estado.elecciones['seccion-' + sel.getAttribute('data-fila')] = sel.value;
+  if (sel.hasAttribute('data-folio')) estado.elecciones['folio-' + sel.getAttribute('data-fila')] = sel.value;
+  if (sel.hasAttribute('data-orden')) { estado.orden[estado.pestana] = sel.value; pintar(); }
+  // NOTA: Chrome lanza "change" a mitad de escribir el año (0002, 0020…); se ignora hasta que esté completo
+  if (sel.hasAttribute('data-periodo') && !(sel.value && sel.value < '1900')) { estado.periodo[estado.pestana][sel.getAttribute('data-periodo')] = sel.value; pintar(); }
+});
+// Las etiquetas (chips) se guardan en estado.elecciones y se conservan con la recarga automática
+</script>
+<script>
+// ===== Páginas: editor de las páginas del blog (ver Paginas.gs) =====
+var PG = {};
+var ESTADO_PAGINAS = {};   // { tipo: { habilitada, motivo } }; se pide una vez al abrir Páginas
+var estadoPaginasPedido = false;   // Por página: { datos, original, url, version, error, cargando, abiertas:{}, reemplazando:null }
+
+function pgEstado() { return PG[estado.filtro.paginas]; }
+function pgSucio(st) { return !!(st && st.datos && JSON.stringify(st.datos) !== st.original); }
+
+function pgObtener(obj, ruta) {
+  return ruta.split('.').reduce(function (o, k) { return o == null ? o : o[k]; }, obj);
+}
+function pgAsignar(obj, ruta, valor) {
+  var partes = ruta.split('.'), ult = partes.pop();
+  pgObtener(obj, partes.join('.'))[ult] = valor;
+}
+
+function pgCargar(tipo, silencioso) {
+  PG[tipo] = PG[tipo] || {};
+  PG[tipo].cargando = true; PG[tipo].error = null;
+  if (!silencioso) pintar();
+  return llamar('obtenerPaginaPanel', tipo).then(function (r) {
+    PG[tipo] = { datos: r.datos, original: JSON.stringify(r.datos), url: r.url, version: r.version, abiertas: {}, reemplazando: null };
+  }).catch(function (err) {
+    PG[tipo] = { error: mensajeError(err) };
+  }).then(function () { if (estado.pestana === 'paginas') pintar(); });
+}
+
+function pgPedirEstado() {
+  if (estadoPaginasPedido) return;
+  estadoPaginasPedido = true;
+  llamar('obtenerEstadoPaginas').then(function (r) {
+    ESTADO_PAGINAS = r || {};
+    if (estado.pestana === 'paginas') pintar();
+  }).catch(function () { estadoPaginasPedido = false; });
+}
+
+/** Precarga en segundo plano (sin volver a pintar la pestaña abierta). Si algo falla, la pestaña lo pide al abrirse. */
+function precargarPestanas() {
+  pgPedirEstado();
+  if (!PG[estado.filtro.paginas]) pgCargar(estado.filtro.paginas, true);
+  if (!MT.datos && !MT.cargando) mtCargar();
+  metCargar();
+  guiaCargar();
+}
+
+function pgMiniatura(id) { return id ? 'https://img.youtube.com/vi/' + id + '/mqdefault.jpg' : ''; }
+
+function pgCampo(etiqueta, ruta, valor, opciones) {
+  opciones = opciones || {};
+  var control = opciones.area
+    ? '<textarea data-ruta="' + ruta + '" rows="' + (opciones.filas || 3) + '" placeholder="' + esc(opciones.placeholder || '') + '">' + esc(valor || '') + '</textarea>'
+    : '<input type="text" data-ruta="' + ruta + '" value="' + esc(valor || '') + '" placeholder="' + esc(opciones.placeholder || '') + '"' + (opciones.auto ? ' data-autotitulo="' + opciones.auto + '"' : '') + '>';
+  return '<label class="pg-campo' + (opciones.clase ? ' ' + opciones.clase : '') + '"><span>' + esc(etiqueta) + '</span>' + control + '</label>';
+}
+
+function pgBotonesOrden(rutaLista, i, total) {
+  return '<button class="pg-mini" data-pg="mover" data-lista="' + rutaLista + '" data-i="' + i + '" data-dir="-1" type="button" title="Subir"' + (i === 0 ? ' disabled' : '') + '>↑</button>' +
+    '<button class="pg-mini" data-pg="mover" data-lista="' + rutaLista + '" data-i="' + i + '" data-dir="1" type="button" title="Bajar"' + (i === total - 1 ? ' disabled' : '') + '>↓</button>' +
+    '<button class="pg-mini peligro" data-pg="eliminar" data-lista="' + rutaLista + '" data-i="' + i + '" type="button" title="Eliminar">Eliminar</button>';
+}
+
+// --- Pintar ---
+function pintarPaginas() {
+  var tipo = estado.filtro.paginas;
+  var st = PG[tipo];
+  var lista = document.getElementById('lista');
+
+  pgPedirEstado();
+
+  function mostrar(html) { lista.innerHTML = '<div class="pg-layout">' + pgMenu() + '<div class="pg-editor">' + html + '</div></div>'; }
+
+  if (!st || (!st.datos && !st.error && !st.cargando)) { pgCargar(tipo); mostrar('<div class="mensaje-lista">Cargando…</div>'); return; }
+  if (st.cargando) { mostrar('<div class="mensaje-lista">Cargando…</div>'); return; }
+  if (st.error) {
+    var sinFormato = ESTADO_PAGINAS[tipo] && !ESTADO_PAGINAS[tipo].habilitada;
+    mostrar('<div class="mensaje-lista error">' + (sinFormato ? 'Esta página todavía no se puede editar desde el panel. ' : 'No se pudo cargar: ') + esc(st.error) +
+      '<br><br><button class="boton secundario" data-pg="recargar" type="button">Reintentar</button></div>');
+    return;
+  }
+
+  var scroll = window.scrollY;
+  mostrar(pgBarra(st) + (tipo === 'multimedia' ? pgEditorMultimedia(st) : tipo === 'guias' ? pgEditorGuias(st) : pgEditorTextos(st)));
+  window.scrollTo(0, scroll);
+}
+
+/** Menú lateral: cada página con un punto de estado (verde lista, amarillo sin publicar, rojo no editable). */
+function pgMenu() {
+  return '<nav class="pg-menu" aria-label="Páginas">' + FILTROS.paginas.map(function (f) {
+    var e = ESTADO_PAGINAS[f.clave], sucio = pgSucio(PG[f.clave]);
+    var punto = sucio ? 'sucio' : e && !e.habilitada ? 'error' : e ? 'ok' : '';
+    var nota = sucio ? 'Cambios sin publicar' : e && !e.habilitada ? 'No editable' : '';
+    return '<button class="pg-item' + (f.clave === estado.filtro.paginas ? ' activo' : '') + '" data-pg="ir" data-tipo="' + f.clave + '" type="button"' +
+      (e && e.motivo ? ' title="' + esc(e.motivo) + '"' : '') + '>' +
+      '<span class="pg-punto ' + punto + '"></span><span>' + esc(f.texto) + (nota ? '<small>' + nota + '</small>' : '') + '</span></button>';
+  }).join('') + '</nav>';
+}
+
+function pgBarra(st) {
+  var sucio = pgSucio(st);
+  return '<div class="pg-barra">' +
+    '<div><b>' + esc(pgNombre(estado.filtro.paginas)) + '</b>' +
+      (st.url ? ' · <a href="' + esc(estado.filtro.paginas === 'inicio' ? st.url.replace(/\/p\/inicio\.html.*$/, '/') : st.url) + '" target="_blank" rel="noopener">Ver en el blog ↗</a>' : '') +
+      '<span class="pg-estado' + (sucio ? ' sucio' : '') + '" id="pg-estado">' + (sucio ? 'Cambios sin publicar' : 'Sin cambios') + '</span></div>' +
+    '<div class="pg-barra-botones">' +
+      '<button class="boton secundario" data-pg="descartar" type="button" id="pg-descartar"' + (sucio ? '' : ' disabled') + '>Descartar cambios</button>' +
+      '<button class="boton principal" data-pg="publicar" type="button" id="pg-publicar"' + (sucio ? '' : ' disabled') + '>Publicar cambios</button>' +
+    '</div></div>';
+}
+
+function pgActualizarBarra() {
+  var st = pgEstado(), sucio = pgSucio(st);
+  var el = document.getElementById('pg-estado');
+  if (!el) return;
+  el.textContent = sucio ? 'Cambios sin publicar' : 'Sin cambios';
+  el.className = 'pg-estado' + (sucio ? ' sucio' : '');
+  document.getElementById('pg-publicar').disabled = !sucio;
+  document.getElementById('pg-descartar').disabled = !sucio;
+  var menu = document.querySelector('.pg-menu');
+  if (menu) menu.outerHTML = pgMenu();
+}
+
+function pgNombre(tipo) {
+  var f = FILTROS.paginas.filter(function (x) { return x.clave === tipo; })[0];
+  return f ? f.texto : tipo;
+}
+
+// --- Páginas de solo textos ---
+function pgEditorTextos(st) {
+  var d = st.datos, grupos = [], porTitulo = {};
+  // "Equipo · título" → sección "Equipo", campo "Título"
+  d.textos.forEach(function (t, i) {
+    var partes = t.clave.split(/\s*(?:·|&#183;)\s*/);
+    var seccion = partes.length > 1 ? partes[0] : 'Textos generales';
+    var nombre = partes.length > 1 ? partes.slice(1).join(' · ') : t.clave;
+    if (!porTitulo[seccion]) grupos.push(porTitulo[seccion] = { titulo: seccion, campos: '' });
+    porTitulo[seccion].campos += pgCampo(nombre.charAt(0).toUpperCase() + nombre.slice(1), 'textos.' + i + '.texto', t.texto, t.largo ? { area: true, filas: Math.min(8, Math.max(2, Math.ceil(t.texto.length / 95))) } : {});
+  });
+
+  var h = estado.filtro.paginas === 'inicio' ? '<p class="pg-ayuda">Estos textos se muestran en la portada del blog.</p>' : '';
+  var equipoPuesto = false;
+  grupos.forEach(function (g) {
+    var conEquipo = d.equipo && g.titulo === 'Equipo';
+    equipoPuesto = equipoPuesto || conEquipo;
+    h += '<section class="tarjeta pg-bloque"><h3>' + esc(g.titulo) + '</h3>' + g.campos + (conEquipo ? pgEditorEquipo(d.equipo) : '') + '</section>';
+  });
+  if (d.equipo && !equipoPuesto) h += '<section class="tarjeta pg-bloque"><h3>Equipo</h3>' + pgEditorEquipo(d.equipo) + '</section>';
+  return h + '<p class="pg-ayuda">Solo cambia el contenido; el diseño de la página se conserva. En los párrafos, cada salto de línea se publica como un salto de línea.</p>';
+}
+
+function pgIniciales(nombre) {
+  return String(nombre || '').split(/\s+/).filter(function (p) { return p && p.indexOf('.') === -1; })
+    .slice(0, 2).map(function (p) { return p.charAt(0).toUpperCase(); }).join('');
+}
+
+function pgEditorEquipo(equipo) {
+  var h = '<div class="pg-equipo">';
+  equipo.forEach(function (m, i) {
+    var r = 'equipo.' + i;
+    h += '<div class="pg-integrante">' +
+      '<div class="pg-foto">' + (m.foto ? '<img src="' + esc(m.foto) + '" alt="">' : '<span>' + esc(pgIniciales(m.nombre)) + '</span>') + '</div>' +
+      '<div><div class="pg-rejilla">' + pgCampo('Nombre', r + '.nombre', m.nombre) + pgCampo('Cargo', r + '.cargo', m.cargo) + '</div>' +
+        pgCampo('Foto (enlace, opcional)', r + '.foto', m.foto, { placeholder: 'https://…' }) + '</div>' +
+      '<div class="pg-acciones">' + pgBotonesOrden('equipo', i, equipo.length) + '</div></div>';
+  });
+  return h + '</div><button class="pg-mini" data-pg="agregar-integrante" type="button">+ Agregar integrante</button>' +
+    '<p class="pg-ayuda" style="margin-top:8px">Los integrantes sin nombre no se publican.</p>';
+}
+
+// --- Multimedia ---
+function pgEditorMultimedia(st) {
+  var d = st.datos;
+  var h = '<div class="tarjeta pg-bloque"><h3>Encabezado de la página</h3>' +
+    pgCampo('Título', 'titulo', d.titulo) +
+    pgCampo('Descripción', 'descripcion', d.descripcion, { area: true, filas: 2 }) + '</div>';
+
+  h += '<div class="tarjeta pg-bloque"><h3>Agregar video</h3>' +
+    '<div class="pg-agregar"><input type="text" id="pg-nuevo-video" placeholder="Pega el enlace de YouTube (watch, youtu.be o shorts)">' +
+    '<button class="boton principal" data-pg="agregar-video" type="button">Agregar</button></div>' +
+    '<p class="pg-ayuda">El título se llena solo con el del video; después puedes cambiarlo.</p></div>';
+
+  h += '<h3 class="pg-subtitulo">Videos publicados (' + d.videos.length + ')</h3>';
+  if (!d.videos.length) h += '<div class="mensaje-lista">Aún no hay videos.</div>';
+
+  d.videos.forEach(function (v, i) {
+    var r = 'videos.' + i;
+    h += '<div class="tarjeta pg-video">' +
+      '<a class="pg-miniatura" href="https://www.youtube.com/watch?v=' + esc(v.id) + '" target="_blank" rel="noopener"><img src="' + pgMiniatura(v.id) + '" alt=""><span>▶</span></a>' +
+      '<div class="pg-video-campos">' +
+        pgCampo('Título', r + '.titulo', v.titulo) +
+        pgCampo('Descripción', r + '.descripcion', v.descripcion, { area: true, filas: 2 }) +
+        pgCampo('Etiqueta', r + '.etiqueta', v.etiqueta, { clase: 'corto' }) +
+        (st.reemplazando === i
+          ? '<div class="pg-agregar"><input type="text" id="pg-reemplazo" placeholder="Enlace del video nuevo">' +
+            '<label class="pg-check"><input type="checkbox" id="pg-reemplazo-titulo"> Usar el título del video nuevo</label>' +
+            '<button class="boton principal" data-pg="confirmar-reemplazo" data-i="' + i + '" type="button">Reemplazar</button>' +
+            '<button class="boton secundario" data-pg="cancelar-reemplazo" type="button">Cancelar</button></div>'
+          : '') +
+      '</div>' +
+      '<div class="pg-acciones">' + pgBotonesOrden('videos', i, d.videos.length) +
+        '<button class="pg-mini" data-pg="reemplazar" data-i="' + i + '" type="button">Reemplazar video</button></div>' +
+    '</div>';
+  });
+  return h;
+}
+
+// --- Guías ---
+function pgEditorGuias(st) {
+  var d = st.datos;
+  var h = '<div class="tarjeta pg-bloque"><h3>Encabezado de la página</h3>' +
+    pgCampo('Título', 'titulo', d.titulo) +
+    pgCampo('Descripción', 'descripcion', d.descripcion, { area: true, filas: 2 }) + '</div>';
+
+  h += '<div class="pg-fila-titulo"><h3 class="pg-subtitulo">Guías (' + d.guias.length + ')</h3>' +
+    '<button class="boton principal" data-pg="agregar-guia" type="button">+ Agregar guía</button></div>';
+
+  d.guias.forEach(function (g, gi) {
+    var r = 'guias.' + gi;
+    var sinUrl = g.recursos.reduce(function (n, rec) { return n + rec.enlaces.filter(function (l) { return !l.url; }).length; }, 0);
+    h += '<details class="tarjeta pg-guia" data-g="' + gi + '"' + (st.abiertas[gi] ? ' open' : '') + '>' +
+      '<summary><b>' + esc(g.titulo || '(sin título)') + '</b>' +
+        (g.video ? '<span class="pastilla aprobado">Con video</span>' : '<span class="pastilla">Sin video</span>') +
+        (sinUrl ? '<span class="pastilla pendiente">⚠ ' + sinUrl + ' enlace' + (sinUrl === 1 ? '' : 's') + ' sin URL</span>' : '') +
+      '</summary>' +
+      '<div class="pg-acciones arriba">' + pgBotonesOrden('guias', gi, d.guias.length) + '</div>' +
+      '<div class="pg-rejilla">' +
+        pgCampo('Nombre en el menú', r + '.menu', g.menu) +
+        pgCampo('Etiqueta', r + '.etiqueta', g.etiqueta) +
+        pgCampo('Título', r + '.titulo', g.titulo) +
+        pgCampo('Subtítulo', r + '.subtitulo', g.subtitulo) +
+      '</div>' +
+      pgCampo('Descripción', r + '.descripcion', g.descripcion, { area: true, filas: 3 }) +
+      '<div class="pg-video-guia">' +
+        (g.video ? '<a class="pg-miniatura chica" href="https://www.youtube.com/watch?v=' + esc(g.video) + '" target="_blank" rel="noopener"><img src="' + pgMiniatura(g.video) + '" alt=""><span>▶</span></a>' : '') +
+        '<div class="pg-video-guia-campos">' +
+          '<span class="pg-etiqueta">Video principal</span>' +
+          '<div class="pg-agregar"><input type="text" id="pg-video-' + gi + '" placeholder="Enlace de YouTube" value="' + (g.video ? 'https://youtu.be/' + esc(g.video) : '') + '">' +
+          '<button class="boton principal" data-pg="video-guia" data-g="' + gi + '" type="button">' + (g.video ? 'Cambiar' : 'Agregar') + '</button>' +
+          (g.video ? '<button class="boton secundario" data-pg="quitar-video-guia" data-g="' + gi + '" type="button">Quitar</button>' : '') + '</div>' +
+          pgCampo('Imagen propia (opcional, URL). Si se deja vacía, se usa la miniatura del video', r + '.imagen', g.imagen, { placeholder: 'https://…' }) +
+        '</div>' +
+      '</div>';
+
+    g.recursos.forEach(function (rec, ri) {
+      var rr = r + '.recursos.' + ri;
+      h += '<div class="pg-grupo">' +
+        '<div class="pg-grupo-cabecera">' + pgCampo('Título del desplegable', rr + '.titulo', rec.titulo) +
+          '<div class="pg-acciones">' + pgBotonesOrden(r + '.recursos', ri, g.recursos.length) + '</div></div>' +
+        pgCampo('Texto introductorio (opcional)', rr + '.descripcion', rec.descripcion) +
+        '<div class="pg-enlaces">';
+      rec.enlaces.forEach(function (l, li) {
+        var rl = rr + '.enlaces.' + li;
+        h += '<div class="pg-enlace' + (l.url ? '' : ' sin-url') + '">' +
+          '<input type="text" data-ruta="' + rl + '.texto" value="' + esc(l.texto) + '" placeholder="Texto del enlace">' +
+          '<input type="text" data-ruta="' + rl + '.url" value="' + esc(l.url) + '" placeholder="https://… (si es YouTube se abre en la ventana del video)" data-autotitulo="' + rl + '.texto">' +
+          '<div class="pg-acciones">' + pgBotonesOrden(rr + '.enlaces', li, rec.enlaces.length) + '</div></div>';
+      });
+      h += '</div><button class="pg-mini" data-pg="agregar-enlace" data-lista="' + rr + '.enlaces" type="button">+ Agregar enlace</button></div>';
+    });
+    h += '<button class="pg-mini" data-pg="agregar-grupo" data-lista="' + r + '.recursos" type="button">+ Agregar desplegable</button>';
+    h += '</details>';
+  });
+
+  var a = d.ayuda || {};
+  h += '<div class="tarjeta pg-bloque"><h3>Bloque final de ayuda</h3><div class="pg-rejilla">' +
+    pgCampo('Título', 'ayuda.titulo', a.titulo) + pgCampo('Texto del botón', 'ayuda.boton', a.boton) + '</div>' +
+    pgCampo('Texto', 'ayuda.texto', a.texto, { area: true, filas: 2 }) +
+    pgCampo('Enlace del botón', 'ayuda.url', a.url, { placeholder: 'https://…' }) + '</div>';
+  return h;
+}
+
+// --- Eventos ---
+document.addEventListener('input', function (e) {
+  var campo = e.target.closest('[data-ruta]');
+  if (!campo || estado.pestana !== 'paginas') return;
+  var st = pgEstado();
+  pgAsignar(st.datos, campo.getAttribute('data-ruta'), campo.value);
+  var fila = campo.closest('.pg-enlace');
+  if (fila && /\.url$/.test(campo.getAttribute('data-ruta'))) fila.classList.toggle('sin-url', !campo.value.trim());
+  pgActualizarBarra();
+});
+
+// Si se pega un enlace de YouTube y el texto está vacío, se llena con el título del video
+document.addEventListener('change', function (e) {
+  var campo = e.target.closest('[data-autotitulo]');
+  if (!campo || estado.pestana !== 'paginas') return;
+  var st = pgEstado(), rutaTexto = campo.getAttribute('data-autotitulo');
+  if ((pgObtener(st.datos, rutaTexto) || '').trim() || !/youtu/.test(campo.value)) return;
+  llamar('infoVideoYoutube', campo.value).then(function (v) {
+    pgAsignar(st.datos, rutaTexto, v.titulo);
+    pintar();
+  }).catch(function () {});
+});
+
+document.addEventListener('toggle', function (e) {
+  var det = e.target;
+  if (!det.classList || !det.classList.contains('pg-guia')) return;
+  pgEstado().abiertas[det.getAttribute('data-g')] = det.open;
+}, true);
+
+document.addEventListener('click', function (e) {
+  var b = e.target.closest('[data-pg]');
+  if (!b || estado.pestana !== 'paginas') return;
+  var tipo = estado.filtro.paginas, st = pgEstado(), accion = b.getAttribute('data-pg');
+  var listaRuta = b.getAttribute('data-lista'), i = Number(b.getAttribute('data-i'));
+
+  function ocupado(promesa) {
+    b.disabled = true;
+    return promesa.catch(function (err) { avisar(mensajeError(err), true); }).then(function () { b.disabled = false; });
+  }
+
+  if (accion === 'ir') { estado.filtro.paginas = b.getAttribute('data-tipo'); pintar(); return; }
+  if (accion === 'recargar') { pgCargar(tipo); return; }
+  if (accion === 'agregar-integrante') { st.datos.equipo.push({ nombre: '', cargo: '', foto: '' }); pintar(); return; }
+
+  if (accion === 'mover') {
+    var arr = pgObtener(st.datos, listaRuta), j = i + Number(b.getAttribute('data-dir'));
+    if (j < 0 || j >= arr.length) return;
+    var tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+    if (listaRuta === 'guias') { var ab = st.abiertas[i]; st.abiertas[i] = st.abiertas[j]; st.abiertas[j] = ab; }
+    pintar(); return;
+  }
+
+  if (accion === 'eliminar') {
+    if (!b.classList.contains('confirmando')) {
+      b.classList.add('confirmando'); b.textContent = '¿Seguro? Clic otra vez';
+      setTimeout(function () { if (document.body.contains(b)) { b.classList.remove('confirmando'); b.textContent = 'Eliminar'; } }, 3000);
+      return;
+    }
+    pgObtener(st.datos, listaRuta).splice(i, 1);
+    if (listaRuta === 'guias') st.abiertas = {};
+    pintar(); return;
+  }
+
+  if (accion === 'agregar-video') {
+    var url = document.getElementById('pg-nuevo-video').value;
+    ocupado(llamar('infoVideoYoutube', url).then(function (v) {
+      if (st.datos.videos.some(function (x) { return x.id === v.id; })) { avisar('Ese video ya está en la página.', true); return; }
+      st.datos.videos.unshift({ id: v.id, titulo: v.titulo, descripcion: '', etiqueta: 'Video' });
+      avisar('Video agregado al inicio de la lista. Recuerda publicar los cambios.');
+      pintar();
+    }));
+    return;
+  }
+
+  if (accion === 'reemplazar') { st.reemplazando = i; pintar(); document.getElementById('pg-reemplazo').focus(); return; }
+  if (accion === 'cancelar-reemplazo') { st.reemplazando = null; pintar(); return; }
+  if (accion === 'confirmar-reemplazo') {
+    var urlR = document.getElementById('pg-reemplazo').value;
+    var usarTitulo = document.getElementById('pg-reemplazo-titulo').checked;
+    ocupado(llamar('infoVideoYoutube', urlR).then(function (v) {
+      var video = st.datos.videos[i];
+      video.id = v.id;
+      if (usarTitulo) video.titulo = v.titulo;
+      st.reemplazando = null;
+      pintar();
+    }));
+    return;
+  }
+
+  if (accion === 'agregar-guia') {
+    st.datos.guias.push({ ancla: '', menu: 'Nueva guía', etiqueta: '', titulo: 'Nueva guía', subtitulo: '', descripcion: '', video: '', imagen: '', imagenAlt: '',
+      recursos: [{ titulo: 'Video tutoriales', descripcion: '', enlaces: [] }, { titulo: 'Herramientas', descripcion: '', enlaces: [] }, { titulo: 'Más recursos de apoyo', descripcion: '', enlaces: [] }] });
+    st.abiertas[st.datos.guias.length - 1] = true;
+    pintar(); return;
+  }
+
+  if (accion === 'video-guia') {
+    var g = Number(b.getAttribute('data-g'));
+    ocupado(llamar('infoVideoYoutube', document.getElementById('pg-video-' + g).value).then(function (v) {
+      var guia = st.datos.guias[g];
+      guia.video = v.id;
+      if (/picsum\.photos/.test(guia.imagen || '')) guia.imagen = ''; // La imagen de relleno se cambia por la miniatura del video
+      st.abiertas[g] = true; pintar();
+    }));
+    return;
+  }
+  if (accion === 'quitar-video-guia') { st.datos.guias[Number(b.getAttribute('data-g'))].video = ''; pintar(); return; }
+
+  if (accion === 'agregar-enlace') { pgObtener(st.datos, listaRuta).push({ texto: '', url: '' }); pintar(); return; }
+  if (accion === 'agregar-grupo') { pgObtener(st.datos, listaRuta).push({ titulo: 'Nuevo desplegable', descripcion: '', enlaces: [] }); pintar(); return; }
+
+  if (accion === 'descartar') { st.datos = JSON.parse(st.original); st.reemplazando = null; pintar(); return; }
+
+  if (accion === 'publicar') {
+    ocupado(llamar('publicarPaginaPanel', tipo, st.datos, st.version).then(function (r) {
+      avisar(r.mensaje);
+      return pgCargar(tipo);   // Recarga lo que quedó publicado
+    }));
+    // Si falla, ocupado() muestra el error y los cambios siguen en pantalla sin marcarse como publicados
+  }
+});
+
+// Aviso al cerrar el panel con cambios sin publicar
+window.addEventListener('beforeunload', function (e) {
+  var sucia = Object.keys(PG).some(function (k) { return pgSucio(PG[k]); });
+  if (sucia) { e.preventDefault(); e.returnValue = ''; }
+});
+</script>
+<script>
+// ===== Guía de uso (se carga desde Guia.html solo al abrir la pestaña) =====
+var GUIA = { html: '', error: '', cargando: false };
+
+function guiaCargar() {
+  if (GUIA.html || GUIA.cargando) return;
+  GUIA.cargando = true; GUIA.error = '';
+  llamar('obtenerGuia')
+    .then(function (html) { GUIA.html = html; })
+    .catch(function (err) { GUIA.error = mensajeError(err); })
+    .then(function () { GUIA.cargando = false; if (estado.pestana === 'guia') pintar(); });
+}
+
+function pintarGuia() {
+  var lista = document.getElementById('lista');
+  if (GUIA.error) {
+    lista.innerHTML = '<div class="mensaje-lista error">No se pudo cargar la guía: ' + esc(GUIA.error) +
+      '<br><br><button class="boton secundario" data-guia="recargar" type="button">Reintentar</button></div>';
+    return;
+  }
+  if (!GUIA.html) {
+    lista.innerHTML = '<div class="mensaje-lista">Cargando guía…</div>';
+    guiaCargar();
+    return;
+  }
+  lista.innerHTML =
+    '<div class="tarjeta guia-barra">' +
+      '<p>Guía para el personal autorizado del CIAD. También puedes descargarla para consultarla sin abrir el panel.</p>' +
+      '<button class="boton principal" data-guia="pdf" type="button">Descargar PDF</button>' +
+    '</div>' +
+    '<div class="tarjeta">' + GUIA.html + '</div>';
+}
+
+function descargarGuiaPdf(boton) {
+  boton.disabled = true;
+  boton.textContent = 'Generando PDF…';
+  llamar('descargarGuiaPdf').then(function (r) {
+    var binario = atob(r.base64), bytes = new Uint8Array(binario.length);
+    for (var i = 0; i < binario.length; i++) bytes[i] = binario.charCodeAt(i);
+    var url = URL.createObjectURL(new Blob([bytes], { type: 'application/pdf' }));
+    var enlace = document.createElement('a');
+    enlace.href = url;
+    enlace.download = r.nombre;
+    document.body.appendChild(enlace);
+    enlace.click();
+    enlace.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 60000);
+  }).catch(function (err) {
+    avisar('No se pudo generar el PDF: ' + mensajeError(err), true);
+  }).then(function () {
+    boton.disabled = false;
+    boton.textContent = 'Descargar PDF';
+  });
+}
+
+document.addEventListener('click', function (e) {
+  if (estado.pestana !== 'guia') return;
+  var b = e.target.closest('[data-guia]');
+  if (b) {
+    if (b.getAttribute('data-guia') === 'pdf') descargarGuiaPdf(b);
+    if (b.getAttribute('data-guia') === 'recargar') { GUIA.error = ''; pintar(); }
+    return;
+  }
+  // Índice de la guía: el panel usa <base target="_top">, así que los enlaces #ancla se resuelven aquí
+  var ir = e.target.closest('[data-ir]');
+  if (ir) {
+    e.preventDefault();
+    var destino = document.getElementById(ir.getAttribute('data-ir'));
+    if (destino) destino.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+});
+
+// ===== Mantenimiento (Mantenimiento.gs): revisar y limpiar el espacio sin abrir el editor =====
+var MT = { datos: null, error: '', cargando: false, ocupado: '', elegidas: {}, confirmar: false };
+
+function mtCargar() {
+  MT.cargando = true; MT.error = '';
+  llamar('obtenerMantenimiento')
+    .then(function (d) { MT.datos = d; })
+    .catch(function (err) { MT.error = mensajeError(err); })
+    .then(function () { MT.cargando = false; if (estado.pestana === 'mantenimiento') pintar(); });
+}
+
+// Qué significa cada grupo, en palabras del personal (en el orden de la pantalla)
+var MT_GRUPOS = {
+  'Sin uso en el blog': 'Archivos dentro de las carpetas del blog que ninguna nota, página ni el diseño muestran (imágenes reemplazadas, pruebas, copias).',
+  'Carpetas de artículos': 'Artículos rechazados, eliminados del blog o intentos fallidos, y respaldos (Doc/PDF) de notas ya publicadas.',
+  'Subidas del formulario': 'Lo que llegó por el formulario de envío y ya no hace falta.',
+  'Imágenes pesadas': 'Imágenes más grandes de lo que el blog muestra. Se guardan a 2000 px: no se borran, mantienen su enlace y la nota se ve igual.',
+  'Blogger': 'Borradores que dejó el Publicador y ninguna solicitud usa.',
+  'Comentarios': 'Comentarios rechazados hace tiempo.'
+};
+
+// Qué pasa con cada elemento, de menos a más grave (así se agrupa la confirmación)
+var MT_ACCIONES = [
+  { prueba: /^reducir/i, titulo: 'Se reducen', nota: 'se quedan en su lugar con el mismo enlace', clase: '' },
+  { prueba: /^papelera/i, titulo: 'Van a la papelera', nota: 'se recuperan desde la papelera de Drive durante 30 días', clase: '' },
+  { prueba: /sin deshacer/i, titulo: 'Se borran para siempre', nota: 'no se pueden recuperar', clase: ' sin-deshacer' }
+];
+function mtTipoAccion(f) {
+  for (var i = 0; i < MT_ACCIONES.length; i++) if (MT_ACCIONES[i].prueba.test(f.accion)) return MT_ACCIONES[i];
+  return { titulo: f.accion, nota: '', clase: '' };
+}
+/** Lo elegido agrupado por lo que le va a pasar: [{ a: acción, l: filas }] */
+function mtPorAccion(elegidas) {
+  var g = [];
+  MT_ACCIONES.concat([null]).forEach(function (a) {
+    var l = elegidas.filter(function (f) { var t = mtTipoAccion(f); return a ? t === a : MT_ACCIONES.indexOf(t) === -1; });
+    if (l.length) g.push({ a: a || mtTipoAccion(l[0]), l: l });
+  });
+  return g;
+}
+
+/** "12.3 MB" → bytes (el informe guarda el tamaño ya formateado). */
+function mtBytes(t) {
+  var m = String(t || '').match(/([\d.]+)\s*(B|KB|MB|GB)/);
+  return m ? Number(m[1]) * { B: 1, KB: 1024, MB: 1048576, GB: 1073741824 }[m[2]] : 0;
+}
+function mtTamano(b) {
+  if (b < 1048576) return Math.round(b / 1024) + ' KB';
+  if (b < 1073741824) return (b / 1048576).toFixed(1) + ' MB';
+  return (b / 1073741824).toFixed(2) + ' GB';
+}
+
+function pintarMantenimiento() {
+  var lista = document.getElementById('lista');
+  if (MT.error) { lista.innerHTML = '<div class="mensaje-lista error">' + esc(MT.error) + '</div>'; return; }
+  if (!MT.datos) { lista.innerHTML = '<div class="mensaje-lista">Cargando…</div>'; if (!MT.cargando) mtCargar(); return; }
+
+  var filas = MT.datos.filas || [];
+  var accionables = filas.filter(function (f) { return f.tipo !== 'info' && !f.resultado; });
+  var hechas = filas.filter(function (f) { return f.tipo !== 'info' && f.resultado; });
+  var info = filas.filter(function (f) { return f.tipo === 'info'; });
+  var elegidas = accionables.filter(function (f) { return MT.elegidas[f.fila]; });
+  var ocupado = !!MT.ocupado;
+  var dis = ocupado ? ' disabled' : '';
+
+  var suma = function (l) { return l.reduce(function (t, f) { return t + mtBytes(f.tamano); }, 0); };
+  var usoFila = info.filter(function (f) { return f.categoria === 'Resumen' && f.elemento === 'Espacio del blog'; })[0];
+  var uso = usoFila ? mtBytes(usoFila.tamano) : 0;
+  var liberar = suma(accionables);
+
+  // 1. Cabecera: qué es, cuándo se revisó y las cifras principales
+  var html = '<div class="tarjeta">' +
+    '<div class="mt-cabecera"><div><h2>Espacio del blog</h2><p>' +
+      (MT.datos.fecha ? 'Última revisión: ' + esc(MT.datos.fecha) : 'Todavía no se ha revisado') +
+      ' · Solo se revisa "Blog CIAD · sistema"; nada personal.</p></div>' +
+      '<div class="mt-botones">' +
+        '<button class="boton secundario" data-mt="ordenar" type="button"' + dis + ' title="Pasa cada artículo publicado a Publicados <año> con todas sus imágenes">' + (MT.ocupado === 'ordenar' ? 'Ordenando…' : 'Ordenar publicados') + '</button>' +
+        '<button class="boton principal" data-mt="auditar" type="button"' + dis + '>' + (MT.ocupado === 'auditar' ? 'Revisando… (≈30 s)' : 'Revisar ahora') + '</button>' +
+      '</div></div>';
+  if (filas.length) {
+    html += '<div class="mt-cifras">' +
+      '<div class="mt-cifra"><b>' + (uso ? mtTamano(uso) : '—') + '</b><span>Usa el blog en Drive</span></div>' +
+      '<div class="mt-cifra liberar"><b>' + mtTamano(liberar) + '</b><span>Se puede liberar (aprox.)</span></div>' +
+      '<div class="mt-cifra"><b>' + accionables.length + '</b><span>Elementos por decidir</span></div>' +
+      '<div class="mt-cifra"><b>' + hechas.length + '</b><span>Ya aplicados</span></div>' +
+    '</div>';
+    if (uso) html += '<div class="mt-barra-uso" title="Parte del espacio del blog que se puede liberar"><i style="width:' + Math.min(100, Math.round(liberar / uso * 100)) + '%"></i></div>';
+  }
+  html += '<details class="mt-reglas"><summary>¿Cómo decide qué sobra?</summary><ul>' +
+    '<li>Lee todas las notas (publicadas, borradores y programadas), las páginas y el diseño del blog, y anota qué archivos de Drive muestran.</li>' +
+    '<li>Todo archivo dentro de "Blog CIAD · sistema" que nada de eso muestra se propone para la papelera.</li>' +
+    '<li>Nunca propone: artículos que siguen en proceso, respaldos de páginas, formularios, hojas ni la plantilla "Demo Articulo".</li>' +
+    '<li>Imágenes pesadas: las de más de 500 KB se pueden guardar a 2000 px (lo máximo que muestra el blog). Mismo enlace; Drive libera el espacio en 30 días.</li>' +
+    '<li>Revisar no borra nada. Lo que mandes a la papelera de Drive se recupera durante 30 días; borradores y comentarios no.</li>' +
+  '</ul></details></div>';
+
+  if (!filas.length) {
+    lista.innerHTML = html + '<div class="mensaje-lista">Pulsa "Revisar ahora" para ver qué se puede limpiar.</div>';
+    return;
+  }
+
+  // 2. Un bloque por grupo, de lo más pesado a lo más ligero
+  if (accionables.length) {
+    var grupos = {};
+    accionables.forEach(function (f) { (grupos[f.categoria] = grupos[f.categoria] || []).push(f); });
+    var orden = Object.keys(MT_GRUPOS).filter(function (g) { return grupos[g]; })
+      .concat(Object.keys(grupos).filter(function (g) { return !MT_GRUPOS[g]; }));
+    orden.forEach(function (g) {
+      var l = grupos[g].slice().sort(function (a, b) { return mtBytes(b.tamano) - mtBytes(a.tamano); });
+      var todos = l.every(function (f) { return MT.elegidas[f.fila]; });
+      html += '<div class="tarjeta"><div class="mt-grupo-cab"><h3>' + esc(g) + ' · ' + l.length + '</h3>' +
+        '<span class="mt-sub">' + (suma(l) ? mtTamano(suma(l)) + ' · ' : '') +
+        '<button class="mt-enlace" data-mt="grupo" data-grupo="' + esc(g) + '" type="button"' + dis + '>' + (todos ? 'Quitar grupo' : 'Elegir grupo') + '</button></span></div>' +
+        (MT_GRUPOS[g] ? '<p class="mt-grupo-desc">' + esc(MT_GRUPOS[g]) + '</p>' : '');
+      l.forEach(function (f) {
+        var partes = String(f.elemento).split(' › ');
+        var nombre = partes.pop();
+        var sinDeshacer = /sin deshacer/i.test(f.accion);
+        html += '<label class="mt-fila"><input type="checkbox" data-mt-fila="' + f.fila + '"' + (MT.elegidas[f.fila] ? ' checked' : '') + dis + '>' +
+          '<span><b>' + esc(nombre) + '</b><small>' + esc(f.motivo) + (partes.length ? ' · en ' + esc(partes.join(' › ')) : '') +
+          (f.enlace ? ' · <a href="' + esc(f.enlace) + '" target="_blank" rel="noopener">Abrir ↗</a>' : '') + '</small></span>' +
+          '<span class="mt-lado">' + (f.tamano ? '<span class="mt-tam">' + esc(f.tamano) + '</span>' : '') +
+          '<span class="mt-etiqueta' + (sinDeshacer ? ' sin-deshacer' : '') + '">' + esc(mtTipoAccion(f).titulo) + '</span></span></label>';
+      });
+      html += '</div>';
+    });
+
+    // 3. Barra fija: qué pasará con lo elegido (agrupado por acción), cuánto se libera y confirmación
+    var porAccion = mtPorAccion(elegidas);
+    var desglose = porAccion.map(function (g) { return '<span class="mt-etiqueta' + g.a.clase + '">' + esc(g.a.titulo) + ': ' + g.l.length + '</span>'; }).join(' ');
+    html += '<div class="tarjeta mt-acciones">' +
+      (MT.confirmar
+        ? '<div class="mt-revision" role="region" aria-label="Lo que se va a aplicar">' +
+            '<p><b>Revisa antes de aplicar:</b> ' + elegidas.length + ' elemento(s) · se liberan ≈ ' + mtTamano(suma(elegidas)) + '</p>' +
+            porAccion.map(function (g) {
+              return '<h4 class="' + g.a.clase.trim() + '">' + esc(g.a.titulo) + ' (' + g.l.length + ')' + (g.a.nota ? ' <small>· ' + esc(g.a.nota) + '</small>' : '') + '</h4><ul>' +
+                g.l.map(function (f) {
+                  return '<li><span>' + esc(String(f.elemento).split(' › ').pop()) + ' <small>· ' + esc(f.categoria) + '</small></span>' +
+                    (f.tamano ? '<b>' + esc(f.tamano) + '</b>' : '') + '</li>';
+                }).join('') + '</ul>';
+            }).join('') +
+          '</div>' +
+          '<span class="mt-total">' + desglose + '</span>' +
+          '<button class="boton secundario" data-mt="cancelar" type="button"' + dis + '>Volver</button>' +
+          '<button class="boton peligro-lleno" data-mt="aplicar" type="button"' + dis + '>' + (MT.ocupado === 'aplicar' ? 'Aplicando… no cierres el panel' : 'Sí, aplicar ' + elegidas.length) + '</button>'
+        : '<span class="mt-total">' + (elegidas.length ? '<b>' + elegidas.length + ' elegido(s) · ≈ ' + mtTamano(suma(elegidas)) + '</b> ' + desglose : 'Elige lo que quieras limpiar. Nada se aplica hasta que lo confirmes.') + '</span>' +
+          '<button class="boton secundario" data-mt="todo" type="button"' + dis + '>' + (elegidas.length === accionables.length ? 'Quitar selección' : 'Elegir todo') + '</button>' +
+          '<button class="boton principal" data-mt="pedir" type="button"' + (elegidas.length && !ocupado ? '' : ' disabled') + '>Revisar y aplicar</button>') +
+      '</div>';
+  } else {
+    html += '<div class="mensaje-lista">El blog no tiene nada que sobre. ✔</div>';
+  }
+
+  // 4. Historial y detalle, plegados para no estorbar
+  if (hechas.length) {
+    html += '<details class="tarjeta mt-plegable"><summary>Ya aplicado (' + hechas.length + ')</summary>' + hechas.map(function (f) {
+      return '<div class="mt-fila"><span></span><span>' + esc(String(f.elemento).split(' › ').pop()) + '<small>' + esc(f.categoria) + (f.tamano ? ' · ' + esc(f.tamano) : '') + '</small></span>' +
+        '<span class="mt-etiqueta' + (/^Error/.test(f.resultado) ? ' sin-deshacer' : ' hecho') + '">' + esc(f.resultado) + '</span></div>';
+    }).join('') + '</details>';
+  }
+  html += '<details class="tarjeta mt-plegable"><summary>Detalle de la revisión</summary><table class="mt-resumen">' + info.map(function (f) {
+    return '<tr><td><b>' + esc(f.categoria) + '</b></td><td>' + esc(f.elemento) + '</td><td>' + esc(f.motivo) + '</td><td>' + esc(f.tamano) + '</td></tr>';
+  }).join('') + '</table></details>';
+
+  lista.innerHTML = html;
+}
+
+function mtEjecutar(tipo, promesa) {
+  MT.ocupado = tipo; accionesEnCurso++; pintar();
+  return promesa.then(function (r) {
+    if (r && r.datos) MT.datos = r.datos;
+    avisar((r && r.mensaje) || (typeof r === 'string' ? r : 'Listo.'));
+    if (tipo !== 'ordenar') { MT.elegidas = {}; MT.confirmar = false; }
+  }).catch(function (err) {
+    avisar(mensajeError(err), true);
+  }).then(function () {
+    MT.ocupado = ''; accionesEnCurso--; pintar();
+  });
+}
+
+document.addEventListener('change', function (e) {
+  if (estado.pestana !== 'mantenimiento') return;
+  var c = e.target.closest('[data-mt-fila]');
+  if (!c) return;
+  MT.elegidas[c.getAttribute('data-mt-fila')] = c.checked;
+  MT.confirmar = false;
+  pintar();
+});
+
+document.addEventListener('click', function (e) {
+  if (estado.pestana !== 'mantenimiento') return;
+  var b = e.target.closest('[data-mt]');
+  if (!b || b.disabled) return;
+  var a = b.getAttribute('data-mt');
+  if (a === 'auditar') mtEjecutar('auditar', llamar('auditarDesdePanel'));
+  if (a === 'ordenar') mtEjecutar('ordenar', llamar('ordenarDesdePanel'));
+  if (a === 'todo') {
+    var pend = (MT.datos.filas || []).filter(function (f) { return f.tipo !== 'info' && !f.resultado; });
+    var todas = pend.every(function (f) { return MT.elegidas[f.fila]; });
+    MT.elegidas = {};
+    if (!todas) pend.forEach(function (f) { MT.elegidas[f.fila] = true; });
+    pintar();
+  }
+  if (a === 'grupo') {
+    var g = (MT.datos.filas || []).filter(function (f) { return f.tipo !== 'info' && !f.resultado && f.categoria === b.getAttribute('data-grupo'); });
+    var marcar = !g.every(function (f) { return MT.elegidas[f.fila]; });
+    g.forEach(function (f) { MT.elegidas[f.fila] = marcar; });
+    MT.confirmar = false; pintar();
+  }
+  if (a === 'pedir') { MT.confirmar = true; pintar(); }
+  if (a === 'cancelar') { MT.confirmar = false; pintar(); }
+  if (a === 'aplicar') {
+    var filas = Object.keys(MT.elegidas).filter(function (k) { return MT.elegidas[k]; }).map(Number);
+    mtEjecutar('aplicar', llamar('aplicarDesdePanel', filas));
+  }
+});
+</script>
+<script>
+// ===== Métricas: de dónde vienen los artículos (hojas de solicitudes y artículos) =====
+var MET = { datos: null, error: '', cargando: false, hora: '' };
+
+function metCargar() {
+  if (MET.cargando) return;
+  MET.cargando = true; MET.error = '';
+  llamar('obtenerMetricas')
+    .then(function (d) { MET.datos = d; MET.hora = new Date().toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' }); })
+    .catch(function (err) { MET.error = mensajeError(err); })
+    .then(function () { MET.cargando = false; if (estado.pestana === 'metricas') pintar(); });
+}
+
+/** Cuenta por campo sin distinguir mayúsculas ni espacios; de mayor a menor. */
+function metContar(lista, campo) {
+  var mapa = {};
+  lista.forEach(function (x) {
+    var texto = String(x[campo] || '').replace(/\s+/g, ' ').trim();
+    if (!texto) return;
+    var k = texto.toLowerCase();
+    (mapa[k] = mapa[k] || { texto: texto, n: 0 }).n++;
+  });
+  return Object.keys(mapa).map(function (k) { return mapa[k]; })
+    .sort(function (a, b) { return b.n - a.n || a.texto.localeCompare(b.texto, 'es'); });
+}
+
+function metPct(n, total) { return total ? Math.round(n * 100 / total) + '%' : '0%'; }
+
+function metBarras(titulo, nota, filas) {
+  var total = filas.reduce(function (t, f) { return t + f.n; }, 0);
+  var max = filas.length ? filas[0].n : 0;
+  var li = function (f) {
+    return '<li title="' + esc(f.texto + ': ' + f.n + ' (' + metPct(f.n, total) + ')') + '">' +
+      '<span class="met-etiqueta">' + esc(f.texto) + '</span>' +
+      '<span class="met-barra"><i style="width:' + (f.n * 100 / max) + '%' + (f.color ? ';background:' + f.color : '') + '"></i></span>' +
+      '<b>' + f.n + ' <small>' + metPct(f.n, total) + '</small></b></li>';
+  };
+  var VISIBLES = 8;
+  return '<div class="tarjeta met-grafica"><h3>' + esc(titulo) + '</h3><p>' + esc(nota) + '</p>' +
+    (!filas.length ? '<p>Sin datos en este periodo.</p>' :
+      '<ul class="met-lista">' + filas.slice(0, VISIBLES).map(li).join('') + '</ul>' +
+      (filas.length > VISIBLES ? '<details><summary>Ver los ' + filas.length + '</summary><ul class="met-lista">' + filas.slice(VISIBLES).map(li).join('') + '</ul></details>' : '')) +
+  '</div>';
+}
+
+/** Semestre UABC de una fecha: enero–junio = "-1", julio–diciembre = "-2". */
+function metSemestre(ms) { var d = new Date(ms); return d.getFullYear() + (d.getMonth() < 6 ? '-1' : '-2'); }
+
+function metRangoSemestre(sem) { // "2026-2" → { desde: '2026-07-01', hasta: '2026-12-31' }
+  var y = sem.slice(0, 4), uno = sem.slice(5) === '1';
+  return { desde: y + (uno ? '-01-01' : '-07-01'), hasta: y + (uno ? '-06-30' : '-12-31') };
+}
+
+/** Selector de semestre: llena Desde/Hasta; si las fechas no son un semestre exacto, muestra "Personalizado". */
+function metSelectorSemestre() {
+  var per = estado.periodo.metricas, vistos = {};
+  if (MET.datos) MET.datos.solicitudes.concat(MET.datos.articulos).forEach(function (x) {
+    var t = fechaEnMs(x.fecha);
+    if (!isNaN(t)) vistos[metSemestre(t)] = true;
+  });
+  var semestres = Object.keys(vistos).sort().reverse();
+  var actual = !per.desde && !per.hasta ? '' : (semestres.filter(function (sm) {
+    var r = metRangoSemestre(sm); return r.desde === per.desde && r.hasta === per.hasta;
+  })[0] || 'personalizado');
+  return '<label>Semestre<select data-semestre>' +
+    '<option value="">Todos</option>' +
+    semestres.map(function (sm) { return '<option value="' + sm + '"' + (actual === sm ? ' selected' : '') + '>' + sm + '</option>'; }).join('') +
+    (actual === 'personalizado' ? '<option value="personalizado" selected>Personalizado</option>' : '') +
+  '</select></label>';
+}
+
+/* De dónde viene cada artículo. Orden y colores fijos, revisados para daltonismo (verde, naranja, azul,
+   amarillo: no quedan juntos dos parecidos). NOTA: el amarillo tiene poco contraste, por eso cada color
+   va siempre con su nombre y su número. */
+var MET_GRUPOS = [
+  { clave: 'uabc', texto: 'UABC', color: '#00723f' },
+  { clave: 'otra', texto: 'Otra institución', color: '#eb6834' },
+  { clave: 'indep', texto: 'Independiente', color: '#2a78d6' },
+  { clave: 'ciad', texto: 'CIAD', color: '#eda100' },
+  { clave: 'sin', texto: 'Sin solicitud vinculada', color: '#a3adb8' }
+];
+
+function metGrupo(vinculo) {
+  var v = String(vinculo || '').trim();
+  if (!v) return 'sin';
+  if (v === 'CIAD') return 'ciad';
+  if (/^uabc/i.test(v)) return 'uabc';
+  if (/independiente/i.test(v)) return 'indep';
+  return 'otra';
+}
+
+/** { uabc: n, otra: n, … } */
+function metCuentaGrupos(lista) {
+  var c = {};
+  lista.forEach(function (x) { var g = metGrupo(x.vinculo); c[g] = (c[g] || 0) + 1; });
+  return c;
+}
+
+/** Filas para metBarras, con el color de cada grupo; de mayor a menor. */
+function metFilasGrupo(lista) {
+  var c = metCuentaGrupos(lista);
+  return MET_GRUPOS.filter(function (g) { return c[g.clave]; })
+    .map(function (g) { return { texto: g.texto, n: c[g.clave], color: g.color }; })
+    .sort(function (a, b) { return b.n - a.n; });
+}
+
+function metLeyenda(lista) {
+  var c = metCuentaGrupos(lista);
+  return '<div class="met-leyenda">' + MET_GRUPOS.filter(function (g) { return c[g.clave]; }).map(function (g) {
+    return '<span><i style="background:' + g.color + '"></i>' + esc(g.texto) + ' <b>' + c[g.clave] + '</b></span>';
+  }).join('') + '</div>';
+}
+
+/** Una sola barra horizontal dividida por grupo (la tarjeta grande de publicados). */
+function metBarraPartida(lista) {
+  var c = metCuentaGrupos(lista);
+  return '<div class="met-partida">' + MET_GRUPOS.filter(function (g) { return c[g.clave]; }).map(function (g) {
+    return '<i style="flex:' + c[g.clave] + ';background:' + g.color + '" title="' + esc(g.texto + ': ' + c[g.clave] + ' (' + metPct(c[g.clave], lista.length) + ')') + '"></i>';
+  }).join('') + '</div>';
+}
+
+/** Columnas apiladas por grupo, de la primera a la última fecha (los periodos vacíos se ven en cero).
+ *  clave(ms) → número consecutivo; etiqueta(número) → texto. */
+function metApiladas(lista, clave, etiqueta) {
+  var cuenta = {};
+  lista.forEach(function (x) {
+    var t = fechaEnMs(x.fecha);
+    if (isNaN(t)) return;
+    var k = clave(t), g = metGrupo(x.vinculo);
+    cuenta[k] = cuenta[k] || { total: 0 };
+    cuenta[k][g] = (cuenta[k][g] || 0) + 1;
+    cuenta[k].total++;
+  });
+  var claves = Object.keys(cuenta).map(Number);
+  if (!claves.length) return '<p>Sin datos en este periodo.</p>';
+  var desde = Math.min.apply(null, claves), hasta = Math.max.apply(null, claves);
+  var max = Math.max.apply(null, claves.map(function (k) { return cuenta[k].total; }));
+  var html = '';
+  for (var k = desde; k <= hasta; k++) {
+    var c = cuenta[k] || { total: 0 }, nombre = etiqueta(k);
+    var detalle = MET_GRUPOS.filter(function (g) { return c[g.clave]; }).map(function (g) { return g.texto + ' ' + c[g.clave]; }).join(' · ');
+    html += '<div class="met-mes" title="' + esc(nombre + ': ' + c.total + (detalle ? ' — ' + detalle : '')) + '"><b>' + (c.total || '') + '</b>' +
+      '<div class="met-pila" style="height:' + (c.total * 100 / max) + '%">' +
+        MET_GRUPOS.filter(function (g) { return c[g.clave]; }).map(function (g) {
+          return '<i style="flex:' + c[g.clave] + ';background:' + g.color + '"></i>';
+        }).join('') +
+      '</div><span>' + esc(nombre) + '</span></div>';
+  }
+  return '<div class="met-meses">' + html + '</div>';
+}
+
+function metMeses(lista) {
+  var MES = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+  return metApiladas(lista,
+    function (t) { var d = new Date(t); return d.getFullYear() * 12 + d.getMonth(); },
+    function (k) { return MES[k % 12] + ' ' + String(Math.floor(k / 12)).slice(2); });
+}
+
+function metSemestres(lista) {
+  return metApiladas(lista,
+    function (t) { var d = new Date(t); return d.getFullYear() * 2 + (d.getMonth() < 6 ? 0 : 1); },
+    function (k) { return Math.floor(k / 2) + '-' + (k % 2 + 1); });
+}
+
+function metPeriodoTexto() {
+  var per = estado.periodo.metricas, f = function (iso) { return iso.split('-').reverse().join('/'); };
+  if (!per.desde && !per.hasta) return 'todo el historial';
+  return (per.desde ? 'del ' + f(per.desde) : 'desde el inicio') + (per.hasta ? ' al ' + f(per.hasta) : ' a hoy');
+}
+
+function pintarMetricas() {
+  var lista = document.getElementById('lista');
+  if (MET.error) {
+    lista.innerHTML = '<div class="mensaje-lista error">No se pudieron cargar las métricas: ' + esc(MET.error) +
+      '<br><br><button class="boton secundario" data-met="actualizar" type="button">Reintentar</button></div>';
+    return;
+  }
+  if (!MET.datos) { lista.innerHTML = '<div class="mensaje-lista">Cargando métricas…</div>'; metCargar(); return; }
+
+  var soloPublicados = estado.filtro.metricas === 'publicado';
+  var sol = ordenarYFiltrarPorFecha(MET.datos.solicitudes, 'metricas', 'fecha');
+  var todos = ordenarYFiltrarPorFecha(MET.datos.articulos, 'metricas', 'fecha');
+  var cuenta = function (l, tipo) { return l.filter(function (x) { return x.tipo === tipo; }).length; };
+  var publicados = cuenta(todos, 'publicado');
+  var aprobadas = sol.filter(function (x) { return x.estado === 'Aprobada'; }).length;
+  var arts = soloPublicados ? todos.filter(function (x) { return x.tipo === 'publicado'; }) : todos;
+  var deQue = soloPublicados ? 'artículos publicados' : 'artículos recibidos';
+  var cifra = function (n, texto) { return '<div class="mt-cifra"><b>' + n + '</b><span>' + texto + '</span></div>'; };
+  var externas = function (x) { return { organizacion: metGrupo(x.vinculo) === 'otra' ? x.organizacion : '' }; };
+  var deUabc = arts.filter(function (x) { return metGrupo(x.vinculo) === 'uabc'; });
+  var naranja = MET_GRUPOS[1].color, verde = MET_GRUPOS[0].color;
+  var conColor = function (filas, color) { return filas.map(function (f) { f.color = color; return f; }); };
+
+  // Tarjeta grande: siempre todo lo publicado, sin filtros ni periodo
+  var historico = MET.datos.articulos.filter(function (x) { return x.tipo === 'publicado'; });
+  var html = '<div class="solo-impresion"><b>Panel CIAD · Métricas del blog</b><br>Periodo: ' + esc(metPeriodoTexto()) +
+      ' · Gráficas de ' + (soloPublicados ? 'artículos publicados' : 'todos los artículos recibidos') +
+      ' · Generado el ' + esc(new Date().toLocaleString('es-MX')) + '</div>' +
+    '<div class="tarjeta met-heroe"><div class="met-heroe-cifra"><b>' + historico.length + '</b>' +
+      '<span>artículos publicados en el blog<br><small>Desde el inicio · no cambia con los filtros</small></span></div>' +
+      (historico.length ? metBarraPartida(historico) + metLeyenda(historico) : '') +
+    '</div>';
+
+  html += '<div class="tarjeta"><div class="mt-cabecera"><div><h2>Métricas del periodo: ' + esc(metPeriodoTexto()) + '</h2><p>' +
+      'Datos de las hojas de solicitudes y de artículos. Las fechas son las del envío del formulario' + (MET.hora ? ' · actualizado: ' + esc(MET.hora) : '') + '</p></div>' +
+      '<div class="mt-botones">' +
+        '<button class="boton secundario" data-met="pdf" type="button" title="Se abre la ventana de impresión: en Destino elige «Guardar como PDF»">Descargar PDF</button>' +
+        '<button class="boton secundario" data-met="actualizar" type="button"' + (MET.cargando ? ' disabled' : '') + '>' +
+        (MET.cargando ? 'Actualizando…' : 'Actualizar') + '</button></div></div>' +
+    '<div class="mt-cifras">' +
+      cifra(sol.length, 'Solicitudes recibidas') +
+      cifra(aprobadas, 'Solicitudes aprobadas (' + metPct(aprobadas, sol.length) + ')') +
+      cifra(todos.length, 'Artículos recibidos') +
+      cifra(publicados, 'Publicados (' + metPct(publicados, todos.length) + ' de los recibidos)') +
+      cifra(cuenta(todos, 'revision') + cuenta(todos, 'vincular'), 'Por revisar o vincular') +
+      cifra(cuenta(todos, 'rechazado') + cuenta(todos, 'eliminado'), 'Rechazados o eliminados') +
+    '</div></div>';
+
+  html += '<div class="met-rejilla">' +
+    metBarras('Por vínculo', 'De dónde vienen los ' + deQue + '.', metFilasGrupo(arts)) +
+    metBarras('UABC · por unidad académica', 'Solo ' + deQue + ' de la UABC: facultad o escuela.', conColor(metContar(deUabc, 'unidad'), verde)) +
+    metBarras('UABC · por programa educativo', 'Solo ' + deQue + ' de la UABC: programa del autor.', conColor(metContar(deUabc, 'programa'), verde)) +
+    metBarras('Otras instituciones', 'Escuelas y organizaciones fuera de la UABC.', conColor(metContar(arts.map(externas), 'organizacion'), naranja)) +
+    metBarras('Por sección del blog', 'Sección asignada al publicar (o la que pidió el autor).', metContar(arts, 'seccion')) +
+    metBarras('Solicitudes por vínculo', 'Todas las solicitudes del periodo, aprobadas o no.', metFilasGrupo(sol)) +
+  '</div>';
+
+  var deQueTitulo = soloPublicados ? 'Artículos publicados' : 'Artículos recibidos';
+  html += '<div class="met-rejilla">' +
+    '<div class="tarjeta met-grafica"><h3>' + deQueTitulo + ' por semestre</h3>' +
+      '<p>Semestre UABC en que el autor envió su artículo. Semestre 1: enero a junio; semestre 2: julio a diciembre.</p>' +
+      metLeyenda(arts) + metSemestres(arts) + '</div>' +
+    '<div class="tarjeta met-grafica"><h3>' + deQueTitulo + ' por mes</h3>' +
+      '<p>Mes en que el autor envió su artículo. Pasa el cursor por una columna para ver el detalle.</p>' +
+      metLeyenda(arts) + metMeses(arts) + '</div>' +
+  '</div>';
+
+  lista.innerHTML = html;
+}
+
+document.addEventListener('click', function (e) {
+  if (e.target.closest('[data-met="actualizar"]')) { metCargar(); pintar(); }
+  if (e.target.closest('[data-met="pdf"]')) {
+    // El PDF lleva las listas completas; Chrome lo guarda con «Guardar como PDF» en el diálogo de impresión
+    document.querySelectorAll('.met-grafica details').forEach(function (d) { d.open = true; });
+    window.print();
+  }
+});
+document.addEventListener('change', function (e) {
+  var sel = e.target.closest('[data-semestre]');
+  if (!sel || sel.value === 'personalizado') return;
+  estado.periodo.metricas = sel.value ? metRangoSemestre(sel.value) : { desde: '', hasta: '' };
+  pintar();
+});
+</script>
+<script>
+// ===== Usuarios: acceso al panel, administradores y avisos por correo (solo administradores) =====
+var US = { datos: null, borrador: null, error: '', cargando: false, guardando: false };
+var US_AREAS = [['solicitudes', 'Solicitudes'], ['articulos', 'Artículos'], ['comentarios', 'Comentarios']];
+
+function usCargar() {
+  if (US.cargando) return;
+  US.cargando = true; US.error = '';
+  llamar('obtenerUsuarios')
+    .then(usRecibir)
+    .catch(function (err) { US.error = mensajeError(err); })
+    .then(function () { US.cargando = false; if (estado.pestana === 'usuarios') pintar(); });
+}
+
+function usRecibir(r) { US.datos = r; US.borrador = JSON.parse(JSON.stringify(r.usuarios)); }
+function usSucio() { return !!US.datos && JSON.stringify(US.borrador) !== JSON.stringify(US.datos.usuarios); }
+
+function pintarUsuarios() {
+  var lista = document.getElementById('lista');
+  if (US.error && !US.datos) {
+    lista.innerHTML = '<div class="mensaje-lista error">No se pudieron cargar los usuarios: ' + esc(US.error) +
+      '<br><br><button class="boton secundario" data-us="recargar" type="button">Reintentar</button></div>';
+    return;
+  }
+  if (!US.datos) { lista.innerHTML = '<div class="mensaje-lista">Cargando usuarios…</div>'; usCargar(); return; }
+
+  var dis = US.guardando ? ' disabled' : '';
+  var soyCiad = US.datos.fijas.indexOf(US.datos.yo) !== -1; // Solo el CIAD decide quién es administrador (el servidor lo exige)
+  var filas = US.borrador.map(function (u, i) {
+    var fija = US.datos.fijas.indexOf(u.correo) !== -1, yo = u.correo === US.datos.yo;
+    var original = US.datos.usuarios.filter(function (o) { return o.correo === u.correo; })[0];
+    var esAdminGuardado = !!(original && original.admin); // Un administrador ya guardado solo lo puede quitar el CIAD
+    return '<tr>' +
+      '<td><div class="us-correo">' + esc(u.correo) + '</div>' +
+        (fija ? '<div class="us-nota">Cuenta del CIAD: siempre administradora</div>' : yo ? '<div class="us-nota">Tú</div>' : '') + '</td>' +
+      '<td><input type="text" data-us-i="' + i + '" data-us-campo="nombre" value="' + esc(u.nombre) + '" maxlength="80" placeholder="Nombre" aria-label="Nombre de ' + esc(u.correo) + '"' + dis + '></td>' +
+      '<td class="centro"><input type="checkbox" data-us-i="' + i + '" data-us-campo="admin"' + (u.admin ? ' checked' : '') +
+        (fija || !soyCiad || US.guardando ? ' disabled' : '') + ' aria-label="Administrador: ' + esc(u.correo) + '"' +
+        (!soyCiad && !fija ? ' title="Solo la cuenta del CIAD puede cambiar quién es administrador"' : '') + '></td>' +
+      US_AREAS.map(function (a) {
+        return '<td class="centro"><input type="checkbox" data-us-i="' + i + '" data-us-campo="' + a[0] + '"' + (u.avisos[a[0]] ? ' checked' : '') + dis +
+          ' aria-label="Avisos de ' + a[1].toLowerCase() + ': ' + esc(u.correo) + '"></td>';
+      }).join('') +
+      '<td class="centro">' + (fija || yo || (esAdminGuardado && !soyCiad) ? '' : '<button class="boton peligro" data-us="quitar" data-us-i="' + i + '" type="button"' + dis + '>Quitar</button>') + '</td>' +
+    '</tr>';
+  }).join('');
+
+  var resumen = US_AREAS.map(function (a) {
+    var n = US.borrador.filter(function (u) { return u.avisos[a[0]]; }).length;
+    return a[1] + ': ' + n + (n === 1 ? ' persona' : ' personas');
+  }).join(' · ');
+
+  lista.innerHTML = '<div class="tarjeta">' +
+    '<div class="mt-cabecera"><div><h2>Usuarios y avisos</h2><p>Quién puede abrir el panel, quién lo administra y qué correos recibe cada persona. ' +
+      'Solo los administradores ven esta pestaña. Quien no esté en la lista no puede abrir el panel.' +
+      (soyCiad ? '' : ' <b>Solo la cuenta del CIAD puede cambiar quién es administrador.</b>') + '</p></div></div>' +
+    '<div class="us-tabla-caja"><table class="us-tabla"><thead><tr>' +
+      '<th>Cuenta</th><th>Nombre</th><th class="centro">Administrador</th>' +
+      US_AREAS.map(function (a) { return '<th class="centro">Aviso: ' + a[1] + '</th>'; }).join('') + '<th></th>' +
+    '</tr></thead><tbody>' + filas + '</tbody></table></div>' +
+    '<div class="us-agregar"><input type="email" id="us-nuevo" placeholder="correo@uabc.edu.mx" aria-label="Correo de la persona a agregar"' + dis + '>' +
+      '<button class="boton secundario" data-us="agregar" type="button"' + dis + '>Agregar persona</button></div>' +
+    '<p class="us-nota" style="margin-top:6px">Entra con todos los avisos activados y sin ser administrador. Para abrir el panel necesita una cuenta @uabc.edu.mx.</p>' +
+    '<div class="us-pie"><span class="us-resumen">Reciben avisos de ' + esc(resumen) + '</span>' +
+      '<div class="mt-botones">' +
+        (usSucio() ? '<button class="boton secundario" data-us="descartar" type="button"' + dis + '>Descartar cambios</button>' : '') +
+        '<button class="boton principal" data-us="guardar" type="button"' + (usSucio() && !US.guardando ? '' : ' disabled') + '>' +
+          (US.guardando ? 'Guardando…' : 'Guardar cambios') + '</button>' +
+      '</div></div>' +
+  '</div>';
+}
+
+document.addEventListener('change', function (e) {
+  var el = e.target.closest('[data-us-campo]');
+  if (!el || el.type !== 'checkbox') return;
+  var u = US.borrador[Number(el.getAttribute('data-us-i'))], campo = el.getAttribute('data-us-campo');
+  if (campo === 'admin') u.admin = el.checked; else u.avisos[campo] = el.checked;
+  pintar();
+});
+
+document.addEventListener('input', function (e) {
+  var el = e.target.closest('[data-us-campo="nombre"]');
+  if (!el) return;
+  US.borrador[Number(el.getAttribute('data-us-i'))].nombre = el.value;
+  // Sin volver a pintar (se perdería el cursor): solo se habilita Guardar
+  var g = document.querySelector('[data-us="guardar"]');
+  if (g) g.disabled = !usSucio();
+});
+
+document.addEventListener('click', function (e) {
+  var b = e.target.closest('[data-us]');
+  if (!b) return;
+  var accion = b.getAttribute('data-us');
+  if (accion === 'recargar') { US.datos = null; US.error = ''; pintar(); }
+  if (accion === 'quitar') { US.borrador.splice(Number(b.getAttribute('data-us-i')), 1); pintar(); }
+  if (accion === 'descartar') { US.borrador = JSON.parse(JSON.stringify(US.datos.usuarios)); pintar(); }
+  if (accion === 'agregar') {
+    var campo = document.getElementById('us-nuevo'), correo = campo.value.trim().toLowerCase();
+    if (!/^[^@\s,;]+@[^@\s,;]+\.[^@\s,;]+$/.test(correo)) { avisar('Escribe un correo válido.', true); campo.focus(); return; }
+    if (US.borrador.some(function (u) { return u.correo === correo; })) { avisar('Esa persona ya está en la lista.', true); return; }
+    US.borrador.push({ correo: correo, nombre: '', admin: false, avisos: { solicitudes: true, articulos: true, comentarios: true } });
+    pintar();
+  }
+  if (accion === 'guardar') {
+    US.guardando = true; pintar();
+    llamar('guardarUsuarios', US.borrador, US.datos.version)
+      .then(function (r) { usRecibir(r); avisar('Usuarios guardados. Los avisos ya llegan con la nueva lista.'); })
+      .catch(function (err) { avisar(mensajeError(err), true); })
+      .then(function () { US.guardando = false; pintar(); });
+  }
+});
+
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Enter' && e.target.id === 'us-nuevo') { e.preventDefault(); document.querySelector('[data-us="agregar"]').click(); }
+});
+
+window.addEventListener('beforeunload', function (e) {
+  if (usSucio()) { e.preventDefault(); e.returnValue = ''; }
+});
+</script>
+<script>
+// ===== Inicio (va al final para que ya existan todas las pestañas de los <script> anteriores) =====
+var INICIO = <?!= inicio ?>; // Lo pone doGet, así no hay que esperar llamadas al servidor
+document.getElementById('correo-sesion').textContent = INICIO.correo;
+estado.secciones = INICIO.secciones || [];
+if (INICIO.admin) document.querySelector('[data-pestana="usuarios"]').hidden = false;
+if (INICIO.pestana && (INICIO.pestana !== 'usuarios' || INICIO.admin)) estado.pestana = INICIO.pestana; // Enlace de un aviso por correo
+// OPT: al terminar lo principal, se precargan Páginas, Mantenimiento y Guía para que abran al instante
+cargarTodo().then(function () { setTimeout(precargarPestanas, 500); });
+</script>
+
+</body>
+</html>

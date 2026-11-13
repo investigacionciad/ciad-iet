@@ -1,0 +1,19 @@
+# Credenciales (nunca se suben). La plantilla sin valores es CREDENCIALES.ejemplo.md
+CREDENCIALES.md
+.clasprc.json
+**/.clasprc.json
+# ID de cada proyecto de Apps Script: cada quien lo crea en su computadora (ver README › Preparar tu computadora)
+**/.clasp.json
+
+# Sistema y editores
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/
+node_modules/
+
+# Exportaciones con datos personales (hojas, comentarios, respaldos)
+*.csv
+*.xlsx
+respaldos/

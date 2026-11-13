@@ -1,0 +1,4912 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html b:css='false' b:defaultwidgetversion='2' b:js='false' b:layoutsVersion='3' expr:dir='data:blog.languageDirection' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+
+<head>
+  <meta content='width=device-width, initial-scale=1.0' name='viewport'/>
+  <title><data:view.title.escaped/></title>
+
+  <link href='https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700&amp;family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;display=swap' rel='stylesheet'/>
+  <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css' rel='stylesheet'/>
+
+  <script async='async' defer='defer' src='https://accounts.google.com/gsi/client?hl=es'/>
+
+  <b:skin><![CDATA[
+
+:root {
+  --font-main: 'Noto Sans', sans-serif;
+  --font-title: 'Bitter', Georgia, serif;
+  --bg-body: #f4f6f8;
+  --bg-surface: #ffffff;
+  --text-primary: #000000;
+  --text-secondary: #4b5563;
+  --color-primary: #00723F;
+  --color-accent: #DD971A;
+  --color-border: #e5e7eb;
+  --color-footer: #000000;
+  --radius: 8px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  font-family: var(--font-main);
+  background: var(--bg-body);
+  color: var(--text-primary);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.site-header {
+  width: 100%;
+  background: #FFFFFF;
+  border-bottom: 3px solid #d8d8d8;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+}
+
+.header-container {
+  width: 100%;
+  max-width: 1600px;
+  min-height: 80px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.brand-logo-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.brand-logo-link {
+  display: flex;
+  align-items: center;
+  line-height: 0;
+}
+
+.brand-logo-left img {
+  display: block;
+  width: auto;
+  height: 42px;
+  max-width: 180px;
+  object-fit: contain;
+}
+
+.brand-logo-left,
+.header-nav,
+.header-controls {
+  min-width: 0;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.header-nav {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 1.15rem;
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.nav-links li {
+  list-style: none !important;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.nav-links li::before,
+.nav-links li::after {
+  content: none !important;
+  display: none !important;
+}
+
+.nav-links a {
+  display: block;
+  padding: 8px 0;
+  font-size: 0.73rem;
+  font-weight: 700;
+  color: #808080;
+  text-transform: uppercase;
+  text-decoration: none !important;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: #FEBE10;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-shrink: 0;
+}
+
+.control-btn {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 50%;
+  color: #737373;
+  cursor: pointer;
+  font-size: 1.05rem;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.control-btn:hover,
+.control-btn:focus-visible {
+  background: rgba(0,0,0,0.055);
+  color: #DD971A;
+}
+
+#menuButton {
+  display: none;
+}
+
+.search-panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  padding: 16px 1.5rem;
+  background: #ffffff;
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: all 0.2s ease;
+}
+
+.search-panel.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.search-form {
+  display: flex;
+  gap: 10px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.search-input {
+  flex: 1;
+  height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  outline: none;
+  background: #f8fafc;
+  color: #000000;
+  font-family: var(--font-main);
+}
+
+.search-submit {
+  height: 44px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: var(--radius);
+  background: #00723F;
+  color: #ffffff;
+  cursor: pointer;
+  font-family: var(--font-main);
+  font-weight: 600;
+}
+
+.search-advanced {
+  height: 44px;
+  padding: 0 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: 1px solid #00723F;
+  border-radius: var(--radius);
+  background: #ffffff;
+  color: #00723F;
+  font-family: var(--font-main);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none !important;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.search-advanced:hover {
+  background: #00723F;
+  color: #ffffff !important;
+}
+
+.mobile-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  padding: 10px 1.5rem;
+  background: #f4f6f8;
+  border-bottom: 1px solid #dfe3e8;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+}
+
+.mobile-menu.active {
+  display: block;
+}
+
+.mobile-menu ul {
+  list-style: none !important;
+  margin: 0;
+  padding: 0;
+}
+
+.mobile-menu li {
+  list-style: none !important;
+  border-bottom: 1px solid #dfe3e8;
+}
+
+.mobile-menu li:last-child {
+  border-bottom: 0;
+}
+
+.mobile-menu li::before,
+.mobile-menu li::after {
+  content: none !important;
+}
+
+.mobile-menu a {
+  display: block;
+  padding: 12px 4px;
+  color: #4b5563;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.mobile-menu a:hover {
+  color: #374151;
+}
+
+.app-container {
+  width: 100%;
+  flex: 1 0 auto;
+  background: #f4f6f8;
+}
+
+.layout-grid {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+}
+
+.main-content {
+  width: 100%;
+}
+
+.post-outer-container {
+  margin-bottom: 2rem;
+}
+
+.post-outer {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.post {
+  padding: 2rem;
+}
+
+.post-title {
+  margin: 0 0 1rem;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  line-height: 1.2;
+  font-weight: 700;
+  color: #000000;
+}
+
+.post-title a {
+  color: #00723F;
+}
+
+.post-title a:hover {
+  color: #00723F;
+}
+
+.post-body {
+  color: #000000;
+  overflow-wrap: break-word;
+}
+
+.post-body a {
+  color: #00723F;
+  text-decoration: underline;
+}
+
+.post-body a:hover {
+  color: #20419A; DD971A
+}
+
+.post-body h1,
+.post-body h2,
+.post-body h3,
+.post-body h4 {
+  color: #00723F;
+  line-height: 1.3;
+  margin-top: 1.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.post-body p {
+  margin-bottom: 1rem;
+}
+
+.post-body ul,
+.post-body ol {
+  margin: 1rem 0 1rem 1.5rem;
+}
+
+.post-body li {
+  margin-bottom: 0.4rem;
+}
+
+.post-footer {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.post-labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.post-labels a {
+  display: inline-block;
+  padding: 5px 10px;
+  background: #f4f6f8;
+  border: 1px solid #e5e7eb;
+  border-radius: 20px;
+  color: #00723F !important;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-decoration: none !important;
+}
+
+/* DEF-003: las etiquetas internas siguen en el HTML (las usa el menú para marcar la sección), pero no se muestran */
+.post-labels a[href*='/search/label/categoria-'],
+.post-labels a[href*='/search/label/formato-'] {
+  display: none !important;
+}
+
+/* Páginas de componente: las notas de cada tema en filas adaptables (no en columna alternada) */
+.post-body .bloque-tema .lista-articulos {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.75rem !important;
+  align-items: stretch;
+}
+
+@media (max-width: 640px) {
+  .post-body .bloque-tema .lista-articulos {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Notas por fila elegidas en el Panel CIAD (data-columnas en la página; sin él quedan 2) */
+.post-body [data-columnas="1"] .bloque-tema .lista-articulos {
+  grid-template-columns: 1fr;
+}
+
+.post-body [data-columnas="3"] .bloque-tema .lista-articulos {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 900px) {
+  .post-body [data-columnas="3"] .bloque-tema .lista-articulos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .post-body [data-columnas] .bloque-tema .lista-articulos {
+    grid-template-columns: 1fr;
+  }
+}
+
+.post-body .bloque-tema .lista-articulos .tarjeta-articulo {
+  width: auto !important;
+  align-self: stretch !important;
+}
+
+.post-body .bloque-tema .lista-articulos .contenido-articulo {
+  flex: 1;
+}
+
+.post-body .bloque-tema .lista-articulos .mensaje-estado {
+  grid-column: 1 / -1;
+}
+
+/* Toda la tarjeta abre la nota, no solo el botón "Leer más" */
+.post-body .tarjeta-articulo,
+.seccion-inicio .tarjeta-reciente {
+  position: relative;
+  cursor: pointer;
+}
+
+.post-body .tarjeta-articulo .boton-leer,
+.seccion-inicio .tarjeta-reciente .leer-reciente {
+  position: static !important;
+}
+
+.post-body .tarjeta-articulo .boton-leer::after,
+.seccion-inicio .tarjeta-reciente .leer-reciente::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+.post-body .tarjeta-articulo:focus-within,
+.seccion-inicio .tarjeta-reciente:focus-within {
+  outline: 3px solid rgba(0, 114, 63, .45);
+  outline-offset: 2px;
+}
+
+/* Sin subrayado en las tarjetas al pasar el cursor o seleccionarlas */
+.post-body .tarjeta-articulo a,
+.post-body .tarjeta-articulo a:hover,
+.post-body .tarjeta-articulo a:focus,
+.post-body .tarjeta-articulo a:active,
+.seccion-inicio .tarjeta-reciente a,
+.seccion-inicio .tarjeta-reciente a:hover,
+.seccion-inicio .tarjeta-reciente a:focus,
+.seccion-inicio .tarjeta-reciente a:active {
+  text-decoration: none !important;
+}
+
+/* Fecha de las tarjetas en azul (el de los banners y el logo) */
+.post-body .tarjeta-articulo .fecha-articulo,
+.seccion-inicio .tarjeta-reciente .fecha-reciente {
+  color: #1f3f99 !important;
+}
+
+/* Sin "Leer más" / "Leer nota": toda la tarjeta ya abre la nota. El enlace se queda (sin texto visible) para el clic y los lectores de pantalla */
+.post-body .tarjeta-articulo .boton-leer,
+.seccion-inicio .tarjeta-reciente .leer-reciente {
+  display: block !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: none !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  color: transparent !important;
+}
+
+/* DEF-018: párrafos del artículo justificados (también en entradas ya publicadas) */
+.post-body .articulo-cuerpo p:not(.articulo-referencia),
+.post-body .articulo-cuerpo li {
+  text-align: justify;
+}
+
+/* US7: tamaños de la nota (mismas fuentes, solo cambia el tamaño) */
+.post:has(.articulo-ciad) .post-title {
+  font-size: 16pt !important;
+}
+
+.post-body .articulo-subtitulo,
+.post-body .articulo-ficha,
+.post-body .articulo-ciad blockquote {
+  font-size: 12pt !important;
+}
+
+.post-body .articulo-cuerpo p,
+.post-body .articulo-cuerpo li,
+.post-body .articulo-cuerpo td,
+.post-body .articulo-cuerpo th {
+  font-size: 14pt;
+}
+
+/* US7: imágenes del Word sin quedar enormes (también en entradas ya publicadas) */
+.post-body .articulo-cuerpo img {
+  max-height: 560px;
+  object-fit: contain;
+}
+
+/* Figuras del Word: la figura ya limita el alto (70% de la pantalla) y el pie mide lo mismo que la imagen */
+.post-body .articulo-cuerpo .articulo-figura img {
+  max-height: none;
+}
+
+/* US7: galería al final de la nota */
+.post-body .articulo-galeria-rejilla {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 10px;
+}
+
+.post-body .articulo-galeria-foto {
+  cursor: zoom-in;
+  text-decoration: none !important;
+}
+
+.post-body .articulo-galeria-foto img {
+  transition: transform 0.25s ease;
+}
+
+.post-body .articulo-galeria-foto:hover img {
+  transform: scale(1.04);
+}
+
+.visor-galeria {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  background: rgba(20,36,58,0.92);
+  align-items: center;
+  justify-content: center;
+  padding: 56px 64px;
+}
+
+.visor-galeria.abierto {
+  display: flex;
+}
+
+.visor-galeria img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+}
+
+.visor-galeria button {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #14243a;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.visor-galeria button:hover {
+  background: #DD971A;
+}
+
+.visor-galeria .visor-cerrar { top: 12px; right: 12px; }
+.visor-galeria .visor-anterior { left: 12px; top: 50%; transform: translateY(-50%); }
+.visor-galeria .visor-siguiente { right: 12px; top: 50%; transform: translateY(-50%); }
+
+.visor-galeria .visor-contador {
+  position: absolute;
+  bottom: 14px;
+  left: 0;
+  right: 0;
+  margin: 0;
+  text-align: center;
+  color: #ffffff;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 600px) {
+  .visor-galeria { padding: 56px 12px; }
+  .visor-galeria .visor-anterior,
+  .visor-galeria .visor-siguiente { top: auto; bottom: 8px; transform: none; }
+}
+
+/* DEF-022: búsqueda sin resultados */
+.sin-resultados {
+  padding: 3rem 1.5rem;
+  text-align: center;
+  background: #ffffff;
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius);
+  color: var(--text-secondary);
+}
+
+.sin-resultados h2 {
+  margin-bottom: 0.5rem;
+  color: #00723F;
+}
+
+.sin-resultados a {
+  color: #00723F;
+  text-decoration: underline;
+}
+
+.blog-pager {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.blog-pager a {
+  padding: 10px 16px;
+  background: #00723F;
+  color: #ffffff !important;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.layout-grid:has(.seccion-tecnologia) {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.main-content:has(.seccion-tecnologia) {
+  width: 100%;
+  max-width: none;
+}
+
+.post-outer-container:has(.seccion-tecnologia) {
+  margin: 0;
+}
+
+.post-outer:has(.seccion-tecnologia) {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  overflow: visible;
+}
+
+.post:has(.seccion-tecnologia) {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.post-body:has(.seccion-tecnologia) {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+}
+
+.app-container:has(.seccion-tecnologia) {
+  width: 100%;
+  max-width: none;
+  background: #ffffff;
+  overflow: visible;
+}
+
+.blog-posts:has(.seccion-tecnologia),
+.main-section:has(.seccion-tecnologia) {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.post-outer:has(.seccion-tecnologia) > .post .post-title,
+.post-outer:has(.seccion-tecnologia) .entry-title {
+  display: none !important;
+}
+
+/* Footer oculto: se conserva en el código porque Blogger necesita sus secciones; no se muestra */
+.site-footer {
+  display: none !important;
+  width: 100%;
+  flex-shrink: 0;
+  margin-top: auto;
+  background: #000000;
+  padding: 3rem 1.5rem 2rem;
+}
+
+.site-footer > div {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.footer-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-col .title {
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.footer-col .widget-content,
+.footer-col p {
+  color: #9ca3af;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.footer-col a {
+  color: #9ca3af;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+.footer-col a:hover {
+  color: #ffffff;
+}
+
+.footer-col ul {
+  list-style: none !important;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-col li {
+  list-style: none !important;
+}
+
+.footer-divider {
+  border-top: 1px solid #333333;
+  margin: 2.5rem 0 1.5rem;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+.footer-bottom .copyright {
+  color: #737373;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.social-container {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.social-text {
+  font-size: 0.85rem;
+  line-height: 1.2;
+  text-align: right;
+  color: #737373;
+  font-weight: 700;
+}
+
+.social-icons {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.social-icons a {
+  color: #737373;
+  font-size: 2rem;
+}
+
+.social-icons a:hover {
+  color: #ffffff;
+}
+
+.google-account-slot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  min-width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+}
+
+.google-signin-host {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  flex: 0 0 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  border-radius: 50%;
+  overflow: visible;
+  line-height: 0;
+}
+
+.google-signin-host > div {
+  margin: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.google-profile-setup {
+  display: none;
+  align-items: center;
+  gap: 7px;
+  height: 36px;
+  max-width: 180px;
+  padding: 0 11px;
+  border: 1px solid #d1d5db;
+  border-radius: 999px;
+  background: #f8fafc;
+  color: #737373;
+  font-size: 0.72rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.google-profile-setup i {
+  color: #DD971A;
+  flex-shrink: 0;
+}
+
+.google-profile-trigger {
+  display: none;
+  position: relative;
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  max-width: 42px;
+  flex: 0 0 42px;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid #d1d5db;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #737373;
+  cursor: pointer;
+  font-family: var(--font-main);
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.google-profile-trigger:hover,
+.google-profile-trigger[aria-expanded='true'],
+.google-profile-trigger:focus-visible {
+  background: #f5f5f5;
+  border-color: #DD971A;
+  color: #DD971A;
+}
+
+.google-profile-avatar {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30px;
+  height: 30px;
+  margin: 0;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  background: #ffffff;
+}
+
+.google-profile-avatar-fallback {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30px;
+  height: 30px;
+  margin: 0;
+  transform: translate(-50%, -50%);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #00723F;
+  line-height: 1;
+  text-align: center;
+}
+
+.google-profile-summary {
+  min-width: 0;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.08;
+  overflow: hidden;
+}
+
+.google-profile-kicker {
+  color: #8c8c8c;
+  font-size: 0.56rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.google-profile-name {
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #737373;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.google-profile-chevron {
+  flex: 0 0 auto;
+  font-size: 0.66rem;
+  color: #8c8c8c;
+}
+
+.google-profile-summary,
+.google-profile-chevron {
+  display: none !important;
+}
+
+.google-profile-popover {
+  position: absolute;
+  top: calc(100% + 11px);
+  right: 0;
+  z-index: 1200;
+  width: min(310px, calc(100vw - 24px));
+  padding: 14px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 14px 35px rgba(0,0,0,0.18);
+  color: #111827;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-5px);
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
+}
+
+.google-profile-popover.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.google-profile-popover-head {
+  display: flex;
+  gap: 11px;
+  align-items: center;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.google-profile-popover-avatar {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #f3f4f6;
+}
+
+.google-profile-popover-data {
+  min-width: 0;
+  flex: 1;
+}
+
+.google-profile-popover-data strong,
+.google-profile-popover-data span {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.google-profile-popover-data strong {
+  color: #111827;
+  font-size: 0.87rem;
+}
+
+.google-profile-popover-data span {
+  margin-top: 2px;
+  color: #6b7280;
+  font-size: 0.73rem;
+}
+
+.google-profile-note {
+  margin: 11px 0 !important;
+  color: #6b7280;
+  font-size: 0.68rem;
+  line-height: 1.45;
+}
+
+.google-profile-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.google-profile-action {
+  flex: 1;
+  min-height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 7px 9px;
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+  background: #ffffff;
+  color: #374151;
+  cursor: pointer;
+  font-family: var(--font-main);
+  font-size: 0.69rem;
+  font-weight: 600;
+}
+
+.google-profile-action:hover {
+  border-color: #00723F;
+  color: #00723F;
+}
+
+.google-profile-action.primary {
+  border-color: #00723F;
+  background: #00723F;
+  color: #ffffff;
+}
+
+.google-profile-action.primary:hover {
+  background: #005d34;
+  color: #ffffff;
+}
+
+@media (max-width: 1480px) {
+  .google-profile-trigger {
+    max-width: 160px;
+  }
+
+  .google-profile-kicker {
+    display: none;
+  }
+
+  .google-profile-name {
+    font-size: 0.70rem;
+  }
+
+  .google-profile-setup {
+    max-width: 145px;
+    padding: 0 10px;
+    font-size: 0.68rem;
+  }
+}
+
+@media (max-width: 1360px) {
+  .google-profile-trigger {
+    max-width: 118px;
+    padding-right: 7px;
+  }
+
+  .google-profile-name {
+    font-size: 0.68rem;
+  }
+
+  .google-profile-chevron {
+    display: none;
+  }
+
+  .google-profile-setup {
+    max-width: 42px;
+    width: 42px;
+    justify-content: center;
+    padding: 0;
+    font-size: 0;
+  }
+
+  .google-profile-setup i {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .header-container {
+    gap: 0.75rem;
+  }
+
+  .header-controls {
+    gap: 0.25rem;
+  }
+
+  .google-profile-trigger {
+    width: 38px;
+    max-width: 38px;
+    height: 38px;
+    padding: 4px;
+    justify-content: center;
+    border: 0;
+    background: transparent;
+  }
+
+  .google-profile-trigger:hover,
+  .google-profile-trigger[aria-expanded='true'] {
+    background: rgba(0,0,0,0.055);
+  }
+
+  .google-profile-avatar,
+  .google-profile-avatar-fallback {
+    width: 30px;
+    height: 30px;
+    flex-basis: 30px;
+  }
+
+  .google-profile-summary,
+  .google-profile-chevron {
+    display: none;
+  }
+
+  .google-profile-setup {
+    width: 38px;
+    max-width: 38px;
+    padding: 0;
+    justify-content: center;
+    border: 0;
+    background: transparent;
+    font-size: 0;
+  }
+
+  .google-profile-setup i {
+    font-size: 1rem;
+  }
+
+  .google-profile-popover {
+    position: fixed;
+    top: 74px;
+    right: 12px;
+  }
+}
+
+@media (max-width: 1500px) {
+  .nav-links {
+    gap: 0.72rem;
+  }
+
+  .nav-links a {
+    font-size: 0.66rem;
+  }
+}
+
+@media (max-width: 1360px) {
+  .header-nav {
+    display: none;
+  }
+
+  #menuButton {
+    display: flex;
+  }
+}
+
+@media (max-width: 900px) {
+
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .social-container {
+    flex-direction: column;
+  }
+
+  .social-text {
+    text-align: center;
+  }
+
+  .layout-grid {
+    padding: 2rem 1rem;
+  }
+
+  .post {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+
+  .header-container {
+    padding: 0 1rem;
+  }
+
+  .brand-logo-left img {
+    height: 36px;
+    max-width: 150px;
+  }
+
+  .search-form {
+    flex-direction: column;
+  }
+
+  .search-submit,
+  .search-advanced {
+    width: 100%;
+  }
+}
+
+@media (max-width: 500px) {
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .post {
+    padding: 1.25rem;
+  }
+
+  .social-icons {
+    gap: 1rem;
+  }
+
+  .social-icons a {
+    font-size: 1.7rem;
+  }
+}
+
+body,
+.post-body,
+.post-body p,
+.post-body li,
+.articulo-cuerpo,
+.articulo-cuerpo p,
+.articulo-cuerpo li,
+.et-guides-page,
+.et-emerging-page,
+.et-multimedia-page,
+.et-guides-page p,
+.et-emerging-page p,
+.et-multimedia-page p {
+  font-family: 'Noto Sans', sans-serif !important;
+}
+
+.post-body,
+.post-body p,
+.post-body li,
+.articulo-cuerpo,
+.articulo-cuerpo p,
+.articulo-cuerpo li,
+.et-guide-text p,
+.et-card p {
+  color: #000000 !important;
+}
+
+h1, h2, h3, h4, h5, h6,
+.post-title,
+.entry-title,
+.titulo-bienvenida,
+.titulo-recientes,
+.titulo-reciente,
+.titulo-comentarios {
+  font-family: 'Bitter', Georgia, serif !important;
+  font-style: normal;
+}
+
+.post-title,
+.post-title a,
+.entry-title,
+.entry-title a,
+.post-body h1,
+.post-body h2,
+.post-body h3,
+.post-body h4,
+.seccion-inicio .titulo-bienvenida,
+.seccion-inicio .titulo-recientes,
+.seccion-inicio .titulo-reciente,
+.seccion-inicio .titulo-reciente a,
+.seccion-comentarios .titulo-comentarios,
+.et-page-intro h2,
+.et-card h3,
+.et-guide-heading,
+.et-guide-text h4 {
+  color: #00723F !important;
+}
+
+/* US7: el título de la nota se queda verde al pasar el mouse */
+.post-title a:hover,
+.entry-title a:hover {
+  color: #00723F !important;
+}
+
+.seccion-inicio .titulo-reciente a:hover {
+  color: #DD971A !important;
+}
+
+.articulo-subtitulo,
+.post-body h2.articulo-subtitulo,
+.et-subtitle,
+.et-page-intro .et-subtitle,
+.seccion-inicio .resumen-reciente {
+  font-family: 'Bitter', Georgia, serif !important;
+  font-style: italic !important;
+  color: #20419A !important;
+}
+
+body :where(*:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="fa-"])) {
+  font-family: 'Noto Sans', sans-serif !important;
+}
+
+h1,
+h1 :where(*:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="fa-"])),
+h2,
+h2 :where(*:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="fa-"])),
+h3,
+h3 :where(*:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="fa-"])),
+h4,
+h4 :where(*:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="fa-"])),
+h5,
+h5 :where(*:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="fa-"])),
+h6,
+h6 :where(*:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="fa-"])),
+.post-title,
+.post-title :where(*:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="fa-"])),
+.entry-title,
+.entry-title :where(*:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="fa-"])),
+.titulo-bienvenida,
+.titulo-bienvenida :where(*:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="fa-"])),
+.titulo-recientes,
+.titulo-recientes :where(*:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="fa-"])),
+.titulo-reciente,
+.titulo-reciente :where(*:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="fa-"])),
+.titulo-comentarios,
+.titulo-comentarios :where(*:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="fa-"])),
+.et-guia-titulo,
+.et-guia-titulo :where(*:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="fa-"])),
+.titulo-pagina,
+.titulo-pagina :where(*:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="fa-"])),
+.titulo-seccion,
+.titulo-seccion :where(*:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="fa-"])),
+.titulo-multimedia,
+.titulo-multimedia :where(*:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="fa-"])),
+.titulo-articulo,
+.titulo-articulo :where(*:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="fa-"])),
+.paso-titulo,
+.paso-titulo :where(*:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="fa-"])),
+.nombre-integrante,
+.nombre-integrante :where(*:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="fa-"])) {
+  font-family: 'Bitter', Georgia, serif !important;
+  font-weight: 700 !important;
+}
+
+.articulo-subtitulo,
+.articulo-subtitulo :where(*:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="fa-"])),
+.et-subtitle,
+.et-subtitle :where(*:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="fa-"])),
+.resumen-reciente,
+.resumen-reciente :where(*:not(i):not(.fa):not(.fas):not(.far):not(.fab):not([class*="fa-"])) {
+  font-family: 'Bitter', Georgia, serif !important;
+  font-style: italic !important;
+  font-weight: 400 !important;
+}
+
+.nav-links a.nav-actual,
+.mobile-menu a.nav-actual {
+  color: #DD971A !important;
+}
+
+/* Menu responsivo de fondo gris claro */
+.mobile-menu a {
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.mobile-menu a:hover,
+.mobile-menu a:focus-visible {
+  background-color: #e5e7eb;
+  color: #374151;
+}
+
+.mobile-menu a:active {
+  background-color: #d9dee5;
+}
+
+.mobile-menu a.nav-actual,
+.mobile-menu a[aria-current='page'] {
+  background-color: #e5e7eb;
+  color: #DD971A !important;
+}
+
+.mobile-menu a.nav-actual:hover,
+.mobile-menu a.nav-actual:focus-visible {
+  background-color: #dfe3e8;
+}
+
+html.ciad-embedded {
+  width: 100%;
+  max-width: 100%;
+  height: auto !important;
+  min-height: 100%;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  overscroll-behavior-y: auto;
+  scrollbar-width: none !important;
+  scrollbar-gutter: auto !important;
+  -ms-overflow-style: none;
+}
+
+html.ciad-embedded body {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0 !important;
+  height: auto !important;
+  min-height: 100vh;
+  overflow: visible !important;
+}
+
+html.ciad-embedded::-webkit-scrollbar,
+html.ciad-embedded body::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+  display: none !important;
+  background: transparent !important;
+}
+
+html.ciad-embedded .site-header {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1000 !important;
+}
+
+html.ciad-embedded .app-container,
+html.ciad-embedded .layout-grid,
+html.ciad-embedded .main-content,
+html.ciad-embedded .main-section,
+html.ciad-embedded .blog-posts,
+html.ciad-embedded .post-outer-container,
+html.ciad-embedded .post-outer,
+html.ciad-embedded .post,
+html.ciad-embedded .post-body {
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+
+html.ciad-embedded .seccion-innovacion .hero-innovacion,
+html.ciad-embedded .seccion-tecnologia .hero-tecnologia,
+html.ciad-embedded .seccion-emergentes .hero-emergentes,
+html.ciad-embedded .seccion-etica-sociedad .hero-etica,
+html.ciad-embedded .et-guias-tutoriales .hero-guias,
+html.ciad-embedded .pagina-sobre-blog .hero-sobre,
+html.ciad-embedded .seccion-multimedia .hero-multimedia,
+html.ciad-embedded .pagina-multimedia .hero-multimedia,
+html.ciad-embedded .et-multimedia-page .hero-multimedia {
+  width: 100% !important;
+  max-width: 100% !important;
+  left: auto !important;
+  right: auto !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+]]></b:skin>
+
+<script type='text/javascript'>
+//<![CDATA[
+(function () {
+  var embebido = false;
+
+  try {
+    embebido = window.self !== window.top;
+  } catch (e) {
+    embebido = true;
+  }
+
+  if (embebido) {
+    document.documentElement.classList.add('ciad-embedded');
+  }
+})();
+//]]>
+</script>
+
+</head>
+
+<script type='text/javascript'>
+//<![CDATA[
+document.addEventListener('DOMContentLoaded', function () {
+
+  var searchButton = document.getElementById('searchButton');
+  var searchPanel = document.getElementById('searchPanel');
+  var menuButton = document.getElementById('menuButton');
+  var mobileMenu = document.getElementById('mobileMenu');
+
+  if (!searchButton || !searchPanel || !menuButton || !mobileMenu) {
+    return;
+  }
+
+  searchButton.addEventListener('click', function () {
+
+    var open = searchPanel.classList.toggle('active');
+
+    mobileMenu.classList.remove('active');
+    menuButton.setAttribute('aria-expanded', 'false');
+
+    var icon = searchButton.querySelector('i');
+
+    if (icon) {
+      icon.classList.toggle('fa-xmark', open);
+      icon.classList.toggle('fa-magnifying-glass', !open);
+    }
+
+    if (open) {
+
+      var input = searchPanel.querySelector('.search-input');
+
+      if (input) {
+        setTimeout(function () {
+          input.focus();
+        }, 150);
+      }
+
+    }
+
+  });
+
+  menuButton.addEventListener('click', function () {
+
+    var open = mobileMenu.classList.toggle('active');
+
+    searchPanel.classList.remove('active');
+
+    menuButton.setAttribute(
+      'aria-expanded',
+      open ? 'true' : 'false'
+    );
+
+    var icon = menuButton.querySelector('i');
+
+    if (icon) {
+      icon.classList.toggle('fa-xmark', open);
+      icon.classList.toggle('fa-bars', !open);
+    }
+
+    var searchIcon = searchButton.querySelector('i');
+
+    if (searchIcon) {
+      searchIcon.classList.remove('fa-xmark');
+      searchIcon.classList.add('fa-magnifying-glass');
+    }
+
+  });
+
+  document.addEventListener('keydown', function (e) {
+
+    if (e.key === 'Escape') {
+
+      searchPanel.classList.remove('active');
+      mobileMenu.classList.remove('active');
+
+      var searchIcon = searchButton.querySelector('i');
+      var menuIcon = menuButton.querySelector('i');
+
+      if (searchIcon) {
+        searchIcon.className =
+          'fa-solid fa-magnifying-glass';
+      }
+
+      if (menuIcon) {
+        menuIcon.className =
+          'fa-solid fa-bars';
+      }
+
+      menuButton.setAttribute(
+        'aria-expanded',
+        'false'
+      );
+
+    }
+
+  });
+
+});
+//]]>
+</script>
+
+<body>
+
+<header class='site-header'>
+
+  <div class='header-container'>
+
+    <div class='brand-logo-left'>
+
+      <a aria-label='Ir al inicio' class='brand-logo-link' expr:href='data:blog.homepageUrl'>
+        <img alt='CIAD' src='https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgQuk0rhmA8psCIKRt7bSEi7hkCPrXxhj6PdsL9mhyOdDjxiMiv9xMbcs1N7pe-yHsQJ0BZJpbE7TfcNNSnXgWpBWQIFj0KeNFrwkscqmMwCojp2EXUw0rRZ3s3_HNPchtbMc9CaB79xkEpPZ5j9ONkECbHtI7wkVqI8kP7JBZhUyIwKXGicWuvjBLTOBM/s3790/LOGO_CIAD_2023_PNG%20%281%29.png'/>
+      </a>
+
+    </div>
+
+    <nav aria-label='Navegación principal' class='header-nav'>
+
+      <ul class='nav-links'>
+
+        <li>
+          <a expr:href='data:blog.homepageUrl'>
+            Inicio
+          </a>
+        </li>
+
+        <li>
+          <a href='/p/tecnologia-educativa.html'>
+            Tecnología Educativa
+          </a>
+        </li>
+
+        <li>
+          <a href='/p/tecnologias-emergentes.html'>
+            Tecnologías Emergentes
+          </a>
+        </li>
+
+        <li>
+          <a href='/p/etica-y-sociedad-digital.html'>
+            Ética y Sociedad
+          </a>
+        </li>
+
+        <!-- DESACTIVADO: Guías y Tutoriales (página intacta; quitar el comentario para reactivar)
+        <li>
+          <a href='/p/guias-y-tutoriales.html'>
+            Guías y Tutoriales
+          </a>
+        </li>
+        -->
+
+        <!-- DESACTIVADO: Multimedia (página intacta; quitar el comentario para reactivar)
+        <li>
+          <a href='/p/multimedia.html'>
+            Multimedia
+          </a>
+        </li>
+        -->
+
+        <li>
+          <a href='/p/innovacion.html'>
+            Innovación
+          </a>
+        </li>
+
+        <li>
+          <a href='/p/sobre-el-blog.html'>
+            Sobre el Blog
+          </a>
+        </li>
+
+      </ul>
+
+    </nav>
+
+    <div class='header-controls'>
+
+      <div class='google-account-slot' id='googleAccountSlot'>
+
+        <div aria-label='Acceder con Google' class='google-signin-host' id='googleSignInButton'/>
+
+        <div class='google-profile-setup' id='googleProfileSetup' title='Configura Firebase y Google'>
+          <i class='fa-solid fa-database'/>
+          <span>Configurar Firebase</span>
+        </div>
+
+        <button aria-expanded='false' aria-haspopup='true' aria-label='Ver perfil de Google' class='google-profile-trigger' id='googleProfileTrigger' type='button'>
+          <img alt='' class='google-profile-avatar' id='googleProfileAvatar' referrerpolicy='no-referrer'/>
+          <span class='google-profile-avatar-fallback' id='googleProfileAvatarFallback'>
+            <i class='fa-solid fa-user'/>
+          </span>
+          <span class='google-profile-summary'>
+            <span class='google-profile-kicker'>Cuenta Google</span>
+            <span class='google-profile-name' id='googleProfileName'>Usuario</span>
+          </span>
+          <i class='fa-solid fa-chevron-down google-profile-chevron'/>
+        </button>
+
+        <div aria-hidden='true' class='google-profile-popover' id='googleProfilePopover'>
+          <div class='google-profile-popover-head'>
+            <img alt='' class='google-profile-popover-avatar' id='googleProfilePopoverAvatar' referrerpolicy='no-referrer'/>
+            <div class='google-profile-popover-data'>
+              <strong id='googleProfilePopoverName'>Usuario</strong>
+              <span id='googleProfileEmail'>correo@ejemplo.com</span>
+            </div>
+          </div>
+
+          <p class='google-profile-note'>
+           &#161;Bienvenido!.
+          </p>
+
+          <div class='google-profile-actions'>
+            <a class='google-profile-action primary' href='#comments' id='googleGoComments'>
+              <i class='fa-regular fa-comment'/>
+              Comentarios
+            </a>
+            <button class='google-profile-action' id='firebaseSignOutButton' type='button'>
+              <i class='fa-solid fa-arrow-right-from-bracket'/>
+              Cerrar sesión
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <button aria-label='Buscar' class='control-btn' id='searchButton' title='Buscar' type='button'>
+        <i class='fa-solid fa-magnifying-glass'/>
+      </button>
+
+      <button aria-expanded='false' aria-label='Menú' class='control-btn' id='menuButton' title='Menú' type='button'>
+        <i class='fa-solid fa-bars'/>
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class='search-panel' id='searchPanel'>
+
+    <form action='/p/buscador.html' class='search-form'>
+
+      <input class='search-input' name='q' placeholder='Buscar en el blog...' type='search'/>
+
+      <button class='search-submit' type='submit'>
+        <i class='fa-solid fa-magnifying-glass'/>
+        Buscar
+      </button>
+
+      <a class='search-advanced' href='/p/buscador.html'>
+        <i class='fa-solid fa-sliders'/>
+        Búsqueda avanzada
+      </a>
+
+    </form>
+
+  </div>
+
+  <div class='mobile-menu' id='mobileMenu'>
+
+    <ul>
+
+      <li>
+        <a expr:href='data:blog.homepageUrl'>
+          Inicio
+        </a>
+      </li>
+
+      <li>
+        <a href='/p/tecnologia-educativa.html'>
+          Tecnología Educativa
+        </a>
+      </li>
+
+      <li>
+        <a href='/p/tecnologias-emergentes.html'>
+          Tecnologías Emergentes
+        </a>
+      </li>
+
+      <li>
+        <a href='/p/etica-y-sociedad-digital.html'>
+          Ética y Sociedad
+        </a>
+      </li>
+
+      <!-- DESACTIVADO: Guías y Tutoriales (página intacta; quitar el comentario para reactivar)
+      <li>
+        <a href='/p/guias-y-tutoriales.html'>
+          Guías y Tutoriales
+        </a>
+      </li>
+      -->
+
+      <!-- DESACTIVADO: Multimedia (página intacta; quitar el comentario para reactivar)
+      <li>
+        <a href='/p/multimedia.html'>
+          Multimedia
+        </a>
+      </li>
+      -->
+
+      <li>
+        <a href='/p/innovacion.html'>
+          Innovación
+        </a>
+      </li>
+
+      <li>
+        <a href='/p/sobre-el-blog.html'>
+          Sobre el Blog
+        </a>
+      </li>
+
+      <li>
+        <a href='/p/buscador.html'>
+          Buscador
+        </a>
+      </li>
+
+    </ul>
+
+  </div>
+
+</header>
+
+<div class='app-container'>
+
+  <div class='layout-grid'>
+
+    <main class='main-content'>
+
+      <b:if cond='data:view.isHomepage or (data:view.isSearch and !data:view.search.query) or (data:view.isPage and data:view.title == &quot;Todas las notas&quot;)'>
+
+        <style>
+
+          #Blog1 {
+            display: none !important;
+          }
+
+          body:has(.contenedor-inicio) .nav-links li:first-child a,
+          body:has(.contenedor-inicio) .mobile-menu li:first-child a {
+            color: #DD971A;
+          }
+
+          .seccion-inicio {
+            --verde-uabc: #00723f;
+            --amarillo-uabc: #DD971A;
+            --azul-oscuro: #14243a;
+            --texto-gris: #5d6b7c;
+            --fondo: #f7f9fb;
+            --blanco: #ffffff;
+            --borde: #e5eaf0;
+            --radio: 20px;
+            --sombra: 0 12px 34px rgba(20,36,58,.09);
+
+            width: 100%;
+            font-family: &#39;Noto Sans&#39;, sans-serif;
+            background: var(--fondo);
+            color: var(--texto-gris);
+            line-height: 1.65;
+          }
+
+          .seccion-inicio * {
+            box-sizing: border-box;
+          }
+
+          .seccion-inicio .contenedor-inicio {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 7rem 5.5rem 5rem;
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+          }
+
+          .seccion-inicio .titulo-bienvenida {
+            font-family: &#39;Bitter&#39;, Georgia, serif;
+            font-size: clamp(2.8rem, 5.5vw, 4.2rem);
+            font-weight: 800;
+            color: var(--azul-oscuro);
+            line-height: 1.1;
+            letter-spacing: -0.01em;
+            margin: 0 0 2rem;
+          }
+
+          .seccion-inicio .texto-bienvenida {
+            font-size: 1.2rem;
+            color: var(--texto-gris);
+            max-width: 620px;
+            margin: 0;
+          }
+
+          .seccion-inicio .imagen-bienvenida {
+            width: 100%;
+            aspect-ratio: 5 / 4;
+            object-fit: cover;
+            border-radius: 28px;
+            display: block;
+            background: #e9edf1;
+          }
+
+          .seccion-inicio .texto-bienvenida:empty {
+            display: none;
+          }
+
+          .seccion-inicio .imagen-bienvenida.imagen-provisional {
+            object-fit: contain;
+            padding: 12%;
+            background: #ffffff;
+            border: 1px solid var(--borde);
+          }
+
+          .seccion-inicio .seccion-recientes {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 5.5rem 7rem;
+          }
+
+          .seccion-inicio .cabecera-recientes {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 2rem;
+            margin-bottom: 2.25rem;
+          }
+
+          .seccion-inicio .cabecera-recientes-texto {
+            max-width: 760px;
+          }
+
+          .seccion-inicio .eyebrow-recientes {
+            margin: 0 0 .45rem;
+            color: var(--verde-uabc);
+            font-size: .8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+          }
+
+          .seccion-inicio .titulo-recientes {
+            font-family: &#39;Bitter&#39;, Georgia, serif;
+            color: var(--azul-oscuro);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin: 0 0 .65rem;
+          }
+
+          .seccion-inicio .descripcion-recientes {
+            margin: 0;
+            color: var(--texto-gris);
+            font-size: 1rem;
+          }
+
+          .seccion-inicio .boton-todas {
+            flex: 0 0 auto;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 44px;
+            padding: .7rem 1.25rem;
+            border: 1px solid var(--verde-uabc);
+            border-radius: 999px;
+            background: transparent;
+            color: var(--verde-uabc) !important;
+            font-size: .88rem;
+            font-weight: 700;
+            text-decoration: none !important;
+            transition: background .2s ease, color .2s ease;
+          }
+
+          .seccion-inicio .boton-todas:hover {
+            background: var(--verde-uabc);
+            color: #ffffff !important;
+          }
+
+          .seccion-inicio .lista-recientes {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1.5rem;
+          }
+
+          .seccion-inicio .tarjeta-reciente {
+            position: relative;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            padding: 0;
+            border: 0;
+            border-radius: 18px;
+            background: #ffffff;
+            box-shadow: 0 10px 28px rgba(20,36,58,.11);
+            transform: translateY(0);
+            transition: transform .35s ease, box-shadow .35s ease;
+          }
+
+          .seccion-inicio .tarjeta-reciente:hover,
+          .seccion-inicio .tarjeta-reciente:focus-within {
+            transform: translateY(-5px);
+            box-shadow: 0 18px 38px rgba(20,36,58,.17);
+          }
+
+          .seccion-inicio .enlace-imagen-reciente {
+            display: block;
+            overflow: hidden;
+            background: #edf1f4;
+            border-radius: 0;
+            flex-shrink: 0;
+          }
+
+          .seccion-inicio .contenido-reciente {
+            padding: 1.35rem 1.35rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            background: #ffffff;
+            border-radius: 0;
+          }
+
+          .seccion-inicio .enlace-imagen-reciente::before,
+          .seccion-inicio .enlace-imagen-reciente::after {
+            display: none !important;
+          }
+
+          @media (prefers-reduced-motion: reduce) {
+            .seccion-inicio .tarjeta-reciente,
+            .seccion-inicio .imagen-reciente {
+              transition: none !important;
+            }
+            .seccion-inicio .tarjeta-reciente:hover,
+            .seccion-inicio .tarjeta-reciente:focus-within {
+              transform: none !important;
+            }
+          }
+
+          .seccion-inicio .imagen-reciente {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            display: block;
+            transform: scale(1.08);
+            transform-origin: center center;
+            transition: transform .45s ease, filter .45s ease;
+          }
+
+          .seccion-inicio .tarjeta-reciente:hover .imagen-reciente {
+            transform: scale(1.12);
+            filter: saturate(1.06) contrast(1.02);
+          }
+
+          .seccion-inicio .fecha-reciente {
+            margin: 0 0 .55rem;
+            color: var(--verde-uabc);
+            font-size: .76rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+          }
+
+          .seccion-inicio .titulo-reciente {
+            font-family: &#39;Bitter&#39;, Georgia, serif;
+            font-size: 1.18rem;
+            line-height: 1.25;
+            font-weight: 700;
+            color: var(--azul-oscuro);
+            margin: 0 0 .7rem;
+          }
+
+          .seccion-inicio .titulo-reciente a {
+            color: inherit !important;
+            text-decoration: none !important;
+          }
+
+          .seccion-inicio .resumen-reciente {
+            margin: 0 0 1.1rem;
+            color: var(--texto-gris);
+            font-size: .92rem;
+            line-height: 1.6;
+            flex: 1;
+          }
+
+          .seccion-inicio .leer-reciente {
+            align-self: flex-start;
+            color: var(--verde-uabc) !important;
+            font-size: .86rem;
+            font-weight: 700;
+            text-decoration: none !important;
+          }
+
+          .seccion-inicio .leer-reciente:hover {
+            text-decoration: underline !important;
+          }
+
+          .seccion-inicio .estado-recientes {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin: 0;
+            padding: 3rem 1rem;
+            color: var(--texto-gris);
+            background: rgba(255,255,255,.70);
+            border: 1px dashed var(--borde);
+            border-radius: var(--radio);
+          }
+
+
+          /* ============================================================
+             Hero C &#183; IA &#183; D: letras grandes al centro y bienvenida debajo.
+             Una sola entrada al abrir; después nada se mueve.
+             Posición de las letras: .ciad-c / .ciad-ia / .ciad-d (left, top, width, height)
+             ============================================================ */
+          .seccion-inicio {
+            --ciad-ease: cubic-bezier(.22, 1, .36, 1);
+          }
+
+          .seccion-inicio section.contenedor-inicio {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: clamp(1.75rem, 5vh, 3.5rem);
+            width: 100%;
+            max-width: none;
+            min-height: calc(100vh - 84px);
+            min-height: calc(100svh - 84px);
+            margin: 0;
+            padding: clamp(2rem, 6vh, 4.5rem) 1.25rem;
+            text-align: center;
+          }
+
+          /* Lienzo con la proporción del logotipo oficial (LOGO_CIAD_2023): cada letra va en su
+             posición exacta en %, así IA cruza un poco dentro de la D como en el logo */
+          .seccion-inicio .ciad-letras {
+            position: relative;
+            width: min(92vw, 1100px, 134vh);
+            aspect-ratio: 2576 / 848;
+            margin: 0 auto;
+          }
+
+          .seccion-inicio .ciad-letra {
+            position: absolute;
+            display: block;
+            line-height: 0;
+          }
+
+          .seccion-inicio .ciad-c  { left: 0;      top: 2.95%; width: 29.39%; height: 97.05%; }
+          .seccion-inicio .ciad-ia { left: 31.52%; top: 4.48%; width: 41.85%; height: 93.51%; z-index: 1; }
+          .seccion-inicio .ciad-d  { left: 65.61%; top: 0;     width: 34.39%; height: 100%; }
+
+          .seccion-inicio .ciad-letra img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+          }
+
+          .seccion-inicio .ciad-bienvenida {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 720px;
+            margin: 0 auto;
+          }
+
+          .seccion-inicio .ciad-bienvenida .titulo-bienvenida {
+            font-size: clamp(2.25rem, 5vw, 3.75rem);
+            letter-spacing: -0.02em;
+            margin: 0 0 1rem;
+          }
+
+          .seccion-inicio .ciad-bienvenida .texto-bienvenida {
+            font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+            line-height: 1.6;
+            max-width: 60ch;
+            margin: 0 auto;
+          }
+
+          /* Estado inicial: solo si JS activó la entrada (sin JS todo se ve normal) */
+          .seccion-inicio.ciad-prep .ciad-letra,
+          .seccion-inicio.ciad-prep .titulo-bienvenida,
+          .seccion-inicio.ciad-prep .texto-bienvenida {
+            opacity: 0;
+          }
+
+          /* Entrada única: C, IA y D suben y se enfocan, después la bienvenida */
+          .seccion-inicio.ciad-listo .ciad-c  { animation: ciad-entrada 1.1s var(--ciad-ease) .10s both; }
+          .seccion-inicio.ciad-listo .ciad-ia { animation: ciad-entrada 1.1s var(--ciad-ease) .25s both; }
+          .seccion-inicio.ciad-listo .ciad-d  { animation: ciad-entrada 1.1s var(--ciad-ease) .40s both; }
+          .seccion-inicio.ciad-listo .titulo-bienvenida { animation: ciad-texto .9s var(--ciad-ease) .95s both; }
+          .seccion-inicio.ciad-listo .texto-bienvenida  { animation: ciad-texto .9s var(--ciad-ease) 1.10s both; }
+
+          @keyframes ciad-entrada {
+            from { opacity: 0; filter: blur(8px); transform: translate3d(0, 28px, 0) scale(.96); }
+            to   { opacity: 1; filter: none; transform: none; }
+          }
+
+          @keyframes ciad-texto {
+            from { opacity: 0; transform: translate3d(0, 12px, 0); }
+            to   { opacity: 1; transform: none; }
+          }
+
+          @media (prefers-reduced-motion: reduce) {
+            .seccion-inicio .ciad-letra,
+            .seccion-inicio .titulo-bienvenida,
+            .seccion-inicio .texto-bienvenida {
+              animation: none !important;
+              opacity: 1 !important;
+            }
+          }
+
+          @media (max-width: 1024px) {
+            .seccion-inicio .contenedor-inicio {
+              padding: 5rem 2.5rem 4rem;
+              gap: 3rem;
+            }
+
+            .seccion-inicio .seccion-recientes {
+              padding: 1rem 2.5rem 5rem;
+            }
+
+            .seccion-inicio .lista-recientes {
+              grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+          }
+
+          /* Ver todas las notas: un bloque por componente con su color */
+          .seccion-inicio .vista-notas {
+            padding-top: 3rem;
+          }
+
+          .seccion-inicio .notas-indice {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .6rem;
+            margin: 0 0 2.5rem;
+          }
+
+          .seccion-inicio .notas-indice a {
+            padding: .55rem 1.1rem;
+            border: 1px solid var(--acento);
+            border-radius: 999px;
+            color: var(--acento);
+            font-weight: 600;
+            font-size: .9rem;
+            text-decoration: none;
+          }
+
+          .seccion-inicio .notas-indice a:hover,
+          .seccion-inicio .notas-indice a:focus-visible {
+            background: var(--acento);
+            color: #fff;
+          }
+
+          .seccion-inicio .grupo-notas {
+            margin-bottom: 3.5rem;
+            scroll-margin-top: 110px;
+          }
+
+          .seccion-inicio .grupo-cabecera {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: .2rem 0 .2rem 1rem;
+            border-left: 5px solid var(--acento);
+          }
+
+          .seccion-inicio .grupo-titulo {
+            margin: 0;
+            color: var(--azul-oscuro);
+            font-size: 1.6rem;
+          }
+
+          .seccion-inicio .grupo-enlace {
+            color: var(--acento);
+            font-weight: 600;
+            white-space: nowrap;
+            text-decoration: none;
+          }
+
+          .seccion-inicio .grupo-notas .tarjeta-reciente {
+            border-top: 4px solid var(--acento);
+          }
+
+          .seccion-inicio .grupo-notas .leer-reciente {
+            color: var(--acento);
+          }
+
+          @media (max-width: 768px) {
+            .seccion-inicio .contenedor-inicio {
+              grid-template-columns: 1fr;
+              padding: 3rem 1.25rem 3.5rem;
+              gap: 2.5rem;
+            }
+
+            .seccion-inicio .titulo-bienvenida {
+              margin-bottom: 1.25rem;
+            }
+
+            .seccion-inicio .texto-bienvenida {
+              font-size: 1.05rem;
+            }
+
+            .seccion-inicio .imagen-bienvenida {
+              border-radius: 20px;
+              aspect-ratio: 4 / 3;
+            }
+
+            .seccion-inicio .seccion-recientes {
+              padding: .5rem 1.25rem 4rem;
+            }
+
+            .seccion-inicio .cabecera-recientes {
+              align-items: flex-start;
+              flex-direction: column;
+              gap: 1.25rem;
+            }
+
+            .seccion-inicio .lista-recientes {
+              grid-template-columns: 1fr;
+            }
+
+            .seccion-inicio .boton-todas {
+              width: 100%;
+            }
+          }
+        </style>
+
+        <div class='seccion-inicio'>
+          <b:if cond='data:view.isHomepage'>
+
+          <script type='text/javascript'>
+          //<![CDATA[
+          (function () {
+            var raiz = document.currentScript && document.currentScript.parentNode;
+
+            if (!raiz || !window.matchMedia || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+              return;
+            }
+
+            // Oculta el estado inicial antes del primer pintado
+            raiz.classList.add('ciad-prep');
+
+            var iniciado = false;
+
+            function iniciar() {
+              if (iniciado) {
+                return;
+              }
+
+              iniciado = true;
+              raiz.classList.add('ciad-listo');
+            }
+
+            // Espera a que las tres letras estén decodificadas para que la entrada no se corte
+            function esperarLetras() {
+              var imagenes = raiz.querySelectorAll('.ciad-letra img');
+              var pendientes = [];
+
+              for (var i = 0; i < imagenes.length; i++) {
+                pendientes.push(imagenes[i].decode ? imagenes[i].decode().catch(function () {}) : Promise.resolve());
+              }
+
+              var limite = new Promise(function (resolver) { setTimeout(resolver, 2500); });
+
+              Promise.race([Promise.all(pendientes), limite]).then(function () {
+                requestAnimationFrame(iniciar);
+              });
+            }
+
+            if (document.readyState === 'loading') {
+              document.addEventListener('DOMContentLoaded', esperarLetras);
+            } else {
+              esperarLetras();
+            }
+
+            // Seguro: si algo falla, el contenido aparece igual
+            setTimeout(iniciar, 4000);
+          })();
+          //]]>
+          </script>
+
+          <section class='contenedor-inicio'>
+
+            <div aria-label='Centro de Investigación para el Aprendizaje Digital' class='ciad-letras' role='img'>
+              <span class='ciad-letra ciad-c'><img alt='' decoding='async' fetchpriority='high' src='https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiXgIgggkuA41iINKDdJNbu0Jt4mPWVB81sRnsZ0GJL1Sx1eT61dvl1PN0uPKerhQHRjLAojlpj1YACN30-d8TFfc0b7LI0o7FpX35696RIgK2xBNis5Q_W3uc4NpK0c4nJ9YwwlR7X-S48nzorRWxlt6RzTPOYk6WMFmlwkEc1LqixqzWDBYRP35yw02A/s1600/C.png'/></span>
+              <span class='ciad-letra ciad-ia'><img alt='' decoding='async' fetchpriority='high' src='https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiBUgMxMcVdfJvwKMgNgnArOuspF4rG6_GuAJtBpa8cWc2P3Zh7G4kZu9XxJlSheSrWe2R1g69yY_N97zGKrWsNVfV8glY2CYwilphTLLjwfH2DjB_P-MonjkKT6BbXqtBuCFk5XgOLPuiUxxl_nr3_SmHRwNOtoPn3Wg98pmZ31NDe8rUm8xPh7latZ24/s1600/IA.png'/></span>
+              <span class='ciad-letra ciad-d'><img alt='' decoding='async' fetchpriority='high' src='https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifpdgEwjfItSoeQS86E0_LMuZd2PkPK8aA0En7gbS5-6CI6ejh5YWGPUPNfBK0CWOW__9CBS-0AH5ipvtK8KtIh2k34ZNEqpLJF43JGx-dEEe8P8EVD1KvfbmbIagXvSMCPrVU-dEPXgxLP7czwP1GX58bEHNLmAvyfjpiosnnv9-59w6qrtgl-gzIyrc/s1600/D.png'/></span>
+            </div>
+
+            <div class='ciad-bienvenida'>
+              <h1 class='titulo-bienvenida' data-editable='Bienvenida · título'>Bienvenido</h1>
+
+              <p class='texto-bienvenida' data-editable='Bienvenida · texto'>
+                Te damos la bienvenida a InnovaEduTec, el blog del CIAD UABC dedicado a la innovación educativa. Reunimos experiencias reales del aula, proyectos con realidad aumentada, inteligencia artificial y otras tecnologías emergentes, además de guías prácticas y reflexiones sobre ética y sociedad digital. Explora, inspírate y comparte cómo la tecnología puede hacer el aprendizaje más significativo.
+              </p>
+            </div>
+
+          </section>
+
+          <section class='seccion-recientes'>
+
+            <div class='cabecera-recientes'>
+
+              <div class='cabecera-recientes-texto'>
+                <p class='eyebrow-recientes' data-editable='Notas recientes · antetítulo'>Actualidad CIAD</p>
+                <h2 class='titulo-recientes' data-editable='Notas recientes · título'>Notas recientes</h2>
+                <p class='descripcion-recientes' data-editable='Notas recientes · texto'>
+                  Consulta las publicaciones más recientes del blog.
+                </p>
+              </div>
+
+              <a class='boton-todas' href='/p/todas-las-notas.html'>
+                Ver todas las notas
+              </a>
+
+            </div>
+
+            <div class='lista-recientes' id='lista-recientes-home'>
+              <p class='estado-recientes' id='estado-recientes-home'>
+                Cargando notas recientes&#8230;
+              </p>
+            </div>
+
+          </section>
+
+          <script type='text/javascript'>
+          //<![CDATA[
+          // Los textos de la portada se editan en el Panel CIAD (página /p/inicio.html) y aquí se copian.
+          // El HTML de la página se lee con DOMParser (inerte: no carga imágenes ni ejecuta nada).
+          (function () {
+            fetch('/feeds/pages/default/7758592480728629486?alt=json')
+              .then(function (r) { return r.ok ? r.json() : null; })
+              .then(function (d) {
+                var html = d && d.entry && d.entry.content && d.entry.content.$t;
+                if (!html) return;
+                var pagina = new DOMParser().parseFromString(html, 'text/html');
+                document.querySelectorAll('.contenedor-inicio [data-editable], .seccion-recientes:not(.vista-notas) [data-editable]').forEach(function (el) {
+                  var origen = pagina.querySelector('[data-editable="' + CSS.escape(el.getAttribute('data-editable')) + '"]');
+                  if (origen && origen.textContent.trim()) el.innerHTML = origen.innerHTML;
+                });
+              })
+              .catch(function () {});
+          })();
+          //]]>
+          </script>
+
+          <b:elseif cond='data:view.search.label'/>
+
+          <!-- Ver todas las entradas de una etiqueta (/search/label/X): tarjetas, no notas completas -->
+          <section class='seccion-recientes vista-notas'>
+
+            <div class='cabecera-recientes'>
+              <div class='cabecera-recientes-texto'>
+                <p class='eyebrow-recientes'>Actualidad CIAD</p>
+                <h1 class='titulo-recientes'><data:view.search.label/></h1>
+                <p class='descripcion-recientes'>
+                  Todas las notas de este tema.
+                </p>
+              </div>
+              <a class='boton-todas' href='/p/todas-las-notas.html'>
+                Ver todas las notas
+              </a>
+            </div>
+
+            <div class='lista-recientes' data-maximo='150' expr:data-etiqueta='data:view.search.label'>
+              <p class='estado-recientes'>Cargando notas&#8230;</p>
+            </div>
+
+          </section>
+
+          <b:else/>
+
+          <!-- Ver todas las notas (/search): mismas tarjetas del Inicio, agrupadas por componente -->
+          <section class='seccion-recientes vista-notas'>
+
+            <div class='cabecera-recientes'>
+              <div class='cabecera-recientes-texto'>
+                <p class='eyebrow-recientes'>Actualidad CIAD</p>
+                <h1 class='titulo-recientes'>Todas las notas</h1>
+                <p class='descripcion-recientes'>
+                  Explora las publicaciones por categoría.
+                </p>
+              </div>
+              <a class='boton-todas' href='/'>
+                Volver al inicio
+              </a>
+            </div>
+
+            <nav aria-label='Categorías' class='notas-indice'>
+              <a href='#tecnologia-educativa' style='--acento:#00723f'>Tecnología Educativa</a>
+              <a href='#tecnologias-emergentes' style='--acento:#1f5fa8'>Tecnologías Emergentes</a>
+              <a href='#etica-sociedad-digital' style='--acento:#8a3f9e'>Ética y Sociedad</a>
+              <a href='#innovacion' style='--acento:#c27c0e'>Innovación</a>
+            </nav>
+
+            <section class='grupo-notas' id='tecnologia-educativa' style='--acento:#00723f'>
+              <div class='grupo-cabecera'>
+                <h2 class='grupo-titulo'>Tecnología Educativa</h2>
+                <a class='grupo-enlace' href='/p/tecnologia-educativa.html'>Ver sección &#8594;</a>
+              </div>
+              <div class='lista-recientes' data-etiqueta='categoria-tecnologia-educativa'>
+                <p class='estado-recientes'>Cargando notas&#8230;</p>
+              </div>
+            </section>
+
+            <section class='grupo-notas' id='tecnologias-emergentes' style='--acento:#1f5fa8'>
+              <div class='grupo-cabecera'>
+                <h2 class='grupo-titulo'>Tecnologías Emergentes</h2>
+                <a class='grupo-enlace' href='/p/tecnologias-emergentes.html'>Ver sección &#8594;</a>
+              </div>
+              <div class='lista-recientes' data-etiqueta='categoria-tecnologias-emergentes'>
+                <p class='estado-recientes'>Cargando notas&#8230;</p>
+              </div>
+            </section>
+
+            <section class='grupo-notas' id='etica-sociedad-digital' style='--acento:#8a3f9e'>
+              <div class='grupo-cabecera'>
+                <h2 class='grupo-titulo'>Ética y Sociedad</h2>
+                <a class='grupo-enlace' href='/p/etica-y-sociedad-digital.html'>Ver sección &#8594;</a>
+              </div>
+              <div class='lista-recientes' data-etiqueta='categoria-etica-sociedad-digital'>
+                <p class='estado-recientes'>Cargando notas&#8230;</p>
+              </div>
+            </section>
+
+            <section class='grupo-notas' id='innovacion' style='--acento:#c27c0e'>
+              <div class='grupo-cabecera'>
+                <h2 class='grupo-titulo'>Innovación</h2>
+                <a class='grupo-enlace' href='/p/innovacion.html'>Ver sección &#8594;</a>
+              </div>
+              <div class='lista-recientes' data-etiqueta='categoria-innovacion'>
+                <p class='estado-recientes'>Cargando notas&#8230;</p>
+              </div>
+            </section>
+
+          </section>
+
+          </b:if>
+
+        </div>
+
+        <script type='text/javascript'>
+        //<![CDATA[
+        (function () {
+
+          var MAXIMO_RECIENTES = 3;
+          // shortcut: máx. 12 notas por componente, el resto se ve en la página de la sección; subir si hay más
+          var MAXIMO_POR_COMPONENTE = 12;
+          var IMAGEN_GENERICA = "data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 800 500%27%3E%3Crect width=%27800%27 height=%27500%27 fill=%27%23e6f2ec%27/%3E%3Cpath d=%27M0 500L800 290V500z%27 fill=%27%2300723f%27 opacity=%27.14%27/%3E%3C/svg%3E";
+
+          function rutaFeedRecientes(etiqueta, maximo) {
+            return '/feeds/posts/default' +
+              (etiqueta ? '/-/' + encodeURIComponent(etiqueta) : '') +
+              '?alt=json&orderby=published&max-results=' +
+              (maximo || (etiqueta ? MAXIMO_POR_COMPONENTE : MAXIMO_RECIENTES));
+          }
+
+          function quitarHtml(texto) {
+            var caja = document.createElement('div');
+            caja.innerHTML = texto || '';
+
+            return (caja.textContent || '')
+              .replace(/\s+/g, ' ')
+              .trim();
+          }
+
+          function recortar(texto, limite) {
+            if (!texto || texto.length <= limite) {
+              return texto || '';
+            }
+
+            return texto
+              .substring(0, limite)
+              .replace(/\s+\S*$/, '') + '…';
+          }
+
+          function obtenerEnlace(entrada) {
+            var enlaces = entrada.link || [];
+
+            for (var i = 0; i < enlaces.length; i++) {
+              if (enlaces[i].rel === 'alternate') {
+                return enlaces[i].href;
+              }
+            }
+
+            return '#';
+          }
+
+          function obtenerImagen(entrada, indice) {
+            // Panel CIAD (imagenCiad): la imagen de las tarjetas de la nota (o la principal) va antes que la miniatura de Blogger
+            var contenidoCiad = entrada.content ? entrada.content.$t || '' : '';
+            var imagenCiad = contenidoCiad.match(/\x3cimg[^>]*class="articulo-tarjeta"[^>]*src="([^"]+)"/) || contenidoCiad.match(/\x3cfigure class="articulo-portada"[^>]*>\x3cimg[^>]*src="([^"]+)"/);
+            if (imagenCiad) { return imagenCiad[1].replace(/\x26amp;/g, '\x26'); }
+
+            if (
+              entrada.media$thumbnail &&
+              entrada.media$thumbnail.url
+            ) {
+              return entrada.media$thumbnail.url
+                .replace(/\/s72-c\//, '/w900-h506-c/');
+            }
+
+            var contenido =
+              (entrada.content && entrada.content.$t) ||
+              (entrada.summary && entrada.summary.$t) ||
+              '';
+
+            var caja = document.createElement('div');
+            caja.innerHTML = contenido;
+
+            var imagen = caja.querySelector('img');
+
+            if (imagen && imagen.src) {
+              return imagen.src;
+            }
+
+            return IMAGEN_GENERICA;
+          }
+
+          // Texto de la entrada sin la ficha del autor ni estilos, con espacios entre bloques
+          function textoResumen(html) {
+            var caja = document.createElement('div');
+            caja.innerHTML = html || '';
+            caja.querySelectorAll('style, script, .articulo-ficha').forEach(function (el) { el.remove(); });
+            caja.querySelectorAll('p, h1, h2, h3, h4, li, div, br').forEach(function (el) { el.insertAdjacentText('afterend', ' '); });
+            return (caja.textContent || '').replace(/\s+/g, ' ').trim();
+          }
+
+          function obtenerResumen(entrada) {
+            var contenido =
+              (entrada.summary && entrada.summary.$t) ||
+              (entrada.content && entrada.content.$t) ||
+              '';
+
+            return recortar(
+              textoResumen(contenido),
+              155
+            );
+          }
+
+          function formatearFecha(iso) {
+            var fecha = new Date(iso);
+
+            if (isNaN(fecha)) {
+              return '';
+            }
+
+            return fecha.toLocaleDateString(
+              'es-MX',
+              {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+              }
+            );
+          }
+
+          function crearTarjeta(entrada, indice) {
+
+            var enlace = obtenerEnlace(entrada);
+            var titulo = quitarHtml(
+              entrada.title ? entrada.title.$t : 'Publicación'
+            );
+
+            var articulo = document.createElement('article');
+            articulo.className = 'tarjeta-reciente';
+
+            var enlaceImagen = document.createElement('a');
+            enlaceImagen.className = 'enlace-imagen-reciente';
+            enlaceImagen.href = enlace;
+
+            var imagen = document.createElement('img');
+            imagen.className = 'imagen-reciente';
+            imagen.src = obtenerImagen(entrada, indice);
+            imagen.alt = '';
+            imagen.loading = 'lazy';
+            imagen.addEventListener('error', function () {
+              if (this.dataset.fallbackAplicado === '1') {
+                return;
+              }
+
+              this.dataset.fallbackAplicado = '1';
+              this.src = IMAGEN_GENERICA;
+            });
+
+            enlaceImagen.appendChild(imagen);
+
+            var contenido = document.createElement('div');
+            contenido.className = 'contenido-reciente';
+
+            var fecha = document.createElement('p');
+            fecha.className = 'fecha-reciente';
+            fecha.textContent = formatearFecha(
+              entrada.published ? entrada.published.$t : ''
+            );
+
+            var h3 = document.createElement('h3');
+            h3.className = 'titulo-reciente';
+
+            var enlaceTitulo = document.createElement('a');
+            enlaceTitulo.href = enlace;
+            enlaceTitulo.textContent = titulo;
+            h3.appendChild(enlaceTitulo);
+
+            var resumen = document.createElement('p');
+            resumen.className = 'resumen-reciente';
+            resumen.textContent = obtenerResumen(entrada);
+
+            var leer = document.createElement('a');
+            leer.className = 'leer-reciente';
+            leer.href = enlace;
+            leer.textContent = 'Leer nota';
+
+            contenido.appendChild(fecha);
+            contenido.appendChild(h3);
+            contenido.appendChild(resumen);
+            contenido.appendChild(leer);
+
+            articulo.appendChild(enlaceImagen);
+            articulo.appendChild(contenido);
+
+            return articulo;
+          }
+
+          function cargarRecientes(lista, etiqueta, maximo) {
+
+            var estado = lista.querySelector('.estado-recientes');
+
+            fetch(rutaFeedRecientes(etiqueta, maximo))
+              .then(function (respuesta) {
+
+                if (!respuesta.ok) {
+                  throw new Error('Respuesta no válida');
+                }
+
+                return respuesta.json();
+              })
+              .then(function (datos) {
+
+                var entradas =
+                  (datos.feed && datos.feed.entry) || [];
+
+                lista.innerHTML = '';
+
+                if (!entradas.length) {
+                  var vacio = document.createElement('p');
+                  vacio.className = 'estado-recientes';
+                  vacio.textContent = etiqueta
+                    ? 'Aún no hay notas en esta categoría.'
+                    : 'Aún no hay notas publicadas.';
+                  lista.appendChild(vacio);
+                  return;
+                }
+
+                for (var i = 0; i < entradas.length; i++) {
+                  lista.appendChild(
+                    crearTarjeta(entradas[i], i + 1)
+                  );
+                }
+              })
+              .catch(function (error) {
+
+                console.error(
+                  'CIAD · Notas recientes del Inicio:',
+                  error
+                );
+
+                if (estado) {
+                  estado.textContent =
+                    'No fue posible cargar las notas recientes en este momento.';
+                }
+              });
+          }
+
+          document.querySelectorAll('#lista-recientes-home, .lista-recientes[data-etiqueta]').forEach(function (lista) {
+            cargarRecientes(lista, lista.getAttribute('data-etiqueta'), lista.getAttribute('data-maximo'));
+          });
+
+        })();
+        //]]>
+        </script>
+
+      </b:if>
+
+      <b:section class='main-section' id='main' showaddelement='no'>
+        <b:widget id='Blog1' locked='true' title='Entradas del blog' type='Blog' version='2' visible='true'>
+          <b:widget-settings>
+            <b:widget-setting name='showDateHeader'>false</b:widget-setting>
+            <b:widget-setting name='commentLabel'>comments</b:widget-setting>
+            <b:widget-setting name='showShareButtons'>true</b:widget-setting>
+            <b:widget-setting name='showCommentLink'>true</b:widget-setting>
+            <b:widget-setting name='showAuthor'>false</b:widget-setting>
+            <b:widget-setting name='style.unittype'>TextAndImage</b:widget-setting>
+            <b:widget-setting name='reactionsLabel'/>
+            <b:widget-setting name='showAuthorProfile'>false</b:widget-setting>
+            <b:widget-setting name='style.layout'>1x1</b:widget-setting>
+            <b:widget-setting name='showLabels'>true</b:widget-setting>
+            <b:widget-setting name='showLocation'>false</b:widget-setting>
+            <b:widget-setting name='postLabelsLabel'/>
+            <b:widget-setting name='showTimestamp'>true</b:widget-setting>
+            <b:widget-setting name='postsPerAd'>1</b:widget-setting>
+            <b:widget-setting name='showBacklinks'>false</b:widget-setting>
+            <b:widget-setting name='showInlineAds'>false</b:widget-setting>
+            <b:widget-setting name='showReactions'>false</b:widget-setting>
+          </b:widget-settings>
+          <b:includable id='main' var='this'>
+
+            <b:if cond='data:view.isSearch and data:posts.empty'>
+              <div class='sin-resultados'>
+                <h2>No se encontraron entradas</h2>
+                <p>Prueba con otra palabra o usa la <a href='/p/buscador.html'>búsqueda avanzada</a>.</p>
+              </div>
+            </b:if>
+
+            <div class='blog-posts hfeed'>
+
+              <b:loop values='data:posts' var='post'>
+
+                <article class='post-outer-container'>
+
+                  <div class='post-outer'>
+
+                    <div class='post'>
+
+                      <b:if cond='data:post.title'>
+
+                        <h3 class='post-title entry-title'>
+
+                          <b:if cond='data:post.link'>
+
+                            <a expr:href='data:post.link'>
+                              <data:post.title/>
+                            </a>
+
+                          <b:else/>
+
+                            <b:if cond='data:post.url'>
+
+                              <a expr:href='data:post.url'>
+                                <data:post.title/>
+                              </a>
+
+                            <b:else/>
+
+                              <data:post.title/>
+
+                            </b:if>
+
+                          </b:if>
+
+                        </h3>
+
+                      </b:if>
+
+                      <div class='post-body entry-content'>
+
+                        <data:post.body/>
+
+                      </div>
+
+                      <b:if cond='data:post.labels'>
+
+                        <div class='post-footer'>
+
+                          <div class='post-labels'>
+
+                            <b:loop values='data:post.labels' var='label'>
+
+                              <a class='label-name' expr:href='data:label.url' rel='tag'>
+                                <data:label.name/>
+                              </a>
+
+                            </b:loop>
+
+                          </div>
+
+                        </div>
+
+                      </b:if>
+
+                    </div>
+
+                  </div>
+
+                  <b:if cond='data:view.isPost'>
+
+                    <section class='seccion-comentarios' expr:data-post-id='data:post.id' expr:data-post-titulo='data:post.title' expr:data-post-url='data:post.url' id='comments'>
+
+                      <style>
+                        .seccion-comentarios {
+                          --verde: #00723F;
+                          --verde-oscuro: #005a31;
+                          --verde-claro: #e6f2ec;
+                          --amarillo: #DD971A;
+                          --amarillo-claro: #fdf4dc;
+                          --rojo: #b3261e;
+                          --texto: #14243a;
+                          --texto-suave: #5d6b7c;
+                          --borde: #e2e7ed;
+                          font-family: &#39;Noto Sans&#39;, system-ui, sans-serif;
+                          color: var(--texto);
+                          padding: 2rem;
+                          border-top: 1px solid var(--borde);
+                          scroll-margin-top: 110px;
+                        }
+                        .seccion-comentarios * { box-sizing: border-box; }
+                        .seccion-comentarios .titulo-comentarios {
+                          font-family: &#39;Bitter&#39;, Georgia, serif;
+                          font-size: 1.6rem; font-weight: 800; margin: 0 0 1.25rem;
+                        }
+                        .seccion-comentarios .caja-escribir {
+                          background: #f6f8fa; border: 1px solid var(--borde);
+                          border-radius: 14px; padding: 1.25rem; margin-bottom: 1.75rem;
+                        }
+                        .seccion-comentarios .autor-actual { display: flex; align-items: center; gap: .6rem; font-weight: 600; margin-bottom: .75rem; }
+                        .seccion-comentarios textarea {
+                          width: 100%; min-height: 110px; resize: vertical;
+                          font: inherit; font-size: .95rem; color: var(--texto);
+                          border: 1px solid var(--borde); border-radius: 10px; padding: .75rem; background: #fff;
+                        }
+                        .seccion-comentarios textarea:focus { outline: none; border-color: var(--verde); box-shadow: 0 0 0 3px rgba(0,114,63,.15); }
+                        .seccion-comentarios .pie-escribir {
+                          display: flex; align-items: center; justify-content: space-between;
+                          gap: 1rem; flex-wrap: wrap; margin-top: .75rem;
+                        }
+                        .seccion-comentarios .aviso-revision { font-size: .82rem; color: var(--texto-suave); margin: 0; }
+                        .seccion-comentarios .contador-texto { font-size: .8rem; color: var(--texto-suave); }
+                        .seccion-comentarios .boton-comentar {
+                          background: var(--verde); color: #fff; border: 0; border-radius: 999px;
+                          padding: .65rem 1.4rem; font: inherit; font-weight: 700; font-size: .9rem; cursor: pointer;
+                        }
+                        .seccion-comentarios .boton-comentar:hover { background: var(--verde-oscuro); }
+                        .seccion-comentarios .boton-comentar:disabled { opacity: .6; cursor: wait; }
+                        .seccion-comentarios .mensaje-caja { font-size: .9rem; color: var(--texto-suave); margin: 0 0 .9rem; }
+                        .seccion-comentarios .mensaje-caja.exito { color: var(--verde); font-weight: 600; }
+                        .seccion-comentarios .mensaje-caja.error { color: var(--rojo); font-weight: 600; }
+
+                        .seccion-comentarios .avatar {
+                          width: 38px; height: 38px; border-radius: 50%; object-fit: cover; flex-shrink: 0;
+                          background: var(--verde-claro); color: var(--verde); font-weight: 700;
+                          display: inline-flex; align-items: center; justify-content: center;
+                        }
+                        .seccion-comentarios .lista-comentarios { display: grid; gap: 1rem; }
+                        .seccion-comentarios .comentario { display: grid; grid-template-columns: 38px 1fr; gap: .8rem; }
+                        .seccion-comentarios .comentario-cabecera { display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap; }
+                        .seccion-comentarios .comentario-nombre { font-weight: 700; }
+                        .seccion-comentarios .comentario-fecha { font-size: .8rem; color: var(--texto-suave); }
+                        .seccion-comentarios .comentario-texto { margin: .25rem 0 0; white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.6; }
+                        .seccion-comentarios .estado-propio {
+                          display: inline-block; font-size: .75rem; font-weight: 700;
+                          border-radius: 999px; padding: .1rem .6rem;
+                        }
+                        .seccion-comentarios .estado-propio.pendiente { background: var(--amarillo-claro); color: #8a5d00; }
+                        .seccion-comentarios .estado-propio.rechazado { background: #fbe9e7; color: var(--rojo); }
+                        .seccion-comentarios .nota-moderador {
+                          margin-top: .4rem; font-size: .85rem; border-left: 3px solid var(--amarillo);
+                          background: var(--amarillo-claro); padding: .4rem .7rem; border-radius: 0 8px 8px 0;
+                        }
+                        .seccion-comentarios .subtitulo-propios { font-size: .95rem; font-weight: 700; margin: 0 0 .75rem; color: var(--texto-suave); }
+                        .seccion-comentarios .bloque-propios { margin-bottom: 1.75rem; }
+                        .seccion-comentarios .sin-comentarios { color: var(--texto-suave); margin: 0; }
+
+                        @media (max-width: 600px) {
+                          .seccion-comentarios { padding: 1.25rem; }
+                          .seccion-comentarios .boton-comentar { width: 100%; }
+                        }
+                      </style>
+
+                      <h2 class='titulo-comentarios'>Comentarios <span id='comentarios-total'/></h2>
+
+                      <div class='caja-escribir'>
+                        <p class='mensaje-caja' id='comentarios-mensaje'>Cargando&#8230;</p>
+
+                        <div hidden='hidden' id='comentarios-sin-sesion'>
+                          <button class='boton-comentar' id='comentarios-iniciar' type='button'>Inicia sesión con Google para comentar</button>
+                        </div>
+
+                        <div hidden='hidden' id='comentarios-formulario'>
+                          <div class='autor-actual' id='comentarios-autor'/>
+                          <textarea id='comentarios-texto' maxlength='1000' placeholder='Escribe tu comentario…'/>
+                          <div class='pie-escribir'>
+                            <p class='aviso-revision'>Tu comentario será revisado por el equipo del CIAD antes de publicarse. <span class='contador-texto'><span id='comentarios-contador'>0</span>/1000</span></p>
+                            <button class='boton-comentar' id='comentarios-enviar' type='button'>Enviar comentario</button>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class='bloque-propios' hidden='hidden' id='comentarios-propios'>
+                        <p class='subtitulo-propios'>Tus comentarios en esta entrada</p>
+                        <div class='lista-comentarios' id='comentarios-propios-lista'/>
+                      </div>
+
+                      <div class='lista-comentarios' id='comentarios-lista'/>
+
+                      <script type='module'>
+//<![CDATA[
+import {
+  collection, addDoc, query, where, getDocs, getDoc, doc, serverTimestamp
+} from 'https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js';
+
+const seccion = document.getElementById('comments');
+const POST = {
+  id: String(seccion.dataset.postId || ''),
+  url: seccion.dataset.postUrl || location.href.split('#')[0],
+  titulo: seccion.dataset.postTitulo || document.title
+};
+const MAXIMO_MOSTRADOS = 50;
+
+const $ = (id) => document.getElementById(id);
+const mensaje = $('comentarios-mensaje');
+const sinSesion = $('comentarios-sin-sesion');
+const formulario = $('comentarios-formulario');
+const areaTexto = $('comentarios-texto');
+const botonEnviar = $('comentarios-enviar');
+
+let db = null;
+let usuario = null;
+let enviando = false;
+
+// DEF-009: evita comentarios repetidos o enviados muy seguido
+const ESPERA_ENTRE_COMENTARIOS_MS = 60000;
+let textosPropios = [];   // textos que el usuario ya envió en esta entrada
+let ultimoEnvio = 0;
+
+function normalizarTexto(t) {
+  return String(t || '').toLowerCase().replace(/\s+/g, ' ').trim();
+}
+
+function avisar(texto, tipo) {
+  mensaje.textContent = texto || '';
+  mensaje.className = 'mensaje-caja' + (tipo ? ' ' + tipo : '');
+  mensaje.hidden = !texto;
+}
+
+function fecha(valor) {
+  const d = valor && valor.toDate ? valor.toDate() : null;
+  return d ? d.toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
+}
+
+function avatar(foto, nombre) {
+  if (foto) {
+    const img = document.createElement('img');
+    img.className = 'avatar';
+    img.src = foto;
+    img.alt = '';
+    img.referrerPolicy = 'no-referrer';
+    return img;
+  }
+  const span = document.createElement('span');
+  span.className = 'avatar';
+  span.textContent = (nombre || '?').trim().charAt(0).toUpperCase();
+  return span;
+}
+
+function crearComentario(c, propio) {
+  const art = document.createElement('article');
+  art.className = 'comentario';
+  art.appendChild(avatar(c.foto, c.nombre));
+
+  const cuerpo = document.createElement('div');
+  const cabecera = document.createElement('div');
+  cabecera.className = 'comentario-cabecera';
+
+  const nombre = document.createElement('span');
+  nombre.className = 'comentario-nombre';
+  nombre.textContent = c.nombre || 'Lector';
+  cabecera.appendChild(nombre);
+
+  const cuando = document.createElement('span');
+  cuando.className = 'comentario-fecha';
+  cuando.textContent = fecha(c.creado);
+  cabecera.appendChild(cuando);
+
+  if (propio) {
+    const estado = document.createElement('span');
+    estado.className = 'estado-propio ' + c.estado;
+    estado.textContent = c.estado === 'pendiente' ? 'En revisión' : 'No publicado';
+    cabecera.appendChild(estado);
+  }
+
+  const texto = document.createElement('p');
+  texto.className = 'comentario-texto';
+  texto.textContent = c.texto;
+
+  cuerpo.appendChild(cabecera);
+  cuerpo.appendChild(texto);
+
+  if (propio && c.estado === 'rechazado' && c.notaModerador) {
+    const nota = document.createElement('div');
+    nota.className = 'nota-moderador';
+    nota.textContent = 'Nota del equipo editorial: ' + c.notaModerador;
+    cuerpo.appendChild(nota);
+  }
+
+  art.appendChild(cuerpo);
+  return art;
+}
+
+function ordenarRecientes(lista) {
+  return lista.sort((a, b) => ((b.creado && b.creado.toMillis ? b.creado.toMillis() : 0) - (a.creado && a.creado.toMillis ? a.creado.toMillis() : 0)));
+}
+
+async function cargarPublicados() {
+  const lista = $('comentarios-lista');
+  try {
+    const q = query(collection(db, 'comentarios'),
+      where('postId', '==', POST.id),
+      where('estado', '==', 'publicado'));
+    const res = await getDocs(q);
+    const comentarios = ordenarRecientes(res.docs.map((d) => d.data())).slice(0, MAXIMO_MOSTRADOS);
+
+    lista.innerHTML = '';
+    $('comentarios-total').textContent = comentarios.length ? '(' + comentarios.length + ')' : '';
+
+    if (!comentarios.length) {
+      const vacio = document.createElement('p');
+      vacio.className = 'sin-comentarios';
+      vacio.textContent = 'Aún no hay comentarios. Sé el primero en comentar.';
+      lista.appendChild(vacio);
+      return;
+    }
+    comentarios.forEach((c) => lista.appendChild(crearComentario(c, false)));
+  } catch (err) {
+    console.error('Comentarios CIAD:', err);
+    lista.innerHTML = '<p class="sin-comentarios">No fue posible cargar los comentarios.</p>';
+  }
+}
+
+async function cargarPropios() {
+  const bloque = $('comentarios-propios');
+  const lista = $('comentarios-propios-lista');
+  if (!usuario) { bloque.hidden = true; return; }
+
+  try {
+    const q = query(collection(db, 'comentarios'),
+      where('postId', '==', POST.id),
+      where('uid', '==', usuario.uid));
+    const res = await getDocs(q);
+    const todos = res.docs.map((d) => d.data());
+    textosPropios = todos.map((c) => normalizarTexto(c.texto));
+    const recientes = todos.map((c) => (c.creado && c.creado.toMillis ? c.creado.toMillis() : 0));
+    ultimoEnvio = Math.max(ultimoEnvio, ...recientes, 0);
+    const propios = ordenarRecientes(todos.filter((c) => c.estado !== 'publicado'));
+
+    lista.innerHTML = '';
+    propios.forEach((c) => lista.appendChild(crearComentario(c, true)));
+    bloque.hidden = !propios.length;
+  } catch (err) {
+    console.error('Comentarios CIAD (propios):', err);
+    bloque.hidden = true;
+  }
+}
+
+async function estaBloqueado() {
+  try {
+    const d = await getDoc(doc(db, 'bloqueados', usuario.uid));
+    return d.exists();
+  } catch (err) {
+    return false;
+  }
+}
+
+async function aplicarSesion(u) {
+  usuario = u && u.uid ? u : null;
+
+  if (!usuario) {
+    formulario.hidden = true;
+    sinSesion.hidden = false;
+    avisar('');
+    $('comentarios-propios').hidden = true;
+    return;
+  }
+
+  sinSesion.hidden = true;
+
+  if (await estaBloqueado()) {
+    formulario.hidden = true;
+    avisar('Tu cuenta no puede publicar comentarios en este blog.', 'error');
+    return;
+  }
+
+  const autor = $('comentarios-autor');
+  autor.innerHTML = '';
+  autor.appendChild(avatar(usuario.photoURL, usuario.displayName));
+  autor.appendChild(document.createTextNode(usuario.displayName || usuario.email));
+
+  avisar('');
+  formulario.hidden = false;
+  cargarPropios();
+}
+
+areaTexto.addEventListener('input', () => {
+  $('comentarios-contador').textContent = areaTexto.value.length;
+});
+
+botonEnviar.addEventListener('click', async () => {
+  if (enviando || !usuario) return;
+  const texto = areaTexto.value.trim();
+
+  if (texto.length < 2) {
+    avisar('Escribe tu comentario antes de enviarlo.', 'error');
+    areaTexto.focus();
+    return;
+  }
+
+  if (textosPropios.indexOf(normalizarTexto(texto)) !== -1) {
+    avisar('Ya enviaste este comentario en esta entrada.', 'error');
+    return;
+  }
+
+  const faltan = ultimoEnvio + ESPERA_ENTRE_COMENTARIOS_MS - Date.now();
+  if (faltan > 0) {
+    avisar('Espera ' + Math.ceil(faltan / 1000) + ' segundos antes de enviar otro comentario.', 'error');
+    return;
+  }
+
+  enviando = true;
+  botonEnviar.disabled = true;
+  botonEnviar.textContent = 'Enviando…';
+
+  try {
+    await addDoc(collection(db, 'comentarios'), {
+      postId: POST.id,
+      postUrl: POST.url,
+      postTitulo: POST.titulo,
+      uid: usuario.uid,
+      nombre: usuario.displayName || usuario.email,
+      foto: usuario.photoURL || '',
+      texto: texto,
+      estado: 'pendiente',
+      creado: serverTimestamp()
+    });
+    textosPropios.push(normalizarTexto(texto));
+    ultimoEnvio = Date.now();
+    areaTexto.value = '';
+    $('comentarios-contador').textContent = '0';
+    avisar('¡Gracias! Tu comentario fue enviado y aparecerá cuando el equipo del CIAD lo apruebe.', 'exito');
+    cargarPropios();
+  } catch (err) {
+    console.error('Comentarios CIAD (envío):', err);
+    avisar(err && err.code === 'permission-denied'
+      ? 'No se pudo enviar tu comentario. Revisa que no supere los 1000 caracteres.'
+      : 'No se pudo enviar tu comentario. Intenta de nuevo en un momento.', 'error');
+  } finally {
+    enviando = false;
+    botonEnviar.disabled = false;
+    botonEnviar.textContent = 'Enviar comentario';
+  }
+});
+
+$('comentarios-iniciar').addEventListener('click', () => {
+  try {
+    if (window.google && google.accounts && google.accounts.id) google.accounts.id.prompt();
+  } catch (e) {  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+function esperarFirebase() {
+  return new Promise((resolver, rechazar) => {
+    let intentos = 0;
+    const revisar = setInterval(() => {
+      intentos++;
+      if (window.CIADFirebase && window.CIADFirebase.db) {
+        clearInterval(revisar);
+        resolver(window.CIADFirebase);
+      } else if (intentos >= 40) {
+        clearInterval(revisar);
+        rechazar(new Error('Firebase no cargó'));
+      }
+    }, 250);
+  });
+}
+
+window.addEventListener('ciad-auth-changed', (e) => {
+  if (db) aplicarSesion(e.detail && e.detail.user);
+});
+
+try {
+  const fb = await esperarFirebase();
+  db = fb.db;
+  cargarPublicados();
+  aplicarSesion(fb.getCurrentUser ? fb.getCurrentUser() : null);
+} catch (err) {
+  console.error('Comentarios CIAD:', err);
+  avisar('Los comentarios no están disponibles en este momento.', 'error');
+}
+//]]>
+                      </script>
+                    </section>
+
+                  </b:if>
+
+                </article>
+
+              </b:loop>
+
+            </div>
+
+            <b:if cond='data:view.isMultipleItems'>
+
+              <div class='blog-pager' id='blog-pager'>
+
+                <b:if cond='data:newerPageUrl'>
+
+                  <a class='blog-pager-newer-link' expr:href='data:newerPageUrl'>
+                    <data:messages.newerPosts/>
+                  </a>
+
+                </b:if>
+
+                <b:if cond='data:olderPageUrl'>
+
+                  <a class='blog-pager-older-link' expr:href='data:olderPageUrl'>
+                    <data:messages.olderPosts/>
+                  </a>
+
+                </b:if>
+
+              </div>
+
+            </b:if>
+
+          </b:includable>
+          <b:includable id='aboutPostAuthor'>
+  <div class='author-name'>
+    <a class='g-profile' expr:href='data:post.author.profileUrl' rel='author' title='author profile'>
+      <span>
+        <data:post.author.name/>
+      </span>
+    </a>
+  </div>
+  <div>
+    <span class='author-desc'>
+      <data:post.author.aboutMe/>
+    </span>
+  </div>
+</b:includable>
+          <b:includable id='addComments'>
+  <a expr:href='data:post.commentsUrl' expr:onclick='data:post.commentsUrlOnclick'>
+    <b:message name='messages.postAComment'/>
+  </a>
+</b:includable>
+          <b:includable id='blogThisShare'>
+  <b:with value='&quot;window.open(this.href, \&quot;_blank\&quot;, \&quot;height=270,width=475\&quot;); return false;&quot;' var='onclick'>
+    <b:include name='platformShare'/>
+  </b:with>
+</b:includable>
+          <b:includable id='bylineByName' var='byline'>
+  <b:switch var='data:byline.name'>
+  <b:case value='share'/>
+    <b:include cond='data:post.shareUrl' name='postShareButtons'/>
+  <b:case value='comments'/>
+    <b:include cond='data:post.allowComments' name='postCommentsLink'/>
+  <b:case value='location'/>
+    <b:include cond='data:post.location' name='postLocation'/>
+  <b:case value='timestamp'/>
+    <b:include cond='not data:view.isPage' name='postTimestamp'/>
+  <b:case value='author'/>
+    <b:include name='postAuthor'/>
+  <b:case value='labels'/>
+    <b:include cond='data:post.labels' name='postLabels'/>
+  <b:case value='icons'/>
+    <b:include cond='data:post.emailPostUrl' name='emailPostIcon'/>
+  </b:switch>
+</b:includable>
+          <b:includable id='bylineRegion' var='regionItems'>
+  <b:loop values='data:regionItems' var='byline'>
+    <b:include data='byline' name='bylineByName'/>
+  </b:loop>
+</b:includable>
+          <b:includable id='commentAuthorAvatar'>
+  <div class='avatar-image-container'>
+    <img class='author-avatar' expr:src='data:comment.authorAvatarSrc' height='35' width='35'/>
+  </div>
+</b:includable>
+          <b:includable id='commentDeleteIcon' var='comment'>
+  <span expr:class='&quot;item-control &quot; + data:comment.adminClass'>
+    <b:if cond='data:showCmtPopup'>
+      <div class='goog-toggle-button'>
+        <div class='goog-inline-block comment-action-icon'/>
+      </div>
+    <b:else/>
+      <a class='comment-delete' expr:href='data:comment.deleteUrl' expr:title='data:messages.deleteComment'>
+        <img src='https://resources.blogblog.com/img/icon_delete13.gif'/>
+      </a>
+    </b:if>
+  </span>
+</b:includable>
+          <b:includable id='commentForm' var='post'>
+  <div class='comment-form'>
+    <a name='comment-form'/>
+    <h4 id='comment-post-message'><data:messages.postAComment/></h4>
+    <b:if cond='data:this.messages.blogComment != &quot;&quot;'>
+      <p><data:this.messages.blogComment/></p>
+    </b:if>
+    <b:include data='post' name='commentFormIframeSrc'/>
+    <iframe allowtransparency='allowtransparency' class='blogger-iframe-colorize blogger-comment-from-post' expr:height='data:cmtIframeInitialHeight ?: &quot;90px&quot;' frameborder='0' id='comment-editor' name='comment-editor' src='' width='100%'/>
+    <data:post.cmtfpIframe/>
+    <script type='text/javascript'>
+      BLOG_CMT_createIframe(&#39;<data:post.appRpcRelayPath/>&#39;);
+    </script>
+  </div>
+</b:includable>
+          <b:includable id='commentFormIframeSrc' var='post'>
+  <a expr:href='data:post.commentFormIframeSrc' id='comment-editor-src'/>
+</b:includable>
+          <b:includable id='commentItem' var='comment'>
+  <div class='comment' expr:id='&quot;c&quot; + data:comment.id'>
+    <b:include cond='data:blog.enabledCommentProfileImages' name='commentAuthorAvatar'/>
+
+    <div class='comment-block'>
+      <div class='comment-author'>
+        <b:if cond='data:comment.authorUrl'>
+          <b:message name='messages.authorSaidWithLink'>
+            <b:param expr:value='data:comment.author' name='authorName'/>
+            <b:param expr:value='data:comment.authorUrl' name='authorUrl'/>
+          </b:message>
+        <b:else/>
+          <b:message name='messages.authorSaid'>
+            <b:param expr:value='data:comment.author' name='authorName'/>
+          </b:message>
+        </b:if>
+      </div>
+      <div expr:class='&quot;comment-body&quot; + (data:comment.isDeleted ? &quot; deleted&quot; : &quot;&quot;)'>
+        <data:comment.body/>
+      </div>
+      <div class='comment-footer'>
+        <span class='comment-timestamp'>
+          <a expr:href='data:comment.url' title='comment permalink'>
+            <data:comment.timestamp/>
+          </a>
+          <b:include data='comment' name='commentDeleteIcon'/>
+        </span>
+      </div>
+    </div>
+  </div>
+</b:includable>
+          <b:includable id='commentList' var='comments'>
+  <div id='comments-block'>
+    <b:loop values='data:comments' var='comment'>
+      <b:include data='comment' name='commentItem'/>
+    </b:loop>
+  </div>
+</b:includable>
+          <b:includable id='commentPicker' var='post'>
+  <b:if cond='data:post.showThreadedComments'>
+    <b:include data='post' name='threadedComments'/>
+  <b:else/>
+    <b:include data='post' name='comments'/>
+  </b:if>
+</b:includable>
+          <b:includable id='comments' var='post'>
+  <section expr:class='&quot;comments&quot; + (data:post.embedCommentForm ? &quot; embed&quot; : &quot;&quot;)' expr:data-num-comments='data:post.numberOfComments' id='comments'>
+    <a name='comments'/>
+    <b:if cond='data:post.allowComments'>
+
+      <b:include name='commentsTitle'/>
+
+      <div expr:id='data:widget.instanceId + &quot;_comments-block-wrapper&quot;'>
+        <b:include cond='data:post.comments' data='post.comments' name='commentList'/>
+      </div>
+
+      <b:if cond='data:post.commentPagingRequired'>
+        <div class='paging-control-container'>
+          <b:if cond='data:post.hasOlderLinks'>
+            <a expr:class='data:post.oldLinkClass' expr:href='data:post.oldestLinkUrl'>
+              <data:messages.oldest/>
+            </a>
+            <a expr:class='data:post.oldLinkClass' expr:href='data:post.olderLinkUrl'>
+              <data:messages.older/>
+            </a>
+          </b:if>
+
+          <span class='comment-range-text'>
+            <data:post.commentRangeText/>
+          </span>
+
+          <b:if cond='data:post.hasNewerLinks'>
+            <a expr:class='data:post.newLinkClass' expr:href='data:post.newerLinkUrl'>
+              <data:messages.newer/>
+            </a>
+            <a expr:class='data:post.newLinkClass' expr:href='data:post.newestLinkUrl'>
+              <data:messages.newest/>
+            </a>
+          </b:if>
+        </div>
+      </b:if>
+
+      <div class='footer'>
+        <b:if cond='data:post.embedCommentForm'>
+          <b:if cond='data:post.allowNewComments'>
+            <b:include data='post' name='commentForm'/>
+          <b:else/>
+            <data:post.noNewCommentsText/>
+          </b:if>
+        <b:else/>
+          <b:if cond='data:post.allowComments'>
+            <b:include data='post' name='addComments'/>
+          </b:if>
+        </b:if>
+      </div>
+    </b:if>
+    <b:if cond='data:showCmtPopup'>
+      <div id='comment-popup'>
+        <iframe allowtransparency='allowtransparency' frameborder='0' id='comment-actions' name='comment-actions' scrolling='no'>
+        </iframe>
+      </div>
+    </b:if>
+  </section>
+</b:includable>
+          <b:includable id='commentsLink'>
+  <a class='comment-link' expr:href='data:post.commentsUrl' expr:onclick='data:post.commentsUrlOnclick'>
+    <b:if cond='data:post.numberOfComments &gt; 0'>
+      <b:message name='messages.numberOfComments'>
+        <b:param expr:value='data:post.numberOfComments' name='numComments'/>
+      </b:message>
+    <b:else/>
+      <data:messages.postAComment/>
+    </b:if>
+  </a>
+</b:includable>
+          <b:includable id='commentsLinkIframe'>
+
+</b:includable>
+          <b:includable id='commentsTitle'>
+  <h3 class='title'><data:messages.comments/></h3>
+</b:includable>
+          <b:includable id='defaultAdUnit'>
+  <ins class='adsbygoogle' data-ad-format='auto' expr:data-ad-client='data:adClientId ?: data:blog.adsenseClientId' expr:data-ad-host='data:blog.adsenseHostId' expr:style='data:style ?: &quot;display: block;&quot;'>
+    <b:attr cond='not data:blog.analytics4' expr:value='data:blog.analyticsAccountNumber' name='data-analytics-uacct'/>
+  </ins>
+  <script>
+   (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</b:includable>
+          <b:includable id='emailPostIcon'>
+  <span class='byline post-icons'>
+
+    <span class='item-action'>
+      <a expr:href='data:post.emailPostUrl' expr:title='data:messages.emailPost'>
+        <b:include data='{ iconClass: &quot;touch-icon sharing-icon&quot; }' name='emailIcon'/>
+      </a>
+    </span>
+  </span>
+</b:includable>
+          <b:includable id='facebookShare'>
+  <b:with value='&quot;window.open(this.href, \&quot;_blank\&quot;, \&quot;height=430,width=640\&quot;); return false;&quot;' var='onclick'>
+    <b:include name='platformShare'/>
+  </b:with>
+</b:includable>
+          <b:includable id='feedLinks'>
+  <b:if cond='!data:view.isPost'>
+    <b:if cond='data:feedLinks'>
+      <div class='blog-feeds'>
+        <b:include data='feedLinks' name='feedLinksBody'/>
+      </div>
+    </b:if>
+  <b:else/>
+    <div class='post-feeds'>
+      <b:loop values='data:posts' var='post'>
+        <b:if cond='data:post.allowComments and data:post.feedLinks'>
+          <b:include data='post.feedLinks' name='feedLinksBody'/>
+        </b:if>
+      </b:loop>
+    </div>
+  </b:if>
+</b:includable>
+          <b:includable id='feedLinksBody' var='links'>
+  <div class='feed-links'>
+  <data:messages.subscribeTo/>
+  <b:loop values='data:links' var='f'>
+     <a class='feed-link' expr:href='data:f.url' expr:type='data:f.mimeType' target='_blank'><data:f.name/> (<data:f.feedType/>)</a>
+  </b:loop>
+  </div>
+</b:includable>
+          <b:includable id='footerBylines'>
+  <b:if cond='data:widgets.Blog.first.footerBylines'>
+    <b:loop index='i' values='data:widgets.Blog.first.footerBylines' var='region'>
+      <b:if cond='not data:region.items.empty'>
+        <div expr:class='&quot;post-footer-line post-footer-line-&quot; + (data:i + 1)'>
+          <b:with value='&quot;footer-&quot; + (data:i + 1)' var='regionName'>
+            <b:include data='region.items' name='bylineRegion'/>
+          </b:with>
+        </div>
+      </b:if>
+    </b:loop>
+  </b:if>
+</b:includable>
+          <b:includable id='googlePlusShare'>
+</b:includable>
+          <b:includable id='headerByline'>
+  <b:if cond='data:widgets.Blog.first.headerByline'>
+    <div class='post-header'>
+      <div class='post-header-line-1'>
+        <b:with value='&quot;header-1&quot;' var='regionName'>
+          <b:include data='data:widgets.Blog.first.headerByline.items' name='bylineRegion'/>
+        </b:with>
+      </div>
+    </div>
+  </b:if>
+</b:includable>
+          <b:includable id='homePageLink'>
+  <a class='home-link' expr:href='data:blog.homepageUrl'>
+    <data:messages.home/>
+  </a>
+</b:includable>
+          <b:includable id='iframeComments' var='post'>
+
+</b:includable>
+          <b:includable id='inlineAd' var='post'>
+  <b:if cond='!data:view.isPreview'>
+    <b:if cond='data:this.adCode or data:this.adClientId or data:blog.adsenseClientId'>
+
+      <div class='inline-ad'>
+        <b:if cond='data:this.adCode != &quot;&quot;'>
+          <data:this.adCode/>
+        <b:else/>
+          <b:include cond='data:this.adClientId or data:blog.adsenseClientId' name='defaultAdUnit'/>
+        </b:if>
+      </div>
+    </b:if>
+  <b:else/>
+    <div class='inline-ad'>
+      <div class='inline-ad-placeholder'>
+        <span><b:message name='messages.adsGoHere'/></span>
+      </div>
+    </div>
+  </b:if>
+</b:includable>
+          <b:includable id='linkShare'>
+  <b:with value='&quot;window.prompt(\&quot;Copy to clipboard: Ctrl+C, Enter\&quot;, \&quot;&quot; + data:originalUrl + &quot;\&quot;); return false;&quot;' var='onclick'>
+    <b:include name='platformShare'/>
+  </b:with>
+</b:includable>
+          <b:includable id='nextPageLink'>
+  <a class='blog-pager-older-link' expr:href='data:olderPageUrl' expr:id='data:widget.instanceId + &quot;_blog-pager-older-link&quot;' expr:title='data:messages.olderPosts'>
+    <data:messages.olderPosts/>
+  </a>
+</b:includable>
+          <b:includable id='otherSharingButton'>
+  <span class='sharing-platform-button sharing-element-other' expr:aria-label='data:messages.shareToOtherApps.escaped' expr:data-url='data:originalUrl' expr:title='data:messages.shareToOtherApps.escaped' role='menuitem' tabindex='-1'>
+    <b:with value='{key: &quot;sharingOther&quot;}' var='platform'>
+      <b:include name='sharingPlatformIcon'/>
+    </b:with>
+    <span class='platform-sharing-text'><data:messages.shareOtherApps.escaped/></span>
+  </span>
+</b:includable>
+          <b:includable id='platformShare'>
+  <a expr:class='&quot;goog-inline-block sharing-&quot; + data:platform.key' expr:data-url='data:originalUrl' expr:href='data:shareUrl + &quot;&amp;target=&quot; + data:platform.target' expr:onclick='data:onclick ? data:onclick : &quot;&quot;' expr:title='data:platform.shareMessage' target='_blank'>
+    <span class='share-button-link-text'>
+      <data:platform.shareMessage/>
+    </span>
+  </a>
+</b:includable>
+          <b:includable id='post' var='post'>
+  <div class='post'>
+    <b:include data='post' name='postMeta'/>
+    <b:include data='post' name='postTitle'/>
+    <b:include name='headerByline'/>
+    <b:if cond='data:view.isSingleItem'>
+      <b:include data='post' name='postBody'/>
+    <b:else/>
+      <b:include data='post' name='postBodySnippet'/>
+      <b:include data='post' name='postJumpLink'/>
+    </b:if>
+    <b:include data='post' name='postFooter'/>
+  </div>
+</b:includable>
+          <b:includable id='postAuthor'>
+  <span class='byline post-author vcard'>
+    <span class='post-author-label'>
+      <data:byline.label/>
+    </span>
+    <span class='fn'>
+      <b:if cond='data:post.author.profileUrl'>
+        <meta expr:content='data:post.author.profileUrl'/>
+        <a class='g-profile' expr:href='data:post.author.profileUrl' rel='author' title='author profile'>
+          <span><data:post.author.name/></span>
+        </a>
+      <b:else/>
+        <span><data:post.author.name/></span>
+      </b:if>
+    </span>
+  </span>
+</b:includable>
+          <b:includable id='postBody' var='post'>
+
+  <div class='post-body entry-content float-container' expr:id='&quot;post-body-&quot; + data:post.id'>
+    <data:post.body/>
+  </div>
+</b:includable>
+          <b:includable id='postBodySnippet' var='post'>
+  <b:include data='post' name='postBody'/>
+</b:includable>
+          <b:includable id='postCommentsAndAd' var='post'>
+  <article class='post-outer-container'>
+
+    <div class='post-outer'>
+      <b:include data='post' name='post'/>
+    </div>
+
+    <b:include cond='data:view.isSingleItem' data='post' name='commentPicker'/>
+
+    <b:include cond='data:view.isSingleItem and data:post.includeAd' data='post' name='inlineAd'/>
+  </article>
+
+  <b:include cond='data:view.isMultipleItems and data:post.includeAd' data='post' name='inlineAd'/>
+</b:includable>
+          <b:includable id='postCommentsLink'>
+  <b:if cond='data:view.isMultipleItems'>
+    <span class='byline post-comment-link container'>
+      <b:include cond='data:post.commentSource != 1' name='commentsLink'/>
+    </span>
+  </b:if>
+</b:includable>
+          <b:includable id='postFooter' var='post'>
+  <div class='post-footer'>
+    <b:include name='footerBylines'/>
+    <b:include data='post' name='postFooterAuthorProfile'/>
+  </div>
+</b:includable>
+          <b:includable id='postFooterAuthorProfile' var='post'>
+  <b:if cond='data:post.author.aboutMe and data:view.isPost'>
+    <div class='author-profile'>
+      <b:if cond='data:post.author.authorPhoto.url'>
+        <img class='author-image' expr:src='data:post.author.authorPhoto.url' width='50px'/>
+        <div class='author-about'>
+          <b:include data='post' name='aboutPostAuthor'/>
+        </div>
+      <b:else/>
+        <b:include data='post' name='aboutPostAuthor'/>
+      </b:if>
+    </div>
+  </b:if>
+</b:includable>
+          <b:includable id='postHeader' var='post'>
+  <b:include name='headerByline'/>
+</b:includable>
+          <b:includable id='postJumpLink' var='post'>
+  <div class='jump-link flat-button'>
+    <a expr:href='data:post.url fragment &quot;more&quot;' expr:title='data:post.title'>
+      <b:eval expr='data:blog.jumpLinkMessage'/>
+    </a>
+  </div>
+</b:includable>
+          <b:includable id='postLabels'>
+  <span class='byline post-labels'>
+    <span class='byline-label'><data:byline.label/></span>
+    <b:loop index='i' values='data:post.labels' var='label'>
+      <a expr:href='data:label.url' rel='tag'>
+        <data:label.name/>
+      </a>
+    </b:loop>
+  </span>
+</b:includable>
+          <b:includable id='postLocation'>
+  <span class='byline post-location'>
+    <data:byline.label/>
+    <a expr:href='data:post.location.mapsUrl' target='_blank'><data:post.location.name/></a>
+  </span>
+</b:includable>
+          <b:includable id='postMeta' var='post'>
+  <b:include data='post' name='postMetadataJSON'/>
+</b:includable>
+          <b:includable id='postMetadataJSONImage'>
+  &quot;image&quot;: {
+    &quot;@type&quot;: &quot;ImageObject&quot;,
+    <b:if cond='data:post.featuredImage.isResizable'>
+    &quot;url&quot;: &quot;<b:eval expr='resizeImage(data:post.featuredImage, 1200, &quot;1200:630&quot;)'/>&quot;,
+    &quot;height&quot;: 630,
+    &quot;width&quot;: 1200
+    <b:else/>
+    &quot;url&quot;: &quot;https://blogger.googleusercontent.com/img/b/U2hvZWJveA/AVvXsEgfMvYAhAbdHksiBA24JKmb2Tav6K0GviwztID3Cq4VpV96HaJfy0viIu8z1SSw_G9n5FQHZWSRao61M3e58ImahqBtr7LiOUS6m_w59IvDYwjmMcbq3fKW4JSbacqkbxTo8B90dWp0Cese92xfLMPe_tg11g/w1200/&quot;,
+    &quot;height&quot;: 348,
+    &quot;width&quot;: 1200
+    </b:if>
+  },
+</b:includable>
+          <b:includable id='postMetadataJSONPublisher'>
+ &quot;publisher&quot;: {
+    &quot;@type&quot;: &quot;Organization&quot;,
+    &quot;name&quot;: &quot;Blogger&quot;,
+    &quot;logo&quot;: {
+      &quot;@type&quot;: &quot;ImageObject&quot;,
+      &quot;url&quot;: &quot;https://blogger.googleusercontent.com/img/b/U2hvZWJveA/AVvXsEgfMvYAhAbdHksiBA24JKmb2Tav6K0GviwztID3Cq4VpV96HaJfy0viIu8z1SSw_G9n5FQHZWSRao61M3e58ImahqBtr7LiOUS6m_w59IvDYwjmMcbq3fKW4JSbacqkbxTo8B90dWp0Cese92xfLMPe_tg11g/h60/&quot;,
+      &quot;width&quot;: 206,
+      &quot;height&quot;: 60
+    }
+  },
+</b:includable>
+          <b:includable id='postPagination'>
+  <div class='blog-pager container' id='blog-pager'>
+    <b:include cond='data:newerPageUrl' name='previousPageLink'/>
+    <b:include cond='data:olderPageUrl' name='nextPageLink'/>
+    <b:include cond='data:view.url != data:blog.homepageUrl' name='homePageLink'/>
+  </div>
+</b:includable>
+          <b:includable id='postReactions'>
+
+</b:includable>
+          <b:includable id='postShareButtons'>
+  <div class='byline post-share-buttons goog-inline-block'>
+    <b:with value='data:sharingId ?: ((data:widget.instanceId ?: &quot;sharing&quot;) + &quot;-&quot; + (data:regionName ?: &quot;byline&quot;) + &quot;-&quot; + data:post.id)' var='sharingId'>
+
+      <b:include data='{                                                sharingId: data:sharingId,                                                originalUrl: data:post.url,                                                platforms: data:this.sharing.platforms,                                                shareUrl: data:post.shareUrl,                                                shareTitle: data:post.title,                                              }' name='sharingButtons'/>
+    </b:with>
+  </div>
+</b:includable>
+          <b:includable id='postTimestamp'>
+  <span class='byline post-timestamp'>
+    <data:byline.label/>
+    <b:if cond='data:post.url'>
+      <meta expr:content='data:post.url.canonical'/>
+      <a class='timestamp-link' expr:href='data:post.url' rel='bookmark' title='permanent link'>
+        <time class='published' expr:datetime='data:post.date.iso8601' expr:title='data:post.date.iso8601'>
+          <data:post.date/>
+        </time>
+      </a>
+    </b:if>
+  </span>
+</b:includable>
+          <b:includable id='postTitle' var='post'>
+  <a expr:name='data:post.id'/>
+  <b:if cond='data:post.title != &quot;&quot;'>
+    <h3 class='post-title entry-title'>
+      <b:if cond='data:post.link or (data:post.url and data:view.url != data:post.url)'>
+        <a expr:href='data:post.link ?: data:post.url'><data:post.title/></a>
+      <b:else/>
+        <data:post.title/>
+      </b:if>
+    </h3>
+  </b:if>
+</b:includable>
+          <b:includable id='previousPageLink'>
+  <a class='blog-pager-newer-link' expr:href='data:newerPageUrl' expr:id='data:widget.instanceId + &quot;_blog-pager-newer-link&quot;' expr:title='data:messages.newerPosts'>
+    <data:messages.newerPosts/>
+  </a>
+</b:includable>
+          <b:includable id='sharingButton'>
+  <span expr:aria-label='data:platform.shareMessage' expr:class='&quot;sharing-platform-button sharing-element-&quot; + data:platform.key' expr:data-href='data:shareUrl + &quot;&amp;target=&quot; + data:platform.target' expr:data-url='data:originalUrl' expr:title='data:platform.shareMessage' role='menuitem' tabindex='-1'>
+    <b:include name='sharingPlatformIcon'/>
+    <span class='platform-sharing-text'><data:platform.name/></span>
+  </span>
+</b:includable>
+          <b:includable id='sharingButtonContent'>
+  <div class='flat-icon-button ripple'>
+    <b:include name='shareIcon'/>
+  </div>
+</b:includable>
+          <b:includable id='sharingButtons'>
+  <div class='sharing' expr:aria-owns='&quot;sharing-popup-&quot; + data:sharingId' expr:data-title='data:shareTitle'>
+    <button class='sharing-button touch-icon-button' expr:aria-controls='&quot;sharing-popup-&quot; + data:sharingId' expr:aria-label='data:messages.share.escaped' expr:id='&quot;sharing-button-&quot; + data:sharingId' role='button'>
+      <b:include name='sharingButtonContent'/>
+    </button>
+    <b:include name='sharingButtonsMenu'/>
+  </div>
+</b:includable>
+          <b:includable id='sharingButtonsMenu'>
+  <div class='share-buttons-container'>
+    <ul aria-hidden='true' class='share-buttons hidden' expr:aria-label='data:messages.share.escaped' expr:id='&quot;sharing-popup-&quot; + data:sharingId' role='menu'>
+      <b:loop values='(data:platforms ?: data:blog.sharing.platforms) filter (p =&gt; p.key not in {&quot;blogThis&quot;})' var='platform'>
+        <li>
+          <b:include name='sharingButton'/>
+        </li>
+      </b:loop>
+      <li aria-hidden='true' class='hidden'>
+        <b:include name='otherSharingButton'/>
+      </li>
+    </ul>
+  </div>
+</b:includable>
+          <b:includable id='sharingPlatformIcon'>
+  <b:include data='{ iconClass: (&quot;touch-icon sharing-&quot; + data:platform.key) }' expr:name='data:platform.key + &quot;Icon&quot;'/>
+</b:includable>
+          <b:includable id='threadedCommentForm' var='post'>
+  <div class='comment-form'>
+    <a name='comment-form'/>
+    <h4 id='comment-post-message'><data:messages.postAComment/></h4>
+    <b:if cond='data:this.messages.blogComment != &quot;&quot;'>
+      <p><data:this.messages.blogComment/></p>
+    </b:if>
+    <b:include data='post' name='commentFormIframeSrc'/>
+    <iframe allowtransparency='allowtransparency' class='blogger-iframe-colorize blogger-comment-from-post' expr:height='data:cmtIframeInitialHeight ?: &quot;90px&quot;' frameborder='0' id='comment-editor' name='comment-editor' src='' width='100%'/>
+    <data:post.cmtfpIframe/>
+    <script type='text/javascript'>
+      BLOG_CMT_createIframe(&#39;<data:post.appRpcRelayPath/>&#39;);
+    </script>
+  </div>
+</b:includable>
+          <b:includable id='threadedCommentJs' var='post'>
+  <script async='async' expr:src='data:post.commentSrc' type='text/javascript'/>
+  <b:template-script inline='true' name='threaded_comments'/>
+  <script type='text/javascript'>
+    blogger.widgets.blog.initThreadedComments(
+        <data:post.commentJso/>,
+        <data:post.commentMsgs/>,
+        <data:post.commentConfig/>);
+  </script>
+</b:includable>
+          <b:includable id='threadedComments' var='post'>
+  <section class='comments threaded' expr:data-embed='data:post.embedCommentForm' expr:data-num-comments='data:post.numberOfComments' id='comments'>
+    <a name='comments'/>
+
+    <b:include name='commentsTitle'/>
+
+    <div class='comments-content'>
+      <b:if cond='data:post.embedCommentForm'>
+        <b:include data='post' name='threadedCommentJs'/>
+      </b:if>
+      <div id='comment-holder'>
+         <data:post.commentHtml/>
+      </div>
+    </div>
+
+    <p class='comment-footer'>
+      <b:if cond='data:post.allowNewComments'>
+        <b:include data='post' name='threadedCommentForm'/>
+      <b:else/>
+        <data:post.noNewCommentsText/>
+      </b:if>
+      <b:if cond='data:post.showManageComments'>
+        <b:include data='post' name='manageComments'/>
+      </b:if>
+    </p>
+
+    <b:if cond='data:showCmtPopup'>
+      <div id='comment-popup'>
+        <iframe allowtransparency='allowtransparency' frameborder='0' id='comment-actions' name='comment-actions' scrolling='no'>
+        </iframe>
+      </div>
+    </b:if>
+  </section>
+</b:includable>
+          <b:includable id='tooltipCss'>
+
+  <style>
+    .post-body a.b-tooltip-container {
+      position: relative;
+      display: inline-block;
+    }
+
+    .post-body a.b-tooltip-container .b-tooltip {
+      display: block !important;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translate(-20%, 1px);
+      visibility: hidden;
+      opacity: 0;
+      z-index: 1;
+      transition: opacity 0.2s ease-in-out;
+    }
+
+    .post-body a.b-tooltip-container .b-tooltip iframe {
+      width: 200px;
+      height: 198px;
+      max-width: none;
+      border: none;
+      border-radius: 20px;
+      box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.2);
+    }
+
+    @media (hover: hover) {
+      .post-body a.b-tooltip-container:hover .b-tooltip {
+        visibility: visible;
+        opacity: 1;
+      }
+    }
+  </style>
+
+</b:includable>
+        </b:widget>
+      </b:section>
+
+    </main>
+
+  </div>
+
+</div>
+
+<footer class='site-footer'>
+
+  <div>
+
+    <div class='footer-grid'>
+
+      <div class='footer-col'>
+
+        <b:section class='footer-section' id='footer-col-1' showaddelement='yes'>
+          <b:widget id='Text1' locked='false' title='Centro de Investigación para el Aprendizaje Digital' type='Text' version='2' visible='true'>
+            <b:widget-settings>
+              <b:widget-setting name='content'><![CDATA[Calle Río Mocorito y avenida Víctor Rosales s/n, colonia Ex Ejido Coahuila. Mexicali, Baja California, México, 21360.
+<br/><br/>
+Horario de atención: Lunes a Viernes 9:00 a 17:00 horas.]]></b:widget-setting>
+            </b:widget-settings>
+            <b:includable id='main'>
+
+              <b:include name='widget-title'/>
+
+              <div class='widget-content'>
+                <data:content/>
+              </div>
+
+            </b:includable>
+          </b:widget>
+        </b:section>
+
+      </div>
+
+      <div class='footer-col'>
+
+        <b:section class='footer-section' id='footer-col-2' showaddelement='yes'>
+          <b:widget id='Text2' locked='false' title='Entidades asociadas' type='Text' version='2' visible='true'>
+            <b:widget-settings>
+              <b:widget-setting name='content'><![CDATA[<a href='https://www.sorteosuabc.mx/'>Desarrollo y Vinculación Universitaria S. C.</a>
+<a href='https://fundacionuabc.org/'>Fundación UABC, A. C.</a>
+<a href='https://www.uabc.mx/CentroDeportivoUABC/'>Centro Deportivo UABC, A. C.</a>
+<a href='https://centrodeeducacioncontinua.uabc.mx/'>Centro de Educación Continua UABC.</a>]]></b:widget-setting>
+            </b:widget-settings>
+            <b:includable id='main'>
+
+              <b:include name='widget-title'/>
+
+              <div class='widget-content'>
+                <data:content/>
+              </div>
+
+            </b:includable>
+          </b:widget>
+        </b:section>
+
+      </div>
+
+      <div class='footer-col'>
+
+        <b:section class='footer-section' id='footer-col-3' showaddelement='yes'>
+          <b:widget id='Text3' locked='false' title='Enlaces de interés' type='Text' version='2' visible='true'>
+            <b:widget-settings>
+              <b:widget-setting name='content'><![CDATA[<a href='https://sinedi.mx/'>SINED</a>
+<a href='https://www.learningguild.com/'>The e-learning guild</a>
+<a href='https://www.irrodl.org/index.php/irrodl'>The International Review of Research in Open and Distributed Learning</a>
+<a href='https://www.ecoesad.org.mx/'>ECOESaD</a>
+<a href='https://campustechnology.com/home.aspx'>Campus Technology</a>]]></b:widget-setting>
+            </b:widget-settings>
+            <b:includable id='main'>
+
+              <b:include name='widget-title'/>
+
+              <div class='widget-content'>
+                <data:content/>
+              </div>
+
+            </b:includable>
+          </b:widget>
+        </b:section>
+
+      </div>
+
+      <div class='footer-col'>
+
+        <b:section class='footer-section' id='footer-col-4' showaddelement='yes'>
+          <b:widget id='Text4' locked='false' title='Acerca de ciad.mxl.uabc.mx' type='Text' version='2' visible='true'>
+            <b:widget-settings>
+              <b:widget-setting name='content'><![CDATA[<a href='https://ciad.mxl.uabc.mx/mapa-del-sitio/'>Mapa del Sitio</a>
+<a href='https://transparencia.uabc.mx/Aviso_Privacidad/index.html'>Aviso de privacidad</a>
+<span style='display:block;color:#9ca3af;'>
+Red de Coordinadores CIAD
+</span>]]></b:widget-setting>
+            </b:widget-settings>
+            <b:includable id='main'>
+
+              <b:include name='widget-title'/>
+
+              <div class='widget-content'>
+                <data:content/>
+              </div>
+
+            </b:includable>
+          </b:widget>
+        </b:section>
+
+      </div>
+
+    </div>
+
+    <div class='footer-divider'/>
+
+    <div class='footer-bottom'>
+
+      <p class='copyright'>
+        Centro de Investigación para el Aprendizaje Digital &#169; 2026
+      </p>
+
+      <div class='social-container'>
+
+        <span class='social-text'>
+          &#161;Enlázate<br/>
+          con<br/>
+          nosotros!
+        </span>
+
+        <div class='social-icons'>
+
+          <a href='https://www.facebook.com/ciaduabc' title='Facebook'>
+            <i class='fa-brands fa-facebook-f'/>
+          </a>
+
+          <a href='https://www.youtube.com/@CIADUABC' title='YouTube'>
+            <i class='fa-brands fa-youtube'/>
+          </a>
+
+          <a href='https://www.instagram.com/ciaduabc/' title='Instagram'>
+            <i class='fa-brands fa-instagram'/>
+          </a>
+
+          <a href='https://www.linkedin.com/company/ciad-uabc' title='LinkedIn'>
+            <i class='fa-brands fa-linkedin-in'/>
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</footer>
+
+<script type='module'>
+//<![CDATA[
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js';
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithCredential,
+  signOut,
+  onAuthStateChanged,
+  setPersistence,
+  browserLocalPersistence
+} from 'https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js';
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  updateDoc,
+  serverTimestamp
+} from 'https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js';
+
+const firebaseConfig = {
+    apiKey: "<FIREBASE_API_KEY>",
+    authDomain: "ciad-blog-2026.firebaseapp.com",
+    projectId: "ciad-blog-2026",
+    storageBucket: "ciad-blog-2026.firebasestorage.app",
+    messagingSenderId: "354700702496",
+    appId: "1:354700702496:web:f41f81825ec8f446d79d45",
+    measurementId: "G-5QGZSBNRQS"
+  };
+
+const GOOGLE_CLIENT_ID = "354700702496-pt335qcevivqrhk4hs1nm1o1groid4rc.apps.googleusercontent.com";
+
+(function () {
+
+  function byId(id) {
+    return document.getElementById(id);
+  }
+
+  function firebaseConfigured() {
+    return Boolean(
+      firebaseConfig.apiKey &&
+      firebaseConfig.authDomain &&
+      firebaseConfig.projectId &&
+      firebaseConfig.appId
+    );
+  }
+
+  function googleClientConfigured() {
+    return Boolean(
+      GOOGLE_CLIENT_ID &&
+      GOOGLE_CLIENT_ID.indexOf('TU_CLIENT_ID') === -1
+    );
+  }
+
+  function googleClientMatchesFirebaseProject() {
+    if (!googleClientConfigured()) {
+      return false;
+    }
+
+    var projectNumber = String(
+      firebaseConfig.messagingSenderId || ''
+    ).trim();
+
+    var clientId = String(
+      GOOGLE_CLIENT_ID || ''
+    ).trim();
+
+    if (!projectNumber) {
+      return true;
+    }
+
+    return clientId.indexOf(projectNumber + '-') === 0;
+  }
+
+  function setAvatar(image, fallback, url) {
+    if (!image) {
+      return;
+    }
+
+    if (url) {
+      image.src = url;
+      image.style.display = 'block';
+
+      if (fallback) {
+        fallback.style.display = 'none';
+      }
+    } else {
+      image.removeAttribute('src');
+      image.style.display = 'none';
+
+      if (fallback) {
+        fallback.style.display = 'flex';
+      }
+    }
+  }
+
+  function closeProfilePopover() {
+    var popover = byId('googleProfilePopover');
+    var trigger = byId('googleProfileTrigger');
+
+    if (popover) {
+      popover.classList.remove('active');
+      popover.setAttribute('aria-hidden', 'true');
+    }
+
+    if (trigger) {
+      trigger.setAttribute('aria-expanded', 'false');
+    }
+  }
+
+  function showSetup(message) {
+    closeProfilePopover();
+
+    var signin = byId('googleSignInButton');
+    var setup = byId('googleProfileSetup');
+    var trigger = byId('googleProfileTrigger');
+
+    if (signin) {
+      signin.style.display = 'none';
+    }
+
+    if (trigger) {
+      trigger.style.display = 'none';
+    }
+
+    if (setup) {
+      setup.style.display = 'flex';
+
+      var label = setup.querySelector('span');
+      if (label && message) {
+        label.textContent = message;
+      }
+    }
+  }
+
+  function showSignedOut() {
+    closeProfilePopover();
+
+    var signin = byId('googleSignInButton');
+    var setup = byId('googleProfileSetup');
+    var trigger = byId('googleProfileTrigger');
+
+    if (trigger) {
+      trigger.style.display = 'none';
+    }
+
+    if (!googleClientConfigured()) {
+      if (signin) {
+        signin.style.display = 'none';
+      }
+
+      if (setup) {
+        setup.style.display = 'flex';
+        var label = setup.querySelector('span');
+        if (label) {
+          label.textContent = 'Configurar Google';
+        }
+      }
+
+      return;
+    }
+
+    if (!googleClientMatchesFirebaseProject()) {
+      if (signin) {
+        signin.style.display = 'none';
+      }
+
+      if (setup) {
+        setup.style.display = 'flex';
+        var mismatchLabel = setup.querySelector('span');
+        if (mismatchLabel) {
+          mismatchLabel.textContent = 'Client ID incorrecto';
+        }
+      }
+
+      console.error(
+        'CIAD Google: el OAuth Client ID no pertenece al mismo proyecto que Firebase. ' +
+        'Usa el Web Client ID generado dentro del proyecto Firebase actual.'
+      );
+
+      return;
+    }
+
+    if (setup) {
+      setup.style.display = 'none';
+    }
+
+    if (signin) {
+      signin.style.display = 'flex';
+    }
+
+    waitForGoogleIdentity(0);
+  }
+
+  function showSignedIn(user) {
+    var signin = byId('googleSignInButton');
+    var setup = byId('googleProfileSetup');
+    var trigger = byId('googleProfileTrigger');
+
+    if (signin) {
+      signin.style.display = 'none';
+    }
+
+    if (setup) {
+      setup.style.display = 'none';
+    }
+
+    if (trigger) {
+      trigger.style.display = 'flex';
+    }
+
+    var name = user.displayName || 'Cuenta Google';
+    var email = user.email || 'Correo no disponible';
+    var picture = user.photoURL || '';
+
+    if (byId('googleProfileName')) {
+      byId('googleProfileName').textContent = name;
+    }
+
+    if (byId('googleProfilePopoverName')) {
+      byId('googleProfilePopoverName').textContent = name;
+    }
+
+    if (byId('googleProfileEmail')) {
+      byId('googleProfileEmail').textContent = email;
+    }
+
+    setAvatar(
+      byId('googleProfileAvatar'),
+      byId('googleProfileAvatarFallback'),
+      picture
+    );
+
+    var largeAvatar = byId('googleProfilePopoverAvatar');
+
+    if (largeAvatar) {
+      if (picture) {
+        largeAvatar.src = picture;
+        largeAvatar.style.display = 'block';
+      } else {
+        largeAvatar.removeAttribute('src');
+        largeAvatar.style.display = 'none';
+      }
+    }
+  }
+
+  function publicUser(user) {
+    if (!user) {
+      return null;
+    }
+
+    return {
+      uid: user.uid,
+      displayName: user.displayName || '',
+      email: user.email || '',
+      photoURL: user.photoURL || ''
+    };
+  }
+
+  function notifyAuthChanged(user) {
+    window.dispatchEvent(
+      new CustomEvent('ciad-auth-changed', {
+        detail: {
+          user: publicUser(user)
+        }
+      })
+    );
+  }
+
+  if (!firebaseConfigured()) {
+    document.addEventListener('DOMContentLoaded', function () {
+      showSetup('Configurar Firebase');
+    });
+
+    console.warn(
+      'CIAD Firebase: completa firebaseConfig antes de utilizar el inicio de sesión.'
+    );
+
+    return;
+  }
+
+  var app;
+  var auth;
+  var db;
+
+  var explicitGoogleLoginInProgress = false;
+
+  try {
+    app = initializeApp(firebaseConfig);
+    auth = getAuth(app);
+    db = getFirestore(app);
+
+    auth.languageCode = 'es';
+
+    setPersistence(auth, browserLocalPersistence).catch(function (error) {
+      console.warn(
+        'CIAD Firebase: no se pudo establecer persistencia local.',
+        error
+      );
+    });
+
+    window.CIADFirebase = {
+      app: app,
+      auth: auth,
+      db: db,
+      getCurrentUser: function () {
+        return auth.currentUser;
+      }
+    };
+
+  } catch (error) {
+    console.error('CIAD Firebase: error de inicialización.', error);
+
+    document.addEventListener('DOMContentLoaded', function () {
+      showSetup('Error de Firebase');
+    });
+
+    return;
+  }
+
+  async function syncUserProfile(user, registerLogin) {
+    if (!user) {
+      return;
+    }
+
+    var userRef = doc(db, 'users', user.uid);
+    var snapshot = await getDoc(userRef);
+
+    if (!snapshot.exists()) {
+      await setDoc(userRef, {
+        uid: user.uid,
+        displayName: user.displayName || '',
+        email: user.email || '',
+        photoURL: user.photoURL || '',
+        createdAt: serverTimestamp(),
+        lastLogin: serverTimestamp()
+      });
+
+      console.log(
+        'CIAD Firebase: usuario creado en Firestore:',
+        user.uid
+      );
+
+      return;
+    }
+
+    var changes = {
+      displayName: user.displayName || '',
+      email: user.email || '',
+      photoURL: user.photoURL || ''
+    };
+
+    if (registerLogin) {
+      changes.lastLogin = serverTimestamp();
+    }
+
+    await updateDoc(userRef, changes);
+
+    console.log(
+      registerLogin
+        ? 'CIAD Firebase: acceso registrado.'
+        : 'CIAD Firebase: perfil sincronizado.'
+    );
+  }
+
+  var googleInitialized = false;
+
+  async function handleGoogleCredential(response) {
+    if (!response || !response.credential) {
+      return;
+    }
+
+    explicitGoogleLoginInProgress = true;
+
+    try {
+      var credential = GoogleAuthProvider.credential(
+        response.credential
+      );
+
+      var result = await signInWithCredential(
+        auth,
+        credential
+      );
+
+      await syncUserProfile(result.user, true);
+
+    } catch (error) {
+      console.error(
+        'CIAD Firebase: no se pudo completar el acceso con Google.',
+        error
+      );
+
+      alert(
+        'No se pudo completar el inicio de sesión con Google. Revisa la consola del navegador para ver el detalle.'
+      );
+
+    } finally {
+      explicitGoogleLoginInProgress = false;
+    }
+  }
+
+  function renderGoogleButton() {
+    var host = byId('googleSignInButton');
+
+    if (
+      !host ||
+      !googleClientConfigured() ||
+      !googleClientMatchesFirebaseProject() ||
+      !window.google ||
+      !google.accounts ||
+      !google.accounts.id
+    ) {
+      return false;
+    }
+
+    if (!googleInitialized) {
+      google.accounts.id.initialize({
+        client_id: GOOGLE_CLIENT_ID,
+        callback: handleGoogleCredential,
+        auto_select: false,
+        cancel_on_tap_outside: true
+      });
+
+      googleInitialized = true;
+    }
+
+    host.innerHTML = '';
+
+    google.accounts.id.renderButton(host, {
+      type: 'icon',
+      theme: 'outline',
+      size: 'large',
+      shape: 'circle'
+    });
+
+    return true;
+  }
+
+  function waitForGoogleIdentity(attempt) {
+    attempt = attempt || 0;
+
+    if (
+      window.google &&
+      google.accounts &&
+      google.accounts.id
+    ) {
+      renderGoogleButton();
+      return;
+    }
+
+    if (attempt < 60) {
+      window.setTimeout(function () {
+        waitForGoogleIdentity(attempt + 1);
+      }, 100);
+    } else {
+      console.error(
+        'CIAD: Google Identity Services no terminó de cargar.'
+      );
+    }
+  }
+
+  window.onGoogleLibraryLoad = function () {
+    if (!auth.currentUser) {
+      renderGoogleButton();
+    }
+  };
+
+  document.addEventListener('DOMContentLoaded', function () {
+
+    var trigger = byId('googleProfileTrigger');
+    var popover = byId('googleProfilePopover');
+    var signoutButton = byId('firebaseSignOutButton');
+    var comments = byId('googleGoComments');
+
+    if (trigger && popover) {
+      trigger.addEventListener('click', function (event) {
+        event.stopPropagation();
+
+        var opening = !popover.classList.contains('active');
+
+        popover.classList.toggle('active', opening);
+        popover.setAttribute(
+          'aria-hidden',
+          opening ? 'false' : 'true'
+        );
+        trigger.setAttribute(
+          'aria-expanded',
+          opening ? 'true' : 'false'
+        );
+      });
+    }
+
+    if (popover) {
+      popover.addEventListener('click', function (event) {
+        event.stopPropagation();
+      });
+    }
+
+    if (signoutButton) {
+      signoutButton.addEventListener('click', async function () {
+        signoutButton.disabled = true;
+
+        try {
+          await signOut(auth);
+
+          if (
+            window.google &&
+            google.accounts &&
+            google.accounts.id
+          ) {
+            google.accounts.id.disableAutoSelect();
+          }
+
+          closeProfilePopover();
+
+        } catch (error) {
+          console.error(
+            'CIAD Firebase: no se pudo cerrar la sesión.',
+            error
+          );
+
+        } finally {
+          signoutButton.disabled = false;
+        }
+      });
+    }
+
+    if (comments) {
+      comments.addEventListener('click', function () {
+        closeProfilePopover();
+      });
+    }
+
+    document.addEventListener('click', closeProfilePopover);
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') {
+        closeProfilePopover();
+      }
+    });
+
+  });
+
+  onAuthStateChanged(auth, async function (user) {
+
+    if (user) {
+      showSignedIn(user);
+
+      if (!explicitGoogleLoginInProgress) {
+        try {
+          await syncUserProfile(user, false);
+        } catch (error) {
+          console.error(
+            'CIAD Firebase: sesión válida, pero Firestore rechazó o no pudo guardar el perfil.',
+            error
+          );
+        }
+      }
+
+    } else {
+      showSignedOut();
+    }
+
+    notifyAuthChanged(user);
+  });
+
+})();
+//]]>
+</script>
+
+<script>//<![CDATA[
+
+(function(){
+  function norm(s){return (s||'').toLowerCase().replace(/^categoria-/,'').replace(/\.html$/,'').replace(/-y-/g,'-').replace(/[^a-z0-9]/g,'');}
+  function clave(p){p=p.replace(/\/+$/,'')||'/'; if(p==='/'||p==='/p/inicio.html'){return '__inicio__';} if(p.indexOf('/p/')===0){return norm(p.split('/p/')[1]);} return null;}
+  function marcar(){
+    var claves=[]; var actual=clave(location.pathname);
+    if(actual){claves.push(actual);} else if(!document.querySelector('.vista-notas')){ /* en Todas las notas no hay sección actual */
+      document.querySelectorAll('.post-outer a[href*="/search/label/"], .post a[href*="/search/label/"]').forEach(function(a){
+        var m=decodeURIComponent(a.getAttribute('href')||'').match(/\/search\/label\/([^?#]+)/);
+        if(m && m[1].toLowerCase().indexOf('categoria-')===0){claves.push(norm(m[1]));}
+      });
+    }
+    document.querySelectorAll('.nav-links a, .mobile-menu a').forEach(function(a){
+      var u; try{u=new URL(a.getAttribute('href')||'',location.href);}catch(e){return;}
+      if(u.host!==location.host){return;}
+      var k=clave(u.pathname); if(k && claves.indexOf(k)>-1){a.classList.add('nav-actual');a.setAttribute('aria-current','page');}
+    });
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',marcar);}else{marcar();}
+})();
+//]]></script>
+<script type='text/javascript'>
+//<![CDATA[
+// US7: visor de la galería de la nota (clic en una miniatura → imagen grande con anterior/siguiente)
+(function () {
+  var visor, imagen, contador, anterior, siguiente;
+  var fotos = [];
+  var actual = 0;
+
+  function crearVisor() {
+    visor = document.createElement('div');
+    visor.className = 'visor-galeria';
+    visor.setAttribute('role', 'dialog');
+    visor.setAttribute('aria-label', 'Galería de imágenes');
+    visor.innerHTML =
+      '<button type="button" class="visor-cerrar" aria-label="Cerrar">×</button>' +
+      '<button type="button" class="visor-anterior" aria-label="Imagen anterior">‹</button>' +
+      '<img alt=""/>' +
+      '<button type="button" class="visor-siguiente" aria-label="Imagen siguiente">›</button>' +
+      '<p class="visor-contador"></p>';
+    document.body.appendChild(visor);
+
+    imagen = visor.querySelector('img');
+    contador = visor.querySelector('.visor-contador');
+    anterior = visor.querySelector('.visor-anterior');
+    siguiente = visor.querySelector('.visor-siguiente');
+
+    visor.querySelector('.visor-cerrar').addEventListener('click', cerrar);
+    anterior.addEventListener('click', function () { mostrar(actual - 1); });
+    siguiente.addEventListener('click', function () { mostrar(actual + 1); });
+    visor.addEventListener('click', function (e) { if (e.target === visor) cerrar(); });
+  }
+
+  function mostrar(indice) {
+    actual = (indice + fotos.length) % fotos.length;
+    var foto = fotos[actual];
+    var miniatura = foto.querySelector('img');
+    imagen.src = foto.getAttribute('href');
+    imagen.alt = miniatura ? miniatura.alt : '';
+    contador.textContent = (actual + 1) + ' / ' + fotos.length;
+    anterior.hidden = siguiente.hidden = fotos.length < 2;
+  }
+
+  function cerrar() {
+    visor.classList.remove('abierto');
+    imagen.src = '';
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('click', function (e) {
+    var foto = e.target.closest('.articulo-galeria-foto');
+    if (!foto) return;
+    e.preventDefault();
+    fotos = Array.prototype.slice.call(foto.closest('.articulo-galeria').querySelectorAll('.articulo-galeria-foto'));
+    if (!visor) crearVisor();
+    mostrar(fotos.indexOf(foto));
+    visor.classList.add('abierto');
+    document.body.style.overflow = 'hidden';
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (!visor || !visor.classList.contains('abierto')) return;
+    if (e.key === 'Escape') cerrar();
+    if (e.key === 'ArrowLeft') mostrar(actual - 1);
+    if (e.key === 'ArrowRight') mostrar(actual + 1);
+  });
+})();
+//]]>
+</script>
+<script>
+//<![CDATA[
+/* Panel CIAD: encuadre de las tarjetas cuando la imagen no se recortó (un GIF conserva su animación).
+   La nota trae la imagen como ...#ciad=x,y,z: aquí se le pone object-position y acercamiento, como en el panel. */
+(function () {
+  function ajustar(img) {
+    var m = (img.getAttribute('src') || '').match(/#ciad=(\d+),(\d+),(\d+)/);
+    if (!m) return;
+    img.style.objectFit = 'cover';
+    img.style.objectPosition = m[1] + '% ' + m[2] + '%';
+    img.style.transformOrigin = m[1] + '% ' + m[2] + '%';
+    img.style.scale = String(m[3] / 100);
+  }
+  function revisar(nodo) {
+    if (nodo.nodeType !== 1) return;
+    if (nodo.tagName === 'IMG') ajustar(nodo);
+    else if (nodo.querySelectorAll) nodo.querySelectorAll('img').forEach(ajustar);
+  }
+  new MutationObserver(function (cambios) {
+    cambios.forEach(function (c) {
+      if (c.type === 'attributes') ajustar(c.target);
+      else c.addedNodes.forEach(revisar);
+    });
+  }).observe(document.documentElement, { childList: true, subtree: true, attributes: true, attributeFilter: ['src'] });
+  revisar(document.body);
+})();
+//]]>
+</script>
+</body>
+</html>

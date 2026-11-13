@@ -1,0 +1,941 @@
+<!--
+  Página de Blogger: Guías y Tutoriales
+  URL: https://ciad-innovaedutec.blogspot.com/p/guias-y-tutoriales.html
+  ID de la página: 7042622331919596750
+  Copia del contenido publicado (11/11/2026). Se edita en Blogger › Páginas o, Inicio y Sobre el blog, desde el Panel CIAD.
+-->
+<!-- ============================================================
+     CIAD · Página "Guías y tutoriales"
+     Las guías, videos y enlaces se administran desde el Panel CIAD
+     (pestaña Páginas). No edites a mano lo que está entre
+     PANEL:INICIO y PANEL:FIN: el panel lo reemplaza al publicar.
+     ============================================================ -->
+
+<div class="et-guias-tutoriales">
+
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap');
+
+		.et-guias-tutoriales {
+			--verde-uabc: #00723f;
+			--amarillo-uabc: #f2a900;
+			--azul-oscuro: #14243a;
+			--texto-gris: #5d6b7c;
+			--texto-suave: #737b8a;
+			--fondo: #f6f8fa;
+			--blanco: #ffffff;
+			--borde: #e5eaf0;
+			--radio: 18px;
+			--sombra: 0 10px 30px rgba(20,36,58,.08);
+
+			font-family: inherit;
+			color: var(--texto-gris);
+			background: var(--fondo);
+			line-height: 1.6;
+			padding-bottom: 4rem;
+		}
+
+		.et-guias-tutoriales * {
+			box-sizing: border-box;
+		}
+
+		.et-guias-tutoriales .et-contenedor {
+			max-width: 1100px;
+			margin: 0 auto;
+			padding: 0 1.25rem;
+		}
+
+		.et-guias-tutoriales .et-encabezado {
+			text-align: center;
+			padding: 3.5rem 0 2rem;
+		}
+
+		.et-guias-tutoriales .et-encabezado h1 {
+			font-family: inherit;
+			font-size: clamp(2.4rem, 5vw, 3.5rem);
+			line-height: 1.1;
+			font-weight: 800;
+			color: var(--azul-oscuro);
+			margin: 0 0 .8rem;
+		}
+
+		.et-guias-tutoriales .et-encabezado p {
+			max-width: 760px;
+			margin: auto;
+			color: var(--texto-suave);
+			font-size: 1rem;
+		}
+
+		.et-guias-tutoriales .et-guia {
+			padding: 3.6rem 0 2rem;
+			scroll-margin-top: 80px;
+		}
+
+		.et-guias-tutoriales .et-guia + .et-guia {
+			border-top: 1px solid var(--borde);
+		}
+
+		.et-guias-tutoriales .et-guia-etiqueta {
+			display: block;
+			color: var(--verde-uabc);
+			font-size: .75rem;
+			text-transform: uppercase;
+			letter-spacing: .08em;
+			font-weight: 700;
+			margin-bottom: .4rem;
+		}
+
+		.et-guias-tutoriales .et-guia-titulo {
+			font-family: inherit;
+			color: var(--azul-oscuro);
+			font-size: clamp(2rem, 5vw, 3.2rem);
+			line-height: 1.1;
+			font-weight: 800;
+			margin: 0 0 1.5rem;
+		}
+
+		.et-guias-tutoriales .et-guia-titulo::after {
+			content: "";
+			display: block;
+			width: 64px;
+			height: 4px;
+			background: var(--amarillo-uabc);
+			border-radius: 4px;
+			margin-top: .9rem;
+		}
+
+		.et-guias-tutoriales .et-alinear-derecha {
+			text-align: right;
+		}
+
+		.et-guias-tutoriales .et-alinear-derecha .et-guia-titulo::after {
+			margin-left: auto;
+		}
+
+		.et-guias-tutoriales .et-presentacion {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 2.5rem;
+			align-items: center;
+			margin-bottom: 1.5rem;
+		}
+
+		.et-guias-tutoriales .et-descripcion h3 {
+			font-family: inherit;
+			color: var(--azul-oscuro);
+			font-size: 1.4rem;
+			margin: 0 0 .6rem;
+			text-align: left;
+		}
+
+		.et-guias-tutoriales .et-descripcion p {
+			font-size: .95rem;
+			margin: 0;
+			text-align: justify;
+			text-align-last: left;
+		}
+
+		.et-guias-tutoriales .et-imagen {
+			order: 2;
+		}
+
+		.et-guias-tutoriales .et-descripcion {
+			order: 1;
+		}
+
+		.et-guias-tutoriales .et-guia:nth-of-type(even) .et-imagen {
+			order: 1;
+		}
+
+		.et-guias-tutoriales .et-guia:nth-of-type(even) .et-descripcion {
+			order: 2;
+		}
+
+		.et-guias-tutoriales .et-guia:nth-of-type(even) .et-descripcion h3 {
+			text-align: right;
+		}
+
+		.et-guias-tutoriales .et-guia:nth-of-type(even) .et-descripcion p {
+			text-align: justify;
+			text-align-last: right;
+		}
+
+		.et-guias-tutoriales .et-imagen img {
+			width: 100%;
+			height: 250px;
+			object-fit: cover;
+			display: block;
+			border-radius: var(--radio);
+			box-shadow: var(--sombra);
+		}
+
+		.et-guias-tutoriales .et-video {
+			position: relative;
+			overflow: hidden;
+			border-radius: var(--radio);
+		}
+
+		.et-guias-tutoriales .et-video img {
+			transition: transform .3s ease;
+		}
+
+		.et-guias-tutoriales .et-video:hover img {
+			transform: scale(1.03);
+		}
+
+		.et-guias-tutoriales .et-video-enlace {
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+			width: 58px;
+			height: 58px;
+			border-radius: 50%;
+			background: var(--verde-uabc);
+			color: #fff;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			text-decoration: none;
+			box-shadow: 0 8px 20px rgba(0,0,0,.25);
+			transition: .2s;
+		}
+
+		.et-guias-tutoriales .et-video-enlace:hover {
+			transform: translate(-50%, -50%) scale(1.08);
+			background: var(--amarillo-uabc);
+		}
+
+		.et-guias-tutoriales .et-video-enlace svg {
+			width: 23px;
+			height: 23px;
+			margin-left: 3px;
+		}
+
+		.et-guias-tutoriales .et-recursos {
+			display: flex;
+			flex-direction: column;
+			gap: 9px;
+		}
+
+		.et-guias-tutoriales .et-recurso {
+			background: var(--blanco);
+			border: 1px solid var(--borde);
+			border-radius: 12px;
+			overflow: hidden;
+			transition: box-shadow .2s;
+		}
+
+		.et-guias-tutoriales .et-recurso:hover {
+			box-shadow: var(--sombra);
+		}
+
+		.et-guias-tutoriales .et-recurso summary {
+			list-style: none;
+			cursor: pointer;
+			padding: 15px 20px;
+			display: flex;
+			align-items: center;
+			color: var(--azul-oscuro);
+			font-family: inherit;
+			font-size: 1rem;
+			font-weight: 700;
+		}
+
+		.et-guias-tutoriales .et-recurso summary::-webkit-details-marker {
+			display: none;
+		}
+
+		.et-guias-tutoriales .et-flecha {
+			margin-left: auto;
+			color: var(--verde-uabc);
+			font-size: 1.3rem;
+			transition: transform .2s;
+		}
+
+		.et-guias-tutoriales details[open] .et-flecha {
+			transform: rotate(90deg);
+		}
+
+		.et-guias-tutoriales .et-recurso-contenido {
+			padding: 0 20px 18px;
+			border-top: 1px solid var(--borde);
+		}
+
+		.et-guias-tutoriales .et-recurso-contenido p {
+			margin: 13px 0;
+			font-size: .9rem;
+		}
+
+		.et-guias-tutoriales .et-lista-enlaces {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			gap: 8px;
+		}
+
+		.et-guias-tutoriales .et-lista-enlaces a {
+			display: block;
+			padding: 10px 13px;
+			background: var(--fondo);
+			border-radius: 8px;
+			color: var(--verde-uabc);
+			text-decoration: none;
+			font-size: .85rem;
+			font-weight: 600;
+			transition: .2s;
+		}
+
+		.et-guias-tutoriales .et-lista-enlaces a:hover {
+			background: var(--verde-uabc);
+			color: #fff;
+		}
+
+		@media (max-width: 768px) {
+
+			.et-guias-tutoriales .et-encabezado {
+				padding: 2.8rem 0 1.5rem;
+			}
+
+			.et-guias-tutoriales .et-guia {
+				padding: 2.5rem 0;
+			}
+
+			.et-guias-tutoriales .et-presentacion {
+				grid-template-columns: 1fr;
+				gap: 1.3rem;
+			}
+
+			.et-guias-tutoriales .et-imagen,
+			.et-guias-tutoriales .et-guia:nth-of-type(even) .et-imagen {
+				order: 1;
+			}
+
+			.et-guias-tutoriales .et-descripcion,
+			.et-guias-tutoriales .et-guia:nth-of-type(even) .et-descripcion {
+				order: 2;
+			}
+
+			.et-guias-tutoriales .et-descripcion h3,
+			.et-guias-tutoriales .et-guia:nth-of-type(even) .et-descripcion h3 {
+				text-align: left;
+			}
+
+			.et-guias-tutoriales .et-descripcion p,
+			.et-guias-tutoriales .et-guia:nth-of-type(even) .et-descripcion p {
+				text-align: left;
+				text-align-last: auto;
+			}
+
+			.et-guias-tutoriales .et-imagen img {
+				height: 210px;
+			}
+
+			.et-guias-tutoriales .et-lista-enlaces {
+				grid-template-columns: 1fr;
+			}
+		}
+
+		.ventana-video { display: none; position: fixed; inset: 0; z-index: 999999; background: rgba(20,36,58,.9); padding: 24px; align-items: center; justify-content: center; }
+		.ventana-video.abierta { display: flex; }
+		.ventana-video-caja { position: relative; width: 100%; max-width: 960px; }
+		.ventana-video-caja iframe { width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: 14px; display: block; background: #000; }
+		.ventana-video-cerrar { position: absolute; top: -50px; right: 0; width: 40px; height: 40px; border: none; border-radius: 50%; background: #fff; color: #14243a; font-size: 1.4rem; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+		.ventana-video-cerrar:hover { background: #f2a900; }
+
+		.post-title,
+		.entry-title {
+			display: none;
+		}
+
+		.layout-grid:has(.et-guias-tutoriales) {
+			width: 100%;
+			max-width: none;
+			margin: 0;
+			padding: 0;
+		}
+
+		.main-content:has(.et-guias-tutoriales) {
+			width: 100%;
+			max-width: none;
+		}
+
+		.post-outer-container:has(.et-guias-tutoriales) {
+			margin: 0;
+		}
+
+		.post-outer:has(.et-guias-tutoriales) {
+			width: 100%;
+			max-width: none;
+			margin: 0;
+			padding: 0;
+			background: transparent;
+			border: 0;
+			border-radius: 0;
+			overflow: visible;
+			box-shadow: none;
+		}
+
+		.post:has(.et-guias-tutoriales) {
+			width: 100%;
+			max-width: none;
+			margin: 0;
+			padding: 0;
+		}
+
+		.post-body:has(.et-guias-tutoriales) {
+			width: 100%;
+			max-width: none;
+			margin: 0;
+			padding: 0;
+			overflow: visible;
+		}
+
+		.app-container:has(.et-guias-tutoriales) {
+			width: 100%;
+			max-width: none;
+			background: #ffffff;
+			overflow: visible;
+		}
+
+		.blog-posts:has(.et-guias-tutoriales),
+		.main-section:has(.et-guias-tutoriales) {
+			width: 100%;
+			max-width: none;
+			margin: 0;
+			padding: 0;
+		}
+
+		.post-outer:has(.et-guias-tutoriales) > .post .post-title,
+		.post-outer:has(.et-guias-tutoriales) .entry-title {
+			display: none !important;
+		}
+
+		.et-guias-tutoriales {
+			--solape-panel: clamp(18px, 4vw, 70px);
+			--ancho-panel: 1220px;
+			--radio-panel: 24px;
+
+			background: #ffffff;
+			margin: 0;
+			padding: 0 0 4rem;
+			position: relative;
+		}
+
+		.et-guias-tutoriales .hero-guias {
+			position: relative;
+
+			width: 100vw;
+			left: 50%;
+			margin-left: -50vw;
+
+			height: auto;
+			aspect-ratio: 4 / 1;
+			margin-top: 0;
+			overflow: hidden;
+			background: #ffffff;
+
+			border: 0 !important;
+			border-radius: 0 !important;
+			box-shadow: none !important;
+		}
+
+		.et-guias-tutoriales .banner-guias {
+			position: absolute;
+			inset: 0;
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+
+			border: 0 !important;
+			border-radius: 0 !important;
+			box-shadow: none !important;
+			background: transparent !important;
+		}
+
+		.et-guias-tutoriales .banner-guias img {
+			position: absolute;
+			inset: 0;
+			width: 100%;
+			height: 100%;
+			display: block;
+			object-fit: contain;
+			object-position: center center;
+			max-width: none;
+
+			border: 0 !important;
+			border-radius: 0 !important;
+			box-shadow: none !important;
+			background: transparent !important;
+			padding: 0 !important;
+			margin: 0 !important;
+		}
+
+		.et-guias-tutoriales .hero-guias::after {
+			content: "";
+			position: absolute;
+			inset: 0;
+			pointer-events: none;
+			background: linear-gradient(
+				to bottom,
+				rgba(255,255,255,0.00) 0%,
+				rgba(255,255,255,0.00) 62%,
+				rgba(255,255,255,0.12) 100%
+			);
+		}
+
+		.et-guias-tutoriales .et-contenedor {
+			position: relative;
+			z-index: 4;
+			width: min(calc(100% - 3rem), var(--ancho-panel));
+			max-width: var(--ancho-panel);
+			margin: calc(-1 * var(--solape-panel)) auto 0;
+			padding: 2.4rem 2.4rem 3.5rem;
+			background: var(--blanco);
+			border: 1px solid rgba(20,36,58,.08);
+			border-radius: var(--radio-panel);
+			box-shadow: 0 18px 50px rgba(20,36,58,.13);
+		}
+
+		.et-guias-tutoriales .et-encabezado {
+			padding: 0 0 1.5rem;
+		}
+
+		.et-guias-tutoriales .et-encabezado h1 {
+			display: none !important;
+		}
+
+		.et-guias-tutoriales .et-encabezado p {
+			max-width: 850px;
+			margin: 0 auto;
+			font-size: 1.08rem;
+			color: #737b8a;
+			text-align: center;
+		}
+
+		@media (max-width: 900px) {
+			.et-guias-tutoriales {
+				--solape-panel: 36px;
+			}
+
+			.et-guias-tutoriales .et-contenedor {
+				width: calc(100% - 2rem);
+				padding: 2rem 1.5rem 3rem;
+			}
+		}
+
+		@media (max-width: 768px) {
+			.et-guias-tutoriales {
+				--solape-panel: 28px;
+			}
+
+			.et-guias-tutoriales .et-contenedor {
+				border-radius: 18px;
+			}
+
+			.et-guias-tutoriales .et-guia,
+			.et-guias-tutoriales .et-alinear-derecha {
+				text-align: left;
+			}
+
+			.et-guias-tutoriales .et-alinear-derecha .et-guia-titulo::after {
+				margin-left: 0;
+			}
+
+			.et-guias-tutoriales .et-encabezado p {
+				font-size: 1rem;
+			}
+		}
+
+		@media (max-width: 480px) {
+			.et-guias-tutoriales {
+				--solape-panel: 18px;
+			}
+
+			.et-guias-tutoriales .et-contenedor {
+				width: calc(100% - 1rem);
+				border-radius: 14px;
+				padding: 1.5rem 1rem 2.5rem;
+			}
+		}
+
+	</style>
+
+	<!-- HERO: banner fijo a todo el ancho -->
+	<section class="hero-guias">
+		<div class="banner-guias">
+			<img
+				alt="Guías y tutoriales"
+				loading="eager"
+				src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgazNJL_SJ7IQjHVPPce-k16i1MIfVKTBVOMUXuKtsNM353cTsxM_5IiMhp6EESygTqYNF0r-g5p-zemBJsLgHlz2yLUwH_PTNLGNkp2Pg1eEB6A1iPUj16vAFBZmL6sWTc2E290rBnkEmKnfKSRLCO1r48t9To4ZFhLxUlMWRVzebgoyPDsKJL8EUCt5o/s1600/banner_tutoriales_nuevo.png">
+		</div>
+	</section>
+
+	<div class="et-contenedor">
+
+<!-- PANEL:INICIO -->
+		<header class="et-encabezado">
+			<h1>Guías y tutoriales</h1>
+			<p>
+				Encuentra guías paso a paso, videos y recursos de apoyo para utilizar las aplicaciones y plataformas institucionales en tu aprendizaje digital.
+			</p>
+		</header>
+
+		<nav class="et-navegacion">
+			<a href="#blackboard">Blackboard</a>
+			<a href="#zoom">Zoom</a>
+			<a href="#moodle">Moodle</a>
+			<a href="#teams">Microsoft Teams</a>
+		</nav>
+
+		<section class="et-guia" id="blackboard">
+
+			<span class="et-guia-etiqueta">Plataforma institucional</span>
+
+			<h2 class="et-guia-titulo">Uso básico de Blackboard</h2>
+
+			<div class="et-presentacion">
+
+				<div class="et-descripcion">
+					<h3>Primeros pasos en Blackboard</h3>
+					<p>
+						Aprende a ingresar a Blackboard, localizar tus cursos, consultar materiales, revisar actividades y entregar tareas desde la plataforma institucional.
+					</p>
+				</div>
+
+				<div class="et-imagen et-video">
+					<img src="https://picsum.photos/seed/blackboard-guia/800/500" alt="Tutorial de Blackboard">
+					<a class="et-video-enlace" href="#" target="_blank" aria-label="Ver video: Uso básico de Blackboard">
+						<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
+					</a>
+				</div>
+
+			</div>
+
+			<div class="et-recursos">
+
+				<details class="et-recurso">
+					<summary>
+						Video tutoriales
+						<span class="et-flecha">›</span>
+					</summary>
+
+					<div class="et-recurso-contenido">
+						<p>
+							Tutoriales para conocer las funciones principales de Blackboard.
+						</p>
+
+						<div class="et-lista-enlaces">
+							<a href="https://www.youtube.com/watch?v=WQ1NyZLs2To" target="_blank" rel="noopener">Introducción a Blackboard</a>
+							<a href="https://www.youtube.com/watch?v=kAJv8XnGbzM" target="_blank" rel="noopener">Iniciar sesión en Blackboard</a>
+							<a href="https://youtu.be/-MiSfnka2gg?si=bnCIpNJ9tws8AVRv" target="_blank" rel="noopener">Blackboard recuperación de contraseña</a>
+							<a href="https://youtu.be/47RGXHkrzz4?si=Cs0_sGNskrHoDXbE" target="_blank" rel="noopener">Videotutorial de uso básico de Blackboard para alumnos</a>
+						</div>
+					</div>
+				</details>
+
+				<details class="et-recurso">
+					<summary>
+						Herramientas
+						<span class="et-flecha">›</span>
+					</summary>
+
+					<div class="et-recurso-contenido">
+						<div class="et-lista-enlaces">
+							<a href="#" target="_blank">Cursos</a>
+							<a href="#" target="_blank">Actividades</a>
+							<a href="#" target="_blank">Calificaciones</a>
+							<a href="#" target="_blank">Materiales del curso</a>
+						</div>
+					</div>
+				</details>
+
+				<details class="et-recurso">
+					<summary>
+						Más recursos de apoyo
+						<span class="et-flecha">›</span>
+					</summary>
+
+					<div class="et-recurso-contenido">
+						<div class="et-lista-enlaces">
+							<a href="#" target="_blank">Preguntas frecuentes</a>
+							<a href="#" target="_blank">Manual de usuario</a>
+							<a href="#" target="_blank">Centro de ayuda</a>
+						</div>
+					</div>
+				</details>
+
+			</div>
+
+		</section>
+
+		<section class="et-guia" id="zoom">
+
+			<span class="et-guia-etiqueta">Videoconferencias</span>
+
+			<h2 class="et-guia-titulo">Uso básico de Zoom</h2>
+
+			<div class="et-presentacion">
+
+				<div class="et-descripcion">
+					<h3>Participa en clases y reuniones virtuales</h3>
+					<p>
+						Aprende a ingresar a una reunión, utilizar el micrófono y la cámara, compartir pantalla y aprovechar las principales herramientas de Zoom.
+					</p>
+				</div>
+
+				<div class="et-imagen et-video">
+					<img src="https://picsum.photos/seed/zoom-guia/800/500" alt="Tutorial de Zoom">
+					<a class="et-video-enlace" href="#" target="_blank" aria-label="Ver video: Uso básico de Zoom">
+						<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
+					</a>
+				</div>
+
+			</div>
+
+			<div class="et-recursos">
+
+				<details class="et-recurso">
+					<summary>
+						Video tutoriales
+						<span class="et-flecha">›</span>
+					</summary>
+
+					<div class="et-recurso-contenido">
+						<div class="et-lista-enlaces">
+							<a href="#" target="_blank">Cómo ingresar a una reunión</a>
+							<a href="#" target="_blank">Uso del micrófono y cámara</a>
+							<a href="#" target="_blank">Compartir pantalla</a>
+							<a href="#" target="_blank">Chat y reacciones</a>
+						</div>
+					</div>
+				</details>
+
+				<details class="et-recurso">
+					<summary>
+						Herramientas
+						<span class="et-flecha">›</span>
+					</summary>
+
+					<div class="et-recurso-contenido">
+						<div class="et-lista-enlaces">
+							<a href="#" target="_blank">Reuniones</a>
+							<a href="#" target="_blank">Chat</a>
+							<a href="#" target="_blank">Compartir pantalla</a>
+							<a href="#" target="_blank">Grabaciones</a>
+						</div>
+					</div>
+				</details>
+
+				<details class="et-recurso">
+					<summary>
+						Más recursos de apoyo
+						<span class="et-flecha">›</span>
+					</summary>
+
+					<div class="et-recurso-contenido">
+						<div class="et-lista-enlaces">
+							<a href="#" target="_blank">Preguntas frecuentes</a>
+							<a href="#" target="_blank">Guía rápida</a>
+							<a href="#" target="_blank">Centro de ayuda</a>
+						</div>
+					</div>
+				</details>
+
+			</div>
+
+		</section>
+
+		<section class="et-guia" id="moodle">
+
+			<span class="et-guia-etiqueta">Entorno virtual de aprendizaje</span>
+
+			<h2 class="et-guia-titulo">Uso básico de Moodle</h2>
+
+			<div class="et-presentacion">
+
+				<div class="et-descripcion">
+					<h3>Organiza tu aprendizaje en línea</h3>
+					<p>
+						Conoce cómo navegar por tus cursos, consultar recursos, participar en actividades y revisar tus avances dentro del entorno virtual de aprendizaje.
+					</p>
+				</div>
+
+				<div class="et-imagen et-video">
+					<img src="https://picsum.photos/seed/moodle-guia/800/500" alt="Tutorial de Moodle">
+					<a class="et-video-enlace" href="#" target="_blank" aria-label="Ver video: Uso básico de Moodle">
+						<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
+					</a>
+				</div>
+
+			</div>
+
+			<div class="et-recursos">
+
+				<details class="et-recurso">
+					<summary>
+						Video tutoriales
+						<span class="et-flecha">›</span>
+					</summary>
+
+					<div class="et-recurso-contenido">
+						<div class="et-lista-enlaces">
+							<a href="#" target="_blank">Primeros pasos</a>
+							<a href="#" target="_blank">Navegación del curso</a>
+							<a href="#" target="_blank">Entrega de actividades</a>
+							<a href="#" target="_blank">Consulta de calificaciones</a>
+						</div>
+					</div>
+				</details>
+
+				<details class="et-recurso">
+					<summary>
+						Herramientas
+						<span class="et-flecha">›</span>
+					</summary>
+
+					<div class="et-recurso-contenido">
+						<div class="et-lista-enlaces">
+							<a href="#" target="_blank">Tareas</a>
+							<a href="#" target="_blank">Foros</a>
+							<a href="#" target="_blank">Cuestionarios</a>
+							<a href="#" target="_blank">Recursos</a>
+						</div>
+					</div>
+				</details>
+
+				<details class="et-recurso">
+					<summary>
+						Más recursos de apoyo
+						<span class="et-flecha">›</span>
+					</summary>
+
+					<div class="et-recurso-contenido">
+						<div class="et-lista-enlaces">
+							<a href="#" target="_blank">Manual de usuario</a>
+							<a href="#" target="_blank">Preguntas frecuentes</a>
+							<a href="#" target="_blank">Centro de ayuda</a>
+						</div>
+					</div>
+				</details>
+
+			</div>
+
+		</section>
+
+		<section class="et-guia" id="teams">
+
+			<span class="et-guia-etiqueta">Comunicación y colaboración</span>
+
+			<h2 class="et-guia-titulo">Uso básico de Microsoft Teams</h2>
+
+			<div class="et-presentacion">
+
+				<div class="et-descripcion">
+					<h3>Comunícate y trabaja en equipo</h3>
+					<p>
+						Aprende a utilizar Teams para participar en clases, comunicarte con compañeros y docentes, compartir archivos y colaborar en actividades académicas.
+					</p>
+				</div>
+
+				<div class="et-imagen et-video">
+					<img src="https://picsum.photos/seed/teams-guia/800/500" alt="Tutorial de Microsoft Teams">
+					<a class="et-video-enlace" href="#" target="_blank" aria-label="Ver video: Uso básico de Microsoft Teams">
+						<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg>
+					</a>
+				</div>
+
+			</div>
+
+			<div class="et-recursos">
+
+				<details class="et-recurso">
+					<summary>
+						Video tutoriales
+						<span class="et-flecha">›</span>
+					</summary>
+
+					<div class="et-recurso-contenido">
+						<div class="et-lista-enlaces">
+							<a href="#" target="_blank">Primeros pasos en Teams</a>
+							<a href="#" target="_blank">Participar en una reunión</a>
+							<a href="#" target="_blank">Compartir archivos</a>
+							<a href="#" target="_blank">Comunicación en equipos</a>
+						</div>
+					</div>
+				</details>
+
+				<details class="et-recurso">
+					<summary>
+						Herramientas
+						<span class="et-flecha">›</span>
+					</summary>
+
+					<div class="et-recurso-contenido">
+						<div class="et-lista-enlaces">
+							<a href="#" target="_blank">Equipos</a>
+							<a href="#" target="_blank">Canales</a>
+							<a href="#" target="_blank">Chat</a>
+							<a href="#" target="_blank">Archivos</a>
+						</div>
+					</div>
+				</details>
+
+				<details class="et-recurso">
+					<summary>
+						Más recursos de apoyo
+						<span class="et-flecha">›</span>
+					</summary>
+
+					<div class="et-recurso-contenido">
+						<div class="et-lista-enlaces">
+							<a href="#" target="_blank">Guía rápida</a>
+							<a href="#" target="_blank">Preguntas frecuentes</a>
+							<a href="#" target="_blank">Centro de ayuda</a>
+						</div>
+					</div>
+				</details>
+
+			</div>
+
+		</section>
+
+<script type="application/json" id="datos-panel">{"titulo":"Guías y tutoriales","descripcion":"Encuentra guías paso a paso, videos y recursos de apoyo para utilizar las aplicaciones y plataformas institucionales en tu aprendizaje digital.","guias":[{"ancla":"blackboard","menu":"Blackboard","etiqueta":"Plataforma institucional","titulo":"Uso básico de Blackboard","subtitulo":"Primeros pasos en Blackboard","descripcion":"Aprende a ingresar a Blackboard, localizar tus cursos, consultar materiales, revisar actividades y entregar tareas desde la plataforma institucional.","video":"","imagen":"https://picsum.photos/seed/blackboard-guia/800/500","imagenAlt":"Tutorial de Blackboard","recursos":[{"titulo":"Video tutoriales","descripcion":"Tutoriales para conocer las funciones principales de Blackboard.","enlaces":[{"texto":"Introducción a Blackboard","url":"https://www.youtube.com/watch?v=WQ1NyZLs2To"},{"texto":"Iniciar sesión en Blackboard","url":"https://www.youtube.com/watch?v=kAJv8XnGbzM"},{"texto":"Blackboard recuperación de contraseña","url":"https://youtu.be/-MiSfnka2gg?si=bnCIpNJ9tws8AVRv"},{"texto":"Videotutorial de uso básico de Blackboard para alumnos","url":"https://youtu.be/47RGXHkrzz4?si=Cs0_sGNskrHoDXbE"}]},{"titulo":"Herramientas","descripcion":"","enlaces":[{"texto":"Cursos","url":""},{"texto":"Actividades","url":""},{"texto":"Calificaciones","url":""},{"texto":"Materiales del curso","url":""}]},{"titulo":"Más recursos de apoyo","descripcion":"","enlaces":[{"texto":"Preguntas frecuentes","url":""},{"texto":"Manual de usuario","url":""},{"texto":"Centro de ayuda","url":""}]}]},{"ancla":"zoom","menu":"Zoom","etiqueta":"Videoconferencias","titulo":"Uso básico de Zoom","subtitulo":"Participa en clases y reuniones virtuales","descripcion":"Aprende a ingresar a una reunión, utilizar el micrófono y la cámara, compartir pantalla y aprovechar las principales herramientas de Zoom.","video":"","imagen":"https://picsum.photos/seed/zoom-guia/800/500","imagenAlt":"Tutorial de Zoom","recursos":[{"titulo":"Video tutoriales","descripcion":"","enlaces":[{"texto":"Cómo ingresar a una reunión","url":""},{"texto":"Uso del micrófono y cámara","url":""},{"texto":"Compartir pantalla","url":""},{"texto":"Chat y reacciones","url":""}]},{"titulo":"Herramientas","descripcion":"","enlaces":[{"texto":"Reuniones","url":""},{"texto":"Chat","url":""},{"texto":"Compartir pantalla","url":""},{"texto":"Grabaciones","url":""}]},{"titulo":"Más recursos de apoyo","descripcion":"","enlaces":[{"texto":"Preguntas frecuentes","url":""},{"texto":"Guía rápida","url":""},{"texto":"Centro de ayuda","url":""}]}]},{"ancla":"moodle","menu":"Moodle","etiqueta":"Entorno virtual de aprendizaje","titulo":"Uso básico de Moodle","subtitulo":"Organiza tu aprendizaje en línea","descripcion":"Conoce cómo navegar por tus cursos, consultar recursos, participar en actividades y revisar tus avances dentro del entorno virtual de aprendizaje.","video":"","imagen":"https://picsum.photos/seed/moodle-guia/800/500","imagenAlt":"Tutorial de Moodle","recursos":[{"titulo":"Video tutoriales","descripcion":"","enlaces":[{"texto":"Primeros pasos","url":""},{"texto":"Navegación del curso","url":""},{"texto":"Entrega de actividades","url":""},{"texto":"Consulta de calificaciones","url":""}]},{"titulo":"Herramientas","descripcion":"","enlaces":[{"texto":"Tareas","url":""},{"texto":"Foros","url":""},{"texto":"Cuestionarios","url":""},{"texto":"Recursos","url":""}]},{"titulo":"Más recursos de apoyo","descripcion":"","enlaces":[{"texto":"Manual de usuario","url":""},{"texto":"Preguntas frecuentes","url":""},{"texto":"Centro de ayuda","url":""}]}]},{"ancla":"teams","menu":"Microsoft Teams","etiqueta":"Comunicación y colaboración","titulo":"Uso básico de Microsoft Teams","subtitulo":"Comunícate y trabaja en equipo","descripcion":"Aprende a utilizar Teams para participar en clases, comunicarte con compañeros y docentes, compartir archivos y colaborar en actividades académicas.","video":"","imagen":"https://picsum.photos/seed/teams-guia/800/500","imagenAlt":"Tutorial de Microsoft Teams","recursos":[{"titulo":"Video tutoriales","descripcion":"","enlaces":[{"texto":"Primeros pasos en Teams","url":""},{"texto":"Participar en una reunión","url":""},{"texto":"Compartir archivos","url":""},{"texto":"Comunicación en equipos","url":""}]},{"titulo":"Herramientas","descripcion":"","enlaces":[{"texto":"Equipos","url":""},{"texto":"Canales","url":""},{"texto":"Chat","url":""},{"texto":"Archivos","url":""}]},{"titulo":"Más recursos de apoyo","descripcion":"","enlaces":[{"texto":"Guía rápida","url":""},{"texto":"Preguntas frecuentes","url":""},{"texto":"Centro de ayuda","url":""}]}]}],"ayuda":{"titulo":"","texto":"","boton":"","url":""}}</script>
+<!-- PANEL:FIN -->
+
+	</div>
+
+	<script>
+	(function () {
+		var pagina = document.querySelector('.et-guias-tutoriales');
+		if (!pagina) return;
+
+		var ventana = document.createElement('div');
+		ventana.className = 'ventana-video';
+		ventana.innerHTML = '<div class="ventana-video-caja"><button type="button" class="ventana-video-cerrar" aria-label="Cerrar video">&times;</button><div class="ventana-video-marco"></div></div>';
+		document.body.appendChild(ventana);
+		var marco = ventana.querySelector('.ventana-video-marco');
+
+		function cerrar() { ventana.classList.remove('abierta'); marco.innerHTML = ''; document.body.style.overflow = ''; }
+		function abrir(id, titulo) {
+			marco.innerHTML = '<iframe src="https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0" title="' + (titulo || 'Video').replace(/"/g, '') + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe>';
+			ventana.classList.add('abierta');
+			document.body.style.overflow = 'hidden';
+		}
+		ventana.querySelector('.ventana-video-cerrar').addEventListener('click', cerrar);
+		ventana.addEventListener('click', function (e) { if (e.target === ventana) cerrar(); });
+		document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && ventana.classList.contains('abierta')) cerrar(); });
+
+		pagina.addEventListener('click', function (e) {
+			var a = e.target.closest('a');
+			if (!a) return;
+			var href = a.getAttribute('href') || '';
+			if (href === '#') { e.preventDefault(); return; }
+			var m = href.match(/(?:youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|embed\/|live\/)|youtu\.be\/)([\w-]{11})/);
+			if (!m) return;
+			e.preventDefault();
+			abrir(m[1], a.textContent.trim() || a.getAttribute('aria-label'));
+		});
+	})();
+	</script>
+
+</div>

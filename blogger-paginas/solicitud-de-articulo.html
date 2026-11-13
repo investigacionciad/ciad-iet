@@ -1,0 +1,841 @@
+<!--
+  Página de Blogger: Solicitud de Articulo
+  URL: https://ciad-innovaedutec.blogspot.com/p/solicitud-de-articulo.html
+  ID de la página: 4116400710515882306
+  Copia del contenido publicado (11/11/2026). Se edita en Blogger › Páginas o, Inicio y Sobre el blog, desde el Panel CIAD.
+-->
+<style>
+.solicitud-articulo {
+  --verde: #0a7d3e;
+  --verde-oscuro: #07632f;
+  --verde-claro: #e7f3ec;
+  --verde-suave: #d3eadc;
+  --texto: #0f1b2d;
+  --texto-suave: #5b6472;
+  --borde: #d9dee4;
+  --fondo: #f4f6f8; /* el mismo gris de fondo que el resto del blog */
+  font-family: 'Noto Sans', system-ui, sans-serif;
+  color: var(--texto);
+  background: var(--fondo);
+  padding: 28px 0 64px;
+  line-height: 1.5;
+}
+.solicitud-articulo *, .solicitud-articulo *::before, .solicitud-articulo *::after { box-sizing: border-box; }
+/* Sin el marco blanco que el tema pone a las páginas: aquí solo destacan las tarjetas blancas */
+.post-outer:has(.solicitud-articulo) { background: transparent; border: 0; }
+.post:has(.solicitud-articulo) { padding: 0; }
+.solicitud-articulo [hidden] { display: none !important; }
+
+.solicitud-articulo .contenedor-principal { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+/* ---------- Migas de pan ---------- */
+.solicitud-articulo .migas {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+  font-size: 13px; color: var(--texto-suave);
+  margin: 0 0 28px; padding: 0; list-style: none;
+}
+.solicitud-articulo .migas a { color: var(--texto-suave); text-decoration: none; }
+.solicitud-articulo .migas a:hover { color: var(--verde); }
+.solicitud-articulo .migas li + li::before { content: "›"; margin-right: 8px; }
+.solicitud-articulo .migas li:last-child { color: var(--texto); }
+
+/* ---------- Portada ---------- */
+.solicitud-articulo .seccion-portada {
+  display: grid; grid-template-columns: 1fr 300px; gap: 32px;
+  align-items: center; margin-bottom: 40px;
+}
+.solicitud-articulo .titulo-pagina {
+  font-family: 'Bitter', Georgia, serif; font-weight: 800;
+  font-size: clamp(34px, 5vw, 50px); line-height: 1.1; letter-spacing: -0.02em;
+  margin: 0 0 18px; color: var(--texto);
+}
+.solicitud-articulo .descripcion-pagina { font-size: 18px; color: var(--texto-suave); max-width: 560px; margin: 0; }
+.solicitud-articulo .ilustracion-portada { width: 100%; height: auto; display: block; }
+
+/* ---------- Proceso ---------- */
+.solicitud-articulo .subtitulo { font-family: 'Bitter', Georgia, serif; font-weight: 700; font-size: 26px; margin: 0 0 24px; }
+.solicitud-articulo .lista-pasos {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+  list-style: none; margin: 0 0 40px; padding: 0;
+}
+.solicitud-articulo .paso { position: relative; text-align: center; }
+.solicitud-articulo .paso-icono {
+  position: relative; width: 68px; height: 68px; margin: 0 auto 14px;
+  border-radius: 50%; background: var(--verde-claro); color: var(--verde);
+  display: flex; align-items: center; justify-content: center;
+}
+.solicitud-articulo .paso-numero {
+  position: absolute; left: -34px; top: 50%; transform: translateY(-50%);
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--verde); color: #fff; font-weight: 700; font-size: 14px;
+  display: flex; align-items: center; justify-content: center;
+}
+.solicitud-articulo .paso:not(:last-child)::after {
+  content: ""; position: absolute; top: 34px;
+  left: calc(50% + 50px); right: calc(-50% + 60px);
+  height: 1px; background: var(--verde-suave);
+}
+.solicitud-articulo .paso-titulo { font-weight: 600; font-size: 15px; margin: 0 0 4px; }
+.solicitud-articulo .paso-texto { font-size: 14px; color: var(--texto-suave); margin: 0 auto; max-width: 220px; }
+
+/* ---------- Dos columnas ---------- */
+.solicitud-articulo .contenido-solicitud {
+  display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+  gap: 20px; align-items: start;
+}
+
+/* ---------- Tarjeta del formulario ---------- */
+.solicitud-articulo .tarjeta-formulario {
+  background: #fff; border-radius: 14px; padding: 28px 24px;
+  box-shadow: 0 1px 3px rgba(15, 27, 45, .06);
+}
+.solicitud-articulo .encabezado-formulario {
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: 12px; flex-wrap: wrap; margin-bottom: 14px;
+}
+.solicitud-articulo .encabezado-formulario h2 { font-family: 'Bitter', Georgia, serif; font-weight: 700; font-size: 24px; margin: 0; }
+.solicitud-articulo .nota-obligatorios { font-size: 12px; color: var(--texto-suave); }
+
+/* Estados de sesión */
+.solicitud-articulo .bloque-sesion { text-align: center; padding: 36px 10px; }
+.solicitud-articulo .bloque-sesion .icono-circulo { margin: 0 auto 16px; }
+.solicitud-articulo .bloque-sesion h3 { font-family: 'Bitter', Georgia, serif; font-size: 22px; margin: 0 0 8px; }
+.solicitud-articulo .bloque-sesion p { color: var(--texto-suave); margin: 0 auto 20px; max-width: 420px; font-size: 14px; }
+.solicitud-articulo .texto-cargando { color: var(--texto-suave); font-size: 14px; text-align: center; padding: 48px 10px; }
+
+/* Campos */
+.solicitud-articulo .campo { margin-bottom: 18px; }
+.solicitud-articulo .campo > label,
+.solicitud-articulo .etiqueta-grupo { display: block; font-size: 14px; font-weight: 500; margin-bottom: 6px; }
+.solicitud-articulo .campo input[type="text"],
+.solicitud-articulo .campo input[type="email"],
+.solicitud-articulo .campo select,
+.solicitud-articulo .campo textarea {
+  width: 100%; font: inherit; font-size: 14px; color: var(--texto);
+  background: #fff; border: 1px solid var(--borde); border-radius: 6px;
+  padding: 9px 12px; transition: border-color .15s;
+}
+.solicitud-articulo .campo input[hidden] { display: none; }
+.solicitud-articulo .campo select + input { margin-top: 8px; }
+.solicitud-articulo .campo input[readonly] { background: #f3f5f4; color: var(--texto-suave); cursor: default; }
+.solicitud-articulo .campo input::placeholder,
+.solicitud-articulo .campo textarea::placeholder { color: #9aa2ad; }
+.solicitud-articulo .campo input:focus,
+.solicitud-articulo .campo select:focus,
+.solicitud-articulo .campo textarea:focus {
+  outline: none; border-color: var(--verde); box-shadow: 0 0 0 3px rgba(10, 125, 62, .15);
+}
+.solicitud-articulo .campo select {
+  appearance: none; -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%230f1b2d' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 14px center;
+  padding-right: 36px; cursor: pointer;
+}
+.solicitud-articulo .campo textarea { min-height: 110px; resize: vertical; }
+.solicitud-articulo .ayuda-campo { font-size: 12px; color: var(--texto-suave); margin-top: 4px; }
+.solicitud-articulo .contador { text-align: right; font-size: 12px; color: var(--texto-suave); margin-top: 4px; }
+.solicitud-articulo .fila-campos { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
+
+/* Opciones de vínculo */
+.solicitud-articulo .opciones-vinculo { display: grid; gap: 8px; }
+.solicitud-articulo .opcion-vinculo {
+  display: flex; align-items: center; gap: 10px;
+  border: 1px solid var(--borde); border-radius: 6px;
+  padding: 9px 12px; font-size: 14px; cursor: pointer;
+  transition: border-color .15s, background .15s;
+}
+.solicitud-articulo .opcion-vinculo input { accent-color: var(--verde); width: 16px; height: 16px; margin: 0; }
+.solicitud-articulo .opcion-vinculo:has(input:checked) { border-color: var(--verde); background: var(--verde-claro); }
+.solicitud-articulo .grupo-condicional { border-left: 3px solid var(--verde-suave); padding-left: 14px; margin-bottom: 18px; }
+
+/* Errores */
+.solicitud-articulo .campo.con-error input,
+.solicitud-articulo .campo.con-error select,
+.solicitud-articulo .campo.con-error textarea,
+.solicitud-articulo .campo.con-error .opcion-vinculo { border-color: #c62828; }
+.solicitud-articulo .mensaje-error { display: none; font-size: 12px; color: #c62828; margin-top: 4px; }
+.solicitud-articulo .con-error .mensaje-error { display: block; }
+
+/* DEF-021: aviso de uso de datos */
+.solicitud-articulo .aviso-datos {
+  font-size: 12px; color: var(--texto-suave); background: #f6f8f7;
+  border: 1px solid var(--borde); border-radius: 6px; padding: 10px 12px; margin: 22px 0 0;
+}
+.solicitud-articulo .aviso-datos a { color: var(--verde); }
+.solicitud-articulo .campo-aceptar { display: flex; align-items: center; gap: 10px; font-size: 13px; margin: 22px 0 20px; }
+.solicitud-articulo .campo-aceptar input { width: 17px; height: 17px; accent-color: var(--verde); cursor: pointer; }
+.solicitud-articulo .campo-aceptar a { color: var(--verde); }
+.solicitud-articulo .campo-aceptar.con-error { color: #c62828; }
+
+/* DEF-013: aviso cuando la solicitud no se pudo registrar */
+.solicitud-articulo .mensaje-envio {
+  border-left: 3px solid #c62828; background: #fdecea; color: #8e1c1c;
+  border-radius: 0 6px 6px 0; padding: 10px 14px; font-size: 14px; margin: 0 0 16px;
+}
+
+/* Botones */
+.solicitud-articulo .boton-enviar {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--verde); color: #fff; border: 0; border-radius: 6px;
+  padding: 11px 26px; font: inherit; font-weight: 600; font-size: 15px;
+  cursor: pointer; transition: background .15s;
+}
+.solicitud-articulo .boton-enviar:hover { background: var(--verde-oscuro); }
+.solicitud-articulo .boton-enviar:disabled { opacity: .6; cursor: wait; }
+.solicitud-articulo .boton-enviar:focus-visible,
+.solicitud-articulo .boton-contorno:focus-visible { outline: 3px solid rgba(10,125,62,.35); outline-offset: 2px; }
+
+/* Éxito */
+.solicitud-articulo .mensaje-exito { text-align: center; padding: 40px 10px; }
+.solicitud-articulo .mensaje-exito .icono-exito {
+  width: 64px; height: 64px; margin: 0 auto 16px; border-radius: 50%;
+  background: var(--verde-claro); color: var(--verde);
+  display: flex; align-items: center; justify-content: center;
+}
+.solicitud-articulo .mensaje-exito h3 { font-family: 'Bitter', Georgia, serif; font-size: 22px; margin: 0 0 8px; }
+.solicitud-articulo .mensaje-exito p { color: var(--texto-suave); margin: 0 auto; max-width: 420px; }
+.solicitud-articulo .mensaje-exito .folio-exito { margin-top: 10px; }
+
+/* ---------- Columna lateral ---------- */
+.solicitud-articulo .columna-lateral { display: flex; flex-direction: column; gap: 20px; }
+.solicitud-articulo .tarjeta-lateral { background: #fff; border-radius: 14px; padding: 24px 22px; box-shadow: 0 1px 3px rgba(15, 27, 45, .06); }
+.solicitud-articulo .tarjeta-lateral.destacada { background: var(--verde-claro); box-shadow: none; }
+.solicitud-articulo .tarjeta-con-icono { display: grid; grid-template-columns: 56px 1fr; gap: 14px; }
+.solicitud-articulo .icono-circulo {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: var(--verde-claro); color: var(--verde);
+  display: flex; align-items: center; justify-content: center;
+}
+.solicitud-articulo .destacada .icono-circulo { background: var(--verde-suave); }
+.solicitud-articulo .tarjeta-lateral h3 { font-family: 'Bitter', Georgia, serif; font-weight: 700; font-size: 19px; margin: 4px 0 8px; }
+.solicitud-articulo .tarjeta-lateral p { font-size: 13px; color: var(--texto-suave); margin: 0 0 16px; }
+.solicitud-articulo .tarjeta-lateral p a { color: var(--verde); }
+.solicitud-articulo .boton-contorno {
+  display: inline-flex; align-items: center; gap: 10px;
+  border: 1.5px solid var(--verde); color: var(--verde); background: #fff;
+  border-radius: 6px; padding: 7px 16px; font: inherit; font-weight: 600; font-size: 14px;
+  text-decoration: none; cursor: pointer; transition: background .15s, color .15s;
+}
+.solicitud-articulo .boton-contorno:hover { background: var(--verde); color: #fff; }
+.solicitud-articulo .lista-criterios { list-style: none; margin: 16px 0 0; padding: 0; }
+.solicitud-articulo .lista-criterios li {
+  display: grid; grid-template-columns: 22px 1fr; gap: 12px;
+  font-size: 13px; color: var(--texto-suave); margin-bottom: 12px;
+}
+.solicitud-articulo .lista-criterios li:last-child { margin-bottom: 0; }
+.solicitud-articulo .lista-criterios svg { color: var(--verde); margin-top: 1px; }
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 900px) {
+  .solicitud-articulo .seccion-portada { grid-template-columns: 1fr 200px; }
+  .solicitud-articulo .contenido-solicitud { grid-template-columns: 1fr; }
+  .solicitud-articulo .lista-pasos { grid-template-columns: repeat(2, 1fr); row-gap: 28px; }
+  .solicitud-articulo .paso::after { display: none; }
+}
+@media (max-width: 600px) {
+  .solicitud-articulo .seccion-portada { grid-template-columns: 1fr; }
+  .solicitud-articulo .ilustracion-portada { max-width: 200px; margin: 0 auto; order: -1; }
+  .solicitud-articulo .descripcion-pagina { font-size: 16px; }
+  .solicitud-articulo .lista-pasos { grid-template-columns: 1fr; }
+  .solicitud-articulo .fila-campos { grid-template-columns: 1fr; }
+  .solicitud-articulo .tarjeta-formulario { padding: 22px 16px; }
+  .solicitud-articulo .boton-enviar { width: 100%; justify-content: center; }
+}
+
+/* Ocultar título automático de Blogger */
+.post-title, .entry-title { display: none; }
+</style>
+
+<div class="solicitud-articulo">
+  <div class="contenedor-principal">
+    
+    <!---
+    <ol class="migas">
+      <li><a href="/">Inicio</a></li>
+      <li><a href="/p/sobre-el-blog.html">Sobre el Blog</a></li>
+      <li>Solicitud de artículo</li>
+    </ol>-->
+
+    <section class="seccion-portada">
+      <div>
+        <h1 class="titulo-pagina">Solicitud de artículo</h1>
+        <p class="descripcion-pagina">¿Te gustaría colaborar en el blog del CIAD? Envíanos tu propuesta de artículo y forma parte de nuestra comunidad de divulgación sobre tecnología, educación e innovación.</p>
+      </div>
+      <svg class="ilustracion-portada" viewBox="0 0 300 240" aria-hidden="true">
+        <path d="M150 12c62 0 128 30 136 92 8 64-46 124-118 128C90 236 20 204 14 138 8 72 78 12 150 12z" fill="#e7f3ec"/>
+        <rect x="104" y="40" width="98" height="128" rx="10" fill="#fff" stroke="#c9cfd6" stroke-width="3"/>
+        <rect x="120" y="62" width="64" height="6" rx="3" fill="#c9cfd6"/>
+        <rect x="120" y="78" width="54" height="6" rx="3" fill="#c9cfd6"/>
+        <rect x="120" y="94" width="60" height="6" rx="3" fill="#c9cfd6"/>
+        <rect x="140" y="140" width="30" height="5" rx="2.5" fill="#9ccdb2"/>
+        <rect x="80" y="120" width="60" height="60" rx="8" fill="#0a7d3e"/>
+        <path d="M110 134v32M94 150h32" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+        <path d="M244 96l-78 38 30 10 10 30z" fill="#0a7d3e"/>
+        <path d="M196 144l48-48-38 58z" fill="#07632f"/>
+        <path d="M232 52v14M246 72l10-10M254 84h12" stroke="#0a7d3e" stroke-width="3" stroke-linecap="round" opacity=".6"/>
+      </svg>
+    </section>
+
+    <h2 class="subtitulo">Proceso de solicitud</h2>
+    <ol class="lista-pasos">
+      <li class="paso">
+        <div class="paso-icono"><span class="paso-numero">1</span>
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+        </div>
+        <h3 class="paso-titulo">Completa el formulario</h3>
+        <p class="paso-texto">Inicia sesión con Google y cuéntanos sobre tu propuesta.</p>
+      </li>
+      <li class="paso">
+        <div class="paso-icono"><span class="paso-numero">2</span>
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h5"/><polyline points="14 2 14 8 20 8"/><circle cx="16.5" cy="16.5" r="3"/><line x1="21" y1="21" x2="18.7" y2="18.7"/><line x1="8" y1="12" x2="12" y2="12"/></svg>
+        </div>
+        <h3 class="paso-titulo">Revisión editorial</h3>
+        <p class="paso-texto">Nuestro equipo revisará tu propuesta.</p>
+      </li>
+      <li class="paso">
+        <div class="paso-icono"><span class="paso-numero">3</span>
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22 6 12 13 2 6"/></svg>
+        </div>
+        <h3 class="paso-titulo">Respuesta</h3>
+        <p class="paso-texto">Si se aprueba, te enviamos por correo el formulario para entregar tu artículo.</p>
+      </li>
+      <li class="paso">
+        <div class="paso-icono"><span class="paso-numero">4</span>
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/></svg>
+        </div>
+        <h3 class="paso-titulo">Publicación</h3>
+        <p class="paso-texto">Revisamos tu artículo y lo programamos en el blog.</p>
+      </li>
+    </ol>
+
+    <div class="contenido-solicitud">
+
+      <div class="tarjeta-formulario">
+
+        <!-- Mientras Firebase restaura la sesión -->
+        <p class="texto-cargando" id="estado-cargando">Verificando tu sesión…</p>
+
+        <!-- Sin sesión -->
+        <div class="bloque-sesion" id="estado-sin-sesion" hidden>
+          <div class="icono-circulo">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <h3>Inicia sesión para enviar tu propuesta</h3>
+          <p>Usamos tu cuenta de Google para identificarte y responderte al correo correcto.</p>
+          <p><strong>Para continuar, presiona el botón de Google (G) en la barra superior de esta página.</strong></p>
+        </div>
+
+        <!-- Con sesión -->
+        <div id="bloque-formulario" hidden>
+          <div class="encabezado-formulario">
+            <h2>Formulario de solicitud</h2>
+            <span class="nota-obligatorios">* Campos obligatorios</span>
+          </div>
+
+          <form id="formulario-solicitud" novalidate>
+
+            <input type="hidden" data-campo="uid" id="campo-uid">
+
+            <div class="fila-campos">
+              <div class="campo">
+                <label for="campo-nombre">Nombre completo *</label>
+                <input id="campo-nombre" data-campo="nombre" type="text" placeholder="Tu nombre completo" required autocomplete="name">
+                <div class="ayuda-campo">Puedes corregirlo si tu nombre de Google no está completo.</div>
+                <div class="mensaje-error">Escribe tu nombre completo.</div>
+              </div>
+              <div class="campo">
+                <label for="campo-correo">Correo electrónico *</label>
+                <input id="campo-correo" data-campo="correo" type="email" readonly required>
+                <div class="ayuda-campo">Es el correo de tu cuenta de Google.</div>
+              </div>
+            </div>
+
+            <div class="campo" id="campo-vinculo">
+              <span class="etiqueta-grupo">Institución *</span>
+              <div class="opciones-vinculo">
+                <!-- name="vinculo" agrupa las opciones: solo se puede elegir una. value = texto que valida el receptor -->
+                <label class="opcion-vinculo"><input type="radio" name="vinculo" data-campo="vinculo" value="UABC" required> Universidad Autónoma de Baja California</label>
+                <label class="opcion-vinculo"><input type="radio" name="vinculo" data-campo="vinculo" value="Otra institución u organización"> Otra institución u organización</label>
+                <label class="opcion-vinculo"><input type="radio" name="vinculo" data-campo="vinculo" value="Independiente"> Independiente</label>
+              </div>
+              <div class="mensaje-error">Elige una opción.</div>
+            </div>
+
+            <div class="grupo-condicional" id="grupo-uabc" hidden>
+              <!-- Listas tomadas de uabc.mx (oferta de licenciatura). Los inputs ocultos son los que se envían -->
+              <div class="campo">
+                <label for="sel-unidad">Unidad académica *</label>
+                <select id="sel-unidad"><option value="">Elige tu unidad académica…</option></select>
+                <input id="campo-unidad" data-campo="unidad" type="text" placeholder="Escribe tu unidad académica" required hidden>
+                <div class="mensaje-error">Elige tu unidad académica.</div>
+              </div>
+              <div class="campo">
+                <label for="sel-programa">Programa educativo *</label>
+                <select id="sel-programa" disabled><option value="">Primero elige tu unidad académica</option></select>
+                <input id="campo-programa" data-campo="programa" type="text" placeholder="Escribe tu programa (posgrado u otro)" required hidden>
+                <div class="mensaje-error">Elige tu programa educativo.</div>
+              </div>
+            </div>
+
+            <div class="grupo-condicional" id="grupo-organizacion" hidden>
+              <div class="campo">
+                <label for="campo-organizacion">Institución u organización *</label>
+                <input id="campo-organizacion" data-campo="organizacion" type="text" placeholder="Nombre de tu institución u organización" required autocomplete="organization">
+                <div class="mensaje-error">Escribe el nombre de tu institución u organización.</div>
+              </div>
+            </div>
+
+            <div class="campo">
+              <label for="campo-titulo">Título tentativo del artículo *</label>
+              <textarea id="campo-titulo" data-campo="titulo" rows="2" placeholder="Ej. El impacto de la IA en la educación superior" required></textarea>
+              <div class="contador"><span id="contador-titulo">0</span> palabras · máximo 20</div>
+              <div class="mensaje-error" id="error-titulo">Escribe un título de máximo 20 palabras.</div>
+            </div>
+
+
+            <div class="campo">
+              <label for="campo-resumen">¿De qué trata tu nota? *</label>
+              <textarea id="campo-resumen" data-campo="resumen" required
+                placeholder="Describe brevemente el tema, enfoque y relevancia de tu artículo...&#10;(máximo 100 palabras)"></textarea>
+              <div class="contador"><span id="contador-resumen">0</span> palabras · máximo 100</div>
+              <div class="mensaje-error">Escribe un resumen de máximo 100 palabras. Llevas <span id="palabras-resumen">0</span>.</div>
+            </div>
+
+            <p class="aviso-datos">
+              <strong>Uso de tus datos.</strong> Usamos tu nombre y tu correo solo para revisar tu propuesta,
+              avisarte la decisión del equipo editorial y, si se publica, darte el crédito como autor.
+              No los compartimos con terceros. Consulta el
+              <a href="https://transparencia.uabc.mx/Aviso_Privacidad/index.html" target="_blank" rel="noopener">aviso de privacidad de la UABC</a>.
+            </p>
+
+            <label class="campo-aceptar" id="campo-aceptar">
+              <input type="checkbox" id="campo-lineamientos">
+              <span>He leído y acepto los <a href="/p/lineamientos-editoriales.html" target="_blank" rel="noopener">lineamientos editoriales</a> *</span>
+            </label>
+
+            <div class="mensaje-envio" id="mensaje-envio" role="alert" hidden></div>
+
+            <button type="submit" class="boton-enviar" id="boton-enviar">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              <span id="texto-boton">Enviar solicitud</span>
+            </button>
+          </form>
+        </div>
+
+        <div class="mensaje-exito" id="mensaje-exito" role="status" hidden>
+          <div class="icono-exito">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h3 id="titulo-exito">Solicitud enviada</h3>
+          <p id="texto-exito">Recibimos tu propuesta. El equipo editorial del CIAD la revisará y te escribirá a <strong id="correo-confirmacion"></strong>.</p>
+          <p class="folio-exito" id="folio-exito" hidden>Folio: <strong id="folio-confirmacion"></strong></p>
+        </div>
+
+      </div>
+
+      <aside class="columna-lateral">
+        <div class="tarjeta-lateral destacada tarjeta-con-icono">
+          <div class="icono-circulo">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg>
+          </div>
+          <div>
+            <h3>Lineamientos editoriales</h3>
+            <p>Antes de enviar tu propuesta, te invitamos a revisar nuestros lineamientos editoriales para asegurar que tu artículo cumpla con los criterios del blog.</p>
+            <a class="boton-contorno" href="/p/lineamientos-editoriales.html">
+              Ver lineamientos
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="tarjeta-lateral">
+          <h3>¿Qué tipo de artículos buscamos?</h3>
+          <ul class="lista-criterios">
+            <li><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="currentColor"/><polyline points="7 12.5 10.5 16 17 9" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Temas relacionados con tecnología educativa, innovación, ética digital y más.</li>
+            <li><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="currentColor"/><polyline points="7 12.5 10.5 16 17 9" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Contenido original y de interés para la comunidad.</li>
+            <li><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="currentColor"/><polyline points="7 12.5 10.5 16 17 9" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Enfoque académico, divulgativo o de experiencia.</li>
+            <li><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="currentColor"/><polyline points="7 12.5 10.5 16 17 9" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Artículos accesibles para un público amplio.</li>
+          </ul>
+        </div>
+
+        <div class="tarjeta-lateral tarjeta-con-icono">
+          <div class="icono-circulo">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="13" y2="13"/></svg>
+          </div>
+          <div>
+            <h3>¿Tienes preguntas?</h3>
+            <p>Si tienes dudas sobre el proceso o tu propuesta, escríbenos a <a href="mailto:investigacion.ciad@uabc.edu.mx">investigacion.ciad@uabc.edu.mx</a>.</p>
+            <a class="boton-contorno" href="mailto:investigacion.ciad@uabc.edu.mx?subject=Dudas%20sobre%20mi%20solicitud%20de%20art%C3%ADculo">
+              Escribir al CIAD
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+
+  /* =========================================================
+     CONFIGURACIÓN
+     RECEPTOR_URL: URL /exec del proyecto "Receptor de solicitudes CIAD".
+     La solicitud se envía ahí y la página solo muestra "Solicitud enviada"
+     cuando el receptor confirma que quedó en la hoja (DEF-013).
+     ========================================================= */
+  var CONFIG = {
+    RECEPTOR_URL: 'https://script.google.com/macros/s/AKfycbxcrYi6QIXnL5nTySI7RcbTergUgr2MFF7QSEJeOPUCcngPYLJPKruBQNVR7o9Twn1c/exec',
+    tiempoMaximoMs: 30000,
+    maximoPalabras: { titulo: 20, resumen: 100 } // igual que el Receptor
+  };
+
+  var formulario = document.getElementById('formulario-solicitud');
+  if (!formulario) return;
+
+  var $ = function (id) { return document.getElementById(id); };
+  var estadoCargando = $('estado-cargando');
+  var estadoSinSesion = $('estado-sin-sesion');
+  var bloqueFormulario = $('bloque-formulario');
+  var mensajeExito = $('mensaje-exito');
+  var resumen = $('campo-resumen');
+  var aceptar = $('campo-lineamientos');
+  var boton = $('boton-enviar');
+  var mensajeEnvio = $('mensaje-envio');
+  var enviando = false;
+  var enviado = false;
+
+  /* ---------------- Sesión de Firebase ---------------- */
+
+  function mostrarSesion(usuario) {
+    if (enviado) return;
+    estadoCargando.hidden = true;
+
+    if (!usuario || !usuario.email) {
+      estadoSinSesion.hidden = false;
+      bloqueFormulario.hidden = true;
+      return;
+    }
+
+    estadoSinSesion.hidden = true;
+    bloqueFormulario.hidden = false;
+
+    $('campo-correo').value = usuario.email;
+    $('campo-uid').value = usuario.uid || '';
+
+    // Nombre: se prellena con el de Google pero queda editable
+    var nombre = $('campo-nombre');
+    if (usuario.displayName && !nombre.value) nombre.value = usuario.displayName;
+  }
+
+  // El tema avisa cada vez que cambia la sesión
+  window.addEventListener('ciad-auth-changed', function (e) {
+    mostrarSesion(e.detail && e.detail.user);
+  });
+
+  // Por si la sesión ya estaba lista (o el tema carga después que esta página),
+  // se revisa cada medio segundo durante 6 segundos.
+  var intentos = 0;
+  var revision = setInterval(function () {
+    intentos++;
+    var fb = window.CIADFirebase;
+    var usuario = fb && fb.getCurrentUser ? fb.getCurrentUser() : null;
+
+    if (usuario) {
+      clearInterval(revision);
+      mostrarSesion(usuario);
+    } else if (intentos >= 12) {   // 6 segundos sin sesión
+      clearInterval(revision);
+      if (!estadoCargando.hidden) mostrarSesion(null);
+    }
+  }, 500);
+
+  /* ---------------- Unidad y programa (UABC) ----------------
+     Catálogo de uabc.mx/oferta-educativa-programas-de-licenciatura (nov 2026): { campus: { unidad: [programas] } }.
+     shortcut: lista fija en la página; si la UABC abre o cierra programas, hay que volver a generarla. */
+  var UABC_OFERTA = {"Ensenada":{"Escuela de Ciencias de la Salud":["Licenciatura en Enfermería","Licenciatura en Medicina"],"Facultad De Ciencias Marinas - Geomática":[],"Facultad de Artes":["Licenciatura en Artes Visuales","Licenciatura en Música"],"Facultad de Ciencias":["Licenciatura en Biología","Licenciatura en Ciencia de Datos","Licenciatura en Ciencias Computacionales","Licenciatura en Física","Licenciatura en Matemáticas Aplicadas"],"Facultad de Ciencias Administrativas y Sociales":["Licenciatura en Administración de Empresas","Licenciatura en Ciencias de la Comunicación","Licenciatura en Ciencias de la Educación","Licenciatura en Contaduría","Licenciatura en Derecho","Licenciatura en Inteligencia de Negocios","Licenciatura en Psicología","Licenciatura en Sociología"],"Facultad de Ciencias Marinas":["Licenciatura en Biotecnología en Acuacultura","Licenciatura en Ciencias Ambientales","Licenciatura en Oceanología"],"Facultad de Deportes":["Licenciatura en Actividad Física y Deportes"],"Facultad de Enología y Gastronomía":["Licenciatura en Enología","Licenciatura en Gastronomía"],"Facultad de Idiomas":["Licenciatura en Enseñanza de Lenguas","Licenciatura en Traducción"],"Facultad de Ingeniería y Negocios, San Quintín":["Ingeniero en Agronegocios","Ingeniería en Agronomía","Licenciatura en Administración de Empresas","Licenciatura en Contaduría"],"Facultad de Ingeniería, Arquitectura y Diseño":["Bioingeniería","Ingeniería Civil","Ingeniería Industrial","Ingeniería en Computación","Ingeniería en Electrónica","Ingeniería en Nanotecnología","Ingeniería en Software y Tecnologías Emergentes","Licenciatura en Arquitectura"],"Instituto de Investigaciones Oceanológicas":[],"Instituto de Investigación y Desarrollo Educativo":[]},"Mexicali":{"Facultad De Ingeniería y Negocios Guadalupe Victoria Extensión Ciudad Morelos":[],"Facultad de Arquitectura y Diseño":["Licenciatura en Arquitectura","Licenciatura en Diseño Gráfico","Licenciatura en Diseño Industrial"],"Facultad de Artes":["Licenciatura en Animación Digital y Efectos Visuales","Licenciatura en Artes Cinematográficas y Producción Audiovisual","Licenciatura en Artes Visuales","Licenciatura en Danza"],"Facultad de Ciencias Administrativas":["Licenciatura en Administración de Empresas","Licenciatura en Contaduría","Licenciatura en Gestión Turística","Licenciatura en Gestión e Innovación Organizacional (En Línea)","Licenciatura en Inteligencia de Negocios","Licenciatura en Mercadotecnia","Licenciatura en Negocios Internacionales"],"Facultad de Ciencias Administrativas Extensión San Felipe":[],"Facultad de Ciencias Administrativas, Sociales e Ingeniería":["Licenciatura en Administración de Empresas","Licenciatura en Ciencias de la Educación","Licenciatura en Psicología"],"Facultad de Ciencias Humanas":["Licenciatura en Ciencias de la Comunicación","Licenciatura en Ciencias de la Educación","Licenciatura en Historia","Licenciatura en Psicología","Licenciatura en Sociología"],"Facultad de Ciencias Sociales y Políticas":["Licenciatura en Administración Pública y Ciencias Políticas","Licenciatura en Economía","Licenciatura en Relaciones Internacionales"],"Facultad de Deportes":["Licenciatura en Actividad Física y Deportes"],"Facultad de Derecho":["Licenciatura en Derecho"],"Facultad de Enfermería":["Licenciatura en Enfermería","Licenciatura en Fisioterapia"],"Facultad de Idiomas":["Licenciatura en Enseñanza de Lenguas","Licenciatura en Traducción"],"Facultad de Ingeniería":["Bioingeniería","Ingeniería Aeroespacial","Ingeniería Civil","Ingeniería Eléctrica","Ingeniería Industrial","Ingeniería Mecánica","Ingeniería en Computación","Ingeniería en Electrónica","Ingeniería en Energías Renovables","Ingeniería en Mecatrónica","Ingeniería en Semiconductores y Microelectrónica","Licenciatura en Sistemas Computacionales"],"Facultad de Medicina y Nutrición":["Licenciatura en Medicina","Licenciatura en Nutrición"],"Facultad de Odontología":["Licenciatura en Cirujano Dentista"],"Facultad de Pedagogía e Innovación Educativa":["Licenciatura en Docencia de la Lengua y la Literatura","Licenciatura en Docencia de la Matemática","Licenciatura en Docencia de las Ciencias","Licenciatura en Psicopedagogía"],"Instituto de Ciencias Agrícolas":["Ingeniero en Agronegocios","Ingeniería en Agronomía y Zootecnia","Ingeniería en Biotecnología Agropecuaria"],"Instituto de Ingeniería":[],"Instituto de Investigaciones Culturales-Museo":[],"Instituto de Investigaciones Sociales":[],"Instituto de Investigaciones en Ciencias Veterinarias":["Licenciatura en Medicina Veterinaria y Zootecnia"],"Unidad Universitaria Ciudad Morelos":["Licenciado en Administración de Empresas"],"Unidad Universitaria San Felipe":["Licenciado en Administración de Empresas","Licenciado en Contaduría"],"Unidad Universitaria de Ciencias de la Salud":[]},"Tijuana":{"Facultad de Artes":["Licenciatura en Artes Visuales","Licenciatura en Teatro"],"Facultad de Ciencias Químicas e Ingeniería":["Ingeniería Industrial","Ingeniería Química","Ingeniería en Computación","Ingeniería en Electrónica","Ingeniería en Software y Tecnologías Emergentes","Licenciatura en Química Farmaceútica Biológica","Licenciatura en Química Industrial"],"Facultad de Ciencias de la Ingeniería y Tecnología, Valle de las Palmas":["Bioingeniería","Ingeniería Aeroespacial","Ingeniería Civil","Ingeniería Eléctrica","Ingeniería Industrial","Ingeniería Mecánica","Ingeniería en Energías Renovables","Ingeniería en Mecatrónica","Ingeniería en Software y Tecnologías Emergentes","Licenciatura en Arquitectura","Licenciatura en Desarrollo de software (En Línea)","Licenciatura en Diseño Gráfico","Licenciatura en Diseño Industrial"],"Facultad de Ciencias de la Ingeniería, Administrativas y Sociales, Tecate":["Ingeniería Industrial","Ingeniería en Mecatrónica","Licenciatura en Administración de Empresas","Licenciatura en Contaduría","Licenciatura en Derecho","Licenciatura en Inteligencia de Negocios"],"Facultad de Ciencias de la Salud, Valle de las Palmas":["Licenciatura en Cirujano Dentista","Licenciatura en Enfermería","Licenciatura en Fisioterapia","Licenciatura en Psicología"],"Facultad de Contaduría y Administración":["Licenciatura en Administración de Empresas","Licenciatura en Contaduría","Licenciatura en Inteligencia de Negocios","Licenciatura en Mercadotecnia","Licenciatura en Negocios Internacionales"],"Facultad de Deportes":["Licenciatura en Actividad Física y Deportes"],"Facultad de Derecho":["Licenciatura en Derecho"],"Facultad de Economía y Relaciones Internacionales":["Licenciatura en Administración Pública y Ciencias Políticas","Licenciatura en Economía","Licenciatura en Relaciones Internacionales"],"Facultad de Humanidades y Ciencias Sociales":["Licenciatura en Ciencias de la Comunicación","Licenciatura en Docencia de la Lengua y la Literatura","Licenciatura en Docencia de la Matemática","Licenciatura en Filosofía","Licenciatura en Historia","Licenciatura en Lengua y Literatura de Hispanoamérica","Licenciatura en Psicopedagogía","Licenciatura en Sociología"],"Facultad de Idiomas":["Licenciatura en Enseñanza de Lenguas","Licenciatura en Traducción"],"Facultad de Idiomas, Tecate":[],"Facultad de Medicina y Psicología":["Licenciatura en Medicina","Licenciatura en Nutrición","Licenciatura en Psicología"],"Facultad de Odontología":["Licenciatura en Cirujano Dentista"],"Facultad de Turismo y Mercadotecnia":["Licenciatura en Gastronomía","Licenciatura en Gestión Turística"],"Instituto de Investigaciones Históricas":[],"Unidad Universitaria, Rosarito":[]}};
+  var OTRA = '__otra__';
+  var selUnidad = $('sel-unidad'), selPrograma = $('sel-programa');
+  var txtUnidad = $('campo-unidad'), txtPrograma = $('campo-programa');
+
+  function opcion(valor, texto) {
+    var o = document.createElement('option');
+    o.value = valor; o.textContent = texto;
+    return o;
+  }
+
+  Object.keys(UABC_OFERTA).forEach(function (campus) {
+    var grupo = document.createElement('optgroup');
+    grupo.label = 'Campus ' + campus;
+    Object.keys(UABC_OFERTA[campus]).forEach(function (unidad) { grupo.appendChild(opcion(campus + '|' + unidad, unidad)); });
+    selUnidad.appendChild(grupo);
+  });
+  selUnidad.appendChild(opcion(OTRA, 'Otra / no aparece en la lista'));
+
+  // Los valores se pasan a los inputs ocultos en "input" (antes que la revalidación del formulario)
+  function alElegirUnidad() {
+    var v = selUnidad.value, partes = v.split('|');
+    var programas = v && v !== OTRA ? UABC_OFERTA[partes[0]][partes[1]] : [];
+    selPrograma.innerHTML = '';
+    selPrograma.appendChild(opcion('', v ? 'Elige tu programa educativo\u2026' : 'Primero elige tu unidad académica'));
+    programas.forEach(function (p) { selPrograma.appendChild(opcion(p, p)); });
+    selPrograma.appendChild(opcion(OTRA, 'Otro (posgrado u otro programa)'));
+    selPrograma.disabled = !v;
+    if (v === OTRA) selPrograma.value = OTRA;
+
+    // Se guarda con el campus ("Facultad de Artes, Mexicali"): hay nombres repetidos entre campus
+    txtUnidad.hidden = v !== OTRA;
+    txtUnidad.value = v && v !== OTRA ? partes[1] + ', ' + partes[0] : '';
+    alElegirPrograma();
+  }
+
+  function alElegirPrograma() {
+    var v = selPrograma.value;
+    txtPrograma.hidden = v !== OTRA;
+    txtPrograma.value = v && v !== OTRA ? v : '';
+  }
+
+  selUnidad.addEventListener('input', alElegirUnidad);
+  selPrograma.addEventListener('input', alElegirPrograma);
+
+  /* ---------------- Campos condicionales ---------------- */
+
+  function activarGrupo(grupo, activo) {
+    grupo.hidden = !activo;
+    Array.prototype.forEach.call(grupo.querySelectorAll('input'), function (el) {
+      el.disabled = !activo; // deshabilitado = no se valida ni se envía
+      if (!activo) el.closest('.campo').classList.remove('con-error');
+    });
+  }
+
+  function actualizarVinculo() {
+    var elegido = formulario.querySelector('[data-campo="vinculo"]:checked');
+    var valor = elegido ? elegido.value : '';
+    activarGrupo($('grupo-uabc'), valor === 'UABC');
+    activarGrupo($('grupo-organizacion'), valor === 'Otra institución u organización');
+  }
+  formulario.addEventListener('change', function (e) {
+    if (e.target.getAttribute('data-campo') === 'vinculo') {
+      actualizarVinculo();
+      $('campo-vinculo').classList.remove('con-error');
+    }
+  });
+  actualizarVinculo();
+
+  /* ---------------- Validación ---------------- */
+
+  // Título y resumen se cuentan en PALABRAS, igual que el Receptor (los contadores los pinta el script de abajo)
+  function contarPalabras(texto) { var t = texto.trim(); return t ? t.split(/\s+/).length : 0; }
+
+  function marcar(elemento, valido) {
+    var campo = elemento.closest('.campo') || elemento.closest('.campo-aceptar');
+    if (campo) campo.classList.toggle('con-error', !valido);
+    return valido;
+  }
+
+  function validar() {
+    var todoBien = true;
+
+    Array.prototype.forEach.call(formulario.querySelectorAll('input[required]:not([type="radio"]):not(:disabled), select[required], textarea[required]'), function (el) {
+      var ok = el.value.trim() !== '' && el.checkValidity();
+      if (el === resumen || el.id === 'campo-titulo') {
+        var total = contarPalabras(el.value);
+        ok = total >= 1 && total <= CONFIG.maximoPalabras[el === resumen ? 'resumen' : 'titulo'];
+      }
+      if (!marcar(el, ok)) todoBien = false;
+    });
+
+    var vinculo = formulario.querySelector('[data-campo="vinculo"]:checked');
+    if (!marcar($('campo-vinculo'), !!vinculo)) todoBien = false;
+    if (!marcar(aceptar, aceptar.checked)) todoBien = false;
+    return todoBien;
+  }
+
+  formulario.addEventListener('input', function (e) {
+    var campo = e.target.closest('.campo');
+    if (campo && campo.classList.contains('con-error')) validar();
+  });
+  aceptar.addEventListener('change', function () { marcar(aceptar, aceptar.checked); });
+
+  /* ---------------- Envío ---------------- */
+
+  function avisarError(texto) {
+    mensajeEnvio.textContent = texto;
+    mensajeEnvio.hidden = false;
+    mensajeEnvio.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  // Datos del formulario (los campos deshabilitados no se envían)
+  function leerDatos() {
+    var datos = {};
+    Array.prototype.forEach.call(formulario.querySelectorAll('[data-campo]'), function (el) {
+      if (el.disabled || (el.type === 'radio' && !el.checked)) return;
+      datos[el.getAttribute('data-campo')] = el.value.trim();
+    });
+    datos.aceptaLineamientos = aceptar.checked;
+    return datos;
+  }
+
+  // Token de la sesión de Google: el receptor obtiene el correo de ahí, no del formulario
+  function obtenerToken() {
+    var fb = window.CIADFirebase;
+    var usuario = fb && fb.getCurrentUser ? fb.getCurrentUser() : null;
+    if (!usuario || !usuario.getIdToken) return Promise.reject(new Error('sin-sesion'));
+    return usuario.getIdToken();
+  }
+
+  function terminarEnvio() {
+    enviando = false;
+    boton.disabled = false;
+    $('texto-boton').textContent = 'Enviar solicitud';
+  }
+
+  formulario.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (enviando) return;
+    mensajeEnvio.hidden = true;
+
+    if (!validar()) {
+      var primerError = formulario.querySelector('.con-error input:not([type="hidden"]), .con-error select, .con-error textarea');
+      if (primerError) primerError.focus();
+      return;
+    }
+    if (/^PEGAR_AQUI/.test(CONFIG.RECEPTOR_URL)) {
+      avisarError('El formulario todavía no está disponible. Intenta más tarde.');
+      return;
+    }
+
+    enviando = true;
+    boton.disabled = true;
+    $('texto-boton').textContent = 'Enviando\u2026';
+
+    var control = window.AbortController ? new AbortController() : null;
+    var limite = setTimeout(function () { if (control) control.abort(); }, CONFIG.tiempoMaximoMs);
+
+    obtenerToken()
+      .then(function (token) {
+        var datos = leerDatos();
+        datos.idToken = token;
+        // text/plain evita la consulta previa de CORS que Apps Script no responde
+        return fetch(CONFIG.RECEPTOR_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(datos),
+          signal: control ? control.signal : undefined
+        });
+      })
+      .then(function (r) {
+        if (!r.ok) throw new Error('http-' + r.status);
+        return r.json();
+      })
+      .then(function (resultado) {
+        if (!resultado || resultado.ok !== true) {
+          avisarError((resultado && resultado.mensaje) || 'No pudimos registrar tu solicitud. Intenta de nuevo.');
+          terminarEnvio();
+          return;
+        }
+        // Solo aquí la solicitud está confirmada en la hoja
+        enviado = true;
+        $('correo-confirmacion').textContent = resultado.correo || $('campo-correo').value;
+        if (resultado.folio) {
+          $('folio-confirmacion').textContent = resultado.folio;
+          $('folio-exito').hidden = false;
+        }
+        if (resultado.repetida) {
+          // Ya existía una solicitud con el mismo título desde esta cuenta: no se registró otra
+          $('titulo-exito').textContent = 'Esta solicitud ya estaba registrada';
+          $('texto-exito').textContent = 'Ya habíamos recibido una propuesta con este título desde tu cuenta, así que no la registramos de nuevo. El equipo editorial te escribirá con su respuesta.';
+        }
+        bloqueFormulario.hidden = true;
+        mensajeExito.hidden = false;
+        mensajeExito.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      })
+      .catch(function (err) {
+        var texto = err && err.message === 'sin-sesion'
+          ? 'Tu sesión de Google se cerró. Vuelve a iniciar sesión y envía de nuevo; tus datos siguen aquí.'
+          : (err && err.name === 'AbortError'
+              ? 'El envío tardó demasiado y no pudimos confirmar que se registró. Revisa tu conexión e inténtalo de nuevo.'
+              : 'No pudimos registrar tu solicitud. Revisa tu conexión e inténtalo de nuevo; tus datos siguen aquí.');
+        avisarError(texto);
+        terminarEnvio();
+      })
+      .then(function () { clearTimeout(limite); });
+  });
+
+})();
+</script>
+
+<style>
+.solicitud-articulo #campo-titulo { min-height: 41px; resize: none; overflow: hidden; display: block; } /* misma altura que los demás campos; crece si el título ocupa más de una línea */
+.solicitud-articulo #campo-resumen { min-height: 110px; resize: none; overflow: hidden; display: block; } /* parte de 5 renglones y crece con el texto */
+.solicitud-articulo .contador.excedido { color: #c62828; font-weight: 600; }
+.solicitud-articulo .contador.listo { color: #00723f; font-weight: 600; }
+</style>
+<script>
+/* Título y resumen se miden en PALABRAS (la misma regla que el receptor y el formulario de envío):
+   trozos separados por espacios o saltos de línea. Nada se corta: fuera del rango se marca y no se envía. */
+(function () {
+  var formulario = document.getElementById('formulario-solicitud');
+  if (!formulario) return;
+  var CAMPOS = [
+    { id: 'campo-titulo', contador: 'contador-titulo', error: 'error-titulo', nombre: 'El título', min: 1, max: 20 },
+    { id: 'campo-resumen', contador: 'contador-resumen', nombre: 'El resumen', min: 1, max: 100, llevas: 'palabras-resumen' }
+  ];
+  var intentado = false;
+  CAMPOS.forEach(function (c) {
+    c.el = document.getElementById(c.id);
+    c.cuenta = document.getElementById(c.contador);
+    c.aviso = c.error ? document.getElementById(c.error) : c.el.parentNode.querySelector('.mensaje-error');
+  });
+  var titulo = CAMPOS[0].el;
+
+  // Ajusta la caja (título y resumen) a su texto: crece al pasar de renglón. Si el formulario aún está oculto
+  // (antes de iniciar sesión) no mide nada, para no dejarla en 0.
+  function crecer(el) {
+    if (!el.offsetParent) return;
+    var y = window.scrollY;
+    el.style.height = 'auto';
+    el.style.height = (el.scrollHeight + el.offsetHeight - el.clientHeight) + 'px';
+    window.scrollTo(0, y); // que la página no brinque al medir
+  }
+  CAMPOS.forEach(function (c) { c.el.addEventListener('focus', function () { crecer(c.el); }); });
+  window.addEventListener('resize', function () { CAMPOS.forEach(function (c) { crecer(c.el); }); });
+
+  function palabras(texto) { var t = texto.trim(); return t ? t.split(/\s+/).length : 0; }
+
+  function revisar(c, marcar) {
+    var n = palabras(c.el.value), bien = n >= c.min && n <= c.max;
+    c.cuenta.textContent = n;
+    c.cuenta.parentNode.classList.toggle('excedido', n > c.max);
+    c.cuenta.parentNode.classList.toggle('listo', bien);
+    if (c.aviso) {
+      c.aviso.innerHTML = n ? c.nombre + ' puede tener máximo ' + c.max + ' palabras. Llevas <span' +
+        (c.llevas ? ' id="' + c.llevas + '"' : '') + '>' + n + '</span>.' : c.nombre + ' está vacío.';
+    }
+    if (marcar) c.el.closest('.campo').classList.toggle('con-error', !bien);
+    crecer(c.el);
+    return bien;
+  }
+
+  // El título es de una sola línea aunque la caja crezca: Enter no hace salto
+  titulo.addEventListener('keydown', function (e) { if (e.key === 'Enter') e.preventDefault(); });
+  titulo.addEventListener('input', function () { if (/\n/.test(titulo.value)) titulo.value = titulo.value.replace(/\s*\n\s*/g, ' '); });
+  // En el formulario y después de su propia validación: mantiene la marca roja mientras siga fuera de rango
+  formulario.addEventListener('input', function (e) {
+    CAMPOS.forEach(function (c) { if (e.target === c.el) revisar(c, intentado); });
+  });
+  CAMPOS.forEach(function (c) { revisar(c, false); });
+
+  // En captura: corre antes del envío normal y lo detiene si algo está fuera de rango
+  formulario.addEventListener('submit', function (e) {
+    intentado = true;
+    var malos = CAMPOS.filter(function (c) { return !revisar(c, true); });
+    if (!malos.length) return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    malos[0].el.focus();
+  }, true);
+})();
+</script>

@@ -1,0 +1,758 @@
+<!--
+  Página de Blogger: Buscador
+  URL: https://ciad-innovaedutec.blogspot.com/p/buscador.html
+  ID de la página: 8628180661819521523
+  Copia del contenido publicado (11/11/2026). Se edita en Blogger › Páginas o, Inicio y Sobre el blog, desde el Panel CIAD.
+-->
+<div class="seccion-buscador">
+
+  <!-- HERO: banner fijo a todo el ancho -->
+  <section class="hero-buscador">
+    <div class="banner-buscador">
+      <img
+        alt="Buscador"
+        loading="eager"
+        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgtrOqcYba4GYHvzq_6KQLVI5YZdAyA8eMOj2YOp_SVPM2YLW0nBG1wL1n7n0TTzMXklfDqYRBrBNar6shdBkl4y1Gx1SogrhF2nQY9sD9B5rMi6KWUUWp0I6DLfuq3rg7lvny0vEbJrIXe9NOcKm96Yxs6NDEiG8q7w6T_O2xGxIItveygpuCvAPaeEgI/s1600/banner_buscador_nuevo.png" />
+    </div>
+  </section>
+
+  <!-- PANEL PRINCIPAL -->
+  <main class="panel-buscador">
+
+    <p class="descripcion-buscador">
+      Busca publicaciones del CIAD por palabra clave y utiliza los filtros para encontrar contenido por categoría, facultad o formato.
+    </p>
+
+<style>
+
+#filtro-busqueda .barra-busqueda {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+#campo-busqueda {
+  flex: 1;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  font-family: var(--font-main);
+  font-size: 1rem;
+  background: var(--bg-surface);
+  color: var(--text-primary);
+}
+
+#campo-busqueda:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 1px;
+}
+
+#boton-buscar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.5rem;
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--color-primary);
+  color: #ffffff;
+  font-family: var(--font-main);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#boton-buscar:hover {
+  background: var(--color-accent);
+}
+
+#filtro-busqueda .grupo-filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+#filtro-busqueda .grupo-filtros select {
+  flex: 1;
+  min-width: 190px;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  font-family: var(--font-main);
+  font-size: 0.95rem;
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+#boton-limpiar {
+  padding: 0.7rem 1.2rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--bg-surface);
+  font-family: var(--font-main);
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+#boton-limpiar:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+#resumen-resultados {
+  margin: 0 0 1.25rem;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+#lista-resultados {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.tarjeta-resultado {
+  background: var(--bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.tarjeta-resultado .imagen-resultado {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  display: block;
+}
+
+.tarjeta-resultado .contenido-tarjeta {
+  padding: 1.1rem;
+}
+
+#filtro-busqueda .tarjeta-resultado h3 {
+  margin: 0 0 0.4rem;
+  font-size: 1.05rem;
+  line-height: 1.35;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+#filtro-busqueda .tarjeta-resultado h3 a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+#filtro-busqueda .tarjeta-resultado h3 a:hover {
+  color: var(--color-accent);
+}
+
+.tarjeta-resultado .fecha-resultado {
+  margin: 0 0 0.6rem;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+
+#filtro-busqueda .tarjeta-resultado .extracto-resultado {
+  margin: 0 0 0.8rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.tarjeta-resultado .etiquetas-resultado {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+#filtro-busqueda .etiquetas-resultado a {
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+
+#boton-mas {
+  display: none;
+  margin: 2rem auto 0;
+  padding: 0.85rem 2rem;
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius);
+  background: var(--bg-surface);
+  color: var(--color-primary);
+  font-family: var(--font-main);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#boton-mas:hover {
+  background: var(--color-primary);
+  color: #ffffff;
+}
+
+.mensaje-estado {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 600px) {
+  #filtro-busqueda .barra-busqueda { flex-direction: column; }
+  #boton-buscar { justify-content: center; }
+  #filtro-busqueda .grupo-filtros select { min-width: 100%; }
+  #boton-limpiar { width: 100%; }
+}
+
+
+/* =========================================================
+   FULL BLEED — BUSCADOR
+   Elimina el marco normal de Blogger para que el banner
+   llegue de borde a borde como las demás páginas principales.
+   ========================================================= */
+
+.layout-grid:has(.seccion-buscador) {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.main-content:has(.seccion-buscador) {
+  width: 100%;
+  max-width: none;
+}
+
+.post-outer-container:has(.seccion-buscador) {
+  margin: 0;
+}
+
+.post-outer:has(.seccion-buscador) {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  overflow: visible;
+  box-shadow: none;
+}
+
+.post:has(.seccion-buscador) {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.post-body:has(.seccion-buscador) {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+}
+
+.app-container:has(.seccion-buscador) {
+  width: 100%;
+  max-width: none;
+  background: #ffffff;
+  overflow: visible;
+}
+
+.blog-posts:has(.seccion-buscador),
+.main-section:has(.seccion-buscador) {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.post-outer:has(.seccion-buscador) > .post .post-title,
+.post-outer:has(.seccion-buscador) .entry-title {
+  display: none !important;
+}
+
+
+/* =========================================================
+   ESTRUCTURA PRINCIPAL DEL BUSCADOR
+   ========================================================= */
+
+.seccion-buscador {
+  --solape-panel: clamp(18px, 4vw, 70px);
+  --ancho-panel: 1220px;
+  --radio-panel: 24px;
+
+  background: #ffffff;
+  margin: 0;
+  padding: 0 0 4rem;
+  position: relative;
+}
+
+.seccion-buscador * {
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   HERO — UNA SOLA IMAGEN FIJA
+   ========================================================= */
+
+.seccion-buscador .hero-buscador {
+  position: relative;
+
+  width: 100vw;
+  left: 50%;
+  margin-left: -50vw;
+
+  height: auto;
+  aspect-ratio: 4 / 1;
+  margin-top: 0;
+  overflow: hidden;
+  background: #ffffff;
+
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.seccion-buscador .banner-buscador {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+.seccion-buscador .banner-buscador img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  object-position: center center;
+  max-width: none;
+
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.seccion-buscador .hero-buscador::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.00) 0%,
+    rgba(255,255,255,0.00) 62%,
+    rgba(255,255,255,0.12) 100%
+  );
+}
+
+
+/* =========================================================
+   PANEL BLANCO SUPERPUESTO
+   ========================================================= */
+
+.seccion-buscador .panel-buscador {
+  position: relative;
+  z-index: 4;
+  width: min(calc(100% - 3rem), var(--ancho-panel));
+  margin: calc(-1 * var(--solape-panel)) auto 0;
+  background: var(--bg-surface, #ffffff);
+  border: 1px solid rgba(20,36,58,.08);
+  border-radius: var(--radio-panel);
+  box-shadow: 0 18px 50px rgba(20,36,58,.13);
+  padding: 2.4rem 2.4rem 3.5rem;
+}
+
+.seccion-buscador .descripcion-buscador {
+  max-width: 850px;
+  margin: 0 auto 2rem;
+  text-align: center;
+  color: var(--text-secondary, #4b5563);
+  font-size: 1.08rem;
+  line-height: 1.65;
+}
+
+
+/* Ajustes para que el buscador se integre al nuevo panel */
+
+.seccion-buscador #filtro-busqueda {
+  width: 100%;
+}
+
+.seccion-buscador #resumen-resultados {
+  margin-top: .25rem;
+}
+
+@media (max-width: 900px) {
+  .seccion-buscador {
+    --solape-panel: 36px;
+  }
+
+  .seccion-buscador .panel-buscador {
+    width: calc(100% - 2rem);
+    padding: 2rem 1.5rem 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .seccion-buscador {
+    --solape-panel: 28px;
+  }
+
+  .seccion-buscador .panel-buscador {
+    border-radius: 18px;
+  }
+
+  .seccion-buscador .descripcion-buscador {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .seccion-buscador {
+    --solape-panel: 18px;
+  }
+
+  .seccion-buscador .panel-buscador {
+    width: calc(100% - 1rem);
+    border-radius: 14px;
+    padding: 1.5rem 1rem 2.5rem;
+  }
+}
+
+</style>
+
+<div id="filtro-busqueda">
+
+  <div class="barra-busqueda">
+    <input id="campo-busqueda" type="search" placeholder="Buscar en el blog del CIAD..." />
+    <button id="boton-buscar" type="button">
+      <i class="fa-solid fa-magnifying-glass"></i> Buscar
+    </button>
+  </div>
+
+  <div class="grupo-filtros">
+    <select id="filtro-categoria" aria-label="Filtrar por categoría">
+      <option value="">Todas las categorías</option>
+      <option value="categoria-tecnologia-educativa">Tecnología Educativa</option>
+      <option value="categoria-tecnologias-emergentes">Tecnologías Emergentes</option>
+      <option value="categoria-etica-sociedad-digital">Ética y Sociedad Digital</option>
+      <option value="categoria-innovacion">Innovación</option>
+      <option value="categoria-guias-tutoriales">Guías y Tutoriales</option>
+      <option value="categoria-multimedia">Multimedia</option>
+    </select>
+
+    <select id="filtro-facultad" aria-label="Filtrar por facultad">
+      <option value="">Todas las facultades</option>
+      <option value="facultad-fim">FIM</option>
+      <option value="facultad-fca">FCA</option>
+      <option value="facultad-fiad">FIAD</option>
+      <option value="facultad-cch">CCH</option>
+    </select>
+
+    <select id="filtro-formato" aria-label="Filtrar por formato">
+      <option value="">Todos los formatos</option>
+      <option value="formato-articulo">Artículo</option>
+      <option value="formato-video">Video</option>
+      <option value="formato-podcast">Podcast</option>
+      <option value="formato-infografia">Infografía</option>
+    </select>
+
+    <button id="boton-limpiar" type="button">Limpiar</button>
+  </div>
+
+  <p id="resumen-resultados"></p>
+  <div id="lista-resultados"></div>
+  <button id="boton-mas" type="button">Ver más</button>
+
+</div>
+
+  </main>
+
+</div>
+
+<script>
+//<![CDATA[
+(function () {
+  var POR_PAGINA = 12;
+  var MAXIMO_CON_TEXTO = 150; // con palabra clave se trae un lote y se filtra aquí
+  var indiceInicio = 1;
+  var resultadosLocales = null; // resultados ya filtrados cuando se busca con texto
+
+  var campoBusqueda   = document.getElementById('campo-busqueda');
+  var botonBuscar     = document.getElementById('boton-buscar');
+  var botonLimpiar    = document.getElementById('boton-limpiar');
+  var botonMas        = document.getElementById('boton-mas');
+  var listaResultados = document.getElementById('lista-resultados');
+  var resumen         = document.getElementById('resumen-resultados');
+
+  var selectores = [
+    document.getElementById('filtro-categoria'),
+    document.getElementById('filtro-facultad'),
+    document.getElementById('filtro-formato')
+  ];
+
+  function etiquetasElegidas() {
+    return selectores
+      .map(function (selector) { return selector.value; })
+      .filter(Boolean);
+  }
+
+  // DEF-016: varias etiquetas van juntas en una sola ruta: /-/etiqueta1/etiqueta2
+  // DEF-015: Blogger ignora las etiquetas cuando hay q=, así que con texto se filtra en el navegador
+  function construirUrl() {
+    var texto = campoBusqueda.value.trim();
+    var etiquetas = etiquetasElegidas();
+
+    if (texto) {
+      return '/feeds/posts/default?alt=json&max-results=' + MAXIMO_CON_TEXTO +
+             '&q=' + encodeURIComponent(texto);
+    }
+
+    var ruta = '/feeds/posts/default';
+    if (etiquetas.length) {
+      ruta += '/-/' + etiquetas.map(encodeURIComponent).join('/');
+    }
+    return ruta + '?alt=json&max-results=' + POR_PAGINA + '&start-index=' + indiceInicio;
+  }
+
+  function tieneEtiquetas(entrada, etiquetas) {
+    var propias = (entrada.category || []).map(function (c) { return c.term; });
+    return etiquetas.every(function (e) { return propias.indexOf(e) !== -1; });
+  }
+
+  function obtenerEnlace(entrada) {
+    var enlaces = entrada.link || [];
+    for (var i = 0; i < enlaces.length; i++) {
+      if (enlaces[i].rel === 'alternate') { return enlaces[i].href; }
+    }
+    return '#';
+  }
+
+  function obtenerContenido(entrada) {
+    if (entrada.content) { return entrada.content.$t; }
+    if (entrada.summary) { return entrada.summary.$t; }
+    return '';
+  }
+
+  function obtenerImagen(entrada) {
+    // Panel CIAD (imagenCiad): la imagen de las tarjetas de la nota (o la principal) va antes que la miniatura de Blogger
+    var contenidoCiad = entrada.content ? entrada.content.$t || '' : '';
+    var imagenCiad = contenidoCiad.match(/\x3cimg[^>]*class="articulo-tarjeta"[^>]*src="([^"]+)"/) || contenidoCiad.match(/\x3cfigure class="articulo-portada"[^>]*>\x3cimg[^>]*src="([^"]+)"/);
+    if (imagenCiad) { return imagenCiad[1].replace(/\x26amp;/g, '\x26'); }
+
+    if (entrada.media$thumbnail) {
+      // Blogger entrega miniaturas de 72px; se pide un tamaño mayor.
+      return entrada.media$thumbnail.url.replace('/s72-c/', '/s400/');
+    }
+    // Si la entrada no generó miniatura, se toma la primera imagen del contenido.
+    var encontrada = obtenerContenido(entrada).match(/<img[^>]+src=["']([^"']+)["']/i);
+    return encontrada ? encontrada[1] : null;
+  }
+
+  // El contenido trae comentarios HTML y etiquetas; se limpian para el extracto.
+  function obtenerExtracto(entrada) {
+    var texto = obtenerContenido(entrada)
+      .replace(/<div class="articulo-ficha"[\s\S]*?<\/div>/gi, ' ') // DEF-017: sin la ficha del autor
+      .replace(/<!--[\s\S]*?-->/g, ' ')
+      .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+      .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+      .replace(/<[^>]+>/g, ' ')
+      .replace(/&nbsp;/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+
+    if (!texto) { return ''; }
+    return texto.length > 130 ? texto.substring(0, 130).trim() + '...' : texto;
+  }
+
+  function formatearFecha(texto) {
+    var fecha = new Date(texto);
+    return fecha.toLocaleDateString('es-MX', {
+      day: 'numeric', month: 'long', year: 'numeric'
+    });
+  }
+
+  function limpiarTexto(texto) {
+    var caja = document.createElement('div');
+    caja.textContent = texto;
+    return caja.innerHTML;
+  }
+
+  function crearTarjeta(entrada) {
+    var tarjeta = document.createElement('article');
+    tarjeta.className = 'tarjeta-resultado';
+
+    var imagen   = obtenerImagen(entrada);
+    var extracto = obtenerExtracto(entrada);
+
+    var etiquetas = (entrada.category || []).map(function (categoria) {
+      return '<a href="/search/label/' + encodeURIComponent(categoria.term) + '">'
+           + limpiarTexto(categoria.term) + '</a>';
+    }).join('');
+
+    tarjeta.innerHTML =
+      (imagen ? '<img class="imagen-resultado" src="' + imagen + '" alt="" loading="lazy"/>' : '') +
+      '<div class="contenido-tarjeta">' +
+        '<h3><a href="' + obtenerEnlace(entrada) + '">' + limpiarTexto(entrada.title.$t) + '</a></h3>' +
+        '<p class="fecha-resultado">' + formatearFecha(entrada.published.$t) + '</p>' +
+        '<p class="extracto-resultado">' + limpiarTexto(extracto) + '</p>' +
+        (etiquetas ? '<div class="etiquetas-resultado">' + etiquetas + '</div>' : '') +
+      '</div>';
+
+    return tarjeta;
+  }
+
+  function mostrarSinResultados() {
+    resumen.textContent = '';
+    listaResultados.innerHTML =
+      '<p class="mensaje-estado">No se encontraron entradas con esos filtros.<br/>' +
+      'Prueba quitando alguno o usando otra palabra clave.</p>';
+  }
+
+  // Muestra la siguiente página de los resultados filtrados en el navegador
+  function mostrarLocales() {
+    var pagina = resultadosLocales.slice(indiceInicio - 1, indiceInicio - 1 + POR_PAGINA);
+    pagina.forEach(function (entrada) { listaResultados.appendChild(crearTarjeta(entrada)); });
+
+    var mostradas = indiceInicio - 1 + pagina.length;
+    resumen.textContent = 'Mostrando ' + mostradas + ' de ' + resultadosLocales.length + ' entradas.';
+    botonMas.style.display = mostradas < resultadosLocales.length ? 'block' : 'none';
+  }
+
+  function buscar(esPaginaNueva) {
+    if (!esPaginaNueva) {
+      indiceInicio = 1;
+      resultadosLocales = null;
+      listaResultados.innerHTML = '';
+    }
+
+    // Con texto, las páginas siguientes salen del lote ya descargado
+    if (esPaginaNueva && resultadosLocales) {
+      mostrarLocales();
+      return;
+    }
+
+    resumen.textContent = 'Buscando...';
+    botonMas.style.display = 'none';
+
+    fetch(construirUrl())
+      .then(function (respuesta) { return respuesta.json(); })
+      .then(function (datos) {
+        var feed     = datos.feed || {};
+        var entradas = feed.entry || [];
+        var total    = feed.openSearch$totalResults
+                     ? parseInt(feed.openSearch$totalResults.$t, 10)
+                     : entradas.length;
+
+        if (campoBusqueda.value.trim()) {
+          var etiquetas = etiquetasElegidas();
+          resultadosLocales = entradas.filter(function (entrada) { return tieneEtiquetas(entrada, etiquetas); });
+          if (!resultadosLocales.length) { mostrarSinResultados(); return; }
+          mostrarLocales();
+          actualizarDireccion();
+          return;
+        }
+
+        if (!entradas.length && indiceInicio === 1) {
+          mostrarSinResultados();
+          return;
+        }
+
+        entradas.forEach(function (entrada) {
+          listaResultados.appendChild(crearTarjeta(entrada));
+        });
+
+        var mostradas = indiceInicio - 1 + entradas.length;
+        resumen.textContent = 'Mostrando ' + mostradas + ' de ' + total + ' entradas.';
+        botonMas.style.display = mostradas < total ? 'block' : 'none';
+
+        actualizarDireccion();
+      })
+      .catch(function () {
+        resumen.textContent = '';
+        listaResultados.innerHTML =
+          '<p class="mensaje-estado">No se pudo cargar el contenido. Intenta de nuevo.</p>';
+      });
+  }
+
+  // Refleja la búsqueda en la URL para que el resultado se pueda compartir.
+  function actualizarDireccion() {
+    var parametros = new URLSearchParams();
+
+    if (campoBusqueda.value.trim()) {
+      parametros.set('q', campoBusqueda.value.trim());
+    }
+
+    selectores.forEach(function (selector) {
+      if (selector.value) {
+        parametros.set(selector.id.replace('filtro-', ''), selector.value);
+      }
+    });
+
+    var cadena = parametros.toString();
+    history.replaceState(null, '', cadena ? '?' + cadena : location.pathname);
+  }
+
+  // Lee la URL al cargar: permite que el buscador del header llegue con ?q=texto
+  function leerDireccion() {
+    var parametros = new URLSearchParams(location.search);
+
+    if (parametros.get('q')) {
+      campoBusqueda.value = parametros.get('q');
+    }
+
+    selectores.forEach(function (selector) {
+      var valor = parametros.get(selector.id.replace('filtro-', ''));
+      if (valor) { selector.value = valor; }
+    });
+  }
+
+  botonBuscar.addEventListener('click', function () { buscar(false); });
+
+  campoBusqueda.addEventListener('keydown', function (evento) {
+    if (evento.key === 'Enter') { buscar(false); }
+  });
+
+  selectores.forEach(function (selector) {
+    selector.addEventListener('change', function () { buscar(false); });
+  });
+
+  botonLimpiar.addEventListener('click', function () {
+    campoBusqueda.value = '';
+    selectores.forEach(function (selector) { selector.value = ''; });
+    buscar(false);
+  });
+
+  botonMas.addEventListener('click', function () {
+    indiceInicio += POR_PAGINA;
+    buscar(true);
+  });
+
+  leerDireccion();
+  buscar(false);
+})();
+//]]>
+</script>

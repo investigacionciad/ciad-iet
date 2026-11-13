@@ -1,0 +1,507 @@
+<!--
+  Página de Blogger: Multimedia
+  URL: https://ciad-innovaedutec.blogspot.com/p/multimedia.html
+  ID de la página: 2997600203041357991
+  Copia del contenido publicado (11/11/2026). Se edita en Blogger › Páginas o, Inicio y Sobre el blog, desde el Panel CIAD.
+-->
+<!-- ============================================================
+     CIAD · Página "Multimedia"
+     Los videos se administran desde el Panel CIAD (pestaña Páginas).
+     No edites a mano lo que está entre PANEL:INICIO y PANEL:FIN:
+     el panel lo reemplaza cada vez que publica.
+     ============================================================ -->
+
+<div class="seccion-multimedia">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@700;800&display=swap');
+
+.seccion-multimedia {
+  --verde-uabc: #00723f;
+  --verde-claro: #008c4f;
+  --amarillo-uabc: #f2a900;
+  --azul-oscuro: #14243a;
+  --texto-gris: #5d6b7c;
+  --fondo: #f6f8fa;
+  --blanco: #ffffff;
+  --borde: #e5eaf0;
+  --radio: 18px;
+  --sombra: 0 10px 30px rgba(20,36,58,.08);
+
+  font-family: 'Inter', sans-serif;
+  color: var(--texto-gris);
+  background: var(--fondo);
+  line-height: 1.65;
+  padding: 0 0 4rem;
+}
+
+.seccion-multimedia * {
+  box-sizing: border-box;
+}
+
+/* ============================================================
+   CONTENEDOR
+   ============================================================ */
+
+.seccion-multimedia .contenedor-multimedia {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+/* ============================================================
+   ENCABEZADO
+   ============================================================ */
+
+.seccion-multimedia .encabezado-multimedia {
+  text-align: center;
+  padding: 4.5rem 0 3rem;
+}
+
+.seccion-multimedia .encabezado-multimedia h1 {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  color: var(--azul-oscuro);
+  font-weight: 800;
+  margin: 0 0 1rem;
+  line-height: 1.15;
+}
+
+.seccion-multimedia .encabezado-multimedia p {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 1.05rem;
+  color: #737b8a;
+}
+
+/* ============================================================
+   SECCIÓN DE PUBLICACIONES
+   ============================================================ */
+
+.seccion-multimedia .bloque-multimedia {
+  padding: 2rem 0;
+}
+
+/* ============================================================
+   GRID DE PUBLICACIONES
+   ============================================================ */
+
+.seccion-multimedia .lista-multimedia {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+/* ============================================================
+   TARJETA
+   ============================================================ */
+
+.seccion-multimedia .tarjeta-multimedia {
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease,
+    border-color .25s ease;
+}
+
+.seccion-multimedia .tarjeta-multimedia:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--sombra);
+  border-color: rgba(0,114,63,.25);
+}
+
+/* ============================================================
+   IMAGEN / MINIATURA
+   ============================================================ */
+
+.seccion-multimedia .miniatura-multimedia {
+  position: relative;
+  width: 100%;
+  height: 190px;
+  overflow: hidden;
+  background: #e9edf1;
+}
+
+.seccion-multimedia .miniatura-multimedia img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .35s ease;
+}
+
+.seccion-multimedia .tarjeta-multimedia:hover
+.miniatura-multimedia img {
+  transform: scale(1.04);
+}
+
+/* ============================================================
+   ICONO DE PLAY
+   ============================================================ */
+
+.seccion-multimedia .boton-play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 58px;
+  height: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  background: var(--verde-uabc);
+  color: #fff;
+
+  font-size: 1.15rem;
+  padding-left: 3px;
+
+  box-shadow: 0 6px 18px rgba(0,0,0,.22);
+
+  transition:
+    transform .25s ease,
+    background .25s ease;
+}
+
+.seccion-multimedia .tarjeta-multimedia:hover
+.boton-play {
+  transform: translate(-50%, -50%) scale(1.1);
+  background: var(--amarillo-uabc);
+  color: var(--azul-oscuro);
+}
+
+/* ============================================================
+   CONTENIDO DE LA TARJETA
+   ============================================================ */
+
+.seccion-multimedia .contenido-multimedia {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Etiqueta */
+.seccion-multimedia .etiqueta-multimedia {
+  font-size: .76rem;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--verde-uabc);
+  font-weight: 700;
+  margin: 0 0 .45rem;
+}
+
+/* Título */
+.seccion-multimedia .titulo-multimedia {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--azul-oscuro);
+  line-height: 1.3;
+  margin: 0 0 .65rem;
+}
+
+/* Descripción */
+.seccion-multimedia .descripcion-multimedia {
+  font-size: .92rem;
+  color: var(--texto-gris);
+  margin: 0 0 1rem;
+  flex: 1;
+}
+
+/* ============================================================
+   TABLET
+   ============================================================ */
+
+@media (max-width: 900px) {
+
+  .seccion-multimedia .lista-multimedia {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+/* ============================================================
+   MÓVIL
+   ============================================================ */
+
+@media (max-width: 600px) {
+
+  .seccion-multimedia .encabezado-multimedia {
+    padding: 3rem 0 2rem;
+  }
+
+  .seccion-multimedia .encabezado-multimedia h1 {
+    font-size: 2.4rem;
+  }
+
+  .seccion-multimedia .encabezado-multimedia p {
+    font-size: .95rem;
+  }
+
+  .seccion-multimedia .lista-multimedia {
+    grid-template-columns: 1fr;
+  }
+
+  .seccion-multimedia .miniatura-multimedia {
+    height: 210px;
+  }
+
+}
+
+/* ============================================================
+   VENTANA DEL VIDEO
+   Se agrega directo al <body>, por eso no lleva el prefijo
+   .seccion-multimedia
+   ============================================================ */
+
+.ventana-video {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background: rgba(20,36,58,.9);
+  padding: 24px;
+  align-items: center;
+  justify-content: center;
+}
+
+.ventana-video.abierta {
+  display: flex;
+}
+
+.ventana-video-caja {
+  position: relative;
+  width: 100%;
+  max-width: 960px;
+}
+
+.ventana-video-caja iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  border-radius: 14px;
+  display: block;
+  background: #000;
+}
+
+.ventana-video-cerrar {
+  position: absolute;
+  top: -50px;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: #fff;
+  color: #14243a;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .2s ease;
+}
+
+.ventana-video-cerrar:hover {
+  background: #f2a900;
+}
+
+/* Ocultar título automático de Blogger */
+.post-title,
+.entry-title {
+  display: none;
+}
+</style>
+
+
+<div class="contenedor-multimedia">
+
+<!-- PANEL:INICIO -->
+  <header class="encabezado-multimedia">
+    <h1>Multimedia</h1>
+    <p>
+      Videos y materiales multimedia sobre la UABC y el uso de Blackboard para el aprendizaje digital.
+    </p>
+  </header>
+
+  <section class="bloque-multimedia">
+    <div class="lista-multimedia">
+
+      <article class="tarjeta-multimedia" data-video-id="NxtH5ZyIt7w">
+        <a href="https://www.youtube.com/watch?v=NxtH5ZyIt7w" class="abrir-video" aria-label="Ver video: Video institucional UABC">
+          <div class="miniatura-multimedia">
+            <img src="https://img.youtube.com/vi/NxtH5ZyIt7w/hqdefault.jpg" alt="Video institucional UABC" loading="lazy">
+            <span class="boton-play">▶</span>
+          </div>
+        </a>
+        <div class="contenido-multimedia">
+          <p class="etiqueta-multimedia">Video</p>
+          <h3 class="titulo-multimedia">Video institucional UABC</h3>
+          <p class="descripcion-multimedia">
+            Un vistazo a la Universidad Autónoma de Baja California y su comunidad.
+          </p>
+        </div>
+      </article>
+
+      <article class="tarjeta-multimedia" data-video-id="MehIw3Jb7ho">
+        <a href="https://www.youtube.com/watch?v=MehIw3Jb7ho" class="abrir-video" aria-label="Ver video: Facultad de Medicina y Psicología, Mexicali">
+          <div class="miniatura-multimedia">
+            <img src="https://img.youtube.com/vi/MehIw3Jb7ho/hqdefault.jpg" alt="Facultad de Medicina y Psicología, Mexicali" loading="lazy">
+            <span class="boton-play">▶</span>
+          </div>
+        </a>
+        <div class="contenido-multimedia">
+          <p class="etiqueta-multimedia">Video</p>
+          <h3 class="titulo-multimedia">Facultad de Medicina y Psicología, Mexicali</h3>
+          <p class="descripcion-multimedia">
+            Presentación institucional de la Facultad de Medicina y Psicología, campus Mexicali.
+          </p>
+        </div>
+      </article>
+
+      <article class="tarjeta-multimedia" data-video-id="ps9wlM_mhMw">
+        <a href="https://www.youtube.com/watch?v=ps9wlM_mhMw" class="abrir-video" aria-label="Ver video: UABC Tecate amplía infraestructura educativa">
+          <div class="miniatura-multimedia">
+            <img src="https://img.youtube.com/vi/ps9wlM_mhMw/hqdefault.jpg" alt="UABC Tecate amplía infraestructura educativa" loading="lazy">
+            <span class="boton-play">▶</span>
+          </div>
+        </a>
+        <div class="contenido-multimedia">
+          <p class="etiqueta-multimedia">Video</p>
+          <h3 class="titulo-multimedia">UABC Tecate amplía infraestructura educativa</h3>
+          <p class="descripcion-multimedia">
+            Reportaje sobre la ampliación de instalaciones del campus Tecate.
+          </p>
+        </div>
+      </article>
+
+      <article class="tarjeta-multimedia" data-video-id="1hITZiMAx58">
+        <a href="https://www.youtube.com/watch?v=1hITZiMAx58" class="abrir-video" aria-label="Ver video: Blackboard Learn: introducción para estudiantes">
+          <div class="miniatura-multimedia">
+            <img src="https://img.youtube.com/vi/1hITZiMAx58/hqdefault.jpg" alt="Blackboard Learn: introducción para estudiantes" loading="lazy">
+            <span class="boton-play">▶</span>
+          </div>
+        </a>
+        <div class="contenido-multimedia">
+          <p class="etiqueta-multimedia">Video</p>
+          <h3 class="titulo-multimedia">Blackboard Learn: introducción para estudiantes</h3>
+          <p class="descripcion-multimedia">
+            Recorrido guiado por las herramientas principales de Blackboard Learn para alumnos.
+          </p>
+        </div>
+      </article>
+
+      <article class="tarjeta-multimedia" data-video-id="47RGXHkrzz4">
+        <a href="https://www.youtube.com/watch?v=47RGXHkrzz4" class="abrir-video" aria-label="Ver video: Uso básico de Blackboard para alumnos">
+          <div class="miniatura-multimedia">
+            <img src="https://img.youtube.com/vi/47RGXHkrzz4/hqdefault.jpg" alt="Uso básico de Blackboard para alumnos" loading="lazy">
+            <span class="boton-play">▶</span>
+          </div>
+        </a>
+        <div class="contenido-multimedia">
+          <p class="etiqueta-multimedia">Video</p>
+          <h3 class="titulo-multimedia">Uso básico de Blackboard para alumnos</h3>
+          <p class="descripcion-multimedia">
+            Videotutorial paso a paso sobre el uso básico de la plataforma Blackboard.
+          </p>
+        </div>
+      </article>
+
+      <article class="tarjeta-multimedia" data-video-id="1AjKwtKEQy0">
+        <a href="https://www.youtube.com/watch?v=1AjKwtKEQy0" class="abrir-video" aria-label="Ver video: Blackboard para docentes: uso básico">
+          <div class="miniatura-multimedia">
+            <img src="https://img.youtube.com/vi/1AjKwtKEQy0/hqdefault.jpg" alt="Blackboard para docentes: uso básico" loading="lazy">
+            <span class="boton-play">▶</span>
+          </div>
+        </a>
+        <div class="contenido-multimedia">
+          <p class="etiqueta-multimedia">Video</p>
+          <h3 class="titulo-multimedia">Blackboard para docentes: uso básico</h3>
+          <p class="descripcion-multimedia">
+            Tutorial introductorio de Blackboard orientado a profesores.
+          </p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+<script type="application/json" id="datos-panel">{"titulo":"Publicaciones","descripcion":"Videos y materiales multimedia sobre la UABC y el uso de Blackboard para el aprendizaje digital.","videos":[{"id":"NxtH5ZyIt7w","titulo":"Video institucional UABC","descripcion":"Un vistazo a la Universidad Autónoma de Baja California y su comunidad.","etiqueta":"Video"},{"id":"MehIw3Jb7ho","titulo":"Facultad de Medicina y Psicología, Mexicali","descripcion":"Presentación institucional de la Facultad de Medicina y Psicología, campus Mexicali.","etiqueta":"Video"},{"id":"ps9wlM_mhMw","titulo":"UABC Tecate amplía infraestructura educativa","descripcion":"Reportaje sobre la ampliación de instalaciones del campus Tecate.","etiqueta":"Video"},{"id":"1hITZiMAx58","titulo":"Blackboard Learn: introducción para estudiantes","descripcion":"Recorrido guiado por las herramientas principales de Blackboard Learn para alumnos.","etiqueta":"Video"},{"id":"47RGXHkrzz4","titulo":"Uso básico de Blackboard para alumnos","descripcion":"Videotutorial paso a paso sobre el uso básico de la plataforma Blackboard.","etiqueta":"Video"},{"id":"1AjKwtKEQy0","titulo":"Blackboard para docentes: uso básico","descripcion":"Tutorial introductorio de Blackboard orientado a profesores.","etiqueta":"Video"}]}</script>
+<!-- PANEL:FIN -->
+
+</div>
+
+
+<script>
+(function () {
+  var pagina = document.querySelector('.seccion-multimedia');
+  if (!pagina) return;
+
+  // Ventana para ver el video en grande (se crea una sola vez)
+  var ventana = document.createElement('div');
+  ventana.className = 'ventana-video';
+  ventana.innerHTML =
+    '<div class="ventana-video-caja">' +
+      '<button type="button" class="ventana-video-cerrar" aria-label="Cerrar video">&times;</button>' +
+      '<div class="ventana-video-marco"></div>' +
+    '</div>';
+  document.body.appendChild(ventana);
+
+  var marco = ventana.querySelector('.ventana-video-marco');
+
+  function cerrarVideo() {
+    ventana.classList.remove('abierta');
+    marco.innerHTML = ''; // detiene la reproducción
+    document.body.style.overflow = '';
+  }
+
+  function abrirVideo(id, titulo) {
+    var iframe = document.createElement('iframe');
+    iframe.src = 'https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0';
+    iframe.title = titulo || 'Video de YouTube';
+    iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen');
+    iframe.setAttribute('allowfullscreen', '');
+    marco.innerHTML = '';
+    marco.appendChild(iframe);
+    ventana.classList.add('abierta');
+    document.body.style.overflow = 'hidden';
+  }
+
+  ventana.querySelector('.ventana-video-cerrar').addEventListener('click', cerrarVideo);
+  ventana.addEventListener('click', function (e) {
+    if (e.target === ventana) cerrarVideo(); // clic fuera del video
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && ventana.classList.contains('abierta')) cerrarVideo();
+  });
+
+  // Miniatura, enlace y clic de cada tarjeta a partir de su data-video-id
+  var tarjetas = pagina.querySelectorAll('.tarjeta-multimedia[data-video-id]');
+  Array.prototype.forEach.call(tarjetas, function (tarjeta) {
+    var id = tarjeta.getAttribute('data-video-id');
+    var enlace = tarjeta.querySelector('.abrir-video');
+    var imagen = tarjeta.querySelector('.miniatura-multimedia img');
+    var titulo = tarjeta.querySelector('.titulo-multimedia');
+
+    if (imagen) imagen.src = 'https://img.youtube.com/vi/' + id + '/hqdefault.jpg';
+    if (enlace) {
+      enlace.href = 'https://www.youtube.com/watch?v=' + id; // respaldo si falla el JS
+      enlace.addEventListener('click', function (e) {
+        e.preventDefault();
+        abrirVideo(id, titulo ? titulo.textContent.trim() : null);
+      });
+    }
+  });
+})();
+</script>
+
+</div>

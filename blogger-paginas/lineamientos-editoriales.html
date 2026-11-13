@@ -1,0 +1,363 @@
+<!--
+  Página de Blogger: Lineamientos editoriales
+  URL: https://ciad-innovaedutec.blogspot.com/p/lineamientos-editoriales.html
+  ID de la página: 1329302080916686513
+  Copia del contenido publicado (11/11/2026). Se edita en Blogger › Páginas o, Inicio y Sobre el blog, desde el Panel CIAD.
+-->
+<!-- ============================================================
+     Página "Lineamientos editoriales"  (/p/lineamientos-editoriales.html)
+     Crear en Blogger → Páginas → Nueva página, título "Lineamientos editoriales",
+     vista HTML, pegar todo este código. La URL debe quedar /p/lineamientos-editoriales.html.
+
+     PLANTILLA_URL (abajo, en el script): enlace de Drive de Plantilla_Articulo_CIAD.docx
+     compartido como "Cualquier persona con el enlace". Mientras esté vacío,
+     el botón "Descargar plantilla" no se muestra.
+     ============================================================ -->
+
+<div class="pagina-lineamientos">
+
+<style>
+.layout-grid:has(.pagina-lineamientos) { width: 100%; max-width: none; margin: 0; padding: 0; }
+.main-content:has(.pagina-lineamientos) { width: 100%; max-width: none; }
+.post-outer-container:has(.pagina-lineamientos) { margin: 0; }
+.post-outer:has(.pagina-lineamientos) { width: 100%; max-width: none; margin: 0; padding: 0; background: transparent; border: 0; border-radius: 0; overflow: visible; box-shadow: none; }
+.post:has(.pagina-lineamientos) { width: 100%; max-width: none; margin: 0; padding: 0; }
+.post-body:has(.pagina-lineamientos) { width: 100%; max-width: none; margin: 0; padding: 0; overflow: visible; }
+.app-container:has(.pagina-lineamientos) { width: 100%; max-width: none; background: #ffffff; overflow: visible; }
+.post-outer:has(.pagina-lineamientos) > .post .post-title,
+.post-outer:has(.pagina-lineamientos) .entry-title { display: none !important; }
+
+.pagina-lineamientos {
+  --verde-uabc: #00723f;
+  --amarillo-uabc: #f2a900;
+  --azul-oscuro: #14243a;
+  --texto-gris: #5d6b7c;
+  --borde: #e5eaf0;
+  --fondo-suave: #f6f8fa;
+  color: var(--texto-gris);
+  background: #ffffff;
+  line-height: 1.65;
+  padding: 3rem 0 4rem;
+}
+
+.pagina-lineamientos * { box-sizing: border-box; }
+.pagina-lineamientos [hidden] { display: none !important; }
+
+.pagina-lineamientos .contenedor-principal {
+  width: min(calc(100% - 3rem), 1080px);
+  margin: 0 auto;
+  background: #ffffff;
+  border: 1px solid rgba(20,36,58,.08);
+  border-radius: 24px;
+  box-shadow: 0 18px 50px rgba(20,36,58,.10);
+  padding: 2.6rem 2.6rem 3rem;
+}
+
+.pagina-lineamientos .titulo-pagina {
+  margin: 0 0 .6rem;
+  text-align: center;
+  font-size: clamp(2.2rem, 5vw, 3rem);
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--azul-oscuro);
+}
+
+.pagina-lineamientos .descripcion-pagina {
+  max-width: 760px;
+  margin: 0 auto 1.6rem;
+  text-align: center;
+  font-size: 1.05rem;
+}
+
+.pagina-lineamientos .botones-principales {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .75rem;
+  margin-bottom: 2.4rem;
+}
+
+.pagina-lineamientos .boton-verde,
+.pagina-lineamientos .boton-contorno {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0 1.4rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: .95rem;
+  text-decoration: none !important;
+}
+
+.pagina-lineamientos .boton-verde { background: var(--verde-uabc); color: #ffffff !important; }
+.pagina-lineamientos .boton-verde:hover { background: var(--azul-oscuro); }
+.pagina-lineamientos .boton-contorno { border: 1.5px solid var(--verde-uabc); color: var(--verde-uabc) !important; background: #ffffff; }
+.pagina-lineamientos .boton-contorno:hover { background: var(--verde-uabc); color: #ffffff !important; }
+
+.pagina-lineamientos .seccion-lineamiento { margin-top: 2.6rem; }
+
+.pagina-lineamientos .seccion-lineamiento h2 {
+  margin: 0 0 1rem;
+  font-size: clamp(1.5rem, 3.4vw, 2rem);
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--azul-oscuro);
+}
+
+.pagina-lineamientos .seccion-lineamiento h2::after {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 4px;
+  margin-top: .7rem;
+  border-radius: 4px;
+  background: var(--amarillo-uabc);
+}
+
+.pagina-lineamientos p { margin: 0 0 .9rem; }
+
+.pagina-lineamientos .rejilla-tarjetas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1rem;
+}
+
+.pagina-lineamientos .tarjeta-lineamiento {
+  background: var(--fondo-suave);
+  border: 1px solid var(--borde);
+  border-radius: 16px;
+  padding: 1.2rem 1.25rem;
+}
+
+.pagina-lineamientos .tarjeta-lineamiento h3 {
+  margin: 0 0 .5rem;
+  font-size: 1.05rem;
+  color: var(--verde-uabc);
+}
+
+.pagina-lineamientos .tarjeta-lineamiento ul,
+.pagina-lineamientos .lista-requisitos {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.pagina-lineamientos li { margin-bottom: .35rem; }
+
+.pagina-lineamientos .tabla-requisitos {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .97rem;
+}
+
+.pagina-lineamientos .tabla-requisitos th,
+.pagina-lineamientos .tabla-requisitos td {
+  padding: .7rem .9rem;
+  border-bottom: 1px solid var(--borde);
+  text-align: left;
+  vertical-align: top;
+}
+
+.pagina-lineamientos .tabla-requisitos th {
+  width: 32%;
+  color: var(--azul-oscuro);
+  font-weight: 700;
+}
+
+.pagina-lineamientos .ejemplo-word {
+  background: var(--fondo-suave);
+  border: 1px solid var(--borde);
+  border-left: 4px solid var(--verde-uabc);
+  border-radius: 0 12px 12px 0;
+  padding: 1rem 1.2rem;
+  font-size: .95rem;
+}
+
+.pagina-lineamientos .ejemplo-word p { margin: 0 0 .3rem; }
+.pagina-lineamientos .ejemplo-word strong { color: var(--azul-oscuro); }
+
+.pagina-lineamientos .pasos {
+  counter-reset: paso;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: .9rem;
+}
+
+.pagina-lineamientos .pasos li {
+  counter-increment: paso;
+  position: relative;
+  padding: .2rem 0 0 3rem;
+  margin: 0;
+}
+
+.pagina-lineamientos .pasos li::before {
+  content: counter(paso);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 50%;
+  background: var(--verde-uabc);
+  color: #ffffff;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagina-lineamientos .pasos strong { color: var(--azul-oscuro); }
+
+.pagina-lineamientos .nota-datos {
+  margin-top: 2.6rem;
+  background: #fdf7e6;
+  border-left: 4px solid var(--amarillo-uabc);
+  border-radius: 0 12px 12px 0;
+  padding: 1rem 1.2rem;
+  font-size: .95rem;
+}
+
+.pagina-lineamientos a { color: var(--verde-uabc); }
+
+@media (max-width: 700px) {
+  .pagina-lineamientos { padding: 1.5rem 0 3rem; }
+  .pagina-lineamientos .contenedor-principal { width: calc(100% - 1rem); padding: 1.6rem 1.1rem 2rem; border-radius: 16px; }
+  .pagina-lineamientos .tabla-requisitos th { width: auto; display: block; border-bottom: 0; padding-bottom: 0; }
+  .pagina-lineamientos .tabla-requisitos td { display: block; padding-top: .3rem; }
+}
+
+.post-title, .entry-title { display: none; }
+</style>
+
+<main class="contenedor-principal">
+
+  <h1 class="titulo-pagina">Lineamientos editoriales</h1>
+  <p class="descripcion-pagina">
+    Lo que necesitas saber para proponer y enviar un artículo al blog del Centro de Investigación
+    para el Aprendizaje Digital (CIAD) de la UABC.
+  </p>
+
+  <div class="botones-principales">
+    <a class="boton-verde" href="/p/solicitud-de-articulo.html">Enviar una propuesta</a>
+    <a class="boton-contorno" href="#" id="boton-plantilla" hidden="hidden" target="_blank" rel="noopener">Descargar plantilla Word</a>
+    <a class="boton-contorno" href="https://docs.google.com/document/d/1Q3QqJkOQgi_zXhyAcgAyHjs3Cixan3NEwuOhoBM8Lbo/export?format=docx" target="_blank" rel="noopener">Descargar nota de ejemplo</a>
+  </div>
+
+  <section class="seccion-lineamiento">
+    <h2>¿Qué publicamos?</h2>
+    <p>Artículos originales, de enfoque académico, divulgativo o de experiencia, escritos para un público amplio. Cada artículo se publica en una de estas secciones:</p>
+    <div class="rejilla-tarjetas">
+      <div class="tarjeta-lineamiento">
+        <h3>Tecnología Educativa</h3>
+        <ul>
+          <li>Herramientas y plataformas</li>
+          <li>Metodologías de enseñanza</li>
+          <li>Accesibilidad e inclusión digital</li>
+          <li>Analítica y evaluación del aprendizaje</li>
+        </ul>
+      </div>
+      <div class="tarjeta-lineamiento">
+        <h3>Tecnologías Emergentes</h3>
+        <ul>
+          <li>Inteligencia Artificial</li>
+          <li>Ciberseguridad</li>
+          <li>Realidad Virtual / Aumentada</li>
+          <li>Blockchain</li>
+          <li>IoT y ciudades inteligentes</li>
+          <li>Computación cuántica</li>
+        </ul>
+      </div>
+      <div class="tarjeta-lineamiento">
+        <h3>Ética y Sociedad Digital</h3>
+        <ul>
+          <li>Privacidad y protección de datos</li>
+          <li>Sesgos algorítmicos</li>
+          <li>Honestidad académica e IA</li>
+          <li>Brecha digital</li>
+        </ul>
+      </div>
+      <div class="tarjeta-lineamiento">
+        <h3>Innovación</h3>
+        <ul>
+          <li>Investigación y proyectos institucionales</li>
+          <li>Casos de éxito</li>
+          <li>Startups y emprendimiento tecnológico</li>
+          <li>Transformación digital administrativa</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion-lineamiento">
+    <h2>Requisitos del artículo</h2>
+    <table class="tabla-requisitos">
+      <tr><th>Archivo</th><td>Word (.docx; también se aceptan .doc y .odt), de preferencia hecho a partir de la plantilla del CIAD.</td></tr><tr><th>Imagen principal</th><td>Obligatoria. Una imagen que represente tu nota (JPG, PNG o GIF, que puede ser animado; de máximo 10 MB), propia o con permiso de uso. De preferencia horizontal y con lo importante al centro: en computadora se ve completa junto al título, pero en celular y en las listas del blog se recorta. Se adjunta en el formulario de envío; el CIAD ajusta cómo se ve.</td></tr>
+      <tr><th>Extensión</th><td>Recomendada de 1,000 a 2,500 palabras, sin contar las referencias. Cada nota publicada muestra cuántos minutos toma leerla.</td></tr>
+      <tr><th>Título</th><td>Máximo 20 palabras.</td></tr>
+<tr><th>Resumen</th><td>Máximo 100 palabras.</td></tr>
+      <tr><th>Letra</th><td>Arial 12.</td></tr>
+      <tr><th>Estructura</th><td>Texto de corrido, sin escribir los nombres de sus partes como títulos. Al final, solo si los ocupas, Síntesis curricular y Referencias, con su título.</td></tr>
+      <tr><th>Referencias</th><td>Opcionales: puedes escribir libremente. Si citas, elige cómo (ver <a href="#como-citar">Cómo citar</a>); en Referencias, formato APA 7 y de preferencia fuentes de 2020 a la fecha.</td></tr>
+      <tr><th>Imágenes</th><td>JPG o PNG, propias o con permiso para publicarlas. Van dentro del Word en el lugar donde deben aparecer; las imágenes extra para la galería se suben aparte en el formulario.</td></tr>
+      <tr><th>Palabras clave</th><td>Opcional: hasta 5, separadas por coma. Ayudan a que tu artículo aparezca en las búsquedas del blog.</td></tr>
+    </table>
+  </section>
+
+  <section class="seccion-lineamiento">
+    <h2>Cómo preparar tu Word</h2>
+    <p>Descarga la <strong>plantilla</strong> y mira la <strong>nota de ejemplo</strong> (botones de arriba): ahí está la guía completa, paso a paso. Lo esencial:</p>
+    <ul class="lista-requisitos">
+      <li>En el Word escribe <strong>solo el texto de tu nota</strong>. Tu nombre, título, resumen y correo de contacto van en el formulario de envío; no los repites en el Word.</li>
+      <li>Tu nota se lee <strong>de corrido</strong>, como un artículo de revista: inicio, desarrollo, tu experiencia e invitación son una guía, <strong>no títulos</strong>. Si quieres separar ideas, usa un subtítulo propio con el estilo Título 2.</li>
+      <li>Al final, solo si las ocupas, <strong>Síntesis curricular</strong> (hasta 3 líneas por autor) y <strong>Referencias</strong>, con su título.</li>
+      <li>Lo que va entre corchetes en la plantilla es una guía y no se publica.</li>
+    </ul>
+  </section>
+
+  <section class="seccion-lineamiento" id="como-citar">
+    <h2>Cómo citar (opcional)</h2>
+    <p>Un blog se escribe con libertad: puedes publicar tu nota sin fuentes. Si citas, usa la forma que prefieras; en una misma nota puedes mezclarlas.</p>
+    <ul class="lista-requisitos">
+      <li><strong>Con número:</strong> escribe <code>[[1]]</code> justo después de la idea y empieza la línea de esa fuente en Referencias con <code>[[1]]</code>. En el blog aparece un número pequeño: al pasar el cursor se ve la fuente con un enlace para abrirla, y al darle clic te lleva a las Referencias.</li>
+      <li><strong>Con enlace:</strong> selecciona unas palabras y ponles un hipervínculo (Ctrl + K) a la página de la fuente.</li>
+      <li><strong>Con APA:</strong> (Apellido, 2024) o Apellido (2024) en el texto, y la fuente completa en Referencias, en formato APA 7.</li>
+    </ul>
+    <p>En Referencias van primero las fuentes con número, en orden ([[1]], [[2]]…), y después las demás, en orden alfabético. De preferencia, fuentes de 2020 a la fecha.</p>
+  </section>
+
+  <section class="seccion-lineamiento">
+    <h2>Proceso de publicación</h2>
+    <ol class="pasos">
+      <li><strong>Propuesta.</strong> Inicia sesión con tu cuenta de Google y llena el formulario de <a href="/p/solicitud-de-articulo.html">solicitud de artículo</a> con el título tentativo (máximo 20 palabras) y un resumen de máximo 100 palabras.</li>
+      <li><strong>Revisión editorial.</strong> El equipo del CIAD revisa tu propuesta y te escribe a tu correo con la respuesta.</li>
+      <li><strong>Envío del artículo.</strong> Si se aprueba, recibes el enlace al formulario de envío. Ábrelo con la misma cuenta de Google: ya trae escritos tu nombre, el título y el resumen. Adjunta tu Word y tu <strong>imagen principal</strong> (obligatoria) y, si quieres, imágenes para la galería, palabras clave y un <strong>correo de contacto</strong> para que los lectores te escriban (si lo dejas vacío, se muestra el de tu cuenta).</li>
+      <li><strong>Publicación.</strong> El equipo revisa el artículo, lo publica en la sección que corresponde y te avisa por correo con el enlace.</li>
+    </ol>
+  </section>
+
+  <div class="nota-datos">
+    <strong>Uso de tus datos.</strong> Usamos tu nombre y tu correo solo para revisar tu propuesta, avisarte la decisión
+    del equipo editorial y, si se publica, darte el crédito como autor. No los compartimos con terceros. Consulta el
+    <a href="https://transparencia.uabc.mx/Aviso_Privacidad/index.html" target="_blank" rel="noopener">aviso de privacidad de la UABC</a>.
+    ¿Dudas? Escríbenos a <a href="mailto:investigacion.ciad@uabc.edu.mx">investigacion.ciad@uabc.edu.mx</a>.
+  </div>
+
+</main>
+
+<script>
+(function () {
+  // Enlace de Drive de la plantilla Word ("Cualquier persona con el enlace"). Vacío = el botón no se muestra.
+  var PLANTILLA_URL = 'https://docs.google.com/document/d/1-O70q7qsPTd0gak0raVN7zfuvKiTv0-A7V8eR1UaJVw/export?format=docx'; // se edita en Drive: «Plantilla de nota · Blog CIAD»
+
+  var boton = document.getElementById('boton-plantilla');
+  if (boton && PLANTILLA_URL) {
+    boton.href = PLANTILLA_URL;
+    boton.hidden = false;
+  }
+})();
+</script>
+
+</div>
+

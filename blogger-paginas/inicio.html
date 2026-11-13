@@ -1,0 +1,575 @@
+<!--
+  Página de Blogger: Inicio
+  URL: https://ciad-innovaedutec.blogspot.com/p/inicio.html
+  ID de la página: 7758592480728629486
+  Copia del contenido publicado (11/11/2026). Se edita en Blogger › Páginas o, Inicio y Sobre el blog, desde el Panel CIAD.
+-->
+<!-- ============================================================
+     CIAD · Página "Inicio" + NOTAS RECIENTES
+     Pegar en: Blogger > Páginas > Inicio > vista HTML
+     (sin header ni footer: los pone el tema)
+
+     PARA CAMBIAR LA IMAGEN:
+     Sube la foto en Blogger, copia su URL y reemplaza el src de
+     <img class="imagen-bienvenida">.
+     ============================================================ -->
+
+<div class="seccion-inicio">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@700;800&display=swap');
+
+.seccion-inicio {
+  --verde-uabc: #00723f;
+  --amarillo-uabc: #dd971a;
+  --azul-oscuro: #14243a;
+  --texto-gris: #5d6b7c;
+  --fondo: #f7f9fb;
+  --blanco: #ffffff;
+  --borde: #e5eaf0;
+  --radio: 20px;
+  --sombra: 0 12px 34px rgba(20,36,58,.09);
+
+  font-family: 'Inter', sans-serif;
+  background: var(--fondo);
+  color: var(--texto-gris);
+  line-height: 1.65;
+}
+
+.seccion-inicio * {
+  box-sizing: border-box;
+}
+
+/* ============================================================
+   BIENVENIDA
+   ============================================================ */
+
+.seccion-inicio .contenedor-inicio {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 7rem 5.5rem 5rem;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.seccion-inicio .titulo-bienvenida {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(2.8rem, 5.5vw, 4.2rem);
+  font-weight: 800;
+  color: var(--azul-oscuro);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin: 0 0 2rem;
+}
+
+.seccion-inicio .texto-bienvenida {
+  font-size: 1.2rem;
+  color: var(--texto-gris);
+  max-width: 620px;
+  margin: 0;
+}
+
+.seccion-inicio .imagen-bienvenida {
+  width: 100%;
+  aspect-ratio: 5 / 4;
+  object-fit: cover;
+  border-radius: 28px;
+  display: block;
+  background: #e9edf1;
+}
+
+/* ============================================================
+   NOTAS RECIENTES
+   ============================================================ */
+
+.seccion-inicio .seccion-recientes {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem 5.5rem 7rem;
+}
+
+.seccion-inicio .cabecera-recientes {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 2.25rem;
+}
+
+.seccion-inicio .cabecera-recientes-texto {
+  max-width: 760px;
+}
+
+.seccion-inicio .eyebrow-recientes {
+  margin: 0 0 .45rem;
+  color: var(--verde-uabc);
+  font-size: .8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+.seccion-inicio .titulo-recientes {
+  font-family: 'Outfit', sans-serif;
+  color: var(--azul-oscuro);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin: 0 0 .65rem;
+}
+
+.seccion-inicio .descripcion-recientes {
+  margin: 0;
+  color: var(--texto-gris);
+  font-size: 1rem;
+}
+
+.seccion-inicio .boton-todas {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: .7rem 1.25rem;
+  border: 1px solid var(--verde-uabc);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--verde-uabc);
+  font-size: .88rem;
+  font-weight: 700;
+  text-decoration: none !important;
+  transition: background .2s ease, color .2s ease;
+}
+
+.seccion-inicio .boton-todas:hover {
+  background: var(--verde-uabc);
+  color: #ffffff !important;
+}
+
+.seccion-inicio .lista-recientes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.seccion-inicio .tarjeta-reciente {
+  min-width: 0;
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 8px rgba(20,36,58,.03);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.seccion-inicio .tarjeta-reciente:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--sombra);
+}
+
+.seccion-inicio .enlace-imagen-reciente {
+  display: block;
+  overflow: hidden;
+  background: #edf1f4;
+}
+
+.seccion-inicio .imagen-reciente {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+  transition: transform .25s ease;
+}
+
+.seccion-inicio .tarjeta-reciente:hover .imagen-reciente {
+  transform: scale(1.025);
+}
+
+.seccion-inicio .contenido-reciente {
+  padding: 1.25rem 1.25rem 1.35rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.seccion-inicio .fecha-reciente {
+  margin: 0 0 .55rem;
+  color: var(--verde-uabc);
+  font-size: .76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.seccion-inicio .titulo-reciente {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.18rem;
+  line-height: 1.25;
+  font-weight: 700;
+  color: var(--azul-oscuro);
+  margin: 0 0 .7rem;
+}
+
+.seccion-inicio .titulo-reciente a {
+  color: inherit !important;
+  text-decoration: none !important;
+}
+
+.seccion-inicio .resumen-reciente {
+  margin: 0 0 1.1rem;
+  color: var(--texto-gris);
+  font-size: .92rem;
+  line-height: 1.6;
+  flex: 1;
+}
+
+.seccion-inicio .leer-reciente {
+  align-self: flex-start;
+  color: var(--verde-uabc) !important;
+  font-size: .86rem;
+  font-weight: 700;
+  text-decoration: none !important;
+}
+
+.seccion-inicio .leer-reciente:hover {
+  text-decoration: underline !important;
+}
+
+.seccion-inicio .estado-recientes {
+  grid-column: 1 / -1;
+  text-align: center;
+  margin: 0;
+  padding: 3rem 1rem;
+  color: var(--texto-gris);
+  background: rgba(255,255,255,.7);
+  border: 1px dashed var(--borde);
+  border-radius: var(--radio);
+}
+
+/* ============================================================
+   TABLET
+   ============================================================ */
+
+@media (max-width: 1024px) {
+  .seccion-inicio .contenedor-inicio {
+    padding: 5rem 2.5rem 4rem;
+    gap: 3rem;
+  }
+
+  .seccion-inicio .seccion-recientes {
+    padding: 1rem 2.5rem 5rem;
+  }
+
+  .seccion-inicio .lista-recientes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ============================================================
+   MÓVIL
+   ============================================================ */
+
+@media (max-width: 768px) {
+  .seccion-inicio .contenedor-inicio {
+    grid-template-columns: 1fr;
+    padding: 3rem 1.25rem 3.5rem;
+    gap: 2.5rem;
+  }
+
+  .seccion-inicio .titulo-bienvenida {
+    margin-bottom: 1.25rem;
+  }
+
+  .seccion-inicio .texto-bienvenida {
+    font-size: 1.05rem;
+  }
+
+  .seccion-inicio .imagen-bienvenida {
+    border-radius: 20px;
+    aspect-ratio: 4 / 3;
+  }
+
+  .seccion-inicio .seccion-recientes {
+    padding: .5rem 1.25rem 4rem;
+  }
+
+  .seccion-inicio .cabecera-recientes {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .seccion-inicio .lista-recientes {
+    grid-template-columns: 1fr;
+  }
+
+  .seccion-inicio .boton-todas {
+    width: 100%;
+  }
+}
+
+/* Ocultar título automático de Blogger */
+.post-title,
+.entry-title {
+  display: none;
+}
+</style>
+
+<!-- ============================================================
+     BIENVENIDA
+     ============================================================ -->
+
+<section class="contenedor-inicio">
+
+  <div>
+    <h1 class="titulo-bienvenida" data-editable="Bienvenida · título">Bienvenido</h1>
+
+    <p class="texto-bienvenida" data-editable="Bienvenida · texto">Te damos la bienvenida a InnovaEduTec, el blog del CIAD UABC dedicado a la innovación educativa. Reunimos experiencias reales del aula, proyectos con realidad aumentada, inteligencia artificial y otras tecnologías emergentes, además de guías prácticas y reflexiones sobre ética y sociedad digital. Explora, inspírate y comparte cómo la tecnología puede hacer el aprendizaje más significativo.</p>
+  </div>
+
+  <img
+    class="imagen-bienvenida"
+    src="https://picsum.photos/seed/ciad-inicio/1000/800"
+    alt="Equipo del CIAD trabajando en un espacio de colaboración"
+  />
+
+</section>
+
+<!-- ============================================================
+     NOTAS RECIENTES
+     Se cargan automáticamente del feed general de entradas.
+     ============================================================ -->
+
+<section class="seccion-recientes">
+
+  <div class="cabecera-recientes">
+
+    <div class="cabecera-recientes-texto">
+      <p class="eyebrow-recientes" data-editable="Notas recientes · antetítulo">Actualidad CIAD</p>
+      <h2 class="titulo-recientes" data-editable="Notas recientes · título">Notas recientes</h2>
+      <p class="descripcion-recientes" data-editable="Notas recientes · texto">Consulta las publicaciones más recientes del blog.</p>
+    </div>
+
+    <a class="boton-todas" href="/search">
+      Ver todas las notas
+    </a>
+
+  </div>
+
+  <div class="lista-recientes" id="lista-recientes">
+    <p class="estado-recientes" id="estado-recientes">Cargando notas recientes…</p>
+  </div>
+
+</section>
+
+<script>
+(function () {
+
+  var MAXIMO_RECIENTES = 6;
+
+  function rutaFeedRecientes() {
+    return '/feeds/posts/default?alt=json&orderby=published&max-results=' +
+      MAXIMO_RECIENTES;
+  }
+
+  function quitarHtml(texto) {
+    var caja = document.createElement('div');
+    caja.innerHTML = texto || '';
+    return (caja.textContent || '')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  function recortar(texto, limite) {
+    if (!texto || texto.length <= limite) {
+      return texto || '';
+    }
+
+    return texto
+      .substring(0, limite)
+      .replace(/\s+\S*$/, '') + '…';
+  }
+
+  function obtenerEnlace(entrada) {
+    var enlaces = entrada.link || [];
+
+    for (var i = 0; i < enlaces.length; i++) {
+      if (enlaces[i].rel === 'alternate') {
+        return enlaces[i].href;
+      }
+    }
+
+    return '#';
+  }
+
+  function obtenerImagen(entrada, indice) {
+    // Panel CIAD (imagenCiad): la imagen de las tarjetas de la nota (o la principal) va antes que la miniatura de Blogger
+    var contenidoCiad = entrada.content ? entrada.content.$t || '' : '';
+    var imagenCiad = contenidoCiad.match(/\x3cimg[^>]*class="articulo-tarjeta"[^>]*src="([^"]+)"/) || contenidoCiad.match(/\x3cfigure class="articulo-portada"[^>]*>\x3cimg[^>]*src="([^"]+)"/);
+    if (imagenCiad) { return imagenCiad[1].replace(/\x26amp;/g, '\x26'); }
+
+
+    if (
+      entrada.media$thumbnail &&
+      entrada.media$thumbnail.url
+    ) {
+      return entrada.media$thumbnail.url
+        .replace(/\/s72-c\//, '/w900-h506-c/');
+    }
+
+    var contenido =
+      (entrada.content && entrada.content.$t) ||
+      (entrada.summary && entrada.summary.$t) ||
+      '';
+
+    var caja = document.createElement('div');
+    caja.innerHTML = contenido;
+
+    var imagen = caja.querySelector('img');
+
+    if (imagen && imagen.src) {
+      return imagen.src;
+    }
+
+    return 'https://picsum.photos/seed/ciad-reciente-' +
+      indice + '/900/506';
+  }
+
+  function obtenerResumen(entrada) {
+    var contenido =
+      (entrada.summary && entrada.summary.$t) ||
+      (entrada.content && entrada.content.$t) ||
+      '';
+
+    return recortar(
+      quitarHtml(contenido),
+      155
+    );
+  }
+
+  function formatearFecha(iso) {
+    var fecha = new Date(iso);
+
+    if (isNaN(fecha)) {
+      return '';
+    }
+
+    return fecha.toLocaleDateString(
+      'es-MX',
+      {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+      }
+    );
+  }
+
+  function crearTarjeta(entrada, indice) {
+
+    var enlace = obtenerEnlace(entrada);
+    var titulo = quitarHtml(
+      entrada.title ? entrada.title.$t : 'Publicación'
+    );
+
+    var articulo = document.createElement('article');
+    articulo.className = 'tarjeta-reciente';
+
+    articulo.innerHTML =
+      '<a class="enlace-imagen-reciente" href="' + enlace + '">' +
+        '<img class="imagen-reciente" src="' +
+          obtenerImagen(entrada, indice) +
+          '" alt="" loading="lazy" />' +
+      '</a>' +
+
+      '<div class="contenido-reciente">' +
+
+        '<p class="fecha-reciente">' +
+          formatearFecha(
+            entrada.published ? entrada.published.$t : ''
+          ) +
+        '</p>' +
+
+        '<h3 class="titulo-reciente">' +
+          '<a href="' + enlace + '">' +
+            titulo +
+          '</a>' +
+        '</h3>' +
+
+        '<p class="resumen-reciente">' +
+          obtenerResumen(entrada) +
+        '</p>' +
+
+        '<a class="leer-reciente" href="' + enlace + '">' +
+          'Leer nota' +
+        '</a>' +
+
+      '</div>';
+
+    return articulo;
+  }
+
+  function cargarRecientes() {
+
+    var lista = document.getElementById('lista-recientes');
+    var estado = document.getElementById('estado-recientes');
+
+    if (!lista) {
+      return;
+    }
+
+    fetch(rutaFeedRecientes())
+      .then(function (respuesta) {
+
+        if (!respuesta.ok) {
+          throw new Error('Respuesta no válida');
+        }
+
+        return respuesta.json();
+      })
+      .then(function (datos) {
+
+        var entradas =
+          (datos.feed && datos.feed.entry) || [];
+
+        lista.innerHTML = '';
+
+        if (!entradas.length) {
+          lista.innerHTML =
+            '<p class="estado-recientes">' +
+            'Aún no hay notas publicadas.' +
+            '</p>';
+
+          return;
+        }
+
+        for (var i = 0; i < entradas.length; i++) {
+          lista.appendChild(
+            crearTarjeta(entradas[i], i + 1)
+          );
+        }
+      })
+      .catch(function (error) {
+
+        console.error(
+          'CIAD · Notas recientes:',
+          error
+        );
+
+        if (estado) {
+          estado.textContent =
+            'No fue posible cargar las notas recientes en este momento.';
+        }
+      });
+  }
+
+  cargarRecientes();
+
+})();
+</script>
+
+</div>
