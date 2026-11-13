@@ -27,7 +27,7 @@
 <div class="guia">
 
 <h1>Guía de uso del Panel CIAD</h1>
-<p class="guia-meta">Versión 0.1.40 beta · 12/11/2026 · Blog del CIAD (ciad-innovaedutec.blogspot.com)</p>
+<p class="guia-meta">Versión 0.1.43 beta · 13/11/2026 · Blog del CIAD (ciad-innovaedutec.blogspot.com)</p>
 
 <p><b>¿Para quién es?</b> Para el personal autorizado del CIAD que revisa las propuestas de artículos, publica los artículos, modera los comentarios y actualiza los textos de las páginas del blog. No hace falta saber programar ni entrar al código de Blogger.</p>
 <p class="guia-meta">Las capturas de esta guía usan datos de ejemplo (nombres y notas inventados).</p>
@@ -38,7 +38,7 @@
 <li><b><a href="#g-clonar" data-ir="g-clonar">Clonar</a></b>: copia una nota como borrador para cambiarle algo y publicarla aparte.</li>
 <li><b><a href="#g-imagen" data-ir="g-imagen">Imagen principal</a></b> con tres vistas (computadora, celular y tarjetas de Inicio y listas); acepta GIF animado.</li>
 <li><b>Citas <code>[[n]]</code></b> con burbuja y enlace aunque las referencias tengan otro título; las referencias se ven del mismo tamaño que el texto.</li>
-<li><b>Páginas</b>: solo Inicio y Sobre el blog se editan desde el panel; las secciones muestran sus temas y sus notas.</li>
+<li><b>Páginas</b>: solo Inicio y Sobre el blog se editan desde el panel; las secciones muestran sus notas y en Secciones visibles se muestran u ocultan.</li>
 </ul></div>
 
 <div class="guia-indice">
@@ -169,7 +169,7 @@
 <ol>
 <li>Abre <b>Ver Word ↗</b>, <b>Ver PDF ↗</b> o <b>Editar en Blogger ↗</b> para revisar el texto. Para corregir algo (una errata, una imagen, la ficha), usa <span class="guia-boton">Editar nota</span> en la misma tarjeta. Si lo haces en Blogger, guarda ahí y <b>no lo publiques desde Blogger</b>.</li>
 <li>Revisa la extensión: los lineamientos recomiendan de 1,000 a 2,500 palabras (no es obligatorio). El panel marca ⚠ si queda fuera de ese rango, solo como aviso.</li>
-<li>En <b>Sección del blog</b> confirma o cambia la sección. Viene preseleccionada con la que sugirió el autor (en las copias, con la de la nota original); en las notas propias del CIAD hay que elegirla.</li>
+<li>En <b>Sección del blog</b> confirma o cambia la sección. Viene preseleccionada con la que sugirió el autor (en las copias, con la de la nota original); en las notas propias del CIAD hay que elegirla. Las secciones desactivadas (ver <a href="#g-paginas" data-ir="g-paginas">Páginas</a>) aparecen en gris y no se pueden elegir; si el autor sugirió una de ellas, el panel lo avisa y deja la sección sin elegir.</li>
 <li>En <b>Etiquetas adicionales</b> (opcional) escribe hasta 5 palabras clave, por ejemplo <i>inteligencia artificial, evaluación</i>. Sirven para buscar y filtrar notas en el blog.
 <ul>
 <li>Si el autor escribió palabras clave en el formulario, ya aparecen limpias (sin repetidas, espacios ni signos de más). Puedes cambiarlas.</li>
@@ -280,9 +280,14 @@
 </table>
 <p>Las páginas de sección (<i>Tecnología Educativa</i>, <i>Tecnologías Emergentes</i>, <i>Ética y Sociedad Digital</i> e <i>Innovación</i>) no se editan aquí.</p>
 <ul>
-<li>Muestran su banner, sus temas y las notas de cada tema: 2 por fila y 6 por tema. «Ver todas las entradas» muestra el resto.</li>
+<li>Muestran su banner y sus 10 notas más recientes, sin subtítulos por tema. Si hay más, aparece «Ver todas las notas →», que lleva a esa sección en la página <i>Todas las notas</i> (ahí están todas, en tarjetas compactas).</li>
 <li>Una nota aparece ahí sola al publicarla en esa sección, con la imagen de su tarjeta.</li>
 <li><i>Multimedia</i> y <i>Guías y tutoriales</i> están desactivadas: no aparecen en el menú del blog ni en el panel.</li>
+</ul>
+<p><b>Secciones visibles</b> (último botón de la lista de páginas): cada sección tiene una casilla.</p>
+<ul>
+<li>Apagada: la sección sale del menú del blog y de «Todas las notas», y su página deja de abrirse aunque alguien tenga el enlace. Sus notas no se borran.</li>
+<li>Encendida: la sección vuelve a aparecer. El cambio es inmediato; si no lo ves, recarga con <code>Ctrl + F5</code>.</li>
 </ul>
 
 <h3>Pasos para editar una página</h3>
@@ -333,6 +338,7 @@
 <tr><td>Esta solicitud ya fue respondida / Este artículo ya no está en revisión</td><td>Otra persona ya lo atendió.</td><td>Recargar el panel; no hay que hacer nada más.</td></tr>
 <tr><td>Escribe el motivo</td><td>Rechazar una solicitud o bloquear una cuenta pide motivo.</td><td>Escribir el motivo y confirmar.</td></tr>
 <tr><td>Elige la sección del blog antes de publicar</td><td>El artículo no tiene sección elegida.</td><td>Elegirla en la lista y publicar.</td></tr>
+<tr><td>La sección "…" está desactivada</td><td>Se eligió una sección apagada en Secciones visibles.</td><td>Elegir otra sección, o activarla en Páginas › Secciones visibles y volver a publicar.</td></tr>
 <tr><td>Esa solicitud ya no está disponible</td><td>La solicitud elegida ya tiene un artículo.</td><td>Recargar y elegir otra.</td></tr>
 <tr><td>No se pudo crear el borrador: …</td><td>Falló la conversión del Word o Blogger.</td><td>Reintentar desde <i>No publicados</i>; si sigue, avisar al equipo con el texto.</td></tr>
 <tr><td>El Word ya no existe en Drive: la papelera se vacía 30 días después de publicar</td><td>Rehacer desde el Word un artículo publicado hace más de 30 días.</td><td>Ya no se puede rehacer desde el Word; corrige la nota con <b>Editar nota</b> o pide al autor que la envíe de nuevo.</td></tr>

@@ -167,6 +167,7 @@ a { color: var(--verde); }
 .portada-controles input:disabled { opacity: .4; }
 .portada-controles output { font-size: 13px; color: var(--texto-suave); text-align: right; font-variant-numeric: tabular-nums; }
 .campo-seccion { margin: 12px 0 4px; max-width: 520px; }
+.aviso-seccion { font-size: 13px; color: #8a5a00; background: #fff6e0; border: 1px solid #f1d38a; border-radius: 8px; padding: 6px 10px; margin-top: 6px; }
 .campo-seccion label { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: var(--texto-suave); font-weight: 600; margin-bottom: 4px; }
 .campo-seccion input[type="text"] {
   width: 100%; font: inherit; font-size: 13px; color: var(--texto);
@@ -421,6 +422,9 @@ a { color: var(--verde); }
 .pg-punto { width: 8px; height: 8px; border-radius: 50%; background: var(--borde); margin-top: 7px; flex-shrink: 0; }
 .pg-punto.ok { background: var(--verde); }
 .pg-punto.sucio { background: var(--amarillo); }
+.pg-seccion { display: flex; gap: 10px; align-items: center; cursor: pointer; }
+.pg-seccion input { width: 18px; height: 18px; accent-color: var(--verde); }
+.pg-seccion small { color: var(--texto-suave); }
 .pg-punto.error { background: var(--rojo); }
 .pg-editor { display: grid; gap: 14px; min-width: 0; }
 .pg-equipo { display: grid; gap: 10px; margin: 6px 0 10px; }
@@ -510,7 +514,8 @@ var FILTROS = {
     // { clave: 'multimedia', texto: 'Multimedia' },
     // { clave: 'guias', texto: 'Guías y tutoriales' },
     { clave: 'inicio', texto: 'Inicio' },
-    { clave: 'sobre', texto: 'Sobre el blog' }
+    { clave: 'sobre', texto: 'Sobre el blog' },
+    { clave: 'secciones', texto: 'Secciones visibles' }
   ],
   metricas: [
     { clave: 'publicado', texto: 'Publicados', tono: 'verde' },
@@ -1549,6 +1554,10 @@ document.addEventListener('click', function (e) {
 function selectorSeccion(sugerida, fila, ayuda) {
   var elegida = estado.elecciones['seccion-' + fila];
   var valor = elegida !== undefined ? elegida : sugerida;
+  // Sección oculta (Páginas › Secciones visibles): se ve, pero no se puede elegir
+  var oculta = function (g) { return (estado.ocultas || []).indexOf(g) !== -1; };
+  var valorOculto = valor && oculta(valor.split(':')[0]) ? valor.split(':')[0] : '';
+  if (valorOculto) valor = '';
   var grupos = {};
   estado.secciones.forEach(function (op) {
     var seccion = op.split(':')[0];
@@ -1556,7 +1565,7 @@ function selectorSeccion(sugerida, fila, ayuda) {
   });
   var opciones = '<option value="">Elige la sección…</option>' +
     Object.keys(grupos).map(function (g) {
-      return '<optgroup label="' + esc(g) + '">' + grupos[g].map(function (op) {
+      return '<optgroup label="' + esc(g) + (oculta(g) ? ' (desactivada)' : '') + '"' + (oculta(g) ? ' disabled' : '') + '>' + grupos[g].map(function (op) {
         return '<option value="' + esc(op) + '"' + (op === valor ? ' selected' : '') + '>' +
           esc(op.slice(g.length + 1).trim()) + '</option>';
       }).join('') + '</optgroup>';
@@ -1565,6 +1574,7 @@ function selectorSeccion(sugerida, fila, ayuda) {
   return '<div class="campo-seccion">' +
     '<label>Sección del blog *</label>' +
     '<select data-seccion data-fila="' + fila + '">' + opciones + '</select>' +
+    (valorOculto ? '<div class="aviso-seccion">La sección «' + esc(valorOculto) + '» está desactivada: por ahora no se puede publicar ahí. Elige otra o actívala en Páginas › Secciones visibles.</div>' : '') +
     '<div class="ayuda">' + (ayuda || (sugerida ? 'Preseleccionada con la sugerencia del autor. Puedes cambiarla.' : 'Nota del CIAD: elige dónde se publicará.')) + '</div>' +
   '</div>';
 }
@@ -2015,6 +2025,7 @@ function pgPedirEstado() {
 /** Precarga en segundo plano (sin volver a pintar la pestaña abierta). Si algo falla, la pestaña lo pide al abrirse. */
 function precargarPestanas() {
   pgPedirEstado();
+  pgSecciones(); // también actualiza las secciones ocultas del selector de sección
   if (!PG[estado.filtro.paginas]) pgCargar(estado.filtro.paginas, true);
   if (!MT.datos && !MT.cargando) mtCargar();
   metCargar();
@@ -2046,6 +2057,8 @@ function pintarPaginas() {
   pgPedirEstado();
 
   function mostrar(html) { lista.innerHTML = '<div class="pg-layout">' + pgMenu() + '<div class="pg-editor">' + html + '</div></div>'; }
+
+  if (tipo === 'secciones') { mostrar(pgSecciones()); return; }
 
   if (!st || (!st.datos && !st.error && !st.cargando)) { pgCargar(tipo); mostrar('<div class="mensaje-lista">Cargando…</div>'); return; }
   if (st.cargando) { mostrar('<div class="mensaje-lista">Cargando…</div>'); return; }
@@ -2101,6 +2114,44 @@ function pgNombre(tipo) {
   var f = FILTROS.paginas.filter(function (x) { return x.clave === tipo; })[0];
   return f ? f.texto : tipo;
 }
+
+// --- Secciones visibles (ver Paginas.gs) ---
+var SV = null;   // { lista: [{ id, nombre, visible, existe }] } | { cargando } | { error }
+
+function pgSecciones() {
+  if (!SV) {
+    SV = { cargando: true };
+    llamar('obtenerSeccionesVisibles').then(function (r) { SV = { lista: r }; svOcultas(r); })
+      .catch(function (err) { SV = { error: mensajeError(err) }; })
+      .then(function () { if (estado.pestana === 'paginas') pintar(); });
+  }
+  if (SV.cargando) return '<div class="mensaje-lista">Cargando…</div>';
+  if (SV.error) return '<div class="mensaje-lista error">No se pudo cargar: ' + esc(SV.error) +
+    '<br><br><button class="boton secundario" data-pg="secciones-recargar" type="button">Reintentar</button></div>';
+  return '<div class="pg-barra"><div><b>Secciones visibles</b></div></div>' +
+    '<p class="pg-ayuda">Una sección apagada sale del menú del blog y su página deja de abrirse, aunque alguien tenga el enlace. Sus notas no se borran.</p>' +
+    SV.lista.map(function (s) {
+      return '<label class="pg-grupo pg-seccion"><input type="checkbox" data-sv="' + esc(s.id) + '"' + (s.visible ? ' checked' : '') + (s.existe ? '' : ' disabled') + '>' +
+        '<b>' + esc(s.nombre) + '</b><small>' + (!s.existe ? 'No se encontró en Blogger' : s.visible ? 'Visible' : 'Oculta') + '</small></label>';
+    }).join('');
+}
+
+function svOcultas(lista) {
+  estado.ocultas = lista.filter(function (s) { return s.existe && !s.visible; }).map(function (s) { return s.nombre; });
+}
+
+document.addEventListener('change', function (e) {
+  var c = e.target.closest('[data-sv]');
+  if (!c) return;
+  c.disabled = true;
+  llamar('cambiarVisibilidadSeccion', c.getAttribute('data-sv'), c.checked).then(function (r) {
+    SV = { lista: r }; svOcultas(r);
+    avisar(c.checked ? 'Sección visible en el blog.' : 'Sección oculta: ya no aparece en el menú ni se puede abrir.');
+  }).catch(function (err) {
+    c.checked = !c.checked;
+    avisar(mensajeError(err), true);
+  }).then(function () { if (estado.pestana === 'paginas') pintar(); });
+});
 
 // --- Páginas de solo textos ---
 function pgEditorTextos(st) {
@@ -2288,6 +2339,7 @@ document.addEventListener('click', function (e) {
 
   if (accion === 'ir') { estado.filtro.paginas = b.getAttribute('data-tipo'); pintar(); return; }
   if (accion === 'recargar') { pgCargar(tipo); return; }
+  if (accion === 'secciones-recargar') { SV = null; pintar(); return; }
   if (accion === 'agregar-integrante') { st.datos.equipo.push({ nombre: '', cargo: '', foto: '' }); pintar(); return; }
 
   if (accion === 'mover') {
@@ -3043,6 +3095,7 @@ window.addEventListener('beforeunload', function (e) {
 var INICIO = <?!= inicio ?>; // Lo pone doGet, así no hay que esperar llamadas al servidor
 document.getElementById('correo-sesion').textContent = INICIO.correo;
 estado.secciones = INICIO.secciones || [];
+estado.ocultas = INICIO.ocultas || [];
 if (INICIO.admin) document.querySelector('[data-pestana="usuarios"]').hidden = false;
 if (INICIO.pestana && (INICIO.pestana !== 'usuarios' || INICIO.admin)) estado.pestana = INICIO.pestana; // Enlace de un aviso por correo
 // OPT: al terminar lo principal, se precargan Páginas, Mantenimiento y Guía para que abran al instante

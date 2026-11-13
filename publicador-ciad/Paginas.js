@@ -20,8 +20,8 @@ const PAGINAS_PANEL = {
 
   // Páginas de solo textos (data-editable)
   inicio: { nombre: 'Inicio', ruta: '/p/inicio.html', modo: 'textos' },
-  // NOTA: las 4 páginas de sección (Tecnología Educativa, Emergentes, Innovación, Ética) ya no se editan aquí.
-  // Solo tienen banner, subtítulos y sus notas; las notas por fila y por tema son fijas en la página.
+  // NOTA: las 4 páginas de sección (Tecnología Educativa, Emergentes, Innovación, Ética) no se editan aquí.
+  // Solo tienen banner y sus 10 notas más recientes (fijo en la página); se muestran u ocultan en Secciones visibles.
   // lista: además de los textos, la lista del equipo va en un bloque JSON entre marcas
   sobre: { nombre: 'Sobre el blog', ruta: '/p/sobre-el-blog.html', modo: 'textos', lista: 'equipo' }
 };
@@ -155,6 +155,57 @@ function obtenerEstadoPaginas() {
     }
   });
   return estado;
+}
+
+// ===== Secciones visibles =====
+// Ocultar = regresar la página a borrador: Blogger responde 404 a quien abra la URL y el tema quita su enlace del menú.
+
+// ID de la página en Blogger (está en el encabezado de cada archivo de blogger-paginas/)
+const SECCIONES_VISIBLES_ = [
+  { id: '2188759747346334628', nombre: 'Tecnología Educativa' },
+  { id: '2861727689010700508', nombre: 'Tecnologías Emergentes' },
+  { id: '2365380527035718685', nombre: 'Ética y Sociedad Digital' },
+  { id: '3858324240136165732', nombre: 'Innovación' }
+];
+
+/** [{ id, nombre, visible }] según el estado de cada página en Blogger (LIVE = visible). */
+function obtenerSeccionesVisibles() {
+  exigirAcceso_();
+  const estado = {};
+  (blogger_('GET', '/blogs/' + CONFIG.BLOG_ID + '/pages?fetchBodies=false&status=live&status=draft&maxResults=500').items || [])
+    .forEach(function (p) { estado[p.id] = p.status; });
+  const lista = SECCIONES_VISIBLES_.map(function (s) {
+    return { id: s.id, nombre: s.nombre, visible: estado[s.id] === 'LIVE', existe: !!estado[s.id] };
+  });
+  const ocultas = lista.filter(function (s) { return s.existe && !s.visible; }).map(function (s) { return s.nombre; });
+  PropertiesService.getScriptProperties().setProperty(CLAVE_OCULTAS_, JSON.stringify(ocultas));
+  return lista;
+}
+
+// Nombres de las secciones ocultas según la última consulta a Blogger. El panel la recibe al cargar (sin esperar a Blogger).
+const CLAVE_OCULTAS_ = 'SECCIONES_OCULTAS';
+
+function seccionesOcultas_() {
+  const guardadas = PropertiesService.getScriptProperties().getProperty(CLAVE_OCULTAS_);
+  if (guardadas === null) {
+    try { obtenerSeccionesVisibles(); } catch (err) { return []; }
+    return seccionesOcultas_();
+  }
+  try { return JSON.parse(guardadas); } catch (err) { return []; }
+}
+
+/** IMPORTANTE: no se publica ni se mueve una nota a una sección oculta. Se consulta a Blogger al momento, no la copia guardada. */
+function exigirSeccionVisible_(opcion) {
+  const nombre = String(opcion || '').split(':')[0].trim();
+  const oculta = obtenerSeccionesVisibles().some(function (s) { return s.nombre === nombre && s.existe && !s.visible; });
+  if (oculta) throw new Error('La sección "' + nombre + '" está desactivada (Páginas › Secciones visibles). Elige otra sección o actívala primero.');
+}
+
+function cambiarVisibilidadSeccion(id, visible) {
+  exigirAcceso_();
+  if (!SECCIONES_VISIBLES_.some(function (s) { return s.id === id; })) throw new Error('Sección desconocida: ' + id);
+  blogger_('POST', '/blogs/' + CONFIG.BLOG_ID + '/pages/' + id + (visible ? '/publish' : '/revert'));
+  return obtenerSeccionesVisibles();
 }
 
 /** Datos de un video de YouTube a partir de cualquier enlace o ID. */

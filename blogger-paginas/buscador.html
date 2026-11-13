@@ -2,7 +2,7 @@
   Página de Blogger: Buscador
   URL: https://ciad-innovaedutec.blogspot.com/p/buscador.html
   ID de la página: 8628180661819521523
-  Copia del contenido publicado (11/11/2026). Se edita en Blogger › Páginas o, Inicio y Sobre el blog, desde el Panel CIAD.
+  Copia del contenido publicado (13/11/2026). Se edita en Blogger › Páginas o, Inicio y Sobre el blog, desde el Panel CIAD.
 -->
 <div class="seccion-buscador">
 
@@ -20,7 +20,7 @@
   <main class="panel-buscador">
 
     <p class="descripcion-buscador">
-      Busca publicaciones del CIAD por palabra clave y utiliza los filtros para encontrar contenido por categoría, facultad o formato.
+      Escribe una palabra o elige una categoría. También puedes dar clic en el tema de cualquier nota para ver las demás de ese tema.
     </p>
 
 <style>
@@ -157,6 +157,14 @@
   color: var(--text-secondary);
 }
 
+.tarjeta-resultado .lectura-tarjeta {
+  float:right;
+  margin-left:.5rem;
+  white-space:nowrap;
+  font-weight:600;
+  opacity:.85;
+}
+
 #filtro-busqueda .tarjeta-resultado .extracto-resultado {
   margin: 0 0 0.8rem;
   font-size: 0.9rem;
@@ -176,6 +184,18 @@
   border-radius: 999px;
   color: var(--text-secondary);
   text-decoration: none;
+}
+
+#filtro-busqueda .grupo-filtros select:disabled { cursor: not-allowed; opacity: .55; }
+
+/* Tema elegido al dar clic en la etiqueta de una nota */
+#tema-activo { margin: -0.5rem 0 1.25rem; font-size: 0.95rem; color: var(--text-secondary); }
+#tema-activo button {
+  margin-left: 0.4rem; padding: 0.2rem 0.7rem; border: 1px solid var(--color-primary); border-radius: 999px;
+  background: var(--bg-surface); color: var(--color-primary); font: inherit; font-size: 0.85rem; cursor: pointer;
+}
+#filtro-busqueda .etiquetas-resultado a.etiqueta-categoria {
+  border-color: var(--color-primary); color: var(--color-primary); font-weight: 600;
 }
 
 #boton-mas {
@@ -447,7 +467,7 @@
 <div id="filtro-busqueda">
 
   <div class="barra-busqueda">
-    <input id="campo-busqueda" type="search" placeholder="Buscar en el blog del CIAD..." />
+    <input id="campo-busqueda" type="search" placeholder="Busca por título, tema o palabra clave…" />
     <button id="boton-buscar" type="button">
       <i class="fa-solid fa-magnifying-glass"></i> Buscar
     </button>
@@ -456,12 +476,14 @@
   <div class="grupo-filtros">
     <select id="filtro-categoria" aria-label="Filtrar por categoría">
       <option value="">Todas las categorías</option>
-      <option value="categoria-tecnologia-educativa">Tecnología Educativa</option>
-      <option value="categoria-tecnologias-emergentes">Tecnologías Emergentes</option>
-      <option value="categoria-etica-sociedad-digital">Ética y Sociedad Digital</option>
-      <option value="categoria-innovacion">Innovación</option>
-      <option value="categoria-guias-tutoriales">Guías y Tutoriales</option>
-      <option value="categoria-multimedia">Multimedia</option>
+      <!-- data-pagina: si la página está oculta (Panel CIAD › Páginas › Secciones visibles), la opción se desactiva -->
+      <option value="categoria-tecnologia-educativa" data-pagina="/p/tecnologia-educativa.html">Tecnología Educativa</option>
+      <option value="categoria-tecnologias-emergentes" data-pagina="/p/tecnologias-emergentes.html">Tecnologías Emergentes</option>
+      <option value="categoria-etica-sociedad-digital" data-pagina="/p/etica-y-sociedad-digital.html">Ética y Sociedad Digital</option>
+      <option value="categoria-innovacion" data-pagina="/p/innovacion.html">Innovación</option>
+      <!-- data-desactivada: secciones apagadas en el menú del tema -->
+      <option value="categoria-guias-tutoriales" data-desactivada>Guías y Tutoriales</option>
+      <option value="categoria-multimedia" data-desactivada>Multimedia</option>
     </select>
 
     <select id="filtro-facultad" aria-label="Filtrar por facultad">
@@ -480,12 +502,14 @@
       <option value="formato-infografia">Infografía</option>
     </select>
 
-    <button id="boton-limpiar" type="button">Limpiar</button>
+    <button id="boton-limpiar" type="button">Limpiar filtros</button>
   </div>
+
+  <p id="tema-activo" hidden></p>
 
   <p id="resumen-resultados"></p>
   <div id="lista-resultados"></div>
-  <button id="boton-mas" type="button">Ver más</button>
+  <button id="boton-mas" type="button">Cargar más notas</button>
 
 </div>
 
@@ -513,11 +537,63 @@
     document.getElementById('filtro-facultad'),
     document.getElementById('filtro-formato')
   ];
+  var temaActivo = ''; // ?tema=<etiqueta>: viene del clic en el tema de una nota
+  var avisoTema = document.getElementById('tema-activo');
+
+  // Etiqueta técnica → nombre visible ('categoria-innovacion' → 'Innovación')
+  var nombres = {};
+  selectores.forEach(function (selector) {
+    [].forEach.call(selector.options, function (o) { if (o.value) { nombres[o.value] = o.textContent.trim(); } });
+  });
 
   function etiquetasElegidas() {
     return selectores
       .map(function (selector) { return selector.value; })
+      .concat(temaActivo)
       .filter(Boolean);
+  }
+
+  function mostrarTema() {
+    avisoTema.hidden = !temaActivo;
+    if (temaActivo) {
+      avisoTema.innerHTML = 'Notas del tema <b>' + limpiarTexto(temaActivo) + '</b> <button type="button">Quitar tema ✕</button>';
+    }
+  }
+
+  avisoTema.addEventListener('click', function (evento) {
+    if (evento.target.tagName === 'BUTTON') { temaActivo = ''; mostrarTema(); buscar(false); }
+  });
+
+  // Las opciones sin notas, o de una sección oculta, se ven pero no se pueden elegir.
+  // Si un filtro no tiene ninguna opción disponible, se desactiva completo.
+  function marcarDisponibles() {
+    Promise.all([
+      fetch('/feeds/posts/summary?alt=json&max-results=0').then(function (r) { return r.json(); }),
+      fetch('/feeds/pages/default?alt=json&max-results=100').then(function (r) { return r.json(); })
+    ]).then(function (res) {
+      var usadas = (res[0].feed.category || []).map(function (c) { return c.term; });
+      var vivas = (res[1].feed.entry || []).map(function (e) {
+        var alt = (e.link || []).filter(function (l) { return l.rel === 'alternate'; })[0];
+        return alt ? new URL(alt.href).pathname : '';
+      });
+      var cambio = false;
+      selectores.forEach(function (selector) {
+        var disponibles = 0;
+        [].forEach.call(selector.options, function (o) {
+          if (!o.value) { return; }
+          var pagina = o.getAttribute('data-pagina');
+          var motivo = o.hasAttribute('data-desactivada') || (pagina && vivas.indexOf(pagina) === -1) ? 'desactivada'
+                     : usadas.indexOf(o.value) === -1 ? 'sin notas' : '';
+          o.disabled = !!motivo;
+          o.textContent = nombres[o.value] + (motivo ? ' (' + motivo + ')' : '');
+          if (motivo && selector.value === o.value) { selector.value = ''; cambio = true; }
+          if (!motivo) { disponibles++; }
+        });
+        selector.disabled = !disponibles;
+        selector.title = disponibles ? '' : 'Todavía no hay notas con este dato.';
+      });
+      if (cambio) { buscar(false); }
+    }).catch(function () {});
   }
 
   // DEF-016: varias etiquetas van juntas en una sola ruta: /-/etiqueta1/etiqueta2
@@ -576,6 +652,7 @@
   function obtenerExtracto(entrada) {
     var texto = obtenerContenido(entrada)
       .replace(/<div class="articulo-ficha"[\s\S]*?<\/div>/gi, ' ') // DEF-017: sin la ficha del autor
+      .replace(/<p class="articulo-lectura"[\s\S]*?<\/p>/gi, ' ') // va como insignia junto a la fecha
       .replace(/<!--[\s\S]*?-->/g, ' ')
       .replace(/<style[\s\S]*?<\/style>/gi, ' ')
       .replace(/<script[\s\S]*?<\/script>/gi, ' ')
@@ -586,6 +663,16 @@
 
     if (!texto) { return ''; }
     return texto.length > 130 ? texto.substring(0, 130).trim() + '...' : texto;
+  }
+
+  // Minutos de lectura de la nota (párrafo .articulo-lectura que pone el Panel CIAD); '' si no lo tiene
+  function minutosLectura(entrada){
+    var m = ((entrada.content && entrada.content.$t) || '').match(/class="articulo-lectura"[^>]*>[^<]*?(\d+)\s*min/);
+    return m ? m[1] : '';
+  }
+  function insigniaLectura(entrada){
+    var n = minutosLectura(entrada);
+    return n ? '<span class="lectura-tarjeta" title="Lectura de ' + n + ' min"><i class="fa-regular fa-clock" aria-hidden="true"></i> ' + n + ' min</span>' : '';
   }
 
   function formatearFecha(texto) {
@@ -608,16 +695,22 @@
     var imagen   = obtenerImagen(entrada);
     var extracto = obtenerExtracto(entrada);
 
+    // Categoría con su nombre visible; formato y facultad no se muestran; el resto (temas) filtra el buscador
     var etiquetas = (entrada.category || []).map(function (categoria) {
-      return '<a href="/search/label/' + encodeURIComponent(categoria.term) + '">'
-           + limpiarTexto(categoria.term) + '</a>';
+      var termino = categoria.term;
+      if (/^categoria-/.test(termino)) {
+        return '<a class="etiqueta-categoria" href="?categoria=' + encodeURIComponent(termino) + '">'
+             + limpiarTexto(nombres[termino] || termino.replace(/^categoria-/, '').replace(/-/g, ' ')) + '</a>';
+      }
+      if (/^(formato|facultad)-/.test(termino)) { return ''; }
+      return '<a href="?tema=' + encodeURIComponent(termino) + '">' + limpiarTexto(termino) + '</a>';
     }).join('');
 
     tarjeta.innerHTML =
-      (imagen ? '<img class="imagen-resultado" src="' + imagen + '" alt="" loading="lazy"/>' : '') +
+      (imagen ? '<img class="imagen-resultado" src="' + imagen + '" alt="" loading="lazy" onerror="this.remove()"/>' : '') +
       '<div class="contenido-tarjeta">' +
         '<h3><a href="' + obtenerEnlace(entrada) + '">' + limpiarTexto(entrada.title.$t) + '</a></h3>' +
-        '<p class="fecha-resultado">' + formatearFecha(entrada.published.$t) + '</p>' +
+        '<p class="fecha-resultado">' + formatearFecha(entrada.published.$t) + insigniaLectura(entrada) + '</p>' +
         '<p class="extracto-resultado">' + limpiarTexto(extracto) + '</p>' +
         (etiquetas ? '<div class="etiquetas-resultado">' + etiquetas + '</div>' : '') +
       '</div>';
@@ -628,8 +721,13 @@
   function mostrarSinResultados() {
     resumen.textContent = '';
     listaResultados.innerHTML =
-      '<p class="mensaje-estado">No se encontraron entradas con esos filtros.<br/>' +
+      '<p class="mensaje-estado">No encontramos notas con esa búsqueda.<br/>' +
       'Prueba quitando alguno o usando otra palabra clave.</p>';
+  }
+
+  function resumenNotas(mostradas, total) {
+    if (total === 1) { return '1 nota encontrada.'; }
+    return mostradas < total ? 'Mostrando ' + mostradas + ' de ' + total + ' notas.' : total + ' notas encontradas.';
   }
 
   // Muestra la siguiente página de los resultados filtrados en el navegador
@@ -638,7 +736,7 @@
     pagina.forEach(function (entrada) { listaResultados.appendChild(crearTarjeta(entrada)); });
 
     var mostradas = indiceInicio - 1 + pagina.length;
-    resumen.textContent = 'Mostrando ' + mostradas + ' de ' + resultadosLocales.length + ' entradas.';
+    resumen.textContent = resumenNotas(mostradas, resultadosLocales.length);
     botonMas.style.display = mostradas < resultadosLocales.length ? 'block' : 'none';
   }
 
@@ -686,7 +784,7 @@
         });
 
         var mostradas = indiceInicio - 1 + entradas.length;
-        resumen.textContent = 'Mostrando ' + mostradas + ' de ' + total + ' entradas.';
+        resumen.textContent = resumenNotas(mostradas, total);
         botonMas.style.display = mostradas < total ? 'block' : 'none';
 
         actualizarDireccion();
@@ -711,6 +809,7 @@
         parametros.set(selector.id.replace('filtro-', ''), selector.value);
       }
     });
+    if (temaActivo) { parametros.set('tema', temaActivo); }
 
     var cadena = parametros.toString();
     history.replaceState(null, '', cadena ? '?' + cadena : location.pathname);
@@ -728,6 +827,8 @@
       var valor = parametros.get(selector.id.replace('filtro-', ''));
       if (valor) { selector.value = valor; }
     });
+    temaActivo = parametros.get('tema') || '';
+    mostrarTema();
   }
 
   botonBuscar.addEventListener('click', function () { buscar(false); });
@@ -743,6 +844,8 @@
   botonLimpiar.addEventListener('click', function () {
     campoBusqueda.value = '';
     selectores.forEach(function (selector) { selector.value = ''; });
+    temaActivo = '';
+    mostrarTema();
     buscar(false);
   });
 
@@ -753,6 +856,7 @@
 
   leerDireccion();
   buscar(false);
+  marcarDisponibles();
 })();
 //]]>
 </script>

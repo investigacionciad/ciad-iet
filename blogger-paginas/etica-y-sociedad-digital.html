@@ -2,7 +2,7 @@
   Página de Blogger: Ética y Sociedad Digital
   URL: https://ciad-innovaedutec.blogspot.com/p/etica-y-sociedad-digital.html
   ID de la página: 2365380527035718685
-  Copia del contenido publicado (11/11/2026). Se edita en Blogger › Páginas o, Inicio y Sobre el blog, desde el Panel CIAD.
+  Copia del contenido publicado (13/11/2026). Se edita en Blogger › Páginas o, Inicio y Sobre el blog, desde el Panel CIAD.
 -->
 <div class="seccion-etica-sociedad">
 
@@ -288,6 +288,13 @@
   font-weight: 700;
   margin: 0 0 .5rem;
 }
+.seccion-etica-sociedad .lectura-tarjeta {
+  float:right;
+  margin-left:.5rem;
+  white-space:nowrap;
+  font-weight:600;
+  opacity:.85;
+}
 
 .seccion-etica-sociedad .titulo-articulo {
   font-family: 'Bitter', Georgia, serif;
@@ -324,19 +331,17 @@
 }
 
 .seccion-etica-sociedad .enlace-etiqueta {
-  display: inline-block;
-  margin-top: 1.5rem;
-  padding: .7rem 1.4rem;
-  border-radius: 999px;
-  background: var(--verde-uabc);
-  color: var(--blanco);
-  text-decoration: none;
-  font-size: .9rem;
-  font-weight: 700;
+  display:block;
+  width:fit-content;
+  margin:1rem 0 0 auto;
+  color:var(--verde-uabc);
+  text-decoration:none;
+  font-size:.9rem;
+  font-weight:700;
 }
 
 .seccion-etica-sociedad .enlace-etiqueta:hover {
-  background: var(--azul-oscuro);
+  text-decoration:underline;
 }
 
 @media (max-width: 900px) {
@@ -428,32 +433,10 @@ html { overflow-x: clip; }
 
 <main class="panel-principal">
 
-  <section class="bloque-tema alinear-derecha" id="sec-privacidad">
-    <h2>Privacidad y protección de datos</h2>
-    <div class="lista-articulos" id="lista-privacidad"></div>
-    <p class="mensaje-estado" id="estado-privacidad">Cargando entradas…</p>
-    <a class="enlace-etiqueta" href="#" id="enlace-privacidad">Ver todas las entradas</a>
-  </section>
-
-  <section class="bloque-tema" id="sec-sesgos">
-    <h2>Sesgos algorítmicos</h2>
-    <div class="lista-articulos" id="lista-sesgos"></div>
-    <p class="mensaje-estado" id="estado-sesgos">Cargando entradas…</p>
-    <a class="enlace-etiqueta" href="#" id="enlace-sesgos">Ver todas las entradas</a>
-  </section>
-
-  <section class="bloque-tema alinear-derecha" id="sec-honestidad">
-    <h2>Honestidad académica e IA</h2>
-    <div class="lista-articulos" id="lista-honestidad"></div>
-    <p class="mensaje-estado" id="estado-honestidad">Cargando entradas…</p>
-    <a class="enlace-etiqueta" href="#" id="enlace-honestidad">Ver todas las entradas</a>
-  </section>
-
-  <section class="bloque-tema" id="sec-brecha">
-    <h2>Brecha digital</h2>
-    <div class="lista-articulos" id="lista-brecha"></div>
-    <p class="mensaje-estado" id="estado-brecha">Cargando entradas…</p>
-    <a class="enlace-etiqueta" href="#" id="enlace-brecha">Ver todas las entradas</a>
+  <section class="bloque-tema" id="sec-notas">
+    <div class="lista-articulos" id="lista-notas"></div>
+    <p class="mensaje-estado" id="estado-notas">Cargando entradas…</p>
+    <a class="enlace-etiqueta" href="#" id="enlace-notas">Ver todas las notas &#8594;</a>
   </section>
 
 </main>
@@ -463,34 +446,18 @@ html { overflow-x: clip; }
 
   var IMAGEN_GENERICA = "data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 800 500%27%3E%3Crect width=%27800%27 height=%27500%27 fill=%27%23e6f2ec%27/%3E%3Cpath d=%27M0 500L800 290V500z%27 fill=%27%2300723f%27 opacity=%27.14%27/%3E%3C/svg%3E";
 
-  var etiquetas = {
-    privacidad: 'Privacidad y protección de datos',
-    sesgos: 'Sesgos algorítmicos',
-    honestidad: 'Honestidad académica e IA',
-    brecha: 'Brecha digital'
-  };
+  // La sección muestra sus notas por la etiqueta de la sección (CONFIG.SECCIONES en Código.js), sin subtítulos por tema
+  var etiquetas = { notas: 'categoria-etica-sociedad-digital' };
 
-  var imagenesReferencia = {
-    privacidad: IMAGEN_GENERICA,
-    sesgos: IMAGEN_GENERICA,
-    honestidad: IMAGEN_GENERICA,
-    brecha: IMAGEN_GENERICA
-  };
 
-  // Ver todas las entradas: ?tema=<etiqueta> muestra solo ese tema con todas sus notas
-  var temaActual = new URLSearchParams(location.search).get('tema');
-  if(!Object.keys(etiquetas).some(function(k){return etiquetas[k] === temaActual;})){temaActual = null;}
-  // Notas por tema: se eligen en el Panel CIAD (data-notas en el contenedor de la página)
-  var maximoEntradas = temaActual ? 150 : (Number((document.querySelector('.post-body [data-notas]') || document.body).getAttribute('data-notas')) || 6);
+  // Se piden 11: si llega la 11.ª, hay más y aparece «Ver todas las notas» (lleva a la sección en Todas las notas)
+  var maximoEntradas = 10;
 
   function rutaFeed(etiqueta) {
     return '/feeds/posts/default/-/' + encodeURIComponent(etiqueta) +
-           '?alt=json&orderby=published&max-results=' + maximoEntradas;
+           '?alt=json&orderby=published&max-results=' + (maximoEntradas + 1);
   }
 
-  function rutaEtiqueta(etiqueta) {
-    return location.pathname + '?tema=' + encodeURIComponent(etiqueta);
-  }
 
   function quitarEtiquetasHtml(texto) {
     var caja = document.createElement('div');
@@ -528,14 +495,14 @@ html { overflow-x: clip; }
 
     return imagen
       ? imagen.src
-      : (imagenesReferencia[clave] || IMAGEN_GENERICA);
+      : IMAGEN_GENERICA;
   }
 
   // Texto de la entrada sin la ficha del autor ni estilos, con espacios entre bloques (DEF-017)
   function textoResumen(html){
     var caja = document.createElement('div');
     caja.innerHTML = html || '';
-    caja.querySelectorAll('style, script, .articulo-ficha').forEach(function(el){ el.remove(); });
+    caja.querySelectorAll('style, script, .articulo-ficha, .articulo-lectura').forEach(function(el){ el.remove(); });
     caja.querySelectorAll('p, h1, h2, h3, h4, li, div, br').forEach(function(el){ el.insertAdjacentText('afterend', ' '); });
     return (caja.textContent || '').replace(/\s+/g, ' ').trim();
   }
@@ -545,6 +512,16 @@ html { overflow-x: clip; }
                  (entrada.content && entrada.content.$t) || '';
 
     return recortar(textoResumen(cuerpo), limite);
+  }
+
+  // Minutos de lectura de la nota (párrafo .articulo-lectura que pone el Panel CIAD); '' si no lo tiene
+  function minutosLectura(entrada){
+    var m = ((entrada.content && entrada.content.$t) || '').match(/class="articulo-lectura"[^>]*>[^<]*?(\d+)\s*min/);
+    return m ? m[1] : '';
+  }
+  function insigniaLectura(entrada){
+    var n = minutosLectura(entrada);
+    return n ? '<span class="lectura-tarjeta" title="Lectura de ' + n + ' min"><i class="fa-regular fa-clock" aria-hidden="true"></i> ' + n + ' min</span>' : '';
   }
 
   function formatearFecha(iso) {
@@ -566,7 +543,7 @@ html { overflow-x: clip; }
     articulo.innerHTML =
       '<img class="imagen-articulo" src="' + obtenerImagen(entrada, clave) + '" alt="" loading="lazy" />' +
       '<div class="contenido-articulo">' +
-        '<p class="fecha-articulo">' + formatearFecha(entrada.published.$t) + '</p>' +
+        '<p class="fecha-articulo">' + formatearFecha(entrada.published.$t) + insigniaLectura(entrada) + '</p>' +
         '<h3 class="titulo-articulo">' + quitarEtiquetasHtml(entrada.title.$t) + '</h3>' +
         '<p class="resumen-articulo">' + obtenerResumen(entrada, 130) + '</p>' +
         '<a class="boton-leer" href="' + enlace + '">Leer más</a>' +
@@ -581,14 +558,8 @@ html { overflow-x: clip; }
     var estado = document.getElementById(idEstado);
     var enlace = document.getElementById(idEnlace);
 
-    if (temaActual && etiqueta !== temaActual) {
-      var bloque = lista && lista.closest('.bloque-tema');
-      if (bloque) bloque.style.display = 'none';
-      return;
-    }
 
-    if (enlace) enlace.href = rutaEtiqueta(etiqueta);
-    if (temaActual && enlace) { enlace.href = location.pathname; enlace.textContent = 'Ver todos los temas'; }
+    if(enlace){enlace.href = '/p/todas-las-notas.html#etica-sociedad-digital';}
 
     fetch(rutaFeed(etiqueta))
       .then(function (respuesta) {
@@ -596,9 +567,11 @@ html { overflow-x: clip; }
       })
       .then(function (datos) {
         var entradas = (datos.feed && datos.feed.entry) || [];
+        if(enlace && entradas.length <= maximoEntradas){enlace.style.display = 'none';}
+        entradas = entradas.slice(0, maximoEntradas);
 
         if (!entradas.length) {
-          estado.textContent = 'Aún no hay entradas publicadas en este subapartado.';
+          estado.textContent = 'Aún no hay entradas publicadas en esta sección.';
           if (enlace) enlace.style.display = 'none';
           return;
         }
@@ -615,10 +588,7 @@ html { overflow-x: clip; }
       });
   }
 
-  cargarEntradas('privacidad', 'lista-privacidad', 'estado-privacidad', 'enlace-privacidad');
-  cargarEntradas('sesgos', 'lista-sesgos', 'estado-sesgos', 'enlace-sesgos');
-  cargarEntradas('honestidad', 'lista-honestidad', 'estado-honestidad', 'enlace-honestidad');
-  cargarEntradas('brecha', 'lista-brecha', 'estado-brecha', 'enlace-brecha');
+  cargarEntradas('notas', 'lista-notas', 'estado-notas', 'enlace-notas');
 
 })();
 </script>

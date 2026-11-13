@@ -129,9 +129,9 @@ const CONFIG = {
    * Secciones del blog.
    * La opción del formulario es "<nombre>: <subapartado>". Cada opción recibe la etiqueta de la
    * sección y la del subapartado.
-   *   - Subapartado (lado derecho): verificado contra el objeto `etiquetas` de cada página; es lo
-   *     que hace que la entrada aparezca en la página.
-   *   - `etiqueta` de la sección: la usan el buscador y el orden del panel, no las páginas.
+   *   - `etiqueta` de la sección: es lo que hace que la entrada aparezca en la página de la sección
+   *     (objeto `etiquetas` de cada página); también la usan el buscador y «Todas las notas».
+   *   - Subapartado (lado derecho): sirve para elegir el tema en el formulario; la página ya no lo muestra.
    * IMPORTANTE: si cambia una etiqueta en una página, hay que cambiarla también aquí.
    */
   SECCIONES: [

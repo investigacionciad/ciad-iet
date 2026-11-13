@@ -69,6 +69,7 @@ function doGet(e) {
     correo: Session.getActiveUser().getEmail(),
     admin: esAdmin_(Session.getActiveUser().getEmail()), // La pestaña Usuarios solo se muestra a administradores (el servidor también lo exige)
     secciones: obtenerOpcionesSeccion(),
+    ocultas: seccionesOcultas_(), // ver Paginas.gs
     pestana: ['solicitudes', 'articulos', 'comentarios', 'metricas', 'paginas', 'mantenimiento', 'guia', 'usuarios'].indexOf(pestana) !== -1 ? pestana : ''
   })
     .replace(/</g, '\\u003c'); // IMPORTANTE: va dentro de <script>, así que ningún texto puede cerrar la etiqueta
@@ -388,6 +389,7 @@ function publicarArticulo(fila, postId, seccion, etiquetasTexto) {
   exigirAcceso_();
   const etiquetasSeccion = etiquetasDe_(seccion);
   if (!etiquetasSeccion) throw new Error('Elige la sección del blog antes de publicar.');
+  exigirSeccionVisible_(seccion); // ver Paginas.gs
   const extra = limpiarEtiquetasExtra_(etiquetasTexto);
   const reloj = cronometro_('publicarArticulo (fila ' + fila + ')'); // ver Código.gs
   const bloqueo = LockService.getScriptLock();
@@ -903,6 +905,7 @@ function guardarNotaEditada(fila, postId, d) {
   if (!titulo) throw new Error('El título no puede quedar vacío.');
   const etiquetasSeccion = etiquetasDe_(d.seccion);
   if (!etiquetasSeccion) throw new Error('Elige la sección del blog.');
+  exigirSeccionVisible_(d.seccion); // ver Paginas.gs
   const ficha = {};
   ['nombre', 'fecha', 'correo', 'cargo', 'vinculo'].forEach(function (k) { ficha[k] = una((d.ficha || {})[k], 300); });
   if (ficha.correo && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(ficha.correo)) throw new Error('El correo de la ficha no es válido.');

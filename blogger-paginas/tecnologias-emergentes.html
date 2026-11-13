@@ -2,7 +2,7 @@
   Página de Blogger: Tecnologías Emergentes
   URL: https://ciad-innovaedutec.blogspot.com/p/tecnologias-emergentes.html
   ID de la página: 2861727689010700508
-  Copia del contenido publicado (11/11/2026). Se edita en Blogger › Páginas o, Inicio y Sobre el blog, desde el Panel CIAD.
+  Copia del contenido publicado (13/11/2026). Se edita en Blogger › Páginas o, Inicio y Sobre el blog, desde el Panel CIAD.
 -->
 <div class="seccion-emergentes">
 
@@ -278,6 +278,13 @@
   font-weight:700;
   margin:0 0 .5rem;
 }
+.seccion-emergentes .lectura-tarjeta {
+  float:right;
+  margin-left:.5rem;
+  white-space:nowrap;
+  font-weight:600;
+  opacity:.85;
+}
 
 .seccion-emergentes .titulo-articulo {
   font-size:1.05rem;
@@ -313,19 +320,17 @@
 }
 
 .seccion-emergentes .enlace-etiqueta {
-  display:inline-block;
-  margin-top:1.5rem;
-  padding:.7rem 1.4rem;
-  border-radius:999px;
-  background:var(--verde-uabc);
-  color:var(--blanco);
+  display:block;
+  width:fit-content;
+  margin:1rem 0 0 auto;
+  color:var(--verde-uabc);
   text-decoration:none;
   font-size:.9rem;
   font-weight:700;
 }
 
 .seccion-emergentes .enlace-etiqueta:hover {
-  background:var(--azul-oscuro);
+  text-decoration:underline;
 }
 
 @media (max-width:900px) {
@@ -414,46 +419,10 @@ html { overflow-x: clip; }
 
 <main class="panel-principal">
 
-  <section class="bloque-tema alinear-derecha" id="sec-ia">
-    <h2>Inteligencia Artificial</h2>
-    <div class="lista-articulos" id="lista-ia"></div>
-    <p class="mensaje-estado" id="estado-ia">Cargando entradas…</p>
-    <a class="enlace-etiqueta" href="#" id="enlace-ia">Ver todas las entradas</a>
-  </section>
-
-  <section class="bloque-tema" id="sec-ciberseguridad">
-    <h2>Ciberseguridad</h2>
-    <div class="lista-articulos" id="lista-ciberseguridad"></div>
-    <p class="mensaje-estado" id="estado-ciberseguridad">Cargando entradas…</p>
-    <a class="enlace-etiqueta" href="#" id="enlace-ciberseguridad">Ver todas las entradas</a>
-  </section>
-
-  <section class="bloque-tema alinear-derecha" id="sec-rv">
-    <h2>Realidad Virtual / Aumentada</h2>
-    <div class="lista-articulos" id="lista-rv"></div>
-    <p class="mensaje-estado" id="estado-rv">Cargando entradas…</p>
-    <a class="enlace-etiqueta" href="#" id="enlace-rv">Ver todas las entradas</a>
-  </section>
-
-  <section class="bloque-tema" id="sec-blockchain">
-    <h2>Blockchain</h2>
-    <div class="lista-articulos" id="lista-blockchain"></div>
-    <p class="mensaje-estado" id="estado-blockchain">Cargando entradas…</p>
-    <a class="enlace-etiqueta" href="#" id="enlace-blockchain">Ver todas las entradas</a>
-  </section>
-
-  <section class="bloque-tema alinear-derecha" id="sec-iot">
-    <h2>IoT y ciudades inteligentes</h2>
-    <div class="lista-articulos" id="lista-iot"></div>
-    <p class="mensaje-estado" id="estado-iot">Cargando entradas…</p>
-    <a class="enlace-etiqueta" href="#" id="enlace-iot">Ver todas las entradas</a>
-  </section>
-
-  <section class="bloque-tema" id="sec-cuantica">
-    <h2>Computación cuántica</h2>
-    <div class="lista-articulos" id="lista-cuantica"></div>
-    <p class="mensaje-estado" id="estado-cuantica">Cargando entradas…</p>
-    <a class="enlace-etiqueta" href="#" id="enlace-cuantica">Ver todas las entradas</a>
+  <section class="bloque-tema" id="sec-notas">
+    <div class="lista-articulos" id="lista-notas"></div>
+    <p class="mensaje-estado" id="estado-notas">Cargando entradas…</p>
+    <a class="enlace-etiqueta" href="#" id="enlace-notas">Ver todas las notas &#8594;</a>
   </section>
 
 </main>
@@ -463,38 +432,18 @@ html { overflow-x: clip; }
 
   var IMAGEN_GENERICA = "data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 800 500%27%3E%3Crect width=%27800%27 height=%27500%27 fill=%27%23e6f2ec%27/%3E%3Cpath d=%27M0 500L800 290V500z%27 fill=%27%2300723f%27 opacity=%27.14%27/%3E%3C/svg%3E";
 
-  var etiquetas = {
-    ia:'Inteligencia Artificial',
-    ciberseguridad:'Ciberseguridad',
-    rv:'Realidad Virtual / Aumentada',
-    blockchain:'Blockchain',
-    iot:'IoT y ciudades inteligentes',
-    cuantica:'Computación cuántica'
-  };
+  // La sección muestra sus notas por la etiqueta de la sección (CONFIG.SECCIONES en Código.js), sin subtítulos por tema
+  var etiquetas = { notas: 'categoria-tecnologias-emergentes' };
 
-  var imagenesReferencia = {
-    ia:IMAGEN_GENERICA,
-    ciberseguridad:IMAGEN_GENERICA,
-    rv:IMAGEN_GENERICA,
-    blockchain:IMAGEN_GENERICA,
-    iot:IMAGEN_GENERICA,
-    cuantica:IMAGEN_GENERICA
-  };
 
-  // Ver todas las entradas: ?tema=<etiqueta> muestra solo ese tema con todas sus notas
-  var temaActual = new URLSearchParams(location.search).get('tema');
-  if(!Object.keys(etiquetas).some(function(k){return etiquetas[k] === temaActual;})){temaActual = null;}
-  // Notas por tema: se eligen en el Panel CIAD (data-notas en el contenedor de la página)
-  var maximoEntradas = temaActual ? 150 : (Number((document.querySelector('.post-body [data-notas]') || document.body).getAttribute('data-notas')) || 6);
+  // Se piden 11: si llega la 11.ª, hay más y aparece «Ver todas las notas» (lleva a la sección en Todas las notas)
+  var maximoEntradas = 10;
 
   function rutaFeed(etiqueta){
     return '/feeds/posts/default/-/' + encodeURIComponent(etiqueta) +
-           '?alt=json&orderby=published&max-results=' + maximoEntradas;
+           '?alt=json&orderby=published&max-results=' + (maximoEntradas + 1);
   }
 
-  function rutaEtiqueta(etiqueta){
-    return location.pathname + '?tema=' + encodeURIComponent(etiqueta);
-  }
 
   function quitarEtiquetasHtml(texto){
     var caja = document.createElement('div');
@@ -530,14 +479,14 @@ html { overflow-x: clip; }
     caja.innerHTML = cuerpo;
     var imagen = caja.querySelector('img');
 
-    return imagen ? imagen.src : (imagenesReferencia[clave] || IMAGEN_GENERICA);
+    return imagen ? imagen.src : IMAGEN_GENERICA;
   }
 
   // Texto de la entrada sin la ficha del autor ni estilos, con espacios entre bloques (DEF-017)
   function textoResumen(html){
     var caja = document.createElement('div');
     caja.innerHTML = html || '';
-    caja.querySelectorAll('style, script, .articulo-ficha').forEach(function(el){ el.remove(); });
+    caja.querySelectorAll('style, script, .articulo-ficha, .articulo-lectura').forEach(function(el){ el.remove(); });
     caja.querySelectorAll('p, h1, h2, h3, h4, li, div, br').forEach(function(el){ el.insertAdjacentText('afterend', ' '); });
     return (caja.textContent || '').replace(/\s+/g, ' ').trim();
   }
@@ -546,6 +495,16 @@ html { overflow-x: clip; }
     var cuerpo = (entrada.summary && entrada.summary.$t) ||
                  (entrada.content && entrada.content.$t) || '';
     return recortar(textoResumen(cuerpo), limite);
+  }
+
+  // Minutos de lectura de la nota (párrafo .articulo-lectura que pone el Panel CIAD); '' si no lo tiene
+  function minutosLectura(entrada){
+    var m = ((entrada.content && entrada.content.$t) || '').match(/class="articulo-lectura"[^>]*>[^<]*?(\d+)\s*min/);
+    return m ? m[1] : '';
+  }
+  function insigniaLectura(entrada){
+    var n = minutosLectura(entrada);
+    return n ? '<span class="lectura-tarjeta" title="Lectura de ' + n + ' min"><i class="fa-regular fa-clock" aria-hidden="true"></i> ' + n + ' min</span>' : '';
   }
 
   function formatearFecha(iso){
@@ -562,7 +521,7 @@ html { overflow-x: clip; }
     articulo.innerHTML =
       '<img class="imagen-articulo" src="' + obtenerImagen(entrada,clave) + '" alt="" loading="lazy" />' +
       '<div class="contenido-articulo">' +
-        '<p class="fecha-articulo">' + formatearFecha(entrada.published.$t) + '</p>' +
+        '<p class="fecha-articulo">' + formatearFecha(entrada.published.$t) + insigniaLectura(entrada) + '</p>' +
         '<h3 class="titulo-articulo">' + quitarEtiquetasHtml(entrada.title.$t) + '</h3>' +
         '<p class="resumen-articulo">' + obtenerResumen(entrada,130) + '</p>' +
         '<a class="boton-leer" href="' + enlace + '">Leer más</a>' +
@@ -578,13 +537,7 @@ html { overflow-x: clip; }
     var enlace = document.getElementById(idEnlace);
 
     if(!lista || !estado){return;}
-    if(temaActual && etiqueta !== temaActual){
-      var bloque = lista.closest('.bloque-tema');
-      if(bloque){bloque.style.display = 'none';}
-      return;
-    }
-    if(enlace){enlace.href = rutaEtiqueta(etiqueta);}
-    if(temaActual && enlace){enlace.href = location.pathname; enlace.textContent = 'Ver todos los temas';}
+    if(enlace){enlace.href = '/p/todas-las-notas.html#tecnologias-emergentes';}
 
     fetch(rutaFeed(etiqueta))
       .then(function(respuesta){
@@ -593,9 +546,11 @@ html { overflow-x: clip; }
       })
       .then(function(datos){
         var entradas = (datos.feed && datos.feed.entry) || [];
+        if(enlace && entradas.length <= maximoEntradas){enlace.style.display = 'none';}
+        entradas = entradas.slice(0, maximoEntradas);
 
         if(!entradas.length){
-          estado.textContent = 'Aún no hay entradas publicadas en este subapartado.';
+          estado.textContent = 'Aún no hay entradas publicadas en esta sección.';
           if(enlace){enlace.style.display = 'none';}
           return;
         }
@@ -612,12 +567,7 @@ html { overflow-x: clip; }
       });
   }
 
-  cargarEntradas('ia','lista-ia','estado-ia','enlace-ia');
-  cargarEntradas('ciberseguridad','lista-ciberseguridad','estado-ciberseguridad','enlace-ciberseguridad');
-  cargarEntradas('rv','lista-rv','estado-rv','enlace-rv');
-  cargarEntradas('blockchain','lista-blockchain','estado-blockchain','enlace-blockchain');
-  cargarEntradas('iot','lista-iot','estado-iot','enlace-iot');
-  cargarEntradas('cuantica','lista-cuantica','estado-cuantica','enlace-cuantica');
+  cargarEntradas('notas', 'lista-notas', 'estado-notas', 'enlace-notas');
 
 })();
 </script>
