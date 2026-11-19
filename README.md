@@ -18,7 +18,7 @@ Las notas publicadas no se guardan aquí, están en Blogger. Aquí está lo que 
 
 | Carpeta | Qué tiene | Dónde está en producción |
 |---|---|---|
-| `publicador-ciad/` | El Panel CIAD (web app) y todo el proceso: conversión del Word, borradores, publicación, edición, imágenes, comentarios, páginas, mantenimiento, métricas, usuarios y avisos. También la guía de uso (`Guia.html`). | Apps Script «Publicador CIAD» |
+| `publicador-ciad/` | El Panel CIAD (web app) y todo el proceso: conversión del Word, borradores, publicación, edición, imágenes, comentarios, páginas, mantenimiento, métricas, usuarios y avisos. Se puede usar con teclado y lector de pantalla (pestañas con flechas, foco visible, Escape cancela una confirmación). También la guía de uso (`Guia.html`). | Apps Script «Publicador CIAD» |
 | `receptor/` | Recibe la solicitud de artículo que se llena en el blog, revisa que la persona haya iniciado sesión con Google (Firebase) y la guarda en la hoja con su folio. | Apps Script «Receptor para solicitud de articulo» |
 | `blogger-theme/` | El tema de Blogger (`theme.xml`): diseño, menús, inicio de sesión con Google, comentarios (Firebase) y tarjetas de las notas. | Blogger › Tema › Editar HTML |
 | `blogger-paginas/` | Copia de las 12 páginas del blog (Inicio, secciones, Lineamientos, Solicitud de artículo, Buscador y otras). | Blogger › Páginas |
