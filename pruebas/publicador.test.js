@@ -65,6 +65,8 @@ test('estilo de las notas: se puede aplicar dos veces y ya no trae el patrón de
   const una = P.conEstiloAlDia_('<div class="articulo-ciad">hola</div>');
   assert.strictEqual(P.conEstiloAlDia_(una), una);
   assert.strictEqual((una.match(/<style>/g) || []).length, 1);
+  assert.strictEqual((una.match(/ciad-citas/g) || []).length, 1); // El script de la burbuja tampoco se repite
+  assert.doesNotMatch(P.CITAS_SCRIPT_, /<(?!\/?script)|&&/); // Blogger alteraría "<" y "&&"
   assert.doesNotMatch(una, /svg\+xml/);
 });
 
@@ -81,4 +83,15 @@ test('mantenimiento: las carpetas de imágenes del panel nunca cuentan como «ar
     { id: 'rev', nombre: 'Mi artículo · 12-11-2026' }, { id: 'pub', nombre: 'Publicados 2026' }] };
   P.HIJOS_.pub = { archivos: [], carpetas: [{ id: 'a1', nombre: 'SOL-0001 · Nota' }] };
   igual(P.carpetasDeArticulos_('raiz').map(c => c.id), ['rev', 'a1']);
+});
+
+test('usuarios: la cuenta del CIAD no se puede quitar y solo ella cambia administradores', () => {
+  const fija = P.CONFIG.CUENTAS_CIAD[0].trim().toLowerCase();
+  const otro = { correo: 'otro@uabc.edu.mx', admin: true, avisos: { solicitudes: true, articulos: true, comentarios: true } };
+  const actual = P.validarUsuarios_([otro], fija, []);
+  const cuenta = actual.filter(u => u.correo === fija)[0];
+  assert.ok(cuenta && cuenta.admin); // Si se borra de la lista, vuelve como administradora
+  const sinAdmin = Object.assign({}, otro, { admin: false });
+  assert.throws(() => P.validarUsuarios_([sinAdmin], 'otro@uabc.edu.mx', actual), /Solo la cuenta del CIAD/);
+  assert.doesNotThrow(() => P.validarUsuarios_([sinAdmin], fija, actual));
 });

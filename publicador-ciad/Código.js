@@ -659,7 +659,7 @@ const ESTILO_ARTICULO_ = {
 };
 
 // El <style> que estiloArticulo_ deja en cada nota (cualquier versión anterior)
-const ESTILO_NOTA_ = /<style>@import url\('https:\/\/fonts\.googleapis\.com\/css2\?family=Bitter[\s\S]*?<\/style>/g;
+const ESTILO_NOTA_ = /<style>@import url\('https:\/\/fonts\.googleapis\.com\/css2\?family=Bitter[\s\S]*?<\/style>(?:<script>\/\* ciad-citas \*\/[\s\S]*?<\/script>)?/g;
 
 /** Devuelve la nota con el estilo actual: quita el que tenga y pone el nuevo al final. */
 function conEstiloAlDia_(html) {
@@ -713,7 +713,8 @@ function estiloArticulo_() {
     // Citas numeradas [n]: número volado y burbuja al pasar el cursor o enfocarlo (citasNumeradas_, Documento.gs)
     ".articulo-ciad sup.cita{position:relative;line-height:0;}" +
     ".articulo-ciad sup.cita>a{text-decoration:none;font-weight:700;padding:0 1px;}" +
-    ".articulo-ciad .cita-burbuja{display:none;position:absolute;left:50%;bottom:100%;transform:translateX(-50%);padding-bottom:8px;z-index:30;}" +
+    // --cita-dx lo pone CITAS_SCRIPT_: corre la burbuja para que no se corte en la orilla de la nota
+    ".articulo-ciad .cita-burbuja{display:none;position:absolute;left:50%;bottom:100%;transform:translateX(calc(-50% + var(--cita-dx,0px)));padding-bottom:8px;z-index:30;}" +
     ".articulo-ciad sup.cita:hover .cita-burbuja,.articulo-ciad sup.cita:focus-within .cita-burbuja{display:block;}" +
     ".articulo-ciad .cita-caja{display:block;width:min(300px,80vw);background:#fff;border:1px solid #dfe5ea;border-radius:10px;" +
       "box-shadow:0 8px 24px rgba(0,0,0,.16);padding:.75em .9em;font-size:13px;line-height:1.45;font-weight:400;text-align:left;color:" + c.negro + ";white-space:normal;}" +
@@ -741,8 +742,24 @@ function estiloArticulo_() {
       ".post:has(.articulo-portada) .articulo-ciad .articulo-portada{grid-column:2;grid-row:1/span 4;align-self:stretch;aspect-ratio:auto;min-height:220px;margin:0 0 1.5em;}" +
       ".post:has(.articulo-portada) .articulo-ciad .articulo-portada img{object-fit:contain;object-position:var(--pc,50% 50%);transform:scale(var(--pcz,1));transform-origin:var(--pc,50% 50%);}" +
     "}" +
-    '</style>';
+    '</style>' + CITAS_SCRIPT_;
 }
+
+/**
+ * Burbuja de las citas [n]: la tarjeta blanca de la nota (.post-outer del tema) tiene overflow:hidden,
+ * así que una burbuja centrada en un número al inicio o al final del renglón se cortaba. Al pasar el
+ * cursor o enfocarla, se mide y se corre lo necesario para quedar dentro del texto de la nota.
+ * Llega a las notas existentes con actualizarEstiloDeNotas().
+ * NOTA: sin "<" ni "&&" en el código, para que Blogger no lo altere al guardar la entrada.
+ */
+const CITAS_SCRIPT_ = '<script>/* ciad-citas */(function(){if(window.ciadCitas)return;window.ciadCitas=1;' +
+  'function ajustar(e){var sup=e.target.closest?e.target.closest("sup.cita"):null;if(!sup)return;' +
+  // NOTA: se mide .articulo-cuerpo porque el tema pone .articulo-ciad en display:contents (no tiene tamaño)
+  'var b=sup.querySelector(".cita-burbuja"),art=sup.closest(".articulo-cuerpo")||sup.parentElement;if(!b)return;' +
+  'requestAnimationFrame(function(){var a=art.getBoundingClientRect();b.firstChild.style.width=Math.min(300,a.width)+"px";' +
+  'b.style.setProperty("--cita-dx","0px");var r=b.getBoundingClientRect();' +
+  'b.style.setProperty("--cita-dx",Math.max(a.left-r.left,Math.min(0,a.right-r.right))+"px");});}' +
+  'document.addEventListener("mouseover",ajustar);document.addEventListener("focusin",ajustar);})();</script>';
 
 /** Banner de celular; igual que PORTADA_VISTAS en Panel.html. En computadora, la altura la define el texto de la izquierda. */
 const PORTADA_PROPORCION_ = { celular: '4/1' };

@@ -12,8 +12,8 @@ function falso(nombre) {
 const SERVICIOS = ['DriveApp', 'DocumentApp', 'SpreadsheetApp', 'FormApp', 'PropertiesService', 'ScriptApp', 'Session', 'LockService',
   'UrlFetchApp', 'Utilities', 'MailApp', 'GmailApp', 'HtmlService', 'Logger', 'CacheService', 'Drive', 'ContentService', 'MimeType'];
 
-module.exports = function cargar() {
-  const dir = path.join(__dirname, '..', 'publicador-ciad');
+module.exports = function cargar(carpeta = 'publicador-ciad') {
+  const dir = path.join(__dirname, '..', carpeta);
   const ctx = { console };
   SERVICIOS.forEach(s => { ctx[s] = falso(s); });
   vm.createContext(ctx);

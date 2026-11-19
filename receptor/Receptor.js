@@ -147,6 +147,15 @@ function limpio_(v, max) {
   return String(v == null ? '' : v).replace(/\r/g, '').trim().slice(0, max);
 }
 
+/**
+ * IMPORTANTE: lo que escribe el público entra a la hoja tal cual. Un texto que empieza con = + - @
+ * Sheets lo toma como fórmula (p. ej. =IMAGE("https://…"&B2) mandaría datos de la hoja a otro sitio).
+ * Con ' al inicio queda como texto; Sheets no muestra el ' ni lo devuelve al leer la celda.
+ */
+function comoTexto_(v) {
+  return typeof v === 'string' && /^[=+\-@]/.test(v) ? "'" + v : v;
+}
+
 function normalizar_(t) {
   return String(t || '').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/\s+/g, ' ').trim().toLowerCase();
 }
@@ -205,7 +214,7 @@ function registrarSolicitud_(d, sesion) {
     const folio = 'SOL-' + ('0000' + Math.max(mayor + 1, filaNueva - 1)).slice(-4);
 
     const fila = new Array(hoja.getLastColumn()).fill('');
-    function poner(clave, valor) { if (col[C[clave]]) fila[col[C[clave]] - 1] = valor; }
+    function poner(clave, valor) { if (col[C[clave]]) fila[col[C[clave]] - 1] = comoTexto_(valor); }
     poner('fecha', new Date());
     poner('nombre', s.nombre);
     poner('correo', sesion.correo);   // El de la cuenta verificada, no el que envíe el navegador
